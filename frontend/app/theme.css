@@ -1,0 +1,3119 @@
+
+/* ================================
+   BMI Page
+  ================================ */
+
+.bmiPage {
+  min-height: 100vh;
+  background: url("/images/gym.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Hero */
+.bmiHero {
+  position: relative;
+  padding: 80px 0 54px;
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 122, 26, 0.28) !important;
+  overflow: hidden;
+}
+
+.bmiHero::before,
+.bmiHero::after {
+  display: none !important;
+  content: none !important;
+}
+
+.bmiHero h1 {
+  margin: 20px 0 0;
+  max-width: 840px;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+  color: #fff7ed !important;
+  font-weight: 950;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.55);
+}
+
+.bmiHero p {
+  margin: 20px 0 0;
+  max-width: 780px;
+  color: #dbe4ee !important;
+  font-size: 17px;
+  line-height: 1.8;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.bmiPage .badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.38) !important;
+  color: #ff9f45 !important;
+  border: 1px solid rgba(255, 122, 26, 0.45) !important;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+/* Main section */
+.bmiSection {
+  padding: 56px 0 90px;
+  background: transparent !important;
+}
+
+.bmiGrid {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 30px;
+  align-items: start;
+}
+
+/* Cards */
+.bmiCard {
+  border-radius: 32px;
+  background: rgba(18, 18, 18, 0.76) !important;
+  border: 1px solid rgba(255, 122, 26, 0.32) !important;
+  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.48) !important;
+  padding: 34px;
+  backdrop-filter: blur(8px);
+}
+
+.bmiCard h2 {
+  margin: 0;
+  color: #fff7ed !important;
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+  font-weight: 950;
+}
+
+.bmiCard > p {
+  margin: 12px 0 0;
+  color: #cbd5e1 !important;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* Form */
+.bmiForm {
+  margin-top: 28px;
+}
+
+.bmiFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.bmiFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bmiFormGroup label {
+  color: #ff9f45 !important;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.bmiFormGroup input,
+.bmiFormGroup select {
+  width: 100%;
+  min-height: 52px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 122, 26, 0.35) !important;
+  background: rgba(5, 5, 5, 0.92) !important;
+  color: #fff7ed !important;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 750;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.bmiFormGroup input::placeholder {
+  color: #78716c !important;
+}
+
+.bmiFormGroup input:focus,
+.bmiFormGroup select:focus {
+  border-color: #ff7a1a !important;
+  background: rgba(10, 10, 10, 0.96) !important;
+  box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.18) !important;
+}
+
+/* Button */
+.bmiButton {
+  width: 100%;
+  margin-top: 28px;
+  min-height: 54px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff7a1a, #ff9f45) !important;
+  color: #111111 !important;
+  font-size: 15px;
+  font-weight: 950;
+  box-shadow: 0 18px 45px rgba(255, 122, 26, 0.28);
+  transition: 0.25s ease;
+}
+
+.bmiButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 55px rgba(255, 122, 26, 0.38);
+}
+
+.bmiButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Error */
+.bmiPage .errorMessage {
+  margin-top: 18px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: rgba(239, 68, 68, 0.14) !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  color: #fca5a5 !important;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+/* BMI info box */
+.bmiInfoBox {
+  margin-top: 24px;
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255, 122, 26, 0.09) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.bmiInfoBox h3 {
+  margin: 0;
+  color: #fff7ed !important;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.bmiInfoBox p {
+  margin: 14px 0 0;
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.bmiInfoBox ul {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.bmiInfoBox li {
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.bmiInfoBox li::before {
+  content: "✓";
+  color: #ff9f45;
+  font-weight: 950;
+  margin-right: 8px;
+}
+
+/* BMI score */
+.bmiScoreBox {
+  margin-top: 24px;
+  padding: 30px;
+  border-radius: 30px;
+  background: rgba(255, 122, 26, 0.12) !important;
+  border: 1px solid rgba(255, 122, 26, 0.35) !important;
+  text-align: center;
+}
+
+.bmiScoreBox span {
+  color: #ff9f45 !important;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+.bmiScoreBox strong {
+  display: block;
+  margin-top: 10px;
+  color: #fff7ed !important;
+  font-size: 62px;
+  line-height: 1;
+  font-weight: 950;
+}
+
+.bmiScoreBox p {
+  margin: 10px 0 0;
+  color: #cbd5e1 !important;
+  font-size: 16px;
+  font-weight: 850;
+  text-transform: capitalize;
+}
+
+/* Small result grid */
+.bmiSmallGrid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.bmiSmallGrid div {
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 122, 26, 0.1) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.bmiSmallGrid span {
+  display: block;
+  color: #ff9f45 !important;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.bmiSmallGrid strong {
+  display: block;
+  margin-top: 8px;
+  color: #e2e8f0 !important;
+  font-size: 20px;
+  font-weight: 950;
+  text-transform: capitalize;
+}
+
+/* Disclaimer */
+.bmiDisclaimer {
+  color: #94a3b8 !important;
+  font-size: 13px !important;
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .bmiGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .bmiPage {
+    background: url("/images/gym.png") center center / cover fixed no-repeat !important;
+  }
+
+  .bmiHero {
+    padding: 60px 0 44px;
+  }
+
+  .bmiHero h1 {
+    font-size: 38px;
+  }
+
+  .bmiCard {
+    padding: 24px;
+    border-radius: 26px;
+  }
+
+  .bmiFormGrid,
+  .bmiSmallGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bmiScoreBox strong {
+    font-size: 52px;
+  }
+}
+
+/* ================================
+   Fitness Tracking Page
+   ================================ */
+
+.fitnessPage {
+  min-height: 100vh;
+  background: url("/images/gym.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Hero */
+.fitnessHero {
+  position: relative;
+  padding: 80px 0 54px;
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 122, 26, 0.28) !important;
+  overflow: hidden;
+}
+
+.fitnessHero::before,
+.fitnessHero::after {
+  display: none !important;
+  content: none !important;
+}
+
+.fitnessHero h1 {
+  margin: 20px 0 0;
+  max-width: 840px;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+  color: #fff7ed !important;
+  font-weight: 950;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.55);
+}
+
+.fitnessHero p {
+  margin: 20px 0 0;
+  max-width: 780px;
+  color: #dbe4ee !important;
+  font-size: 17px;
+  line-height: 1.8;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.fitnessPage .badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.38) !important;
+  color: #ff9f45 !important;
+  border: 1px solid rgba(255, 122, 26, 0.45) !important;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+/* Main section */
+.fitnessSection {
+  padding: 56px 0 90px;
+  background: transparent !important;
+}
+
+.fitnessGrid {
+  display: grid;
+  grid-template-columns: 1fr 0.95fr;
+  gap: 30px;
+  align-items: start;
+}
+
+/* Cards */
+.fitnessFormCard,
+.fitnessResultCard {
+  border-radius: 32px;
+  background: rgba(18, 18, 18, 0.76) !important;
+  border: 1px solid rgba(255, 122, 26, 0.32) !important;
+  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.48) !important;
+  padding: 34px;
+  backdrop-filter: blur(8px);
+}
+
+.fitnessResultCard {
+  position: sticky;
+  top: 110px;
+}
+
+.fitnessFormCard h2,
+.fitnessResultCard h2 {
+  margin: 0;
+  color: #fff7ed !important;
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+  font-weight: 950;
+}
+
+.fitnessFormCard > p,
+.fitnessResultCard > p {
+  margin: 12px 0 0;
+  color: #cbd5e1 !important;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* Form */
+.fitnessForm {
+  margin-top: 28px;
+}
+
+.fitnessFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.fitnessFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fitnessFormGroup label {
+  color: #ff9f45 !important;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.fitnessFormGroup input,
+.fitnessFormGroup select,
+.fitnessFormGroup textarea {
+  width: 100%;
+  min-height: 52px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 122, 26, 0.35) !important;
+  background: rgba(5, 5, 5, 0.92) !important;
+  color: #fff7ed !important;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 750;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.fitnessFormGroup textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.fitnessFormGroup input::placeholder,
+.fitnessFormGroup textarea::placeholder {
+  color: #78716c !important;
+}
+
+.fitnessFormGroup input:focus,
+.fitnessFormGroup select:focus,
+.fitnessFormGroup textarea:focus {
+  border-color: #ff7a1a !important;
+  background: rgba(10, 10, 10, 0.96) !important;
+  box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.18) !important;
+}
+
+/* Submit button */
+.fitnessSubmitBtn {
+  width: 100%;
+  margin-top: 28px;
+  min-height: 54px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff7a1a, #ff9f45) !important;
+  color: #111111 !important;
+  font-size: 15px;
+  font-weight: 950;
+  box-shadow: 0 18px 45px rgba(255, 122, 26, 0.28);
+  transition: 0.25s ease;
+}
+
+.fitnessSubmitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 55px rgba(255, 122, 26, 0.38);
+}
+
+.fitnessSubmitBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Error */
+.fitnessPage .errorMessage {
+  margin-top: 18px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: rgba(239, 68, 68, 0.14) !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  color: #fca5a5 !important;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+/* Result summary */
+.fitnessSummaryGrid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.fitnessSummaryGrid div {
+  padding: 20px;
+  border-radius: 22px;
+  background: rgba(255, 122, 26, 0.1) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.fitnessSummaryGrid span {
+  display: block;
+  color: #ff9f45 !important;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.fitnessSummaryGrid strong {
+  display: block;
+  margin-top: 8px;
+  color: #fff7ed !important;
+  font-size: 28px;
+  font-weight: 950;
+  text-transform: capitalize;
+}
+
+.fitnessSummaryGrid p {
+  margin: 6px 0 0;
+  color: #cbd5e1 !important;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+/* Weekly workout plan */
+.weeklyWorkoutPlan {
+  margin-top: 24px;
+  display: grid;
+  gap: 18px;
+}
+
+.workoutDayCard {
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255, 122, 26, 0.08) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.workoutDayTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.workoutDayTop h3 {
+  margin: 0;
+  color: #fff7ed !important;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.workoutDayTop p {
+  margin: 7px 0 0;
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  font-weight: 750;
+  text-transform: capitalize;
+}
+
+.workoutDayTop span {
+  display: inline-flex;
+  border-radius: 999px;
+  background: rgba(255, 122, 26, 0.14) !important;
+  border: 1px solid rgba(255, 122, 26, 0.3) !important;
+  color: #ff9f45 !important;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* Workout blocks */
+.workoutBlock {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.26) !important;
+  border: 1px solid rgba(255, 122, 26, 0.22) !important;
+}
+
+.workoutBlock b {
+  display: block;
+  color: #ff9f45 !important;
+  font-size: 13px;
+  font-weight: 950;
+  margin-bottom: 10px;
+}
+
+.workoutBlock p {
+  margin: 0;
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.workoutBlock ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.workoutBlock li {
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.workoutBlock li::before {
+  content: "✓";
+  color: #ff9f45;
+  font-weight: 950;
+  margin-right: 8px;
+}
+
+.workoutNote {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 122, 26, 0.11) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+  color: #e2e8f0 !important;
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 750;
+}
+
+/* Recommendations */
+.fitnessRecommendationBox {
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 26px;
+  background: rgba(255, 122, 26, 0.09) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.fitnessRecommendationBox h3 {
+  margin: 0;
+  color: #fff7ed !important;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.fitnessRecommendationBox ul {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.fitnessRecommendationBox li {
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.fitnessRecommendationBox li::before {
+  content: "✓";
+  color: #ff9f45;
+  font-weight: 950;
+  margin-right: 8px;
+}
+
+.fitnessRecommendationBox p {
+  margin: 18px 0 0;
+  color: #94a3b8 !important;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .fitnessGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .fitnessResultCard {
+    position: static;
+  }
+}
+
+@media (max-width: 700px) {
+  .fitnessPage {
+    background: url("/images/gym.png") center center / cover fixed no-repeat !important;
+  }
+
+  .fitnessHero {
+    padding: 60px 0 44px;
+  }
+
+  .fitnessHero h1 {
+    font-size: 38px;
+  }
+
+  .fitnessFormCard,
+  .fitnessResultCard {
+    padding: 24px;
+    border-radius: 26px;
+  }
+
+  .fitnessFormGrid,
+  .fitnessSummaryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .workoutDayTop {
+    flex-direction: column;
+  }
+
+  .workoutDayTop span {
+    white-space: normal;
+  }
+}
+/* ================================
+   Nutrition Log Page
+   ================================ */
+
+.nutritionPage {
+  min-height: 100vh;
+  background: url("/images/gym.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Hero */
+.nutritionHero {
+  position: relative;
+  padding: 80px 0 54px;
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 122, 26, 0.28) !important;
+  overflow: hidden;
+}
+
+.nutritionHero::before,
+.nutritionHero::after {
+  display: none !important;
+  content: none !important;
+}
+
+.nutritionHero h1 {
+  margin: 20px 0 0;
+  max-width: 840px;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+  color: #fff7ed !important;
+  font-weight: 950;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.55);
+}
+
+.nutritionHero p {
+  margin: 20px 0 0;
+  max-width: 780px;
+  color: #dbe4ee !important;
+  font-size: 17px;
+  line-height: 1.8;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.nutritionPage .badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.38) !important;
+  color: #ff9f45 !important;
+  border: 1px solid rgba(255, 122, 26, 0.45) !important;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+/* Main section */
+.nutritionSection {
+  padding: 56px 0 90px;
+  background: transparent !important;
+}
+
+.nutritionGrid {
+  display: grid;
+  grid-template-columns: 1fr 0.95fr;
+  gap: 30px;
+  align-items: start;
+}
+
+/* Cards */
+.nutritionFormCard,
+.nutritionResultCard {
+  border-radius: 32px;
+  background: rgba(18, 18, 18, 0.76) !important;
+  border: 1px solid rgba(255, 122, 26, 0.32) !important;
+  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.48) !important;
+  padding: 34px;
+  backdrop-filter: blur(8px);
+}
+
+.nutritionResultCard {
+  position: sticky;
+  top: 110px;
+}
+
+.nutritionFormCard h2,
+.nutritionResultCard h2 {
+  margin: 0;
+  color: #fff7ed !important;
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+  font-weight: 950;
+}
+
+.nutritionFormCard > p,
+.nutritionResultCard > p {
+  margin: 12px 0 0;
+  color: #cbd5e1 !important;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* Form */
+.nutritionForm {
+  margin-top: 28px;
+}
+
+.nutritionFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.nutritionFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nutritionFormGroup label {
+  color: #ff9f45 !important;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.nutritionFormGroup input,
+.nutritionFormGroup select,
+.nutritionFormGroup textarea {
+  width: 100%;
+  min-height: 52px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 122, 26, 0.35) !important;
+  background: rgba(5, 5, 5, 0.92) !important;
+  color: #fff7ed !important;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 750;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.nutritionFormGroup textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.nutritionFormGroup input::placeholder,
+.nutritionFormGroup textarea::placeholder {
+  color: #78716c !important;
+}
+
+.nutritionFormGroup input:focus,
+.nutritionFormGroup select:focus,
+.nutritionFormGroup textarea:focus {
+  border-color: #ff7a1a !important;
+  background: rgba(10, 10, 10, 0.96) !important;
+  box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.18) !important;
+}
+
+/* Submit button */
+.nutritionSubmitBtn {
+  width: 100%;
+  margin-top: 28px;
+  min-height: 54px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff7a1a, #ff9f45) !important;
+  color: #111111 !important;
+  font-size: 15px;
+  font-weight: 950;
+  box-shadow: 0 18px 45px rgba(255, 122, 26, 0.28);
+  transition: 0.25s ease;
+}
+
+.nutritionSubmitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 55px rgba(255, 122, 26, 0.38);
+}
+
+.nutritionSubmitBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Error */
+.nutritionPage .errorMessage {
+  margin-top: 18px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: rgba(239, 68, 68, 0.14) !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  color: #fca5a5 !important;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+/* Result summary */
+.nutritionSummaryGrid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.nutritionSummaryGrid div {
+  padding: 20px;
+  border-radius: 22px;
+  background: rgba(255, 122, 26, 0.1) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.nutritionSummaryGrid span {
+  display: block;
+  color: #ff9f45 !important;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.nutritionSummaryGrid strong {
+  display: block;
+  margin-top: 8px;
+  color: #fff7ed !important;
+  font-size: 30px;
+  font-weight: 950;
+}
+
+.nutritionSummaryGrid p {
+  margin: 6px 0 0;
+  color: #cbd5e1 !important;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+/* Macro target box */
+.macroTargetBox {
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 26px;
+  background: rgba(255, 122, 26, 0.09) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.macroTargetBox h3 {
+  margin: 0;
+  color: #fff7ed !important;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.macroGrid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.macroGrid div {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.28) !important;
+  border: 1px solid rgba(255, 122, 26, 0.25) !important;
+}
+
+.macroGrid span {
+  display: block;
+  color: #ff9f45 !important;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.macroGrid strong {
+  display: block;
+  margin-top: 8px;
+  color: #e2e8f0 !important;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.macroTargetBox p {
+  margin: 18px 0 0;
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Nutrition chart */
+.nutritionChart {
+  margin-top: 24px;
+  display: grid;
+  gap: 18px;
+}
+
+.nutritionMealCard {
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255, 122, 26, 0.08) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.nutritionMealTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.nutritionMealTop h3 {
+  margin: 0;
+  color: #fff7ed !important;
+  font-size: 21px;
+  font-weight: 950;
+}
+
+.nutritionMealTop p {
+  margin: 7px 0 0;
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.nutritionMealTop span {
+  display: inline-flex;
+  border-radius: 999px;
+  background: rgba(255, 122, 26, 0.14) !important;
+  border: 1px solid rgba(255, 122, 26, 0.3) !important;
+  color: #ff9f45 !important;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.nutritionMealCard ul {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.nutritionMealCard li {
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.nutritionMealCard li::before {
+  content: "✓";
+  color: #ff9f45;
+  font-weight: 950;
+  margin-right: 8px;
+}
+
+.nutritionMealCard > p {
+  margin: 18px 0 0;
+  color: #94a3b8 !important;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Recommendations */
+.nutritionRecommendationBox {
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 26px;
+  background: rgba(255, 122, 26, 0.09) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.nutritionRecommendationBox h3 {
+  margin: 0;
+  color: #fff7ed !important;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.nutritionRecommendationBox ul {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.nutritionRecommendationBox li {
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.nutritionRecommendationBox li::before {
+  content: "✓";
+  color: #ff9f45;
+  font-weight: 950;
+  margin-right: 8px;
+}
+
+.nutritionRecommendationBox p {
+  margin: 18px 0 0;
+  color: #94a3b8 !important;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .nutritionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .nutritionResultCard {
+    position: static;
+  }
+}
+
+@media (max-width: 700px) {
+  .nutritionPage {
+    background: url("/images/gym.png") center center / cover fixed no-repeat !important;
+  }
+
+  .nutritionHero {
+    padding: 60px 0 44px;
+  }
+
+  .nutritionHero h1 {
+    font-size: 38px;
+  }
+
+  .nutritionFormCard,
+  .nutritionResultCard {
+    padding: 24px;
+    border-radius: 26px;
+  }
+
+  .nutritionFormGrid,
+  .nutritionSummaryGrid,
+  .macroGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .nutritionMealTop {
+    flex-direction: column;
+  }
+
+  .nutritionMealTop span {
+    white-space: normal;
+  }
+}
+
+/* ================================
+   Goals Page
+   ================================ */
+
+.goalsPage {
+  min-height: 100vh;
+  background: url("/images/gym.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Hero */
+.goalsHero {
+  position: relative;
+  padding: 80px 0 54px;
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 122, 26, 0.28) !important;
+  overflow: hidden;
+}
+
+.goalsHero::before,
+.goalsHero::after {
+  display: none !important;
+  content: none !important;
+}
+
+.goalsHero h1 {
+  margin: 20px 0 0;
+  max-width: 820px;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+  color: #fff7ed !important;
+  font-weight: 950;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.55);
+}
+
+.goalsHero p {
+  margin: 20px 0 0;
+  max-width: 760px;
+  color: #dbe4ee !important;
+  font-size: 17px;
+  line-height: 1.8;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.goalsPage .badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.38) !important;
+  color: #ff9f45 !important;
+  border: 1px solid rgba(255, 122, 26, 0.45) !important;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+/* Main section */
+.goalsSection {
+  padding: 56px 0 50px;
+  background: transparent !important;
+}
+
+.goalsGrid {
+  display: grid;
+  grid-template-columns: 1fr 0.75fr;
+  gap: 30px;
+  align-items: stretch;
+}
+
+/* Form card + info card */
+.goalFormCard,
+.goalInfoCard {
+  border-radius: 32px;
+  background: rgba(18, 18, 18, 0.76) !important;
+  border: 1px solid rgba(255, 122, 26, 0.32) !important;
+  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.48) !important;
+  padding: 34px;
+  backdrop-filter: blur(8px);
+}
+
+.formHeader h2,
+.goalInfoCard h2 {
+  margin: 0;
+  color: #fff7ed !important;
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+  font-weight: 950;
+}
+
+.formHeader p,
+.goalInfoCard > p {
+  margin: 12px 0 0;
+  color: #cbd5e1 !important;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.goalInfoCard > span {
+  display: inline-flex;
+  border-radius: 999px;
+  background: rgba(255, 122, 26, 0.14) !important;
+  border: 1px solid rgba(255, 122, 26, 0.35) !important;
+  color: #ff9f45 !important;
+  padding: 9px 14px;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+/* Form */
+.goalsPage .formGrid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.goalsPage .formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.goalsPage .formGroup label {
+  color: #ff9f45 !important;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.goalsPage .form-input,
+.goalsPage input,
+.goalsPage select,
+.goalsPage textarea {
+  width: 100%;
+  min-height: 52px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 122, 26, 0.35) !important;
+  background: rgba(5, 5, 5, 0.92) !important;
+  color: #fff7ed !important;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 750;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.goalsPage .form-input::placeholder,
+.goalsPage input::placeholder,
+.goalsPage textarea::placeholder {
+  color: #78716c !important;
+}
+
+.goalsPage .form-input:focus,
+.goalsPage input:focus,
+.goalsPage select:focus,
+.goalsPage textarea:focus {
+  border-color: #ff7a1a !important;
+  background: rgba(10, 10, 10, 0.96) !important;
+  box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.18) !important;
+}
+
+.goalTextarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Messages */
+.errorMessage {
+  margin-top: 18px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: rgba(239, 68, 68, 0.14) !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  color: #fca5a5 !important;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.successMessage {
+  margin-top: 18px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: rgba(255, 122, 26, 0.14) !important;
+  border: 1px solid rgba(255, 122, 26, 0.35) !important;
+  color: #ff9f45 !important;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+/* Submit button */
+.goalSubmitBtn {
+  width: 100%;
+  margin-top: 28px;
+  min-height: 54px;
+  border: none !important;
+  border-radius: 999px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff7a1a, #ff9f45) !important;
+  color: #111111 !important;
+  font-size: 15px;
+  font-weight: 950;
+  box-shadow: 0 18px 45px rgba(255, 122, 26, 0.28);
+  transition: 0.25s ease;
+}
+
+.goalSubmitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 55px rgba(255, 122, 26, 0.38);
+}
+
+/* Goal tips */
+.goalTips {
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.goalTips div {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 122, 26, 0.1) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.goalTips strong {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  background: #ff9f45 !important;
+  color: #111111 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 950;
+}
+
+.goalTips p {
+  margin: 0;
+  color: #e2e8f0 !important;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* History section */
+.goalHistorySection {
+  padding: 24px 0 90px;
+  background: transparent !important;
+}
+
+.historyHeader h2 {
+  margin: 16px 0 0;
+  font-size: 34px;
+  color: #fff7ed !important;
+  letter-spacing: -0.045em;
+  font-weight: 950;
+}
+
+.goalHistorySection > .container > p {
+  margin-top: 22px;
+  color: #cbd5e1 !important;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.goalHistoryGrid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* Goal card */
+.goalCard {
+  padding: 26px;
+  border-radius: 28px;
+  background: rgba(18, 18, 18, 0.76) !important;
+  border: 1px solid rgba(255, 122, 26, 0.32) !important;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.48) !important;
+  backdrop-filter: blur(8px);
+  transition: all 0.28s ease;
+}
+
+.goalCard:hover {
+  transform: translateY(-7px);
+  border-color: rgba(255, 159, 69, 0.7) !important;
+  box-shadow: 0 28px 70px rgba(255, 122, 26, 0.18) !important;
+}
+
+.goalCardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.goalCardTop span {
+  display: inline-flex;
+  border-radius: 999px;
+  background: rgba(255, 122, 26, 0.14) !important;
+  color: #ff9f45 !important;
+  border: 1px solid rgba(255, 122, 26, 0.3) !important;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: capitalize;
+}
+
+.goalCardTop h3 {
+  margin: 14px 0 0;
+  color: #fff7ed !important;
+  font-size: 24px;
+  letter-spacing: -0.04em;
+}
+
+.goalCardTop strong {
+  min-width: 58px;
+  height: 58px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ff7a1a, #ff9f45) !important;
+  color: #111111 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 950;
+}
+
+/* Progress bar */
+.goalProgressBar {
+  margin-top: 24px;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 122, 26, 0.14) !important;
+  border: 1px solid rgba(255, 122, 26, 0.25) !important;
+}
+
+.goalProgressBar div {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff7a1a, #ff9f45) !important;
+}
+
+/* Meta grid */
+.goalMetaGrid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.goalMetaGrid div {
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 122, 26, 0.1) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.goalMetaGrid span {
+  color: #ff9f45 !important;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.goalMetaGrid p {
+  margin: 8px 0 0;
+  color: #e2e8f0 !important;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+/* Update box */
+.goalUpdateBox {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+.goalUpdateBox input {
+  min-height: 48px;
+}
+
+.goalUpdateBox button {
+  border: none;
+  border-radius: 16px;
+  padding: 0 20px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff7a1a, #ff9f45) !important;
+  color: #111111 !important;
+  font-size: 14px;
+  font-weight: 950;
+  transition: 0.25s ease;
+}
+
+.goalUpdateBox button:hover {
+  transform: translateY(-2px);
+}
+
+/* Recommendations */
+.goalRecommendationBox {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 122, 26, 0.09) !important;
+  border: 1px solid rgba(255, 122, 26, 0.28) !important;
+}
+
+.goalRecommendationBox > span {
+  color: #ff9f45 !important;
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.goalRecommendationBox ul {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.goalRecommendationBox li {
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.goalRecommendationBox li::before {
+  content: "✓";
+  color: #ff9f45;
+  font-weight: 950;
+  margin-right: 8px;
+}
+
+/* Delete button */
+.goalDeleteBtn {
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 999px;
+  padding: 14px 18px;
+  cursor: pointer;
+  background: rgba(239, 68, 68, 0.12) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  font-size: 14px;
+  font-weight: 950;
+  transition: 0.25s ease;
+}
+
+.goalDeleteBtn:hover {
+  background: rgba(239, 68, 68, 0.22) !important;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .goalsGrid,
+  .goalHistoryGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .goalsPage {
+    background: url("/images/gym.png") center center / cover fixed no-repeat !important;
+  }
+
+  .goalsHero {
+    padding: 60px 0 44px;
+  }
+
+  .goalsHero h1 {
+    font-size: 38px;
+  }
+
+  .goalFormCard,
+  .goalInfoCard,
+  .goalCard {
+    padding: 24px;
+    border-radius: 26px;
+  }
+
+  .goalsPage .formGrid,
+  .goalMetaGrid,
+  .goalUpdateBox {
+    grid-template-columns: 1fr;
+  }
+
+  .goalUpdateBox button {
+    min-height: 48px;
+  }
+}
+/* ======================================
+   PAGE RELATED BACKGROUND IMAGE FIX
+   Different image for each page
+====================================== */
+
+/* 1. Main fallback background */
+body {
+  background: #000 !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.22),
+      rgba(0, 0, 0, 0.22)
+    ),
+    url("/images/gym.png") center / cover no-repeat !important;
+  z-index: -2;
+}
+
+/* 2. Page specific backgrounds */
+.publicPage,
+.dashboardPage,
+.fitnessPage,
+.profilePage,
+.authCheckingPage {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.22),
+      rgba(0, 0, 0, 0.22)
+    ),
+    url("/images/gym.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* BMI page background */
+.bmiPage {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.20),
+      rgba(0, 0, 0, 0.20)
+    ),
+    url("/images/BMI.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Health Risk page background */
+.healthRiskPage {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.20),
+      rgba(0, 0, 0, 0.20)
+    ),
+    url("/images/Health.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Nutrition + Diet page background */
+.nutritionPage,
+.dietPage {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.20),
+      rgba(0, 0, 0, 0.20)
+    ),
+    url("/images/Nutrition.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Sleep Tracking page background */
+.sleepPage {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.18),
+      rgba(0, 0, 0, 0.18)
+    ),
+    url("/images/Sleep.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Goals page background */
+.goalsPage {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.18),
+      rgba(0, 0, 0, 0.18)
+    ),
+    url("/images/Goal.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* 3. Hero sections transparent, so page background visible */
+.heroSection,
+.publicHero,
+.dashboardHero,
+.healthRiskHero,
+.dietHero,
+.bmiHero,
+.nutritionHero,
+.sleepHero,
+.goalsHero,
+.fitnessHero,
+.profileHero {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 122, 26, 0.28) !important;
+  color: #fff7ed !important;
+  overflow: hidden;
+}
+
+/* 4. Remove unwanted front glow overlays */
+.heroSection::before,
+.heroSection::after,
+.publicHero::before,
+.publicHero::after,
+.dashboardHero::before,
+.dashboardHero::after,
+.healthRiskHero::before,
+.healthRiskHero::after,
+.dietHero::before,
+.dietHero::after,
+.bmiHero::before,
+.bmiHero::after,
+.nutritionHero::before,
+.nutritionHero::after,
+.sleepHero::before,
+.sleepHero::after,
+.goalsHero::before,
+.goalsHero::after,
+.fitnessHero::before,
+.fitnessHero::after,
+.profileHero::before,
+.profileHero::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* 5. Sections transparent */
+.featureSection,
+.publicSection,
+.publicLightSection,
+.publicCta,
+.dashboardContent,
+.healthRiskSection,
+.dietSection,
+.bmiSection,
+.nutritionSection,
+.sleepSection,
+.sleepHistorySection,
+.goalsSection,
+.goalHistorySection,
+.goalsListSection,
+.fitnessSection,
+.profileSection {
+  background: transparent !important;
+}
+
+/* 6. Cards professional glass look */
+.previewCard,
+.featureCard,
+.featureInfoCard,
+.dashboardCard,
+.modulePanel,
+.activityPanel,
+.moduleCard,
+.healthRiskForm,
+.healthRiskResult,
+.dietFormCard,
+.dietResultCard,
+.bmiCard,
+.nutritionFormCard,
+.nutritionResultCard,
+.sleepFormCard,
+.sleepResultCard,
+.sleepHistoryCard,
+.fitnessFormCard,
+.fitnessResultCard,
+.goalFormCard,
+.goalInfoCard,
+.goalCard,
+.aboutContentCard,
+.aboutPurposeGrid div,
+.authCheckingBox {
+  background: rgba(18, 18, 18, 0.76) !important;
+  border: 1px solid rgba(255, 122, 26, 0.32) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.48) !important;
+}
+
+/* 7. Text readable */
+h1,
+h2,
+h3,
+.heroContent h1,
+.publicHero h1,
+.dashboardHero h1,
+.healthRiskHero h1,
+.dietHero h1,
+.bmiHero h1,
+.nutritionHero h1,
+.sleepHero h1,
+.goalsHero h1,
+.fitnessHero h1,
+.profileHero h1 {
+  color: #fff7ed !important;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.45) !important;
+}
+
+p,
+.heroContent p,
+.publicHero p,
+.dashboardHero p,
+.healthRiskHero p,
+.dietHero p,
+.bmiHero p,
+.nutritionHero p,
+.sleepHero p,
+.goalsHero p,
+.fitnessHero p,
+.profileHero p {
+  color: #dbe4ee !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* 8. Badge clean orange */
+.badge,
+.pageBadge {
+  background: rgba(0, 0, 0, 0.38) !important;
+  color: #ff9f45 !important;
+  border: 1px solid rgba(255, 122, 26, 0.45) !important;
+}
+
+/* 9. Mobile background fix */
+@media (max-width: 768px) {
+  .publicPage,
+  .dashboardPage,
+  .fitnessPage,
+  .profilePage,
+  .authCheckingPage {
+    background:
+      linear-gradient(
+        rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.35)
+      ),
+      url("/images/gym.png") center / cover scroll no-repeat !important;
+  }
+
+  .bmiPage {
+    background:
+      linear-gradient(
+        rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.35)
+      ),
+      url("/images/BMI.png") center / cover scroll no-repeat !important;
+  }
+
+  .healthRiskPage {
+    background:
+      linear-gradient(
+        rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.35)
+      ),
+      url("/images/Health.png") center / cover scroll no-repeat !important;
+  }
+
+  .nutritionPage,
+  .dietPage {
+    background:
+      linear-gradient(
+        rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.35)
+      ),
+      url("/images/Nutrition.png") center / cover scroll no-repeat !important;
+  }
+
+  .sleepPage {
+    background:
+      linear-gradient(
+        rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.35)
+      ),
+      url("/images/Sleep.png") center / cover scroll no-repeat !important;
+  }
+
+  .goalsPage {
+    background:
+      linear-gradient(
+        rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.35)
+      ),
+      url("/images/Goal.png") center / cover scroll no-repeat !important;
+  }
+}
+/* ======================================
+   PUBLIC HERO IMAGE CLEAR FIX
+   Remove front dark/orange overlay
+====================================== */
+
+.publicHero {
+  position: relative;
+  min-height: calc(100vh - 84px);
+  padding: 95px 0 75px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.12) 50%,
+      rgba(0, 0, 0, 0.28) 100%
+    ),
+    url("/images/gym.png") center / cover no-repeat !important;
+
+  border-bottom: 1px solid rgba(255, 122, 26, 0.22) !important;
+  overflow: hidden;
+}
+
+/* front orange/black shadow remove */
+.publicHero::before,
+.publicHero::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* text area mattum readable-a irukka */
+.publicHero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* text shadow remove */
+.publicHero h1,
+.publicHero p,
+.publicPage .pageBadge {
+  text-shadow: none !important;
+}
+
+/* badge background light-a */
+.publicPage .pageBadge {
+  background: rgba(0, 0, 0, 0.45) !important;
+  color: #ff9f45 !important;
+  border: 1px solid rgba(255, 122, 26, 0.45) !important;
+}
+
+/* buttons shadow konjam reduce */
+.publicPage .primaryBtn,
+.publicPage .secondaryBtn {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* ======================================
+   LOGIN / REGISTER PAGE
+====================================== */
+
+.loginPage,
+.registerPage,
+.authPage {
+  min-height: calc(100vh - 84px);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 24px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.74) 48%,
+      rgba(0, 0, 0, 0.9) 100%
+    ),
+    url("/images/gym.png") center / cover no-repeat !important;
+  color: var(--fit-text) !important;
+}
+
+/* Animated orange glow background */
+.loginPage::before,
+.registerPage::before,
+.authPage::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 122, 26, 0.35), transparent 65%);
+  top: -160px;
+  right: -140px;
+  filter: blur(20px);
+  animation: orangeFloat 7s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+.loginPage::after,
+.registerPage::after,
+.authPage::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 159, 69, 0.22), transparent 65%);
+  left: -120px;
+  bottom: -130px;
+  filter: blur(18px);
+  animation: orangePulse 6s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+/* Main auth card */
+.authCard,
+.loginCard,
+.registerCard {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 460px;
+  padding: 42px;
+  border-radius: 34px;
+  background: rgba(14, 14, 14, 0.88) !important;
+  border: 1px solid rgba(255, 122, 26, 0.36) !important;
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.75),
+    0 0 70px rgba(255, 122, 26, 0.14) !important;
+  backdrop-filter: blur(18px);
+  animation: cardSlideUp 0.75s ease both;
+}
+
+/* Top logo / icon */
+.authLogo,
+.loginLogo,
+.registerLogo {
+  width: 68px;
+  height: 68px;
+  border-radius: 22px;
+  margin: 0 auto 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--fit-orange), var(--fit-orange-light));
+  color: #111111;
+  font-size: 30px;
+  font-weight: 950;
+  box-shadow: 0 20px 45px rgba(255, 122, 26, 0.35);
+  animation: logoGlow 2.4s ease-in-out infinite alternate;
+}
+
+/* Headings */
+.authCard h1,
+.loginCard h1,
+.registerCard h1,
+.authTitle {
+  margin: 0;
+  text-align: center;
+  color: var(--fit-text) !important;
+  font-size: 34px;
+  line-height: 1.1;
+  font-weight: 950;
+  letter-spacing: -1px;
+}
+
+.authCard p,
+.loginCard p,
+.registerCard p,
+.authSubtitle {
+  margin: 12px auto 0;
+  max-width: 360px;
+  text-align: center;
+  color: var(--fit-muted) !important;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Form */
+.authForm,
+.loginForm,
+.registerForm {
+  margin-top: 30px;
+  display: grid;
+  gap: 18px;
+}
+
+.formGroup,
+.authFormGroup {
+  display: grid;
+  gap: 8px;
+}
+
+.formGroup label,
+.authFormGroup label,
+.authForm label,
+.loginForm label,
+.registerForm label {
+  color: var(--fit-orange-light) !important;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+/* Inputs */
+.authForm input,
+.loginForm input,
+.registerForm input,
+.authInput,
+.formGroup input {
+  width: 100%;
+  min-height: 54px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 122, 26, 0.35) !important;
+  background: rgba(5, 5, 5, 0.92) !important;
+  color: var(--fit-text) !important;
+  padding: 0 16px;
+  font-size: 15px;
+  font-weight: 750;
+  outline: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  transition: 0.25s ease;
+}
+
+.authForm input::placeholder,
+.loginForm input::placeholder,
+.registerForm input::placeholder,
+.authInput::placeholder,
+.formGroup input::placeholder {
+  color: #78716c !important;
+}
+
+.authForm input:focus,
+.loginForm input:focus,
+.registerForm input:focus,
+.authInput:focus,
+.formGroup input:focus {
+  border-color: var(--fit-orange) !important;
+  background: rgba(10, 10, 10, 0.96) !important;
+  box-shadow:
+    0 0 0 4px rgba(255, 122, 26, 0.18),
+    0 0 25px rgba(255, 122, 26, 0.12) !important;
+  transform: translateY(-1px);
+}
+
+/* Submit button */
+.authButton,
+.loginBtn,
+.registerBtn,
+.authForm button,
+.loginForm button,
+.registerForm button {
+  width: 100%;
+  min-height: 56px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--fit-orange), var(--fit-orange-light)) !important;
+  color: #111111 !important;
+  font-size: 16px;
+  font-weight: 950;
+  box-shadow: 0 20px 48px rgba(255, 122, 26, 0.34);
+  transition: 0.25s ease;
+}
+
+.authButton:hover,
+.loginBtn:hover,
+.registerBtn:hover,
+.authForm button:hover,
+.loginForm button:hover,
+.registerForm button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 60px rgba(255, 122, 26, 0.45);
+}
+
+.authButton:disabled,
+.loginBtn:disabled,
+.registerBtn:disabled,
+.authForm button:disabled,
+.loginForm button:disabled,
+.registerForm button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Bottom link */
+.authFooter,
+.loginFooter,
+.registerFooter {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--fit-muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.authFooter a,
+.loginFooter a,
+.registerFooter a {
+  color: var(--fit-orange-light) !important;
+  font-weight: 950;
+}
+
+.authFooter a:hover,
+.loginFooter a:hover,
+.registerFooter a:hover {
+  color: var(--fit-orange) !important;
+}
+
+/* Error / success message */
+.authError,
+.loginError,
+.registerError,
+.errorText {
+  margin-top: 14px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: rgba(239, 68, 68, 0.14) !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  color: #fca5a5 !important;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.authSuccess,
+.loginSuccess,
+.registerSuccess {
+  margin-top: 14px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: rgba(255, 122, 26, 0.14);
+  border: 1px solid rgba(255, 122, 26, 0.35);
+  color: var(--fit-orange-light);
+  font-size: 14px;
+  font-weight: 850;
+}
+
+/* Decorative lines */
+.authCard .decorLine,
+.loginCard .decorLine,
+.registerCard .decorLine {
+  width: 90px;
+  height: 4px;
+  border-radius: 999px;
+  margin: 18px auto 0;
+  background: linear-gradient(90deg, transparent, var(--fit-orange), transparent);
+}
+
+/* Animations */
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(34px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes orangeFloat {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+
+  to {
+    transform: translate3d(-40px, 35px, 0) scale(1.08);
+    opacity: 0.85;
+  }
+}
+
+@keyframes orangePulse {
+  from {
+    transform: scale(0.92);
+    opacity: 0.45;
+  }
+
+  to {
+    transform: scale(1.12);
+    opacity: 0.8;
+  }
+}
+
+@keyframes logoGlow {
+  from {
+    box-shadow:
+      0 18px 42px rgba(255, 122, 26, 0.28),
+      0 0 0 rgba(255, 122, 26, 0);
+  }
+
+  to {
+    box-shadow:
+      0 22px 52px rgba(255, 122, 26, 0.45),
+      0 0 40px rgba(255, 122, 26, 0.22);
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .loginPage,
+  .registerPage,
+  .authPage {
+    padding: 45px 18px;
+  }
+
+  .authCard,
+  .loginCard,
+  .registerCard {
+    padding: 30px 22px;
+    border-radius: 26px;
+  }
+
+  .authCard h1,
+  .loginCard h1,
+  .registerCard h1,
+  .authTitle {
+    font-size: 29px;
+  }
+
+  .authLogo,
+  .loginLogo,
+  .registerLogo {
+    width: 60px;
+    height: 60px;
+    border-radius: 19px;
+    font-size: 27px;
+  }
+}
+/* ======================================
+   FITLIFE BLACK + ORANGE GYM THEME
+   No image required
+====================================== */
+
+:root {
+  --fit-black: #050505;
+  --fit-dark: #0b0b0b;
+  --fit-card: rgba(18, 18, 18, 0.92);
+  --fit-card-light: rgba(35, 35, 35, 0.92);
+  --fit-orange: #ff7a1a;
+  --fit-orange-light: #ff9f45;
+  --fit-orange-dark: #d95b00;
+  --fit-text: #fff7ed;
+  --fit-muted: #cbd5e1;
+  --fit-soft: #94a3b8;
+  --fit-border: rgba(255, 122, 26, 0.35);
+  --fit-shadow: rgba(255, 122, 26, 0.28);
+}
+
+/* Global Background */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050505 !important;
+  color: var(--fit-text) !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.78) 48%,
+      rgba(0, 0, 0, 0.92) 100%
+    ),
+    url("/images/gym.png") center / cover no-repeat;
+  z-index: -2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navbar */
+.navbar {
+  background: rgba(5, 5, 5, 0.94) !important;
+  border-bottom: 1px solid var(--fit-border) !important;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.75) !important;
+  backdrop-filter: blur(18px) !important;
+}
+
+.logoIcon {
+  background: linear-gradient(135deg, var(--fit-orange), var(--fit-orange-light)) !important;
+  color: #111111 !important;
+  box-shadow: 0 16px 35px var(--fit-shadow) !important;
+}
+
+.logoBox h1 {
+  color: var(--fit-text) !important;
+}
+
+.logoBox p {
+  color: var(--fit-muted) !important;
+}
+
+.navLinks a,
+.modulesBtn {
+  color: var(--fit-text) !important;
+}
+
+.navLinks a:hover,
+.modulesBtn:hover {
+  color: var(--fit-orange-light) !important;
+}
+
+/* Buttons */
+.btnStart,
+.primaryBtn,
+.healthRiskForm button,
+.profileSubmitBtn,
+.dietPage .profileSubmitBtn {
+  background: linear-gradient(135deg, var(--fit-orange), var(--fit-orange-light)) !important;
+  color: #111111 !important;
+  box-shadow: 0 18px 45px var(--fit-shadow) !important;
+  border: none !important;
+}
+
+.btnStart:hover,
+.primaryBtn:hover,
+.healthRiskForm button:hover,
+.profileSubmitBtn:hover,
+.dietPage .profileSubmitBtn:hover {
+  background: linear-gradient(135deg, var(--fit-orange-light), var(--fit-orange)) !important;
+  transform: translateY(-2px);
+}
+
+.btnLogin,
+.secondaryBtn,
+.profileBtn {
+  background: rgba(18, 18, 18, 0.95) !important;
+  color: var(--fit-orange-light) !important;
+  border: 1px solid var(--fit-border) !important;
+}
+
+.btnLogin:hover,
+.secondaryBtn:hover,
+.profileBtn:hover {
+  background: rgba(255, 122, 26, 0.14) !important;
+  color: var(--fit-text) !important;
+}
+
+/* Dropdown */
+.modulesMenu {
+  background: rgba(10, 10, 10, 0.98) !important;
+  border: 1px solid var(--fit-border) !important;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7) !important;
+}
+
+.modulesMenu::before {
+  background: #0a0a0a !important;
+  border-left: 1px solid var(--fit-border) !important;
+  border-top: 1px solid var(--fit-border) !important;
+}
+
+.modulesMenuItem {
+  color: var(--fit-text) !important;
+  grid-template-columns: 1fr 24px !important;
+}
+
+.modulesMenuItem strong {
+  color: var(--fit-text) !important;
+}
+
+.modulesMenuItem small {
+  color: var(--fit-soft) !important;
+}
+
+.modulesMenuItem:hover {
+  background: rgba(255, 122, 26, 0.16) !important;
+}
+
+.modulesMenuItem > span {
+  display: none !important;
+}
+
+/* Page Hero Sections */
+.heroSection,
+.publicHero,
+.dashboardHero,
+.healthRiskHero,
+.dietHero,
+.bmiHero,
+.nutritionHero,
+.sleepHero,
+.goalHero,
+.fitnessHero,
+.profileHero {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 122, 26, 0.25), transparent 32%),
+    radial-gradient(circle at 85% 20%, rgba(255, 159, 69, 0.16), transparent 30%),
+    linear-gradient(135deg, #000000 0%, #0b0b0b 55%, #1c0d03 100%) !important;
+  color: var(--fit-text) !important;
+  border-bottom: 1px solid var(--fit-border) !important;
+}
+
+/* Page backgrounds */
+.publicPage,
+.dashboardPage,
+.healthRiskPage,
+.dietPage,
+.bmiPage,
+.nutritionPage,
+.sleepPage,
+.goalPage,
+.fitnessPage,
+.profilePage,
+.authCheckingPage {
+  background: transparent !important;
+  color: var(--fit-text) !important;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+.heroContent h1,
+.publicHero h1,
+.dashboardHero h1,
+.healthRiskHero h1,
+.dietHero h1,
+.sectionTitle h2,
+.publicSectionHeader h2,
+.panelHeader h2,
+.healthRiskResult h2,
+.healthRiskForm h2,
+.dietFormCard h2,
+.dietResultCard h2,
+.aboutContentCard h2 {
+  color: var(--fit-text) !important;
+}
+
+/* Hero highlight */
+.heroContent h1 span {
+  color: var(--fit-orange) !important;
+  text-shadow: 0 0 30px rgba(255, 122, 26, 0.35) !important;
+}
+
+/* Text */
+p,
+.heroContent p,
+.publicHero p,
+.dashboardHero p,
+.healthRiskHero p,
+.dietHero p,
+.sectionTitle p,
+.publicSectionHeader p,
+.featureCard p,
+.featureInfoCard p,
+.dashboardCard p,
+.moduleCard p,
+.activityItem p,
+.healthRiskResult p,
+.dietFormCard p,
+.dietResultCard p,
+.aboutContentCard p,
+.aboutPurposeGrid p {
+  color: var(--fit-muted) !important;
+}
+
+/* Badges */
+.badge,
+.pageBadge,
+.publicPage .pageBadge {
+  background: rgba(255, 122, 26, 0.16) !important;
+  color: var(--fit-orange-light) !important;
+  border: 1px solid var(--fit-border) !important;
+}
+
+/* Cards */
+.previewCard,
+.featureCard,
+.featureInfoCard,
+.dashboardCard,
+.modulePanel,
+.activityPanel,
+.moduleCard,
+.healthRiskForm,
+.healthRiskResult,
+.dietFormCard,
+.dietResultCard,
+.aboutContentCard,
+.aboutPurposeGrid div,
+.authCheckingBox {
+  background: var(--fit-card) !important;
+  color: var(--fit-text) !important;
+  border: 1px solid var(--fit-border) !important;
+  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.58) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+/* Card hover */
+.previewCard:hover,
+.featureCard:hover,
+.featureInfoCard:hover,
+.dashboardCard:hover,
+.moduleCard:hover,
+.aboutContentCard:hover {
+  border-color: rgba(255, 159, 69, 0.7) !important;
+  box-shadow: 0 28px 75px rgba(255, 122, 26, 0.2) !important;
+  transform: translateY(-5px);
+}
+
+/* Card headings */
+.featureCard h3,
+.featureInfoCard h3,
+.dashboardCard h3,
+.moduleCard h3,
+.activityItem h3,
+.healthRiskResult h3,
+.aboutPurposeGrid h3,
+.emptyResult h2 {
+  color: var(--fit-text) !important;
+}
+
+/* Orange highlights */
+.previewHeader span,
+.previewBox p,
+.aiNote span,
+.dashboardCard strong,
+.moduleCard span,
+.activityItem strong,
+.resultStats strong,
+.resultStats span,
+.statsRow strong,
+.statsRow span,
+.dietSummaryGrid strong,
+.dietSummaryGrid span,
+.riskSummary strong {
+  color: var(--fit-orange-light) !important;
+}
+
+/* Preview card */
+.previewCard {
+  background:
+    linear-gradient(145deg, rgba(18, 18, 18, 0.96), rgba(5, 5, 5, 0.96)) !important;
+  border: 1px solid rgba(255, 122, 26, 0.38) !important;
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.7),
+    0 0 60px rgba(255, 122, 26, 0.13) !important;
+}
+
+.previewHeader b {
+  background: linear-gradient(135deg, var(--fit-orange), var(--fit-orange-light)) !important;
+  color: #111111 !important;
+}
+
+.previewBox,
+.aiNote,
+.aiSuggestionBox {
+  background: rgba(255, 122, 26, 0.11) !important;
+  border: 1px solid var(--fit-border) !important;
+}
+
+/* Sections */
+.featureSection,
+.publicSection,
+.dashboardContent,
+.healthRiskSection,
+.dietSection,
+.publicLightSection,
+.publicCta {
+  background: transparent !important;
+}
+
+/* Small boxes */
+.statsRow div,
+.resultStats div,
+.dietSummaryGrid div,
+.activityItem,
+.healthRiskResult li,
+.riskSummary p,
+.aboutList li {
+  background: rgba(255, 122, 26, 0.1) !important;
+  border: 1px solid rgba(255, 122, 26, 0.3) !important;
+  color: var(--fit-muted) !important;
+}
+
+/* Icons */
+.dashboardIcon,
+.moduleIcon,
+.featureIcon {
+  background: rgba(255, 122, 26, 0.14) !important;
+  color: var(--fit-orange-light) !important;
+  border: 1px solid var(--fit-border) !important;
+}
+
+/* Forms */
+input,
+select,
+textarea,
+.healthRiskForm input,
+.healthRiskForm select,
+.dietPage .formGroup input,
+.dietPage .formGroup select,
+.dietPage .formGroup textarea {
+  background: #090909 !important;
+  color: var(--fit-text) !important;
+  border: 1px solid var(--fit-border) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #78716c !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.healthRiskForm input:focus,
+.healthRiskForm select:focus,
+.dietPage .formGroup input:focus,
+.dietPage .formGroup select:focus,
+.dietPage .formGroup textarea:focus {
+  border-color: var(--fit-orange) !important;
+  box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.22) !important;
+}
+
+label,
+.healthRiskForm label,
+.dietPage .formGroup label {
+  color: var(--fit-orange-light) !important;
+}
+
+/* Health result */
+.riskBadge {
+  background: linear-gradient(135deg, var(--fit-orange), var(--fit-orange-light)) !important;
+  color: #111111 !important;
+}
+
+.modelInfo {
+  background: rgba(255, 122, 26, 0.14) !important;
+  border: 1px solid var(--fit-border) !important;
+  color: var(--fit-orange-light) !important;
+}
+
+.emptyResult {
+  background: rgba(12, 12, 12, 0.82) !important;
+  border: 1px dashed rgba(255, 122, 26, 0.45) !important;
+}
+
+.errorText {
+  background: rgba(239, 68, 68, 0.12) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+}
+
+/* CTA */
+.publicCtaBox {
+  background: linear-gradient(135deg, rgba(255, 122, 26, 0.96), rgba(217, 91, 0, 0.96)) !important;
+  color: #111111 !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+}
+
+.publicCtaBox h2,
+.publicCtaBox p {
+  color: #111111 !important;
+}
+
+.publicCtaBox .primaryBtn {
+  background: #111111 !important;
+  color: var(--fit-text) !important;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .navbar {
+    height: auto !important;
+  }
+
+  .navContainer {
+    height: auto !important;
+    padding: 16px 24px !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .navLinks {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px 20px;
+  }
+
+  .navActions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .modulesDropdown {
+    position: relative !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .heroSection,
+  .publicHero,
+  .dashboardHero,
+  .healthRiskHero,
+  .dietHero {
+    padding: 60px 0 45px !important;
+  }
+
+  .heroContent,
+  .publicHero .container {
+    text-align: center;
+  }
+
+  .heroButtons,
+  .publicHeroActions {
+    justify-content: center;
+  }
+
+  .modulesMenu {
+    width: 92vw !important;
+  }
+}
+/* ======================================
+   SAFE FINAL BACKGROUND FIX
+   Paste this at the VERY BOTTOM
+====================================== */
+
+/* fallback background for full website */
+body {
+  background: #000 !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+    url("/images/gym.png") center / cover no-repeat !important;
+  z-index: -2;
+}
+
+/* common pages */
+.publicPage,
+.dashboardPage,
+.fitnessPage,
+.profilePage,
+.authCheckingPage {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+    url("/images/gym.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* BMI */
+.bmiPage {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)),
+    url("/images/BMI.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Health Risk */
+.healthRiskPage {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)),
+    url("/images/Health.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Nutrition + Diet */
+.nutritionPage,
+.dietPage {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)),
+    url("/images/Nutrition.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Sleep */
+.sleepPage {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.14)),
+    url("/images/Sleep.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* Goals */
+.goalsPage,
+.goalPage {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.14)),
+    url("/images/Goal.png") right center / cover fixed no-repeat !important;
+  color: #fff7ed !important;
+}
+
+/* hero background remove */
+.heroSection,
+.publicHero,
+.dashboardHero,
+.healthRiskHero,
+.dietHero,
+.bmiHero,
+.nutritionHero,
+.sleepHero,
+.goalsHero,
+.goalHero,
+.fitnessHero,
+.profileHero {
+  background: transparent !important;
+}
+
+/* remove hero overlays */
+.heroSection::before,
+.heroSection::after,
+.publicHero::before,
+.publicHero::after,
+.dashboardHero::before,
+.dashboardHero::after,
+.healthRiskHero::before,
+.healthRiskHero::after,
+.dietHero::before,
+.dietHero::after,
+.bmiHero::before,
+.bmiHero::after,
+.nutritionHero::before,
+.nutritionHero::after,
+.sleepHero::before,
+.sleepHero::after,
+.goalsHero::before,
+.goalsHero::after,
+.goalHero::before,
+.goalHero::after,
+.fitnessHero::before,
+.fitnessHero::after,
+.profileHero::before,
+.profileHero::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* sections transparent */
+.dashboardContent,
+.healthRiskSection,
+.dietSection,
+.bmiSection,
+.nutritionSection,
+.sleepSection,
+.sleepHistorySection,
+.goalsSection,
+.goalHistorySection,
+.fitnessSection,
+.profileSection,
+.publicSection,
+.featureSection {
+  background: transparent !important;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .publicPage,
+  .dashboardPage,
+  .fitnessPage,
+  .profilePage,
+  .authCheckingPage {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)),
+      url("/images/gym.png") center / cover scroll no-repeat !important;
+  }
+
+  .bmiPage {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)),
+      url("/images/BMI.png") center / cover scroll no-repeat !important;
+  }
+
+  .healthRiskPage {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)),
+      url("/images/Health.png") center / cover scroll no-repeat !important;
+  }
+
+  .nutritionPage,
+  .dietPage {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)),
+      url("/images/Nutrition.png") center / cover scroll no-repeat !important;
+  }
+
+  .sleepPage {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)),
+      url("/images/Sleep.png") center / cover scroll no-repeat !important;
+  }
+
+  .goalsPage,
+  .goalPage {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)),
+      url("/images/Goal.png") center / cover scroll no-repeat !important;
+  }
+}
