@@ -4,10 +4,16 @@ import { FormEvent, useEffect, useState } from "react";
 import { apiRequest } from "@/lib/api";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
+type FoodItem = {
+  name: string;
+  grams: number;
+};
+
 type Meal = {
   meal: string;
   target_calories: number;
   foods: string[];
+  food_items?: FoodItem[];
   portion_guide: string;
 };
 
@@ -227,7 +233,7 @@ export default function DietRecommendationPage() {
               <p>
                 FitLife uses your saved profile details and food preferences to
                 generate a simple diet recommendation, calorie target, macro
-                balance, and meal chart.
+                balance, meal chart, and estimated gram portions.
               </p>
             </div>
 
@@ -238,13 +244,13 @@ export default function DietRecommendationPage() {
               </div>
 
               <div>
-                <strong>Simple</strong>
-                <span>Easy meal guidance</span>
+                <strong>Practical</strong>
+                <span>Calories and grams</span>
               </div>
 
               <div>
-                <strong>Practical</strong>
-                <span>Daily calorie target</span>
+                <strong>Simple</strong>
+                <span>Easy meal guidance</span>
               </div>
             </div>
           </div>
@@ -552,13 +558,14 @@ export default function DietRecommendationPage() {
 
                   <p>
                     Your personalized diet chart, calorie target, macro balance,
-                    meal plan, and recommendations will appear here.
+                    meal plan, estimated gram portions, and recommendations will
+                    appear here.
                   </p>
 
                   <div className="dietEmptyList">
                     <span>✓ Profile-based recommendation</span>
                     <span>✓ Daily calorie target</span>
-                    <span>✓ Meal chart and food guidance</span>
+                    <span>✓ Meal calories and gram portions</span>
                   </div>
                 </div>
               ) : (
@@ -611,9 +618,18 @@ export default function DietRecommendationPage() {
                           </div>
 
                           <ul>
-                            {meal.foods.map((food) => (
-                              <li key={food}>{food}</li>
-                            ))}
+                            {meal.food_items && meal.food_items.length > 0
+                              ? meal.food_items.map((food) => (
+                                  <li key={`${meal.meal}-${food.name}`}>
+                                    <span>{formatText(food.name)}</span>
+                                    <strong>{food.grams}g</strong>
+                                  </li>
+                                ))
+                              : meal.foods.map((food) => (
+                                  <li key={`${meal.meal}-${food}`}>
+                                    <span>{formatText(food)}</span>
+                                  </li>
+                                ))}
                           </ul>
 
                           <p>{meal.portion_guide}</p>
@@ -634,8 +650,9 @@ export default function DietRecommendationPage() {
 
                   <p className="dietFriendlyNote">
                     This diet plan is generated for general health and fitness
-                    guidance. It is not a replacement for professional medical
-                    or dietician advice.
+                    guidance. The gram values are estimated portions based on
+                    calorie target, meal type, goal, and food category. It is not
+                    a replacement for professional medical or dietician advice.
                   </p>
                 </div>
               )}

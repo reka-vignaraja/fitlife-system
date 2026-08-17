@@ -2224,13 +2224,8 @@ button {
 }
 /* ================================
    Diet Recommendation Page
-   Clean Compact Dark Glass UI
-   ================================ */
-
-/* ================================
-   Diet Recommendation Page
-   Clean Compact Dark Glass UI
-   Reduced Transparency Version
+   Final Clean Dark Glass UI
+   With Proper Meal Gram Spacing
    ================================ */
 
 .dietPage.dietCompactPage {
@@ -2323,7 +2318,7 @@ button {
 .dietCompactRight {
   border: 1px solid rgba(255, 166, 0, 0.14);
   border-radius: 28px;
-  background: rgba(10, 10, 10, 0.84);
+  background: rgba(10, 10, 10, 0.86);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
@@ -2379,7 +2374,7 @@ button {
 .dietMacroGrid div {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
-  background: rgba(18, 18, 18, 0.88);
+  background: rgba(18, 18, 18, 0.9);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 0.75rem;
@@ -2425,7 +2420,7 @@ button {
   width: 100%;
   border: 1px solid rgba(255, 166, 0, 0.2);
   border-radius: 16px;
-  background: rgba(0, 0, 0, 0.68);
+  background: rgba(0, 0, 0, 0.7);
   color: #ffffff;
   padding: 0.82rem 0.85rem;
   font-size: 0.95rem;
@@ -2451,7 +2446,7 @@ button {
   margin-top: 0.9rem;
   border: 1px solid rgba(255, 166, 0, 0.14);
   border-radius: 20px;
-  background: rgba(18, 18, 18, 0.82);
+  background: rgba(18, 18, 18, 0.84);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 0.9rem;
@@ -2598,7 +2593,7 @@ button {
 .dietMealPanel {
   border: 1px solid rgba(20, 184, 166, 0.2);
   border-radius: 22px;
-  background: rgba(7, 26, 24, 0.9);
+  background: rgba(7, 26, 24, 0.92);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 0.95rem;
@@ -2606,22 +2601,23 @@ button {
 
 .dietMealPanel h3 {
   margin: 0 0 0.65rem;
-  color: #7ef0df;
+  color: #ffffff;
+  font-size: 1.15rem;
 }
 
 .dietMealList {
   display: grid;
   gap: 0.65rem;
-  max-height: 310px;
+  max-height: 390px;
   overflow-y: auto;
-  padding-right: 0.2rem;
+  padding-right: 0.35rem;
 }
 
 .dietMealCard {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
-  background: rgba(10, 10, 10, 0.84);
-  padding: 0.8rem;
+  background: rgba(5, 8, 8, 0.9);
+  padding: 0.95rem;
 }
 
 .dietMealTop {
@@ -2629,36 +2625,71 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 0.8rem;
+  margin-bottom: 0.75rem;
 }
 
 .dietMealTop h4 {
   margin: 0;
   color: #ffffff;
+  font-size: 1rem;
 }
 
 .dietMealTop span {
   color: #ffb56b;
-  font-weight: 900;
-  font-size: 0.8rem;
+  font-weight: 950;
+  font-size: 0.9rem;
 }
 
+/* IMPORTANT: food name and grams spacing */
 .dietMealCard ul {
-  margin: 0.6rem 0;
-  padding-left: 1.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
 }
 
-.dietMealCard li,
-.dietRecommendationList li {
-  margin-bottom: 0.35rem;
-  color: rgba(255, 255, 255, 0.86);
-  line-height: 1.4;
+.dietMealCard li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 72px;
+  align-items: center;
+  column-gap: 1rem;
+  width: 100%;
+  padding: 0.26rem 0;
+  line-height: 1.35;
+}
+
+.dietMealCard li span {
+  display: block;
+  min-width: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: left;
+  word-break: break-word;
+}
+
+.dietMealCard li strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  width: 64px;
+  color: #ffb56b;
+  font-size: 0.82rem;
+  font-weight: 950;
+  background: rgba(255, 159, 67, 0.12);
+  border: 1px solid rgba(255, 159, 67, 0.16);
+  border-radius: 999px;
+  padding: 0.22rem 0.4rem;
+  white-space: nowrap;
 }
 
 .dietMealCard p {
-  margin: 0;
+  margin: 0.85rem 0 0;
   color: rgba(255, 255, 255, 0.72);
   font-size: 0.82rem;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 /* Recommendation section */
@@ -2669,6 +2700,12 @@ button {
 .dietRecommendationList {
   margin: 0.85rem 0 0;
   padding-left: 1.1rem;
+}
+
+.dietRecommendationList li {
+  margin-bottom: 0.45rem;
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.45;
 }
 
 .dietFriendlyNote {
@@ -2736,8 +2773,15 @@ button {
   .dietCardTop {
     flex-direction: column;
   }
-}
 
+  .dietMealCard li {
+    grid-template-columns: minmax(0, 1fr) 64px;
+  }
+
+  .dietMealCard li strong {
+    width: 58px;
+  }
+}
 
 
 /* ================================

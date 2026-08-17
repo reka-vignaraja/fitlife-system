@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel, Field
 
 
@@ -37,3 +37,16 @@ class DietPlanRequest(BaseModel):
     weekly_exercise_hours: Optional[float] = None
     adherence_to_diet_plan: Optional[float] = None
     dietary_nutrient_imbalance_score: Optional[float] = None
+
+
+class DietFoodItem(BaseModel):
+    name: str
+    grams: int
+
+
+class DietMealItem(BaseModel):
+    meal: str
+    target_calories: int
+    foods: List[str]
+    food_items: List[DietFoodItem] = Field(default_factory=list)
+    portion_guide: str

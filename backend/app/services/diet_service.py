@@ -213,6 +213,168 @@ def create_portion_guide(goal, meal_name):
     return "Maintain balanced portions with protein, carbohydrates, vegetables, and healthy fats."
 
 
+def round_to_nearest_5(value):
+    return int(round(value / 5) * 5)
+
+
+def clamp(value, minimum, maximum):
+    return max(minimum, min(value, maximum))
+
+
+def get_food_group(food_name):
+    food = safe_text(food_name, "").lower()
+
+    protein_keywords = [
+        "chicken",
+        "fish",
+        "egg",
+        "eggs",
+        "meat",
+        "lentils",
+        "chickpeas",
+        "paneer",
+        "tofu",
+        "greek yogurt",
+        "yogurt",
+        "beans",
+        "soy chunks",
+    ]
+
+    carb_keywords = [
+        "rice",
+        "brown rice",
+        "red rice",
+        "oats",
+        "roti",
+        "bread",
+        "sweet potato",
+        "potato",
+        "millet",
+        "quinoa",
+        "pasta",
+    ]
+
+    fat_keywords = [
+        "nuts",
+        "avocado",
+        "olive oil",
+        "peanut butter",
+        "seeds",
+    ]
+
+    vegetable_keywords = [
+        "spinach",
+        "carrot",
+        "broccoli",
+        "cucumber",
+        "cabbage",
+        "vegetables",
+        "salad",
+    ]
+
+    fruit_keywords = [
+        "fruit",
+        "apple",
+        "banana",
+        "orange",
+        "berries",
+        "smoothie",
+    ]
+
+    if any(keyword in food for keyword in protein_keywords):
+        return "protein"
+
+    if any(keyword in food for keyword in carb_keywords):
+        return "carbs"
+
+    if any(keyword in food for keyword in fat_keywords):
+        return "fats"
+
+    if any(keyword in food for keyword in vegetable_keywords):
+        return "vegetables"
+
+    if any(keyword in food for keyword in fruit_keywords):
+        return "fruit"
+
+    return "general"
+
+
+def estimate_food_grams(food_name, meal_calories, goal, meal_name):
+    food_group = get_food_group(food_name)
+
+    goal = safe_text(goal, "maintenance").lower()
+    meal_name = safe_text(meal_name, "").lower()
+
+    is_snack = "snack" in meal_name
+
+    base_grams = {
+        "protein": 120,
+        "carbs": 150,
+        "vegetables": 90,
+        "fats": 20,
+        "fruit": 120,
+        "general": 100,
+    }
+
+    min_max_grams = {
+        "protein": (70, 220),
+        "carbs": (70, 260),
+        "vegetables": (50, 220),
+        "fats": (10, 45),
+        "fruit": (70, 180),
+        "general": (50, 180),
+    }
+
+    baseline_calories = 250 if is_snack else 500
+    calorie_factor = meal_calories / baseline_calories
+    calorie_factor = clamp(calorie_factor, 0.65, 1.45)
+
+    goal_factor = 1.0
+
+    if goal == "weight loss":
+        if food_group == "protein":
+            goal_factor = 1.05
+        elif food_group == "carbs":
+            goal_factor = 0.85
+        elif food_group == "vegetables":
+            goal_factor = 1.15
+        elif food_group == "fats":
+            goal_factor = 0.85
+
+    elif goal == "weight gain":
+        if food_group == "protein":
+            goal_factor = 1.10
+        elif food_group == "carbs":
+            goal_factor = 1.15
+        elif food_group == "fats":
+            goal_factor = 1.15
+
+    elif goal == "muscle gain":
+        if food_group == "protein":
+            goal_factor = 1.25
+        elif food_group == "carbs":
+            goal_factor = 1.10
+        elif food_group == "fats":
+            goal_factor = 1.00
+
+    grams = base_grams.get(food_group, 100) * calorie_factor * goal_factor
+
+    minimum, maximum = min_max_grams.get(food_group, (50, 180))
+    grams = clamp(grams, minimum, maximum)
+
+    return round_to_nearest_5(grams)
+
+
+def build_food_items(foods, meal_calories, goal, meal_name):
+    return [
+        {
+            "name": food,
+            "grams": estimate_food_grams(food, meal_calories, goal, meal_name),
+        }
+        for food in foods
+    ]
+
+
 def generate_meal_chart(food_bank, calories, goal, meals_per_day, allergies, food_avoid):
     avoid_text = f"{safe_text(allergies, '')} {safe_text(food_avoid, '')}".lower()
 
@@ -285,6 +447,12 @@ def generate_meal_chart(food_bank, calories, goal, meals_per_day, allergies, foo
                 "meal": meal_name,
                 "target_calories": meal_calories,
                 "foods": foods,
+                "food_items": build_food_items(
+                    foods,
+                    meal_calories,
+                    goal,
+                    meal_name,
+                ),
                 "portion_guide": create_portion_guide(goal, meal_name),
             }
         )
@@ -437,9 +605,6 @@ def predict_diet_recommendation(data, bmi, calories, bmi_category):
                 "Gender": data.gender,
                 "Weight_kg": data.weight_kg,
                 "Height_cm": data.height_cm,
-                "Gender": data.gender,
-                "Weight_kg": data.weight_kg,
-                "Height_cm": data.height_cm,
                 "BMI": bmi,
                 "Disease_Type": disease_type,
                 "Severity": severity,
@@ -562,6 +727,11 @@ def generate_ai_diet_plan(data, user_id=None):
             "Include protein in every main meal and follow strength training."
         )
 
+    if goal == "weight gain":
+        recommendations.append(
+            "Increase calories gradually using healthy carbohydrates, protein, and healthy fats."
+        )
+
     health_conditions = safe_text(
         getattr(data, "health_conditions", "None"),
         "None",
@@ -571,6 +741,10 @@ def generate_ai_diet_plan(data, user_id=None):
         recommendations.append(
             "Health condition mentioned. Please consult a doctor or dietitian before following this plan."
         )
+
+    recommendations.append(
+        "Food gram values are estimated dynamically based on calorie target, meal type, goal, and food category."
+    )
 
     created_at = datetime.utcnow()
     final_user_id = user_id or getattr(data, "user_id", None)
@@ -635,6 +809,7 @@ def generate_ai_diet_plan(data, user_id=None):
                 "confidence": confidence,
                 "probabilities": probabilities,
             },
+            "meal_chart": meal_chart,
             "model_name": metadata.get(
                 "model_name",
                 "FitLife Diet Recommendation Model",
