@@ -32,9 +32,9 @@ export default function HealthRiskPage() {
   const [checking, setChecking] = useState(true);
   const [profileLoading, setProfileLoading] = useState(true);
   const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState("");
   const [profileMessage, setProfileMessage] = useState("");
-
   const [result, setResult] = useState<HealthRiskResult | null>(null);
 
   const [formData, setFormData] = useState({
@@ -82,9 +82,9 @@ export default function HealthRiskPage() {
       }));
 
       setProfileMessage("Profile details loaded automatically.");
-    } catch (err) {
+    } catch {
       setProfileMessage(
-        "Profile details not found. You can enter health details manually."
+        "Profile details not found. Please update your profile before prediction."
       );
     } finally {
       setProfileLoading(false);
@@ -114,9 +114,15 @@ export default function HealthRiskPage() {
     const diastolicBP = Number(formData.diastolic_bp);
 
     const cholesterolValue =
-      formData.cholesterol.trim() === ""
-        ? 180
-        : Number(formData.cholesterol);
+      formData.cholesterol.trim() === "" ? 180 : Number(formData.cholesterol);
+
+    if (!formData.age || !formData.height_cm || !formData.weight_kg) {
+      setError(
+        "Profile details are missing. Please update age, height, and weight in your profile."
+      );
+      setLoading(false);
+      return;
+    }
 
     if (age < 10 || age > 100) {
       setError("Age must be between 10 and 100.");
@@ -124,13 +130,13 @@ export default function HealthRiskPage() {
       return;
     }
 
-    if (height <= 0 || height < 100 || height > 230) {
+    if (height < 100 || height > 230) {
       setError("Height must be between 100cm and 230cm.");
       setLoading(false);
       return;
     }
 
-    if (weight <= 0 || weight < 30 || weight > 250) {
+    if (weight < 30 || weight > 250) {
       setError("Weight must be between 30kg and 250kg.");
       setLoading(false);
       return;
@@ -150,7 +156,7 @@ export default function HealthRiskPage() {
 
     if (cholesterolValue < 80 || cholesterolValue > 400) {
       setError(
-        "Cholesterol must be between 80 and 400. If you do not know it, use 180."
+        "Cholesterol must be between 80 and 400. If you do not know it, keep 180."
       );
       setLoading(false);
       return;
@@ -160,7 +166,7 @@ export default function HealthRiskPage() {
       const response = await apiRequest("/api/health-risk/predict", {
         method: "POST",
         body: JSON.stringify({
-          age: age,
+          age,
           gender: formData.gender,
           height_cm: height,
           weight_kg: weight,
@@ -174,7 +180,7 @@ export default function HealthRiskPage() {
 
       setResult(response);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Prediction failed");
+      setError(err instanceof Error ? err.message : "Prediction failed.");
     } finally {
       setLoading(false);
     }
@@ -192,259 +198,306 @@ export default function HealthRiskPage() {
   }
 
   return (
-    <main className="healthRiskPage">
-      <section className="healthRiskHero">
-        <div className="container">
-          <span className="pageBadge">AI Health Prediction</span>
+    <main className="healthRiskPage healthRiskCompactPage">
+      <section className="healthRiskCompactHero">
+        <div className="container healthRiskHeroWrap">
+          <div>
+            <span className="pageBadge">AI Health Prediction</span>
+            <h1>Health Risk Prediction</h1>
+            <p>
+              Basic profile details are loaded automatically. You only need to
+              enter blood pressure, cholesterol, and smoking status to generate
+              a simple lifestyle risk summary.
+            </p>
+          </div>
 
-          <h1>Health Risk Prediction</h1>
+          <div className="healthHeroHighlights">
+            <div>
+              <strong>Secure</strong>
+              <span>Protected user data</span>
+            </div>
 
-          <p>
-            Your profile details such as age, gender, height, weight, and
-            activity level will be automatically filled from your saved profile.
-          </p>
+            <div>
+              <strong>Simple</strong>
+              <span>Less repeated input</span>
+            </div>
+
+            <div>
+              <strong>Helpful</strong>
+              <span>Clear guidance</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="healthRiskSection">
-        <div className="container healthRiskGrid">
-          <form className="healthRiskForm" onSubmit={handleSubmit}>
-            <h2>Enter Health Details</h2>
+      <section className="healthRiskCompactSection">
+        <div className="container healthRiskCompactGrid">
+          <div className="healthRiskLeftPanel">
+            <div className="profileLoadedCard">
+              <div className="profileLoadedTop">
+                <div>
+                  <span className="miniLabel">Profile Summary</span>
+                  <h2>Auto-loaded Details</h2>
+                </div>
 
-            <p className="helperText">
-              {profileLoading
-                ? "Loading your profile details..."
-                : "You can edit these values before predicting health risk."}
-            </p>
-
-            {profileMessage && <p className="helperText">{profileMessage}</p>}
-
-            <div className="formGrid">
-              <label>
-                Age
-                <input
-                  type="number"
-                  name="age"
-                  value={formData.age}
-                  onChange={handleChange}
-                  min="10"
-                  max="100"
-                  placeholder="Example: 25"
-                  required
-                />
-              </label>
-
-              <label>
-                Gender
-                <select
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleChange}
+                <button
+                  type="button"
+                  className="textActionBtn"
+                  onClick={() => router.push("/profile")}
                 >
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
-              </label>
+                  Update Profile
+                </button>
+              </div>
 
-              <label>
-                Height cm
-                <input
-                  type="number"
-                  name="height_cm"
-                  value={formData.height_cm}
-                  onChange={handleChange}
-                  min="100"
-                  max="230"
-                  placeholder="Example: 170"
-                  required
-                />
-              </label>
+              <p className="profileStatusText">
+                {profileLoading ? "Loading profile details..." : profileMessage}
+              </p>
 
-              <label>
-                Weight kg
-                <input
-                  type="number"
-                  name="weight_kg"
-                  value={formData.weight_kg}
-                  onChange={handleChange}
-                  min="30"
-                  max="250"
-                  placeholder="Example: 75"
-                  required
-                />
-              </label>
+              <div className="profileMiniGrid">
+                <div>
+                  <span>Age</span>
+                  <strong>{formData.age || "-"}</strong>
+                </div>
 
-              <label>
-                Activity Level
-                <select
-                  name="activity_level"
-                  value={formData.activity_level}
-                  onChange={handleChange}
-                >
-                  <option value="Sedentary">Sedentary</option>
-                  <option value="Lightly Active">Lightly Active</option>
-                  <option value="Moderately Active">Moderately Active</option>
-                  <option value="Very Active">Very Active</option>
-                </select>
-              </label>
+                <div>
+                  <span>Gender</span>
+                  <strong>{formData.gender || "-"}</strong>
+                </div>
 
-              <label>
-                Systolic BP
-                <input
-                  type="number"
-                  name="systolic_bp"
-                  value={formData.systolic_bp}
-                  onChange={handleChange}
-                  min="70"
-                  max="250"
-                  placeholder="Example: 120"
-                  required
-                />
-              </label>
+                <div>
+                  <span>Height</span>
+                  <strong>
+                    {formData.height_cm ? `${formData.height_cm} cm` : "-"}
+                  </strong>
+                </div>
 
-              <label>
-                Diastolic BP
-                <input
-                  type="number"
-                  name="diastolic_bp"
-                  value={formData.diastolic_bp}
-                  onChange={handleChange}
-                  min="40"
-                  max="150"
-                  placeholder="Example: 80"
-                  required
-                />
-              </label>
+                <div>
+                  <span>Weight</span>
+                  <strong>
+                    {formData.weight_kg ? `${formData.weight_kg} kg` : "-"}
+                  </strong>
+                </div>
 
-              <label>
-                Cholesterol mg/dL
-                <input
-                  type="number"
-                  name="cholesterol"
-                  value={formData.cholesterol}
-                  onChange={handleChange}
-                  min="80"
-                  max="400"
-                  placeholder="Default: 180"
-                />
-              </label>
-
-              <label>
-                Smoker
-                <select
-                  name="smoker"
-                  value={formData.smoker}
-                  onChange={handleChange}
-                >
-                  <option value="No">No</option>
-                  <option value="Yes">Yes</option>
-                </select>
-              </label>
+                <div className="wideProfileItem">
+                  <span>Activity Level</span>
+                  <strong>{formData.activity_level || "-"}</strong>
+                </div>
+              </div>
             </div>
 
-            <p className="helperText">
-              If you do not know your cholesterol level, keep the default value
-              as 180 mg/dL. Blood pressure and smoking details must be entered
-              manually because they are not saved in profile yet.
-            </p>
+            <form className="healthRiskQuickForm" onSubmit={handleSubmit}>
+              <div className="quickFormHeader">
+                <div>
+                  <span className="miniLabel">Required Health Inputs</span>
+                  <h2>Enter Current Measurements</h2>
+                </div>
+              </div>
 
-            {error && <p className="errorText">{error}</p>}
+              <div className="quickInputGrid">
+                <label>
+                  Systolic BP
+                  <input
+                    type="number"
+                    name="systolic_bp"
+                    value={formData.systolic_bp}
+                    onChange={handleChange}
+                    min="70"
+                    max="250"
+                    placeholder="120"
+                    required
+                  />
+                </label>
 
-            <button type="submit" disabled={loading}>
-              {loading ? "Predicting..." : "Predict Health Risk"}
-            </button>
-          </form>
+                <label>
+                  Diastolic BP
+                  <input
+                    type="number"
+                    name="diastolic_bp"
+                    value={formData.diastolic_bp}
+                    onChange={handleChange}
+                    min="40"
+                    max="150"
+                    placeholder="80"
+                    required
+                  />
+                </label>
 
-          <div className="healthRiskResult">
+                <label>
+                  Cholesterol
+                  <input
+                    type="number"
+                    name="cholesterol"
+                    value={formData.cholesterol}
+                    onChange={handleChange}
+                    min="80"
+                    max="400"
+                    placeholder="180"
+                  />
+                </label>
+
+                <label>
+                  Smoker
+                  <select
+                    name="smoker"
+                    value={formData.smoker}
+                    onChange={handleChange}
+                  >
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                  </select>
+                </label>
+              </div>
+
+              <p className="healthHelperNote">
+                If cholesterol is unknown, keep the default value as 180 mg/dL.
+                BMI is used internally by the system, but it is not repeated on
+                this page.
+              </p>
+
+              {error && <p className="errorText">{error}</p>}
+
+              <button type="submit" disabled={loading} className="predictMainBtn">
+                {loading ? "Predicting..." : "Predict Health Risk"}
+              </button>
+            </form>
+          </div>
+
+          <div className="healthRiskRightPanel">
             {!result ? (
-              <div className="emptyResult">
+              <div className="healthEmptyResult">
+                <div className="healthCircleIcon">♡</div>
                 <h2>No Prediction Yet</h2>
-                <p>Fill the form and click predict to view the result.</p>
+                <p>
+                  After entering the required health measurements, your risk
+                  summary and recommendations will appear here.
+                </p>
+
+                <div className="healthEmptyList">
+                  <span>✓ Profile-based prediction</span>
+                  <span>✓ Simple risk summary</span>
+                  <span>✓ Lifestyle recommendations</span>
+                </div>
               </div>
             ) : (
-              <>
-                <span className="riskBadge">
+              <div className="healthResultContent">
+                <span className={`riskBadge ${getRiskClass(result.predicted_risk_level)}`}>
                   {result.predicted_risk_level}
                 </span>
 
                 <h2>{result.plan_title}</h2>
+                <p className="healthResultMessage">{result.message}</p>
 
-                <p>{result.message}</p>
-
-                <div className="resultStats">
+                <div className="healthResultStats">
                   <div>
-                    <strong>{result.bmi}</strong>
-                    <span>BMI</span>
+                    <strong>{result.predicted_risk_level}</strong>
+                    <span>Risk Level</span>
                   </div>
 
                   <div>
-                    <strong>{result.confidence}%</strong>
-                    <span>Confidence</span>
+                    <strong>{getPredictionStrength(result.confidence)}</strong>
+                    <span>Prediction Strength</span>
                   </div>
 
                   <div>
-                    <strong>{Math.round(result.model_accuracy * 100)}%</strong>
-                    <span>Model Accuracy</span>
+                    <strong>{result.recommendations.length}</strong>
+                    <span>Health Tips</span>
                   </div>
                 </div>
 
-                <h3>Input Summary</h3>
+                <div className="healthRecommendationBox">
+                  <h3>Recommended Actions</h3>
 
-                <div className="riskSummary">
-                  <p>
-                    <strong>Age:</strong> {result.age}
-                  </p>
-
-                  <p>
-                    <strong>Gender:</strong> {result.gender}
-                  </p>
-
-                  <p>
-                    <strong>Height:</strong> {result.height_cm} cm
-                  </p>
-
-                  <p>
-                    <strong>Weight:</strong> {result.weight_kg} kg
-                  </p>
-
-                  <p>
-                    <strong>BP:</strong> {result.systolic_bp}/
-                    {result.diastolic_bp}
-                  </p>
-
-                  <p>
-                    <strong>Cholesterol:</strong> {result.cholesterol} mg/dL
-                  </p>
-
-                  <p>
-                    <strong>Activity:</strong> {result.activity_level}
-                  </p>
-
-                  <p>
-                    <strong>Smoker:</strong> {result.smoker}
-                  </p>
+                  <ul>
+                    {result.recommendations.slice(0, 5).map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
 
-                <h3>Recommendations</h3>
+                <details className="healthInputDetails">
+                  <summary>View input summary</summary>
 
-                <ul>
-                  {result.recommendations.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
+                  <div className="healthInputSummary">
+                    <p>
+                      <strong>Age:</strong> {result.age}
+                    </p>
 
-                <p className="modelInfo">
-                  Model: {result.algorithm} | {result.model_name}
+                    <p>
+                      <strong>Gender:</strong> {result.gender}
+                    </p>
+
+                    <p>
+                      <strong>Height:</strong> {result.height_cm} cm
+                    </p>
+
+                    <p>
+                      <strong>Weight:</strong> {result.weight_kg} kg
+                    </p>
+
+                    <p>
+                      <strong>BP:</strong> {result.systolic_bp}/
+                      {result.diastolic_bp}
+                    </p>
+
+                    <p>
+                      <strong>Cholesterol:</strong> {result.cholesterol} mg/dL
+                    </p>
+
+                    <p>
+                      <strong>Activity:</strong> {result.activity_level}
+                    </p>
+
+                    <p>
+                      <strong>Smoker:</strong> {result.smoker}
+                    </p>
+                  </div>
+                </details>
+
+                <p className="healthFriendlyNote">
+                  This result is generated using your health inputs and is
+                  intended for awareness and lifestyle guidance only.
                 </p>
 
-                <p className="disclaimer">{result.disclaimer}</p>
-              </>
+                <p className="healthDisclaimer">{result.disclaimer}</p>
+              </div>
             )}
           </div>
         </div>
       </section>
     </main>
   );
+}
+
+function getPredictionStrength(confidence: number) {
+  let value = Number(confidence) || 0;
+
+  if (value <= 1) {
+    value = value * 100;
+  }
+
+  if (value >= 80) {
+    return "Strong";
+  }
+
+  if (value >= 60) {
+    return "Moderate";
+  }
+
+  return "Basic";
+}
+
+function getRiskClass(riskLevel: string) {
+  const value = riskLevel.toLowerCase();
+
+  if (value.includes("high")) {
+    return "riskHigh";
+  }
+
+  if (value.includes("medium") || value.includes("moderate")) {
+    return "riskMedium";
+  }
+
+  return "riskLow";
 }
 
 function normalizeGender(gender?: string) {

@@ -159,7 +159,9 @@ export default function DietRecommendationPage() {
     setResult(null);
 
     if (!formData.age || !formData.height_cm || !formData.weight_kg) {
-      setError("Please fill age, height, and weight.");
+      setError(
+        "Profile details are missing. Please enter age, height, and weight."
+      );
       return;
     }
 
@@ -214,96 +216,105 @@ export default function DietRecommendationPage() {
 
   return (
     <ProtectedRoute>
-      <main className="dietPage">
-        <section className="dietHero">
-          <div className="container">
-            <span className="badge">AI Diet Recommendation</span>
+      <main className="dietPage dietCompactPage">
+        <section className="dietCompactHero">
+          <div className="container dietHeroWrap">
+            <div>
+              <span className="badge">AI Diet Recommendation</span>
 
-            <h1>Personalized Diet Chart</h1>
+              <h1>Personalized Diet Chart</h1>
 
-            <p>
-              Your profile details and health inputs are used to generate a
-              personalized AI diet recommendation, meal chart, calorie target,
-              macro balance, and practical guidance.
-            </p>
+              <p>
+                FitLife uses your saved profile details and food preferences to
+                generate a simple diet recommendation, calorie target, macro
+                balance, and meal chart.
+              </p>
+            </div>
+
+            <div className="dietHeroHighlights">
+              <div>
+                <strong>Personalized</strong>
+                <span>Based on profile</span>
+              </div>
+
+              <div>
+                <strong>Simple</strong>
+                <span>Easy meal guidance</span>
+              </div>
+
+              <div>
+                <strong>Practical</strong>
+                <span>Daily calorie target</span>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="dietSection">
-          <div className="container dietGrid">
-            <div className="dietFormCard">
-              <h2>User Requirements</h2>
-
-              <p>
-                {profileLoading
-                  ? "Loading your profile details..."
-                  : "You can edit these values before generating your diet plan."}
-              </p>
-
-              {profileMessage && (
-                <div className="dietInfoBox">
-                  <p>{profileMessage}</p>
+        <section className="dietCompactSection">
+          <div className="container dietCompactGrid">
+            <div className="dietCompactLeft">
+              <div className="dietProfileCard">
+                <div className="dietCardTop">
+                  <div>
+                    <span className="miniLabel">Profile Summary</span>
+                    <h2>Auto-loaded Details</h2>
+                  </div>
                 </div>
-              )}
 
-              {error && <div className="errorMessage">{error}</div>}
+                <p className="dietStatusText">
+                  {profileLoading ? "Loading profile details..." : profileMessage}
+                </p>
 
-              <form onSubmit={generateDietPlan} className="profileForm">
-                <h3>Basic Details</h3>
-
-                <div className="formGrid">
-                  <div className="formGroup">
-                    <label>Age</label>
-
-                    <input
-                      type="number"
-                      name="age"
-                      placeholder="24"
-                      value={formData.age}
-                      onChange={handleChange}
-                    />
+                <div className="dietProfileGrid">
+                  <div>
+                    <span>Age</span>
+                    <strong>{formData.age || "-"}</strong>
                   </div>
 
-                  <div className="formGroup">
-                    <label>Gender</label>
-
-                    <select
-                      name="gender"
-                      value={formData.gender}
-                      onChange={handleChange}
-                    >
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                    </select>
+                  <div>
+                    <span>Gender</span>
+                    <strong>{formData.gender || "-"}</strong>
                   </div>
 
-                  <div className="formGroup">
-                    <label>Height cm</label>
-
-                    <input
-                      type="number"
-                      name="height_cm"
-                      placeholder="162"
-                      value={formData.height_cm}
-                      onChange={handleChange}
-                    />
+                  <div>
+                    <span>Height</span>
+                    <strong>
+                      {formData.height_cm ? `${formData.height_cm} cm` : "-"}
+                    </strong>
                   </div>
 
-                  <div className="formGroup">
-                    <label>Weight kg</label>
-
-                    <input
-                      type="number"
-                      name="weight_kg"
-                      placeholder="68"
-                      value={formData.weight_kg}
-                      onChange={handleChange}
-                    />
+                  <div>
+                    <span>Weight</span>
+                    <strong>
+                      {formData.weight_kg ? `${formData.weight_kg} kg` : "-"}
+                    </strong>
                   </div>
 
-                  <div className="formGroup">
-                    <label>Activity Level</label>
+                  <div>
+                    <span>Goal</span>
+                    <strong>{formatText(formData.goal)}</strong>
+                  </div>
 
+                  <div>
+                    <span>Diet Type</span>
+                    <strong>{formatText(formData.diet_type)}</strong>
+                  </div>
+                </div>
+              </div>
+
+              <form onSubmit={generateDietPlan} className="dietQuickForm">
+                <div className="dietCardTop">
+                  <div>
+                    <span className="miniLabel">Diet Requirements</span>
+                    <h2>Generate Diet Plan</h2>
+                  </div>
+                </div>
+
+                {error && <div className="errorMessage">{error}</div>}
+
+                <div className="dietQuickGrid">
+                  <label>
+                    Activity Level
                     <select
                       name="activity_level"
                       value={formData.activity_level}
@@ -315,11 +326,10 @@ export default function DietRecommendationPage() {
                       <option value="active">Active</option>
                       <option value="very active">Very Active</option>
                     </select>
-                  </div>
+                  </label>
 
-                  <div className="formGroup">
-                    <label>Goal</label>
-
+                  <label>
+                    Goal
                     <select
                       name="goal"
                       value={formData.goal}
@@ -330,11 +340,10 @@ export default function DietRecommendationPage() {
                       <option value="muscle gain">Muscle Gain</option>
                       <option value="maintenance">Maintenance</option>
                     </select>
-                  </div>
+                  </label>
 
-                  <div className="formGroup">
-                    <label>Diet Type</label>
-
+                  <label>
+                    Diet Type
                     <select
                       name="diet_type"
                       value={formData.diet_type}
@@ -345,11 +354,10 @@ export default function DietRecommendationPage() {
                       <option value="vegan">Vegan</option>
                       <option value="balanced">Balanced Diet</option>
                     </select>
-                  </div>
+                  </label>
 
-                  <div className="formGroup">
-                    <label>Meals Per Day</label>
-
+                  <label>
+                    Meals Per Day
                     <select
                       name="meals_per_day"
                       value={formData.meals_per_day}
@@ -360,183 +368,174 @@ export default function DietRecommendationPage() {
                       <option value="5">5 Meals</option>
                       <option value="6">6 Meals</option>
                     </select>
-                  </div>
+                  </label>
                 </div>
 
-                <h3>Health Details</h3>
+                <details className="dietAdvancedSection">
+                  <summary>Advanced health details</summary>
 
-                <div className="formGrid">
-                  <div className="formGroup">
-                    <label>Disease Type</label>
+                  <div className="dietQuickGrid">
+                    <label>
+                      Disease Type
+                      <input
+                        type="text"
+                        name="disease_type"
+                        placeholder="Example: Hypertension"
+                        value={formData.disease_type}
+                        onChange={handleChange}
+                      />
+                    </label>
 
+                    <label>
+                      Severity
+                      <select
+                        name="severity"
+                        value={formData.severity}
+                        onChange={handleChange}
+                      >
+                        <option value="None">None</option>
+                        <option value="Mild">Mild</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Severe">Severe</option>
+                      </select>
+                    </label>
+
+                    <label>
+                      Physical Activity
+                      <select
+                        name="physical_activity_level"
+                        value={formData.physical_activity_level}
+                        onChange={handleChange}
+                      >
+                        <option value="Sedentary">Sedentary</option>
+                        <option value="Light">Light</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Active">Active</option>
+                        <option value="Very Active">Very Active</option>
+                      </select>
+                    </label>
+
+                    <label>
+                      Daily Caloric Intake
+                      <input
+                        type="number"
+                        name="daily_caloric_intake"
+                        placeholder="Example: 2100"
+                        value={formData.daily_caloric_intake}
+                        onChange={handleChange}
+                      />
+                    </label>
+
+                    <label>
+                      Cholesterol mg/dL
+                      <input
+                        type="number"
+                        name="cholesterol_mg_dl"
+                        placeholder="Example: 210"
+                        value={formData.cholesterol_mg_dl}
+                        onChange={handleChange}
+                      />
+                    </label>
+
+                    <label>
+                      Blood Pressure
+                      <input
+                        type="number"
+                        name="blood_pressure_mmhg"
+                        placeholder="Example: 135"
+                        value={formData.blood_pressure_mmhg}
+                        onChange={handleChange}
+                      />
+                    </label>
+
+                    <label>
+                      Glucose mg/dL
+                      <input
+                        type="number"
+                        name="glucose_mg_dl"
+                        placeholder="Example: 95"
+                        value={formData.glucose_mg_dl}
+                        onChange={handleChange}
+                      />
+                    </label>
+
+                    <label>
+                      Weekly Exercise Hours
+                      <input
+                        type="number"
+                        name="weekly_exercise_hours"
+                        placeholder="Example: 3"
+                        value={formData.weekly_exercise_hours}
+                        onChange={handleChange}
+                      />
+                    </label>
+                  </div>
+                </details>
+
+                <details className="dietAdvancedSection">
+                  <summary>Food preferences</summary>
+
+                  <div className="dietQuickGrid">
+                    <label>
+                      Dietary Restrictions
+                      <input
+                        type="text"
+                        name="dietary_restrictions"
+                        placeholder="Example: Vegetarian"
+                        value={formData.dietary_restrictions}
+                        onChange={handleChange}
+                      />
+                    </label>
+
+                    <label>
+                      Preferred Cuisine
+                      <input
+                        type="text"
+                        name="preferred_cuisine"
+                        placeholder="Example: Asian"
+                        value={formData.preferred_cuisine}
+                        onChange={handleChange}
+                      />
+                    </label>
+
+                    <label>
+                      Allergies
+                      <input
+                        type="text"
+                        name="allergies"
+                        placeholder="Example: peanuts, milk"
+                        value={formData.allergies}
+                        onChange={handleChange}
+                      />
+                    </label>
+
+                    <label>
+                      Health Conditions
+                      <input
+                        type="text"
+                        name="health_conditions"
+                        placeholder="Example: Hypertension"
+                        value={formData.health_conditions}
+                        onChange={handleChange}
+                      />
+                    </label>
+                  </div>
+
+                  <label className="dietFullInput">
+                    Foods to Avoid
                     <input
                       type="text"
-                      name="disease_type"
-                      placeholder="Example: Hypertension"
-                      value={formData.disease_type}
+                      name="food_avoid"
+                      placeholder="Example: fried foods, egg, fish"
+                      value={formData.food_avoid}
                       onChange={handleChange}
                     />
-                  </div>
-
-                  <div className="formGroup">
-                    <label>Severity</label>
-
-                    <select
-                      name="severity"
-                      value={formData.severity}
-                      onChange={handleChange}
-                    >
-                      <option value="None">None</option>
-                      <option value="Mild">Mild</option>
-                      <option value="Moderate">Moderate</option>
-                      <option value="Severe">Severe</option>
-                    </select>
-                  </div>
-
-                  <div className="formGroup">
-                    <label>Physical Activity Level</label>
-
-                    <select
-                      name="physical_activity_level"
-                      value={formData.physical_activity_level}
-                      onChange={handleChange}
-                    >
-                      <option value="Sedentary">Sedentary</option>
-                      <option value="Light">Light</option>
-                      <option value="Moderate">Moderate</option>
-                      <option value="Active">Active</option>
-                      <option value="Very Active">Very Active</option>
-                    </select>
-                  </div>
-
-                  <div className="formGroup">
-                    <label>Daily Caloric Intake</label>
-
-                    <input
-                      type="number"
-                      name="daily_caloric_intake"
-                      placeholder="Example: 2100"
-                      value={formData.daily_caloric_intake}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="formGroup">
-                    <label>Cholesterol mg/dL</label>
-
-                    <input
-                      type="number"
-                      name="cholesterol_mg_dl"
-                      placeholder="Example: 210"
-                      value={formData.cholesterol_mg_dl}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="formGroup">
-                    <label>Blood Pressure mmHg</label>
-
-                    <input
-                      type="number"
-                      name="blood_pressure_mmhg"
-                      placeholder="Example: 135"
-                      value={formData.blood_pressure_mmhg}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="formGroup">
-                    <label>Glucose mg/dL</label>
-
-                    <input
-                      type="number"
-                      name="glucose_mg_dl"
-                      placeholder="Example: 95"
-                      value={formData.glucose_mg_dl}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="formGroup">
-                    <label>Weekly Exercise Hours</label>
-
-                    <input
-                      type="number"
-                      name="weekly_exercise_hours"
-                      placeholder="Example: 3"
-                      value={formData.weekly_exercise_hours}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-
-                <h3>Food Preferences</h3>
-
-                <div className="formGrid">
-                  <div className="formGroup">
-                    <label>Dietary Restrictions</label>
-
-                    <input
-                      type="text"
-                      name="dietary_restrictions"
-                      placeholder="Example: Vegetarian"
-                      value={formData.dietary_restrictions}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="formGroup">
-                    <label>Preferred Cuisine</label>
-
-                    <input
-                      type="text"
-                      name="preferred_cuisine"
-                      placeholder="Example: Asian"
-                      value={formData.preferred_cuisine}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-
-                <div className="formGroup">
-                  <label>Allergies</label>
-
-                  <input
-                    type="text"
-                    name="allergies"
-                    placeholder="Example: peanuts, milk"
-                    value={formData.allergies}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="formGroup">
-                  <label>Health Conditions</label>
-
-                  <input
-                    type="text"
-                    name="health_conditions"
-                    placeholder="Example: Hypertension, Diabetes"
-                    value={formData.health_conditions}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="formGroup">
-                  <label>Foods to Avoid</label>
-
-                  <input
-                    type="text"
-                    name="food_avoid"
-                    placeholder="Example: fried foods, egg, fish"
-                    value={formData.food_avoid}
-                    onChange={handleChange}
-                  />
-                </div>
+                  </label>
+                </details>
 
                 <button
                   type="submit"
-                  className="profileSubmitBtn"
+                  className="dietGenerateBtn"
                   disabled={loading}
                 >
                   {loading ? "Generating..." : "Generate AI Diet Chart"}
@@ -544,27 +543,37 @@ export default function DietRecommendationPage() {
               </form>
             </div>
 
-            <div className="dietResultCard">
+            <div className="dietCompactRight">
               {!result ? (
-                <>
+                <div className="dietEmptyResult">
+                  <div className="dietCircleIcon">🍽</div>
+
                   <h2>Diet Chart Preview</h2>
 
                   <p>
-                    Your personalized AI diet chart will appear here after
-                    submitting your requirements.
+                    Your personalized diet chart, calorie target, macro balance,
+                    meal plan, and recommendations will appear here.
                   </p>
-                </>
+
+                  <div className="dietEmptyList">
+                    <span>✓ Profile-based recommendation</span>
+                    <span>✓ Daily calorie target</span>
+                    <span>✓ Meal chart and food guidance</span>
+                  </div>
+                </div>
               ) : (
-                <>
+                <div className="dietResultContent">
+                  <span className="dietResultBadge">
+                    {result.diet_recommendation}
+                  </span>
+
                   <h2>Your AI Diet Plan</h2>
 
-                  <div className="dietSummaryGrid">
-                    <div>
-                      <span>BMI</span>
-                      <strong>{result.bmi}</strong>
-                      <p>{result.bmi_category}</p>
-                    </div>
+                  <p className="dietMatchText">
+                    Suitability: {getSuitabilityText(result.confidence)}
+                  </p>
 
+                  <div className="dietMacroGrid">
                     <div>
                       <span>Calories</span>
                       <strong>{result.daily_calorie_target}</strong>
@@ -582,85 +591,53 @@ export default function DietRecommendationPage() {
                       <strong>{result.macros.carbs_g}g</strong>
                       <p>Per day</p>
                     </div>
-                  </div>
 
-                  <div className="recommendationBox">
-                    <h3>AI Model Result</h3>
-
-                    <p>
-                      <strong>Diet Recommendation:</strong>{" "}
-                      {result.diet_recommendation}
-                    </p>
-
-                    <p>
-                      <strong>Confidence:</strong>{" "}
-                      {result.confidence !== null
-                        ? `${result.confidence}%`
-                        : "Not available"}
-                    </p>
-
-                    <p>
-                      <strong>Model Accuracy:</strong>{" "}
-                      {result.model_accuracy}%
-                    </p>
-
-                    <p>
-                      <strong>Algorithm:</strong> {result.algorithm_type}
-                    </p>
-
-                    <p>
-                      <strong>Model:</strong> {result.model_name}{" "}
-                      {result.model_version}
-                    </p>
-                  </div>
-
-                  {result.probabilities && (
-                    <div className="recommendationBox">
-                      <h3>Prediction Probabilities</h3>
-
-                      <ul>
-                        {Object.entries(result.probabilities).map(
-                          ([label, value]) => (
-                            <li key={label}>
-                              {label}: {value}%
-                            </li>
-                          )
-                        )}
-                      </ul>
+                    <div>
+                      <span>Fats</span>
+                      <strong>{result.macros.fats_g}g</strong>
+                      <p>Per day</p>
                     </div>
-                  )}
-
-                  <div className="mealChart">
-                    {result.meal_chart.map((meal) => (
-                      <div className="mealCard" key={meal.meal}>
-                        <div className="mealTop">
-                          <h3>{meal.meal}</h3>
-                          <span>{meal.target_calories} kcal</span>
-                        </div>
-
-                        <ul>
-                          {meal.foods.map((food) => (
-                            <li key={food}>{food}</li>
-                          ))}
-                        </ul>
-
-                        <p>{meal.portion_guide}</p>
-                      </div>
-                    ))}
                   </div>
 
-                  <div className="recommendationBox">
-                    <h3>Recommendations</h3>
+                  <div className="dietMealPanel">
+                    <h3>Meal Chart</h3>
 
-                    <ul>
+                    <div className="dietMealList">
+                      {result.meal_chart.map((meal) => (
+                        <div className="dietMealCard" key={meal.meal}>
+                          <div className="dietMealTop">
+                            <h4>{meal.meal}</h4>
+                            <span>{meal.target_calories} kcal</span>
+                          </div>
+
+                          <ul>
+                            {meal.foods.map((food) => (
+                              <li key={food}>{food}</li>
+                            ))}
+                          </ul>
+
+                          <p>{meal.portion_guide}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <details className="dietAdvancedSection dietResultDetails" open>
+                    <summary>Practical recommendations</summary>
+
+                    <ul className="dietRecommendationList">
                       {result.recommendations.map((item) => (
                         <li key={item}>{item}</li>
                       ))}
                     </ul>
+                  </details>
 
-                    <p>{result.disclaimer}</p>
-                  </div>
-                </>
+                  <p className="dietFriendlyNote">
+                    This diet plan is generated for general health and fitness
+                    guidance. It is not a replacement for professional medical
+                    or dietician advice.
+                  </p>
+                </div>
               )}
             </div>
           </div>
@@ -668,6 +645,37 @@ export default function DietRecommendationPage() {
       </main>
     </ProtectedRoute>
   );
+}
+
+function getSuitabilityText(confidence: number | null) {
+  if (confidence === null || confidence === undefined) {
+    return "Personalized guidance";
+  }
+
+  let value = Number(confidence) || 0;
+
+  if (value <= 1) {
+    value = value * 100;
+  }
+
+  if (value >= 80) {
+    return "Good match for your profile";
+  }
+
+  if (value >= 60) {
+    return "Moderate match for your profile";
+  }
+
+  return "Basic guidance based on your details";
+}
+
+function formatText(value: string) {
+  if (!value) return "-";
+
+  return value
+    .split(" ")
+    .map((item) => item.charAt(0).toUpperCase() + item.slice(1))
+    .join(" ");
 }
 
 function normalizeGender(gender?: string) {

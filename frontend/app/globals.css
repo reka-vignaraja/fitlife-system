@@ -1235,332 +1235,511 @@ button {
     font-size: 27px;
   }
 }
-/* ======================================
-   HEALTH RISK PAGE - CLEAN LIGHT DESIGN
-====================================== */
+/* ================================
+  Health Risk page 
+================================ */
 
-.healthRiskPage {
+.healthRiskCompactPage {
   min-height: 100vh;
-  background: #f8fafc;
-  color: #0f172a;
+  background: transparent;
+  color: #f8fafc;
 }
 
-/* Hero */
-.healthRiskHero {
-  background: linear-gradient(135deg, #ecfeff, #ffffff);
-  padding: 70px 0 45px;
-  border-bottom: 1px solid #ccfbf1;
+.healthRiskCompactHero {
+  padding: 1.6rem 0 1rem;
 }
 
-.healthRiskHero .container {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0 24px;
+.healthRiskHeroWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.4rem;
 }
 
-.pageBadge {
-  display: inline-block;
-  padding: 10px 18px;
-  border-radius: 999px;
-  background: #ccfbf1;
-  color: #0f766e;
-  font-size: 14px;
-  font-weight: 900;
-  margin-bottom: 18px;
+.healthRiskHeroWrap h1 {
+  margin: 0.55rem 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  color: #ffffff;
+  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
 }
 
-.healthRiskHero h1 {
+.healthRiskHeroWrap p {
+  max-width: 720px;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.6;
   margin: 0;
-  color: #020617;
-  font-size: 48px;
-  line-height: 1.1;
-  font-weight: 950;
 }
 
-.healthRiskHero p {
-  margin-top: 18px;
-  max-width: 760px;
-  color: #475569;
-  font-size: 17px;
-  line-height: 1.7;
-}
-
-/* Main section */
-.healthRiskSection {
-  padding: 55px 0 80px;
-  background: #f8fafc;
-}
-
-.healthRiskGrid {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0 24px;
+.healthHeroHighlights {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  align-items: start;
+  grid-template-columns: repeat(3, minmax(90px, 1fr));
+  gap: 0.7rem;
+  min-width: 360px;
 }
 
-/* Form card */
-.healthRiskForm {
-  background: #ffffff;
-  color: #0f172a;
-  border: 1px solid #dbeafe;
-  border-radius: 28px;
-  padding: 32px;
-  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.1);
+.healthHeroHighlights div {
+  border: 1px solid rgba(255, 166, 0, 0.18);
+  border-radius: 20px;
+  padding: 0.85rem;
+  background: rgba(12, 12, 12, 0.46);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
 }
 
-.healthRiskForm h2 {
-  margin: 0 0 24px;
-  color: #0f172a;
-  font-size: 28px;
-  font-weight: 950;
+.healthHeroHighlights strong {
+  display: block;
+  color: #ff9f43;
+  font-size: 0.95rem;
 }
 
-.formGrid {
+.healthHeroHighlights span {
+  display: block;
+  margin-top: 0.25rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.78rem;
+}
+
+.healthRiskCompactSection {
+  padding: 1rem 0 2rem;
+}
+
+.healthRiskCompactGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  grid-template-columns: 1.03fr 0.97fr;
+  gap: 1.1rem;
+  align-items: stretch;
 }
 
-.healthRiskForm label {
+.healthRiskLeftPanel,
+.healthRiskRightPanel {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  color: #334155;
-  font-size: 14px;
-  font-weight: 900;
+  gap: 1rem;
 }
 
-.healthRiskForm input,
-.healthRiskForm select {
-  width: 100%;
-  height: 52px;
-  border-radius: 15px;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-  color: #0f172a;
-  padding: 0 15px;
-  font-size: 15px;
-  font-weight: 700;
-  outline: none;
+.profileLoadedCard,
+.healthRiskQuickForm,
+.healthRiskRightPanel {
+  border: 1px solid rgba(255, 166, 0, 0.14);
+  border-radius: 28px;
+  background: rgba(12, 12, 12, 0.48);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  padding: 1.1rem;
 }
 
-.healthRiskForm input::placeholder {
-  color: #94a3b8;
+.profileLoadedTop,
+.quickFormHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.healthRiskForm input:focus,
-.healthRiskForm select:focus {
-  border-color: #14b8a6;
-  background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.14);
+.miniLabel {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(20, 184, 166, 0.18);
+  color: #7ef0df;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 800;
 }
 
-.healthRiskForm button {
-  width: 100%;
-  margin-top: 24px;
-  border: none;
-  cursor: pointer;
-  border-radius: 16px;
-  padding: 16px 20px;
-  background: linear-gradient(135deg, #0f766e, #14b8a6);
+.profileLoadedTop h2,
+.quickFormHeader h2,
+.healthRiskRightPanel h2 {
+  margin: 0.55rem 0 0;
   color: #ffffff;
-  font-size: 16px;
-  font-weight: 950;
-  box-shadow: 0 16px 40px rgba(20, 184, 166, 0.28);
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
-.healthRiskForm button:hover {
-  transform: translateY(-2px);
+.textActionBtn {
+  border: 1px solid rgba(255, 159, 67, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 159, 67, 0.14);
+  color: #ffb56b;
+  padding: 0.55rem 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s ease;
 }
 
-.healthRiskForm button:disabled {
+.textActionBtn:hover {
+  background: rgba(255, 159, 67, 0.25);
+  transform: translateY(-1px);
+}
+
+.profileStatusText {
+  margin: 0.75rem 0 0;
+  color: #8cf7e8;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.profileMiniGrid {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.profileMiniGrid div {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.75rem;
+}
+
+.profileMiniGrid span {
+  display: block;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.profileMiniGrid strong {
+  display: block;
+  margin-top: 0.25rem;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.wideProfileItem {
+  grid-column: span 2;
+}
+
+.quickInputGrid {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.quickInputGrid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: #ff9f43;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.quickInputGrid input,
+.quickInputGrid select {
+  width: 100%;
+  border: 1px solid rgba(255, 166, 0, 0.18);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  padding: 0.82rem 0.85rem;
+  font-size: 0.95rem;
+  outline: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.quickInputGrid input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.quickInputGrid input:focus,
+.quickInputGrid select:focus {
+  border-color: rgba(20, 184, 166, 0.75);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.14);
+}
+
+.healthHelperNote {
+  margin: 0.85rem 0 0;
+  border-radius: 16px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #d7e9ff;
+  padding: 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.5;
+  border: 1px solid rgba(96, 165, 250, 0.16);
+}
+
+.predictMainBtn {
+  width: 100%;
+  margin-top: 0.9rem;
+  border: none;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #ff7a18, #ff9f43);
+  color: #ffffff;
+  padding: 0.92rem 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 16px 35px rgba(255, 122, 24, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.predictMainBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 38px rgba(255, 122, 24, 0.34);
+}
+
+.predictMainBtn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-/* Result card */
-.healthRiskResult {
-  min-height: 540px;
-  background: #ffffff;
-  color: #0f172a;
-  border: 1px solid #ccfbf1;
-  border-radius: 28px;
-  padding: 32px;
-  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.1);
-  position: sticky;
-  top: 110px;
+.healthRiskRightPanel {
+  min-height: 520px;
 }
 
-.emptyResult {
-  min-height: 470px;
-  background: #f8fafc;
-  border: 1px dashed #94a3b8;
-  border-radius: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.healthEmptyResult {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
   text-align: center;
-  padding: 30px;
+  align-content: center;
 }
 
-.emptyResult h2 {
-  color: #0f172a;
-  font-size: 26px;
-  margin: 0 0 10px;
-  font-weight: 950;
-}
-
-.emptyResult p {
-  color: #64748b;
-  margin: 0;
-  line-height: 1.7;
-}
-
-.riskBadge {
-  display: inline-block;
-  padding: 10px 18px;
-  border-radius: 999px;
-  background: #0f766e;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 950;
-  margin-bottom: 20px;
-}
-
-.healthRiskResult h2 {
-  color: #0f172a;
-  font-size: 30px;
-  line-height: 1.25;
-  font-weight: 950;
-  margin: 0;
-}
-
-.healthRiskResult h3 {
-  color: #0f172a;
-  font-size: 20px;
-  font-weight: 950;
-  margin: 24px 0 14px;
-}
-
-.healthRiskResult p {
-  color: #475569;
-  line-height: 1.7;
-}
-
-.resultStats {
+.healthCircleIcon {
+  width: 68px;
+  height: 68px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin: 26px 0;
-}
-
-.resultStats div {
-  background: #f0fdfa;
-  border: 1px solid #99f6e4;
-  border-radius: 18px;
-  padding: 18px 14px;
-}
-
-.resultStats strong {
-  display: block;
-  color: #0f172a;
-  font-size: 26px;
-  font-weight: 950;
-}
-
-.resultStats span {
-  display: block;
-  margin-top: 7px;
-  color: #0f766e;
-  font-size: 12px;
+  place-items: center;
+  margin: 0 auto 1rem;
+  border-radius: 24px;
+  background: rgba(20, 184, 166, 0.18);
+  color: #7ef0df;
+  font-size: 2rem;
   font-weight: 900;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.healthRiskResult ul {
-  list-style: none;
-  padding: 0;
+.healthEmptyResult h2 {
   margin: 0;
-  display: grid;
-  gap: 12px;
+  color: #ffffff;
 }
 
-.healthRiskResult li {
-  background: #f0fdfa;
-  border: 1px solid #99f6e4;
-  border-radius: 15px;
-  padding: 13px 15px;
-  color: #334155;
-  font-size: 14px;
-  font-weight: 700;
+.healthEmptyResult p {
+  max-width: 420px;
+  margin: 0.7rem auto 0;
+  color: rgba(255, 255, 255, 0.76);
   line-height: 1.55;
 }
 
-.healthRiskResult li::before {
-  content: "✓";
-  color: #0f766e;
-  font-weight: 950;
-  margin-right: 8px;
-}
-
-.modelInfo {
-  margin-top: 20px;
-  padding: 13px 15px;
-  border-radius: 14px;
-  background: #ecfeff;
-  border: 1px solid #a5f3fc;
-  color: #0f766e;
-  font-size: 13px;
+.healthEmptyList {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  color: #7ef0df;
   font-weight: 800;
+  font-size: 0.9rem;
 }
 
-.disclaimer {
-  color: #64748b;
-  font-size: 12px;
-  line-height: 1.6;
-  margin-top: 12px;
+.healthResultContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.healthResultContent h2 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.healthResultMessage {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.55;
+}
+
+.healthResultStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.healthResultStats div {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.8rem;
+}
+
+.healthResultStats strong {
+  display: block;
+  color: #7ef0df;
+  font-size: 0.98rem;
+}
+
+.healthResultStats span {
+  display: block;
+  margin-top: 0.25rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.healthRecommendationBox {
+  border: 1px solid rgba(20, 184, 166, 0.22);
+  border-radius: 22px;
+  background: rgba(20, 184, 166, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.95rem;
+}
+
+.healthRecommendationBox h3 {
+  margin: 0 0 0.55rem;
+  color: #7ef0df;
+}
+
+.healthRecommendationBox ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.healthRecommendationBox li {
+  margin-bottom: 0.38rem;
+  color: rgba(255, 255, 255, 0.84);
+  line-height: 1.45;
+}
+
+.healthInputDetails {
+  border: 1px solid rgba(96, 165, 250, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.85rem;
+}
+
+.healthInputDetails summary {
+  cursor: pointer;
+  color: #8cf7e8;
+  font-weight: 900;
+  list-style: none;
+}
+
+.healthInputDetails summary::after {
+  content: " +";
+  float: right;
+}
+
+.healthInputDetails[open] summary::after {
+  content: " -";
+}
+
+.healthInputSummary {
+  margin-top: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.healthInputSummary p {
+  margin: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.55rem 0.7rem;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.84rem;
+}
+
+.healthFriendlyNote {
+  margin: 0;
+  border-radius: 16px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #d7e9ff;
+  padding: 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.5;
+  border: 1px solid rgba(96, 165, 250, 0.16);
+}
+
+.healthDisclaimer {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.riskBadge {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 0.42rem 0.85rem;
+  font-weight: 900;
+  font-size: 0.82rem;
+}
+
+.riskLow {
+  background: rgba(34, 197, 94, 0.16);
+  color: #86efac;
+}
+
+.riskMedium {
+  background: rgba(251, 191, 36, 0.16);
+  color: #fcd34d;
+}
+
+.riskHigh {
+  background: rgba(239, 68, 68, 0.16);
+  color: #fca5a5;
 }
 
 .errorText {
-  margin: 16px 0 0;
-  padding: 12px 14px;
-  border-radius: 12px;
-  background: #fef2f2;
-  color: #dc2626;
-  font-size: 14px;
-  font-weight: 800;
+  margin-top: 0.75rem;
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.25);
+  border: 1px solid rgba(248, 113, 113, 0.18);
+  border-radius: 14px;
+  padding: 0.75rem;
+  font-size: 0.84rem;
+  font-weight: 700;
 }
 
-/* Responsive */
-@media (max-width: 1000px) {
-  .healthRiskGrid {
-    grid-template-columns: 1fr;
+@media (max-width: 1080px) {
+  .healthRiskHeroWrap {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .healthRiskResult {
-    position: static;
+  .healthHeroHighlights {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .healthRiskCompactGrid {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 700px) {
-  .healthRiskHero h1 {
-    font-size: 38px;
-  }
-
-  .formGrid {
+@media (max-width: 720px) {
+  .healthHeroHighlights,
+  .profileMiniGrid,
+  .quickInputGrid,
+  .healthResultStats,
+  .healthInputSummary {
     grid-template-columns: 1fr;
   }
 
-  .resultStats {
-    grid-template-columns: 1fr;
+  .wideProfileItem {
+    grid-column: span 1;
   }
 
-  .healthRiskForm,
-  .healthRiskResult {
-    padding: 24px;
+  .profileLoadedTop,
+  .quickFormHeader {
+    flex-direction: column;
+  }
+
+  .healthRiskRightPanel {
+    min-height: auto;
   }
 }
 /* ================================
@@ -1857,321 +2036,9 @@ button {
   }
 }
 
-/* ================================
-   Diet Recommendation Page 
-================================ */
 
-.dietPage {
-  min-height: 100vh;
-  background: #f8fafc;
-  color: #0f172a;
-}
 
-.dietHero {
-  padding: 70px 0 50px;
-  background:
-    radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.18), transparent 30%),
-    radial-gradient(circle at 90% 10%, rgba(20, 184, 166, 0.14), transparent 28%),
-    linear-gradient(135deg, #ecfdf5 0%, #ffffff 55%, #f0fdfa 100%);
-  color: #0f172a;
-}
 
-.dietHero h1 {
-  margin: 20px 0 0;
-  max-width: 780px;
-  color: #064e3b;
-  font-size: clamp(38px, 5vw, 60px);
-  line-height: 1.05;
-  letter-spacing: -0.05em;
-  font-weight: 950;
-}
-
-.dietHero p {
-  margin: 18px 0 0;
-  max-width: 850px;
-  color: #475569;
-  font-size: 17px;
-  line-height: 1.8;
-}
-
-.dietSection {
-  padding: 70px 0;
-  background: #f8fafc;
-}
-
-.dietGrid {
-  display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: 28px;
-  align-items: start;
-}
-
-.dietFormCard,
-.dietResultCard {
-  border-radius: 30px;
-  padding: 30px;
-  background: #ffffff;
-  border: 1px solid #d1fae5;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
-}
-
-.dietFormCard h2,
-.dietResultCard h2 {
-  margin: 0;
-  color: #064e3b;
-  font-size: 30px;
-  line-height: 1.15;
-  letter-spacing: -0.04em;
-  font-weight: 950;
-}
-
-.dietFormCard p,
-.dietResultCard > p {
-  margin: 10px 0 0;
-  color: #64748b;
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-.dietPage .profileForm {
-  margin-top: 26px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.dietPage .formGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-}
-
-.dietPage .formGroup label {
-  display: block;
-  margin-bottom: 8px;
-  color: #065f46;
-  font-size: 14px;
-  font-weight: 900;
-}
-
-.dietPage .formGroup input,
-.dietPage .formGroup select,
-.dietPage .formGroup textarea {
-  width: 100%;
-  min-height: 52px;
-  border: 1px solid #bbf7d0;
-  border-radius: 16px;
-  padding: 14px 16px;
-  background: #ffffff;
-  color: #0f172a;
-  font-size: 14px;
-  font-weight: 700;
-  outline: none;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
-}
-
-.dietPage .formGroup textarea {
-  min-height: 110px;
-  resize: vertical;
-}
-
-.dietPage .formGroup input::placeholder,
-.dietPage .formGroup textarea::placeholder {
-  color: #94a3b8;
-}
-
-.dietPage .formGroup input:focus,
-.dietPage .formGroup select:focus,
-.dietPage .formGroup textarea:focus {
-  border-color: #10b981;
-  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.16);
-}
-
-.dietPage .profileSubmitBtn {
-  width: 100%;
-  min-height: 54px;
-  border: none;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #047857, #10b981);
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 950;
-  cursor: pointer;
-  box-shadow: 0 18px 42px rgba(16, 185, 129, 0.28);
-}
-
-.dietPage .profileSubmitBtn:hover {
-  transform: translateY(-2px);
-}
-
-.dietPage .profileSubmitBtn:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-
-.dietSummaryGrid {
-  margin-top: 22px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-
-.dietSummaryGrid div {
-  padding: 18px;
-  border-radius: 20px;
-  background: #ecfdf5;
-  border: 1px solid #bbf7d0;
-}
-
-.dietSummaryGrid span {
-  display: block;
-  color: #047857;
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.dietSummaryGrid strong {
-  display: block;
-  margin-top: 8px;
-  color: #064e3b;
-  font-size: 28px;
-  font-weight: 950;
-}
-
-.dietSummaryGrid p {
-  margin: 4px 0 0;
-  color: #64748b;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.mealChart {
-  margin-top: 24px;
-  display: grid;
-  gap: 16px;
-}
-
-.mealCard {
-  padding: 20px;
-  border-radius: 22px;
-  background: #ffffff;
-  border: 1px solid #d1fae5;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
-}
-
-.mealTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.mealTop h3 {
-  margin: 0;
-  color: #064e3b;
-  font-size: 20px;
-}
-
-.mealTop span {
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: #d1fae5;
-  color: #047857;
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.mealCard ul {
-  margin: 16px 0 0;
-  padding-left: 18px;
-}
-
-.mealCard li {
-  margin-bottom: 8px;
-  color: #334155;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.mealCard p {
-  margin: 14px 0 0;
-  color: #64748b;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.recommendationBox {
-  margin-top: 24px;
-  padding: 22px;
-  border-radius: 24px;
-  background: #ecfdf5;
-  border: 1px solid #bbf7d0;
-  color: #064e3b;
-  box-shadow: 0 14px 35px rgba(16, 185, 129, 0.14);
-}
-
-.recommendationBox h3 {
-  margin: 0;
-  color: #047857;
-}
-
-.recommendationBox ul {
-  margin: 16px 0 0;
-  padding-left: 18px;
-}
-
-.recommendationBox li {
-  margin-bottom: 10px;
-  color: #065f46;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.recommendationBox p {
-  margin: 16px 0 0;
-  color: #047857;
-  font-size: 13px;
-  line-height: 1.6;
-  font-weight: 700;
-}
-
-.dietPage .errorMessage {
-  margin-top: 18px;
-  padding: 14px 16px;
-  border-radius: 16px;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  color: #dc2626;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-@media (max-width: 1000px) {
-  .dietGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 650px) {
-  .dietHero {
-    padding: 50px 0 38px;
-  }
-
-  .dietSection {
-    padding: 45px 0;
-  }
-
-  .dietFormCard,
-  .dietResultCard {
-    padding: 24px;
-    border-radius: 24px;
-  }
-
-  .dietPage .formGrid,
-  .dietSummaryGrid {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* ================================
    Profile Page
@@ -2355,7 +2222,521 @@ button {
     border-radius: 26px;
   }
 }
+/* ================================
+   Diet Recommendation Page
+   Clean Compact Dark Glass UI
+   ================================ */
 
+/* ================================
+   Diet Recommendation Page
+   Clean Compact Dark Glass UI
+   Reduced Transparency Version
+   ================================ */
+
+.dietPage.dietCompactPage {
+  min-height: 100vh;
+  background: transparent;
+  color: #f8fafc;
+}
+
+/* Hero section */
+.dietCompactHero {
+  padding: 1.6rem 0 1rem;
+  background: transparent;
+}
+
+.dietHeroWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.4rem;
+}
+
+.dietHeroWrap h1 {
+  margin: 0.55rem 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  color: #ffffff;
+  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.38);
+}
+
+.dietHeroWrap p {
+  max-width: 720px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.84);
+  line-height: 1.6;
+}
+
+.dietHeroHighlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(90px, 1fr));
+  gap: 0.7rem;
+  min-width: 390px;
+}
+
+.dietHeroHighlights div {
+  border: 1px solid rgba(255, 166, 0, 0.16);
+  border-radius: 20px;
+  padding: 0.85rem;
+  background: rgba(14, 14, 14, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+}
+
+.dietHeroHighlights strong {
+  display: block;
+  color: #ff9f43;
+  font-size: 0.95rem;
+}
+
+.dietHeroHighlights span {
+  display: block;
+  margin-top: 0.25rem;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.78rem;
+}
+
+/* Main layout */
+.dietCompactSection {
+  padding: 1rem 0 2rem;
+  background: transparent;
+}
+
+.dietCompactGrid {
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: 1.1rem;
+  align-items: stretch;
+}
+
+.dietCompactLeft,
+.dietCompactRight {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Main glass cards */
+.dietProfileCard,
+.dietQuickForm,
+.dietCompactRight {
+  border: 1px solid rgba(255, 166, 0, 0.14);
+  border-radius: 28px;
+  background: rgba(10, 10, 10, 0.84);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+  padding: 1.1rem;
+}
+
+.dietCompactRight {
+  min-height: 610px;
+  overflow: hidden;
+}
+
+.dietCardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dietCardTop h2,
+.dietCompactRight h2 {
+  margin: 0.55rem 0 0;
+  color: #ffffff;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.42);
+}
+
+.miniLabel {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(20, 184, 166, 0.2);
+  color: #7ef0df;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.dietStatusText {
+  margin: 0.75rem 0 0;
+  color: #8cf7e8;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+/* Profile summary */
+.dietProfileGrid {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.dietProfileGrid div,
+.dietMacroGrid div {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(18, 18, 18, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.75rem;
+}
+
+.dietProfileGrid span,
+.dietMacroGrid span {
+  display: block;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.dietProfileGrid strong,
+.dietMacroGrid strong {
+  display: block;
+  margin-top: 0.25rem;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+/* Form */
+.dietQuickGrid {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.dietQuickGrid label,
+.dietFullInput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: #ff9f43;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.dietQuickGrid input,
+.dietQuickGrid select,
+.dietFullInput input {
+  width: 100%;
+  border: 1px solid rgba(255, 166, 0, 0.2);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.68);
+  color: #ffffff;
+  padding: 0.82rem 0.85rem;
+  font-size: 0.95rem;
+  outline: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dietQuickGrid input::placeholder,
+.dietFullInput input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dietQuickGrid input:focus,
+.dietQuickGrid select:focus,
+.dietFullInput input:focus {
+  border-color: rgba(20, 184, 166, 0.75);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.14);
+}
+
+/* Collapsible sections */
+.dietAdvancedSection {
+  margin-top: 0.9rem;
+  border: 1px solid rgba(255, 166, 0, 0.14);
+  border-radius: 20px;
+  background: rgba(18, 18, 18, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.9rem;
+}
+
+.dietAdvancedSection summary {
+  cursor: pointer;
+  color: #ffb56b;
+  font-weight: 900;
+  list-style: none;
+}
+
+.dietAdvancedSection summary::after {
+  content: " +";
+  float: right;
+}
+
+.dietAdvancedSection[open] summary::after {
+  content: " -";
+}
+
+.dietFullInput {
+  margin-top: 0.8rem;
+}
+
+/* Button */
+.dietGenerateBtn {
+  width: 100%;
+  margin-top: 0.9rem;
+  border: none;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #ff7a18, #ff9f43);
+  color: #ffffff;
+  padding: 0.92rem 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 16px 35px rgba(255, 122, 24, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dietGenerateBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 38px rgba(255, 122, 24, 0.34);
+}
+
+.dietGenerateBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Empty result panel */
+.dietEmptyResult {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  align-content: center;
+}
+
+.dietCircleIcon {
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 1rem;
+  border-radius: 24px;
+  background: rgba(20, 184, 166, 0.2);
+  color: #7ef0df;
+  font-size: 2rem;
+  font-weight: 900;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.dietEmptyResult h2 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.dietEmptyResult p {
+  max-width: 420px;
+  margin: 0.7rem auto 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.55;
+}
+
+.dietEmptyList {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  color: #7ef0df;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+/* Result content */
+.dietResultContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.dietResultBadge {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 0.42rem 0.85rem;
+  background: rgba(20, 184, 166, 0.2);
+  color: #7ef0df;
+  font-weight: 900;
+  font-size: 0.82rem;
+}
+
+.dietResultContent h2 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.dietMatchText {
+  margin: 0;
+  border-radius: 16px;
+  background: rgba(18, 42, 76, 0.78);
+  color: #d7e9ff;
+  padding: 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.5;
+  border: 1px solid rgba(96, 165, 250, 0.16);
+}
+
+/* Macro cards */
+.dietMacroGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.dietMacroGrid p {
+  margin: 0.25rem 0 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.76rem;
+}
+
+/* Meal chart */
+.dietMealPanel {
+  border: 1px solid rgba(20, 184, 166, 0.2);
+  border-radius: 22px;
+  background: rgba(7, 26, 24, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.95rem;
+}
+
+.dietMealPanel h3 {
+  margin: 0 0 0.65rem;
+  color: #7ef0df;
+}
+
+.dietMealList {
+  display: grid;
+  gap: 0.65rem;
+  max-height: 310px;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+}
+
+.dietMealCard {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(10, 10, 10, 0.84);
+  padding: 0.8rem;
+}
+
+.dietMealTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.dietMealTop h4 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.dietMealTop span {
+  color: #ffb56b;
+  font-weight: 900;
+  font-size: 0.8rem;
+}
+
+.dietMealCard ul {
+  margin: 0.6rem 0;
+  padding-left: 1.1rem;
+}
+
+.dietMealCard li,
+.dietRecommendationList li {
+  margin-bottom: 0.35rem;
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.4;
+}
+
+.dietMealCard p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+/* Recommendation section */
+.dietResultDetails {
+  margin-top: 0;
+}
+
+.dietRecommendationList {
+  margin: 0.85rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.dietFriendlyNote {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+/* Error */
+.dietPage.dietCompactPage .errorMessage {
+  margin-top: 0.8rem;
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.32);
+  border: 1px solid rgba(248, 113, 113, 0.22);
+  border-radius: 14px;
+  padding: 0.75rem;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+/* Scrollbar */
+.dietMealList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dietMealList::-webkit-scrollbar-thumb {
+  background: rgba(255, 159, 67, 0.55);
+  border-radius: 999px;
+}
+
+.dietMealList::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Responsive */
+@media (max-width: 1080px) {
+  .dietHeroWrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dietHeroHighlights {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dietCompactGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .dietHeroHighlights,
+  .dietProfileGrid,
+  .dietQuickGrid,
+  .dietMacroGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .dietCompactRight {
+    min-height: auto;
+  }
+
+  .dietCardTop {
+    flex-direction: column;
+  }
+}
 
 
 
