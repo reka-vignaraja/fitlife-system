@@ -326,6 +326,7 @@ def get_progress_report(user_id: str = Depends(get_current_user_id)):
     goal_record = find_latest(db["goals"], user_id)
     fitness_record = find_latest(db["fitness_plans"], user_id)
     diet_record = find_latest(db["diet_plans"], user_id)
+    sleep_progress_record = find_latest(db["sleep_progress"], user_id)
 
     height_cm = user.get("height_cm")
     weight_kg = user.get("weight_kg")
@@ -486,6 +487,67 @@ def get_progress_report(user_id: str = Depends(get_current_user_id)):
             "priority": goal_record.get("priority") or "Not set",
         }
 
+
+    sleep_progress_details = {
+        "has_weekly_progress": False,
+        "week_start_date": "Not saved",
+        "average_sleep_hours": 0,
+        "sleep_debt_hours": 0,
+        "consistency_score": 0,
+        "good_sleep_days": 0,
+        "poor_sleep_days": 0,
+        "interrupted_days": 0,
+        "improvement_status": "Not saved",
+        "next_week_goal": "Save weekly sleep progress to generate a next-week sleep goal.",
+        "next_week_recommendation": "Weekly sleep progress is not available yet.",
+        "weekly_feedback": "",
+        "daily_sleep": [],
+        "created_at": None,
+    }
+
+    if sleep_progress_record:
+        sleep_progress_summary = sleep_progress_record.get("summary", {}) or {}
+
+        daily_sleep_items = []
+
+        for item in sleep_progress_record.get("daily_sleep", []):
+            daily_sleep_items.append(
+                {
+                    "date": item.get("date", ""),
+                    "day": item.get("day", ""),
+                    "sleep_hours": item.get("sleep_hours", 0),
+                    "sleep_quality": item.get("sleep_quality", "average"),
+                    "bedtime": item.get("bedtime", ""),
+                    "wake_time": item.get("wake_time", ""),
+                    "interruptions": item.get("interruptions", 0),
+                    "stress_level": item.get("stress_level", "moderate"),
+                    "mood": item.get("mood", "normal"),
+                }
+            )
+
+        sleep_progress_details = {
+            "has_weekly_progress": True,
+            "week_start_date": sleep_progress_record.get("week_start_date") or "Not saved",
+            "average_sleep_hours": sleep_progress_summary.get("average_sleep_hours", 0),
+            "sleep_debt_hours": sleep_progress_summary.get("sleep_debt_hours", 0),
+            "consistency_score": sleep_progress_summary.get("consistency_score", 0),
+            "good_sleep_days": sleep_progress_summary.get("good_sleep_days", 0),
+            "poor_sleep_days": sleep_progress_summary.get("poor_sleep_days", 0),
+            "interrupted_days": sleep_progress_summary.get("interrupted_days", 0),
+            "improvement_status": sleep_progress_summary.get("improvement_status", "Not saved"),
+            "next_week_goal": sleep_progress_summary.get(
+                "next_week_goal",
+                "Save weekly sleep progress to generate a next-week sleep goal.",
+            ),
+            "next_week_recommendation": sleep_progress_summary.get(
+                "next_week_recommendation",
+                "Weekly sleep progress is not available yet.",
+            ),
+            "weekly_feedback": sleep_progress_record.get("weekly_feedback", ""),
+            "daily_sleep": daily_sleep_items,
+            "created_at": clean_datetime(sleep_progress_record.get("created_at")),
+        }
+
     return {
         "message": "Progress report generated successfully",
         "generated_at": datetime.utcnow(),
@@ -533,6 +595,7 @@ def get_progress_report(user_id: str = Depends(get_current_user_id)):
             "meals_per_day": diet_meals_per_day,
             "created_at": diet_created_at,
         },
+        "sleep_progress": sleep_progress_details,
         "goal": goal_details,
         "recommendations": recommendations,
     }

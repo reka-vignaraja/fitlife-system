@@ -58,6 +58,35 @@ type GoalSummary = {
   priority?: string;
 };
 
+type SleepProgressDailyItem = {
+  date?: string;
+  day?: string;
+  sleep_hours?: number | string;
+  sleep_quality?: string;
+  bedtime?: string;
+  wake_time?: string;
+  interruptions?: number | string;
+  stress_level?: string;
+  mood?: string;
+};
+
+type SleepProgressSummary = {
+  has_weekly_progress: boolean;
+  week_start_date: string;
+  average_sleep_hours: number | string;
+  sleep_debt_hours: number | string;
+  consistency_score: number | string;
+  good_sleep_days: number | string;
+  poor_sleep_days: number | string;
+  interrupted_days: number | string;
+  improvement_status: string;
+  next_week_goal: string;
+  next_week_recommendation: string;
+  weekly_feedback?: string;
+  daily_sleep?: SleepProgressDailyItem[];
+  created_at?: string | null;
+};
+
 type ProgressReportResponse = {
   message: string;
   generated_at: string;
@@ -71,6 +100,7 @@ type ProgressReportResponse = {
   summary: ProgressSummary;
   fitness: FitnessSummary;
   diet?: DietSummary;
+  sleep_progress?: SleepProgressSummary;
   goal?: GoalSummary;
   recommendations: string[];
 };
@@ -200,18 +230,14 @@ export default function ProgressReportPage() {
   if (loading) {
     return (
       <ProtectedRoute>
-        <main className="min-h-screen bg-black px-4 py-10 text-white">
-          <div className="mx-auto max-w-7xl">
-            <section className="rounded-[34px] border border-orange-500/30 bg-[#111111] p-8 shadow-2xl">
-              <span className="inline-flex rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm font-bold text-orange-400">
-                Progress Report
-              </span>
+        <main className="progressReportPage">
+          <div className="progressReportShell">
+            <section className="progressHero">
+              <span className="progressBadge">Progress Report</span>
 
-              <h1 className="mt-6 text-4xl font-extrabold text-white">
-                Loading your progress report...
-              </h1>
+              <h1 className="progressTitle">Loading your progress report...</h1>
 
-              <p className="mt-4 text-slate-300">
+              <p className="progressHeroText">
                 Please wait while FitLife collects your BMI, health risk,
                 nutrition, diet, sleep, goal, and fitness details.
               </p>
@@ -225,25 +251,23 @@ export default function ProgressReportPage() {
   if (error || !report) {
     return (
       <ProtectedRoute>
-        <main className="min-h-screen bg-black px-4 py-10 text-white">
-          <div className="mx-auto max-w-7xl">
-            <section className="rounded-[34px] border border-red-500/30 bg-[#111111] p-8 shadow-2xl">
-              <span className="inline-flex rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-bold text-red-400">
+        <main className="progressReportPage">
+          <div className="progressReportShell">
+            <section className="progressHero progressErrorHero">
+              <span className="progressBadge progressErrorBadge">
                 Progress Report Error
               </span>
 
-              <h1 className="mt-6 text-4xl font-extrabold text-white">
-                Unable to load report
-              </h1>
+              <h1 className="progressTitle">Unable to load report</h1>
 
-              <p className="mt-4 text-slate-300">
+              <p className="progressHeroText">
                 {error || "Progress report data not found."}
               </p>
 
               <button
                 type="button"
                 onClick={fetchProgressReport}
-                className="mt-6 rounded-full bg-orange-500 px-6 py-3 font-extrabold text-black"
+                className="progressPrimaryButton"
               >
                 Try Again
               </button>
@@ -257,6 +281,7 @@ export default function ProgressReportPage() {
   const summary = report.summary;
   const fitness = report.fitness;
   const diet = report.diet;
+  const sleepProgress = report.sleep_progress;
   const goal = report.goal;
 
   const dietRecommendation =
@@ -272,27 +297,25 @@ export default function ProgressReportPage() {
 
   return (
     <ProtectedRoute>
-      <main className="min-h-screen bg-black px-4 py-10 text-white">
-        <div className="mx-auto max-w-7xl">
-          <section className="rounded-[34px] border border-orange-500/30 bg-[#111111] p-8 shadow-2xl">
-            <span className="inline-flex rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm font-bold text-orange-400">
-              Progress Report
-            </span>
+      <main className="progressReportPage">
+        <div className="progressReportShell">
+          <section className="progressHero">
+            <span className="progressBadge">Progress Report</span>
 
-            <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_340px] lg:items-center">
+            <div className="progressHeroGrid">
               <div>
-                <h1 className="text-4xl font-extrabold leading-tight text-white md:text-6xl">
+                <h1 className="progressTitle">
                   Your Health & Fitness{" "}
-                  <span className="text-orange-400">Progress Summary</span>
+                  <span>Progress Summary</span>
                 </h1>
 
-                <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
+                <p className="progressHeroText">
                   This report summarizes BMI, health risk, nutrition, diet
                   recommendation, sleep, fitness goal, goal progress, and
                   overall progress using real backend data.
                 </p>
 
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="progressTags">
                   <Tag label={report.user.name || "FitLife User"} />
                   <Tag label={safeText(fitness.fitness_goal, "Goal not set")} />
                   <Tag
@@ -304,12 +327,12 @@ export default function ProgressReportPage() {
                   <Tag label={`Generated: ${formatDate(report.generated_at)}`} />
                 </div>
 
-                <div className="no-print mt-8 flex flex-wrap gap-4">
+                <div className="progressActions no-print">
                   <button
                     type="button"
                     onClick={fetchProgressReport}
                     disabled={generating}
-                    className="rounded-full bg-orange-500 px-6 py-3 font-extrabold text-black transition hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="progressPrimaryButton"
                   >
                     {generating ? "Generating..." : "Generate Latest Report"}
                   </button>
@@ -317,30 +340,24 @@ export default function ProgressReportPage() {
                   <button
                     type="button"
                     onClick={downloadReport}
-                    className="rounded-full border border-orange-500/40 bg-black px-6 py-3 font-extrabold text-orange-300 transition hover:bg-orange-500/10"
+                    className="progressSecondaryButton"
                   >
                     Download / Print Report
                   </button>
                 </div>
               </div>
 
-              <div className="rounded-[30px] border border-orange-500/30 bg-black p-7 text-center">
-                <p className="text-sm font-bold text-orange-400">
-                  Overall Progress
-                </p>
-
-                <h2 className="mt-4 text-7xl font-extrabold text-white">
-                  {summary.overall_score}%
-                </h2>
-
-                <p className="mt-3 text-sm font-semibold text-slate-400">
+              <div className="progressOverallCard">
+                <p>Overall Progress</p>
+                <h2>{summary.overall_score}%</h2>
+                <span>
                   Based on BMI, risk, nutrition, diet, sleep, and goals.
-                </p>
+                </span>
               </div>
             </div>
           </section>
 
-          <section className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+          <section className="progressMetricGrid">
             <ReportCard
               title="BMI Status"
               value={String(summary.bmi_value)}
@@ -368,14 +385,30 @@ export default function ProgressReportPage() {
             <ReportCard
               title="Sleep Score"
               value={String(summary.sleep_score)}
-              note="Sleep summary"
+              note="Daily sleep summary"
+            />
+
+            <ReportCard
+              title="Weekly Sleep"
+              value={
+                sleepProgress?.has_weekly_progress
+                  ? formatSleepDurationForUser(
+                      sleepProgress.average_sleep_hours
+                    )
+                  : "Not saved"
+              }
+              note={
+                sleepProgress?.has_weekly_progress
+                  ? sleepProgress.improvement_status
+                  : "Weekly progress"
+              }
             />
           </section>
 
-          <section className="mt-8 grid gap-8 lg:grid-cols-[1fr_420px]">
-            <div className="space-y-8">
+          <section className="progressMainGrid">
+            <div className="progressLeftColumn">
               <Panel title="Body & Health Analysis">
-                <div className="grid gap-5 md:grid-cols-2">
+                <div className="progressInfoGrid">
                   <InfoBox
                     label="Height"
                     value={
@@ -417,7 +450,7 @@ export default function ProgressReportPage() {
               </Panel>
 
               <Panel title="Fitness Progress">
-                <div className="grid gap-5 md:grid-cols-2">
+                <div className="progressInfoGrid">
                   <InfoBox
                     label="Fitness Goal"
                     value={safeText(fitness.fitness_goal, "Not set")}
@@ -442,20 +475,15 @@ export default function ProgressReportPage() {
                   />
                 </div>
 
-                <div className="mt-6 rounded-3xl border border-orange-500/25 bg-orange-500/10 p-5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-bold text-orange-400">
-                      Goal Progress
-                    </span>
-
-                    <strong className="text-xl font-extrabold text-white">
-                      {summary.goal_progress}%
-                    </strong>
+                <div className="progressGoalCard">
+                  <div className="progressGoalTop">
+                    <span>Goal Progress</span>
+                    <strong>{summary.goal_progress}%</strong>
                   </div>
 
-                  <div className="mt-4 h-3 overflow-hidden rounded-full bg-black">
+                  <div className="progressGoalTrack">
                     <div
-                      className="h-full rounded-full bg-orange-500"
+                      className="progressGoalFill"
                       style={{
                         width: `${Math.min(
                           Math.max(Number(summary.goal_progress) || 0, 0),
@@ -468,7 +496,7 @@ export default function ProgressReportPage() {
               </Panel>
 
               <Panel title="Diet Recommendation">
-                <div className="grid gap-5 md:grid-cols-2">
+                <div className="progressInfoGrid">
                   <InfoBox
                     label="AI Diet Recommendation"
                     value={dietRecommendation}
@@ -527,7 +555,7 @@ export default function ProgressReportPage() {
               </Panel>
 
               <Panel title="Goal Details">
-                <div className="grid gap-5 md:grid-cols-2">
+                <div className="progressInfoGrid">
                   <InfoBox
                     label="Goal Title"
                     value={safeText(goal?.title, "Not set")}
@@ -568,8 +596,107 @@ export default function ProgressReportPage() {
                 </div>
               </Panel>
 
+              <Panel title="Sleep Progress Summary">
+                {!sleepProgress?.has_weekly_progress ? (
+                  <p className="progressEmptyText">
+                    Weekly sleep progress is not saved yet. Save weekly sleep
+                    progress from the Sleep Tracking page to show average sleep,
+                    sleep debt, consistency score, good days, poor days, and next
+                    week goal here.
+                  </p>
+                ) : (
+                  <>
+                    <div className="progressInfoGrid">
+                      <InfoBox
+                        label="Week Start Date"
+                        value={safeText(
+                          sleepProgress.week_start_date,
+                          "Not saved"
+                        )}
+                      />
+
+                      <InfoBox
+                        label="Average Sleep"
+                        value={formatSleepDurationForUser(
+                          sleepProgress.average_sleep_hours
+                        )}
+                      />
+
+                      <InfoBox
+                        label="Sleep Debt"
+                        value={formatSleepDurationForUser(
+                          sleepProgress.sleep_debt_hours
+                        )}
+                      />
+
+                      <InfoBox
+                        label="Consistency Score"
+                        value={`${sleepProgress.consistency_score}%`}
+                      />
+
+                      <InfoBox
+                        label="Good Sleep Days"
+                        value={String(sleepProgress.good_sleep_days)}
+                      />
+
+                      <InfoBox
+                        label="Poor Sleep Days"
+                        value={String(sleepProgress.poor_sleep_days)}
+                      />
+
+                      <InfoBox
+                        label="Interrupted Days"
+                        value={String(sleepProgress.interrupted_days)}
+                      />
+
+                      <InfoBox
+                        label="Improvement Status"
+                        value={safeText(
+                          sleepProgress.improvement_status,
+                          "Not saved"
+                        )}
+                      />
+                    </div>
+
+                    <div className="progressNextGoalCard">
+                      <p>Next Week Goal</p>
+
+                      <h3>{sleepProgress.next_week_goal}</h3>
+
+                      <span>{sleepProgress.next_week_recommendation}</span>
+                    </div>
+
+                    {sleepProgress.daily_sleep &&
+                      sleepProgress.daily_sleep.length > 0 && (
+                        <div className="progressSleepDayGrid">
+                          {sleepProgress.daily_sleep.map((item, index) => (
+                            <div
+                              key={`${item.date || item.day}-${index}`}
+                              className="progressSleepDayCard"
+                            >
+                              <p>{safeText(item.date || item.day, "Sleep day")}</p>
+
+                              <h3>
+                                {formatSleepDurationForUser(
+                                  item.sleep_hours || 0
+                                ) || "Not recorded"}
+                              </h3>
+
+                              <span>
+                                {safeText(item.bedtime, "-")} to{" "}
+                                {safeText(item.wake_time, "-")} ·{" "}
+                                {safeText(item.sleep_quality, "average")}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                  </>
+                )}
+              </Panel>
+
               <Panel title="Nutrition & Lifestyle">
-                <div className="grid gap-5 md:grid-cols-2">
+                <div className="progressInfoGrid">
                   <InfoBox
                     label="Diet Preference"
                     value={safeText(
@@ -596,21 +723,16 @@ export default function ProgressReportPage() {
               </Panel>
             </div>
 
-            <aside className="space-y-8">
+            <aside className="progressAside">
               <Panel title="Final Recommendation">
                 {report.recommendations.length === 0 ? (
-                  <p className="text-sm font-semibold leading-7 text-slate-300">
+                  <p className="progressEmptyText">
                     No recommendations available.
                   </p>
                 ) : (
-                  <ul className="space-y-4 text-sm font-semibold leading-7 text-slate-300">
+                  <ul className="progressRecommendationList">
                     {report.recommendations.map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-2xl border border-orange-500/20 bg-black p-4"
-                      >
-                        ✓ {item}
-                      </li>
+                      <li key={item}>✓ {item}</li>
                     ))}
                   </ul>
                 )}
@@ -670,6 +792,15 @@ export default function ProgressReportPage() {
                 />
 
                 <StatusRow
+                  label="Weekly Sleep Progress"
+                  value={
+                    sleepProgress?.has_weekly_progress
+                      ? "Completed"
+                      : "Pending"
+                  }
+                />
+
+                <StatusRow
                   label="Goal Progress"
                   value={
                     summary.goal_progress > 0 ? "In Progress" : "Not Started"
@@ -706,12 +837,34 @@ function formatDate(dateValue: string) {
   return date.toLocaleString();
 }
 
+function formatSleepDurationForUser(hoursValue: string | number) {
+  const totalHours = Number(hoursValue);
+
+  if (!totalHours || Number.isNaN(totalHours)) {
+    return "Not recorded";
+  }
+
+  let hours = Math.floor(totalHours);
+  let minutes = Math.round((totalHours - hours) * 60);
+
+  if (minutes === 60) {
+    hours += 1;
+    minutes = 0;
+  }
+
+  if (hours === 0) {
+    return `${minutes}m`;
+  }
+
+  if (minutes === 0) {
+    return `${hours}h`;
+  }
+
+  return `${hours}h ${minutes}m`;
+}
+
 function Tag({ label }: { label: string }) {
-  return (
-    <span className="rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm font-bold text-orange-300">
-      {label}
-    </span>
-  );
+  return <span className="progressTag">{label}</span>;
 }
 
 function ReportCard({
@@ -724,12 +877,10 @@ function ReportCard({
   note: string;
 }) {
   return (
-    <div className="rounded-[28px] border border-orange-500/30 bg-[#111111] p-6 shadow-xl">
-      <p className="text-sm font-bold text-orange-400">{title}</p>
-
-      <h3 className="mt-3 text-3xl font-extrabold text-white">{value}</h3>
-
-      <p className="mt-2 text-sm font-semibold text-slate-400">{note}</p>
+    <div className="progressReportCard">
+      <p>{title}</p>
+      <h3>{value}</h3>
+      <span>{note}</span>
     </div>
   );
 }
@@ -742,8 +893,8 @@ function Panel({
   children: ReactNode;
 }) {
   return (
-    <section className="rounded-[32px] border border-orange-500/30 bg-[#111111] p-7 shadow-2xl">
-      <h2 className="mb-6 text-2xl font-extrabold text-white">{title}</h2>
+    <section className="progressPanel">
+      <h2>{title}</h2>
       {children}
     </section>
   );
@@ -751,22 +902,18 @@ function Panel({
 
 function InfoBox({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-orange-500/20 bg-black p-5">
-      <p className="text-sm font-bold text-orange-400">{label}</p>
-
-      <h3 className="mt-2 text-xl font-extrabold text-white">{value}</h3>
+    <div className="progressInfoBox">
+      <p>{label}</p>
+      <h3>{value}</h3>
     </div>
   );
 }
 
 function StatusRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="mb-4 flex items-center justify-between rounded-2xl border border-orange-500/20 bg-black px-4 py-4">
-      <span className="text-sm font-bold text-slate-300">{label}</span>
-
-      <span className="rounded-full bg-orange-500/10 px-3 py-1 text-xs font-extrabold text-orange-300">
-        {value}
-      </span>
+    <div className="progressStatusRow">
+      <span>{label}</span>
+      <strong>{value}</strong>
     </div>
   );
 }

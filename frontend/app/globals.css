@@ -254,135 +254,1473 @@ button {
   font-weight: 900;
   box-shadow: 0 15px 35px rgba(20, 184, 166, 0.25);
 }
+/* ================================
+   Login Page Exact Fix
+   Matches current login/page.tsx
+   Left text + right card like Verify Email
+================================ */
 
-/* FINAL Diet page text clarity fix */
-.dietPage .dietResultCard,
-.dietPage .dietResultCard *,
-.dietPage .mealChart,
-.dietPage .mealChart *,
-.dietPage .mealCard,
-.dietPage .mealCard *,
-.dietPage .recommendationBox,
-.dietPage .recommendationBox * {
-  text-shadow: none !important;
-  filter: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  opacity: 1 !important;
-  mix-blend-mode: normal !important;
-  -webkit-text-fill-color: initial !important;
+main:has(form input[name="password"]):has(a[href="/register"]) {
+  min-height: 100vh !important;
+  display: flex !important;
+  align-items: center !important;
+  overflow: hidden !important;
+  color: #ffffff !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.62) 48%,
+      rgba(0, 0, 0, 0.28) 100%
+    ),
+    url("/images/login-bg.png") center / cover no-repeat fixed !important;
+  padding: 3rem 1.25rem !important;
 }
 
-/* Meal cards */
-.dietPage .dietResultCard .mealChart .mealCard {
-  background: #ffffff !important;
-  border: 1px solid rgba(255, 132, 31, 0.35) !important;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+/* Main two-column wrapper */
+main:has(form input[name="password"]):has(a[href="/register"]) > div {
+  width: min(1150px, 100%) !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 430px !important;
+  gap: 2.5rem !important;
+  align-items: center !important;
 }
 
-/* Meal title */
-.dietPage .dietResultCard .mealChart .mealCard .mealTop h3,
-.dietPage .dietResultCard .mealChart .mealCard h3 {
-  color: #111827 !important;
-  -webkit-text-fill-color: #111827 !important;
+/* Left content */
+main:has(form input[name="password"]):has(a[href="/register"]) > div > section:first-child {
+  max-width: 660px !important;
+}
+
+main:has(form input[name="password"]):has(a[href="/register"]) > div > section:first-child > span {
+  display: inline-flex !important;
+  width: fit-content !important;
+  border: 1px solid rgba(255, 132, 0, 0.35) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 132, 0, 0.12) !important;
+  color: #ff8a00 !important;
+  padding: 0.45rem 0.85rem !important;
+  font-size: 0.78rem !important;
   font-weight: 900 !important;
-  text-shadow: none !important;
 }
 
-/* Kcal badge */
-.dietPage .dietResultCard .mealChart .mealCard .mealTop span {
-  background: #d1fae5 !important;
-  color: #047857 !important;
-  -webkit-text-fill-color: #047857 !important;
+main:has(form input[name="password"]):has(a[href="/register"]) h1 {
+  margin: 1.1rem 0 1rem !important;
+  color: #ffffff !important;
+  font-size: clamp(2.8rem, 5vw, 4.6rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.055em !important;
+  font-weight: 950 !important;
+}
+
+main:has(form input[name="password"]):has(a[href="/register"]) h1 span {
+  color: #ff8a00 !important;
+}
+
+main:has(form input[name="password"]):has(a[href="/register"]) > div > section:first-child > p {
+  max-width: 620px !important;
+  margin-top: 1.2rem !important;
+  color: rgba(255, 255, 255, 0.86) !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+  font-weight: 600 !important;
+}
+
+/* Reminder box */
+main:has(form input[name="password"]):has(a[href="/register"]) > div > section:first-child > div {
+  margin-top: 1.7rem !important;
+  max-width: 470px !important;
+  border: 1px solid rgba(255, 132, 0, 0.24) !important;
+  border-radius: 18px !important;
+  background: rgba(10, 10, 10, 0.58) !important;
+  padding: 1rem 1.1rem !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+main:has(form input[name="password"]):has(a[href="/register"]) > div > section:first-child > div p:first-child {
+  margin: 0 !important;
+  color: #ff8a00 !important;
+  font-size: 0.8rem !important;
   font-weight: 900 !important;
-  text-shadow: none !important;
 }
 
-/* Food list */
-.dietPage .dietResultCard .mealChart .mealCard ul li,
-.dietPage .dietResultCard .mealChart .mealCard li {
-  color: #1f2937 !important;
-  -webkit-text-fill-color: #1f2937 !important;
-  font-weight: 800 !important;
-  text-shadow: none !important;
+main:has(form input[name="password"]):has(a[href="/register"]) > div > section:first-child > div h3 {
+  margin: 0.45rem 0 !important;
+  color: #ffffff !important;
+  font-size: 1.15rem !important;
+  font-weight: 950 !important;
 }
 
-/* Portion guide text */
-.dietPage .dietResultCard .mealChart .mealCard p {
-  color: #374151 !important;
-  -webkit-text-fill-color: #374151 !important;
+main:has(form input[name="password"]):has(a[href="/register"]) > div > section:first-child > div p:last-child {
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.55 !important;
+}
+
+/* Right login card */
+main:has(form input[name="password"]):has(a[href="/register"]) > div > section:last-child {
+  width: 100% !important;
+  max-width: 430px !important;
+  margin-left: auto !important;
+  border: 1px solid rgba(255, 132, 0, 0.3) !important;
+  border-radius: 24px !important;
+  background: rgba(12, 12, 12, 0.88) !important;
+  padding: 1.45rem !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+main:has(form input[name="password"]):has(a[href="/register"]) > div > section:last-child h2 {
+  margin: 0 0 0.45rem !important;
+  color: #ffffff !important;
+  font-size: 1.65rem !important;
+  font-weight: 950 !important;
+}
+
+main:has(form input[name="password"]):has(a[href="/register"]) > div > section:last-child p {
+  color: rgba(255, 255, 255, 0.74) !important;
+}
+
+/* Form */
+main:has(form input[name="password"]):has(a[href="/register"]) form {
+  display: grid !important;
+  gap: 1rem !important;
+}
+
+main:has(form input[name="password"]):has(a[href="/register"]) label {
+  display: block !important;
+  margin-bottom: 0.45rem !important;
+  color: #ff8a00 !important;
+  font-size: 0.82rem !important;
+  font-weight: 900 !important;
+}
+
+main:has(form input[name="password"]):has(a[href="/register"]) input {
+  width: 100% !important;
+  height: 48px !important;
+  border: 1px solid rgba(255, 132, 0, 0.35) !important;
+  border-radius: 14px !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  color: #ffffff !important;
+  padding: 0 0.85rem !important;
+  font-size: 0.92rem !important;
   font-weight: 700 !important;
-  text-shadow: none !important;
+  outline: none !important;
 }
 
-/* AI model result and recommendation boxes */
-.dietPage .dietResultCard .recommendationBox {
-  background: #ecfdf5 !important;
-  border: 1px solid rgba(16, 185, 129, 0.35) !important;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+main:has(form input[name="password"]):has(a[href="/register"]) input::placeholder {
+  color: rgba(255, 255, 255, 0.42) !important;
 }
 
-/* Box titles */
-.dietPage .dietResultCard .recommendationBox h3 {
-  color: #111827 !important;
-  -webkit-text-fill-color: #111827 !important;
-  font-weight: 900 !important;
-  text-shadow: none !important;
+main:has(form input[name="password"]):has(a[href="/register"]) input:focus {
+  border-color: #ff8a00 !important;
+  box-shadow: 0 0 0 3px rgba(255, 132, 0, 0.14) !important;
 }
 
-/* Box normal text */
-.dietPage .dietResultCard .recommendationBox p,
-.dietPage .dietResultCard .recommendationBox li,
-.dietPage .dietResultCard .recommendationBox strong {
-  color: #065f46 !important;
-  -webkit-text-fill-color: #065f46 !important;
-  font-weight: 800 !important;
-  text-shadow: none !important;
+/* Login button */
+main:has(form input[name="password"]):has(a[href="/register"]) form button {
+  width: 100% !important;
+  height: 52px !important;
+  border: none !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #ff9d2e, #ff7a00, #ff6200) !important;
+  color: #160800 !important;
+  font-size: 0.95rem !important;
+  font-weight: 950 !important;
+  cursor: pointer !important;
+  box-shadow: 0 18px 36px rgba(255, 106, 0, 0.28) !important;
 }
 
-/* Progress report print/download PDF support */
-@media print {
-  body {
-    background: white !important;
+main:has(form input[name="password"]):has(a[href="/register"]) form button:hover {
+  filter: brightness(1.06) !important;
+}
+
+/* Register link */
+main:has(form input[name="password"]):has(a[href="/register"]) a[href="/register"] {
+  color: #ff8a00 !important;
+  font-weight: 950 !important;
+  text-decoration: none !important;
+}
+
+main:has(form input[name="password"]):has(a[href="/register"]) a[href="/register"]:hover {
+  text-decoration: underline !important;
+}
+
+/* Error message */
+main:has(form input[name="password"]):has(a[href="/register"]) form + p,
+main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
+  color: #ffbd7a !important;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  main:has(form input[name="password"]):has(a[href="/register"]) {
+    overflow: auto !important;
+    padding: 2rem 1rem !important;
   }
 
-  .no-print,
+  main:has(form input[name="password"]):has(a[href="/register"]) > div {
+    grid-template-columns: 1fr !important;
+  }
+
+  main:has(form input[name="password"]):has(a[href="/register"]) > div > section:last-child {
+    margin: 0 auto !important;
+  }
+}
+
+/* ================================
+   Diet Recommendation Page
+================================ */
+
+.dietPage.dietCompactPage {
+  min-height: 100vh !important;
+  color: #f8fafc !important;
+  padding-bottom: 2.5rem !important;
+}
+
+/* Hero */
+.dietPage.dietCompactPage .dietCompactHero {
+  padding: 0.8rem 0 0.45rem !important;
+  background: transparent !important;
+}
+
+.dietPage.dietCompactPage .dietHeroWrap {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 430px !important;
+  align-items: center !important;
+  gap: 1.1rem !important;
+}
+
+.dietPage.dietCompactPage .dietHeroWrap h1 {
+  max-width: 700px !important;
+  margin: 0.55rem 0 0.45rem !important;
+  color: #ffffff !important;
+  font-size: clamp(2.2rem, 3.8vw, 3.7rem) !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.04em !important;
+  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.42) !important;
+}
+
+.dietPage.dietCompactPage .dietHeroWrap p {
+  max-width: 760px !important;
+  margin: 0 !important;
+  color: rgba(255, 238, 222, 0.84) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.55 !important;
+}
+
+/* Orange badges */
+.dietPage.dietCompactPage .badge,
+.dietPage.dietCompactPage .miniLabel,
+.dietPage.dietCompactPage .dietResultBadge {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(255, 132, 0, 0.35) !important;
+  background: rgba(255, 132, 0, 0.15) !important;
+  color: #ffad5a !important;
+  padding: 0.42rem 0.85rem !important;
+  font-size: 0.78rem !important;
+  font-weight: 950 !important;
+}
+
+/* Hero cards */
+.dietPage.dietCompactPage .dietHeroHighlights {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.65rem !important;
+  min-width: 0 !important;
+}
+
+.dietPage.dietCompactPage .dietHeroHighlights div {
+  min-height: 88px !important;
+  border: 1px solid rgba(255, 132, 0, 0.18) !important;
+  border-radius: 18px !important;
+  background: rgba(8, 8, 8, 0.78) !important;
+  padding: 0.8rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28) !important;
+}
+
+.dietPage.dietCompactPage .dietHeroHighlights strong {
+  display: block !important;
+  color: #ffad5a !important;
+  font-size: 1rem !important;
+  font-weight: 950 !important;
+}
+
+.dietPage.dietCompactPage .dietHeroHighlights span {
+  display: block !important;
+  margin-top: 0.25rem !important;
+  color: rgba(255, 225, 202, 0.72) !important;
+  font-size: 0.74rem !important;
+  font-weight: 850 !important;
+}
+
+/* Main section */
+.dietPage.dietCompactPage .dietCompactSection {
+  padding: 0.45rem 0 1.5rem !important;
+  background: transparent !important;
+}
+
+/* Actual page layout classes */
+.dietPage.dietCompactPage .dietCompactGrid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.05fr) minmax(380px, 0.86fr) !important;
+  gap: 1rem !important;
+  align-items: start !important;
+}
+
+/* Flatten left column so profile can become full-width top */
+.dietPage.dietCompactPage .dietCompactLeft {
+  display: contents !important;
+}
+
+/* Profile summary full-width top */
+.dietPage.dietCompactPage .dietProfileCard {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+}
+
+/* Diet form left */
+.dietPage.dietCompactPage .dietQuickForm {
+  grid-column: 1 / 2 !important;
+  width: 100% !important;
+}
+
+/* Result right */
+.dietPage.dietCompactPage .dietCompactRight {
+  grid-column: 2 / 3 !important;
+  width: 100% !important;
+}
+
+/* Main cards */
+.dietPage.dietCompactPage .dietProfileCard,
+.dietPage.dietCompactPage .dietQuickForm,
+.dietPage.dietCompactPage .dietCompactRight {
+  border: 1px solid rgba(255, 132, 0, 0.2) !important;
+  border-radius: 24px !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 132, 0, 0.075),
+      rgba(255, 106, 0, 0.035)
+    ),
+    rgba(8, 8, 8, 0.82) !important;
+  padding: 1rem 1.15rem !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dietPage.dietCompactPage .dietCardTop {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+}
+
+.dietPage.dietCompactPage .dietCardTop h2,
+.dietPage.dietCompactPage .dietCompactRight h2 {
+  margin: 0.5rem 0 0 !important;
+  color: #ffffff !important;
+  font-size: 1.45rem !important;
+  line-height: 1.12 !important;
+  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.35) !important;
+}
+
+.dietPage.dietCompactPage .dietStatusText {
+  margin: 0.45rem 0 0 !important;
+  color: #ffbd7a !important;
+  font-weight: 850 !important;
+  font-size: 0.86rem !important;
+}
+
+/* Profile summary one row */
+.dietPage.dietCompactPage .dietProfileGrid {
+  margin-top: 0.8rem !important;
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 0.7rem !important;
+}
+
+.dietPage.dietCompactPage .dietProfileGrid div {
+  min-height: 72px !important;
+  border: 1px solid rgba(255, 132, 0, 0.16) !important;
+  border-radius: 15px !important;
+  background: rgba(255, 132, 0, 0.065) !important;
+  padding: 0.75rem 0.9rem !important;
+}
+
+.dietPage.dietCompactPage .dietProfileGrid span {
+  display: block !important;
+  color: rgba(255, 225, 202, 0.72) !important;
+  font-size: 0.72rem !important;
+  font-weight: 850 !important;
+}
+
+.dietPage.dietCompactPage .dietProfileGrid strong {
+  display: block !important;
+  margin-top: 0.25rem !important;
+  color: #ffffff !important;
+  font-size: 0.94rem !important;
+  font-weight: 950 !important;
+}
+
+/* Diet input grid */
+.dietPage.dietCompactPage .dietQuickGrid {
+  margin-top: 0.8rem !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 0.65rem !important;
+}
+
+.dietPage.dietCompactPage .dietQuickGrid label,
+.dietPage.dietCompactPage .dietAdvancedSection label,
+.dietPage.dietCompactPage .dietFullInput,
+.dietPage.dietCompactPage .dietFullText {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.35rem !important;
+  color: #ffad5a !important;
+  font-size: 0.8rem !important;
+  font-weight: 900 !important;
+}
+
+.dietPage.dietCompactPage .dietQuickGrid input,
+.dietPage.dietCompactPage .dietQuickGrid select,
+.dietPage.dietCompactPage .dietAdvancedSection input,
+.dietPage.dietCompactPage .dietAdvancedSection select,
+.dietPage.dietCompactPage .dietFullInput input,
+.dietPage.dietCompactPage .dietFullInput textarea,
+.dietPage.dietCompactPage .dietFullText textarea {
+  width: 100% !important;
+  min-height: 44px !important;
+  border: 1px solid rgba(255, 132, 0, 0.34) !important;
+  border-radius: 14px !important;
+  background: rgba(0, 0, 0, 0.68) !important;
+  color: #fff4e8 !important;
+  padding: 0.62rem 0.8rem !important;
+  font-size: 0.88rem !important;
+  outline: none !important;
+}
+
+.dietPage.dietCompactPage .dietQuickGrid input::placeholder,
+.dietPage.dietCompactPage .dietFullInput input::placeholder,
+.dietPage.dietCompactPage .dietFullInput textarea::placeholder,
+.dietPage.dietCompactPage .dietFullText textarea::placeholder {
+  color: rgba(255, 232, 212, 0.48) !important;
+}
+
+.dietPage.dietCompactPage .dietQuickGrid input:focus,
+.dietPage.dietCompactPage .dietQuickGrid select:focus,
+.dietPage.dietCompactPage .dietAdvancedSection input:focus,
+.dietPage.dietCompactPage .dietAdvancedSection select:focus,
+.dietPage.dietCompactPage .dietFullInput input:focus,
+.dietPage.dietCompactPage .dietFullInput textarea:focus,
+.dietPage.dietCompactPage .dietFullText textarea:focus {
+  border-color: rgba(255, 153, 51, 0.8) !important;
+  box-shadow: 0 0 0 3px rgba(255, 132, 0, 0.14) !important;
+}
+
+/* Advanced boxes */
+.dietPage.dietCompactPage .dietAdvancedSection {
+  margin-top: 0.65rem !important;
+  border: 1px solid rgba(255, 132, 0, 0.16) !important;
+  border-radius: 16px !important;
+  background: rgba(255, 132, 0, 0.055) !important;
+  padding: 0.7rem !important;
+}
+
+.dietPage.dietCompactPage .dietAdvancedSection summary {
+  cursor: pointer !important;
+  color: #ffad5a !important;
+  font-weight: 950 !important;
+  list-style: none !important;
+  font-size: 0.9rem !important;
+}
+
+.dietPage.dietCompactPage .dietAdvancedSection summary::after {
+  content: " +" !important;
+  float: right !important;
+}
+
+.dietPage.dietCompactPage .dietAdvancedSection[open] summary::after {
+  content: " -" !important;
+}
+
+.dietPage.dietCompactPage .dietFullInput,
+.dietPage.dietCompactPage .dietFullText {
+  margin-top: 0.75rem !important;
+}
+
+.dietPage.dietCompactPage .dietFullInput textarea,
+.dietPage.dietCompactPage .dietFullText textarea {
+  min-height: 82px !important;
+  resize: vertical !important;
+}
+
+/* Button */
+.dietPage.dietCompactPage .dietGenerateBtn {
+  width: 100% !important;
+  margin-top: 0.7rem !important;
+  border: none !important;
+  border-radius: 15px !important;
+  background: linear-gradient(135deg, #ffad5a, #ff7a18, #ff5f00) !important;
+  color: #1b0900 !important;
+  padding: 0.82rem 1rem !important;
+  font-weight: 950 !important;
+  cursor: pointer !important;
+  box-shadow: 0 18px 34px rgba(255, 106, 0, 0.28) !important;
+  transition: transform 0.2s ease, filter 0.2s ease !important;
+}
+
+.dietPage.dietCompactPage .dietGenerateBtn:hover {
+  transform: translateY(-1px) !important;
+  filter: brightness(1.05) !important;
+}
+
+.dietPage.dietCompactPage .dietGenerateBtn:disabled {
+  opacity: 0.68 !important;
+  cursor: not-allowed !important;
+}
+
+/* Result box inner scroll */
+.dietPage.dietCompactPage .dietCompactRight {
+  height: calc(100vh - 230px) !important;
+  max-height: 620px !important;
+  min-height: 430px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain !important;
+  padding-right: 0.95rem !important;
+}
+
+.dietPage.dietCompactPage .dietCompactRight::-webkit-scrollbar {
+  width: 7px !important;
+}
+
+.dietPage.dietCompactPage .dietCompactRight::-webkit-scrollbar-track {
+  background: rgba(255, 132, 0, 0.08) !important;
+  border-radius: 999px !important;
+}
+
+.dietPage.dietCompactPage .dietCompactRight::-webkit-scrollbar-thumb {
+  background: rgba(255, 132, 0, 0.55) !important;
+  border-radius: 999px !important;
+}
+
+.dietPage.dietCompactPage .dietCompactRight::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 132, 0, 0.8) !important;
+}
+
+/* Empty result */
+.dietPage.dietCompactPage .dietEmptyResult {
+  min-height: 300px !important;
+  display: grid !important;
+  place-items: center !important;
+  text-align: center !important;
+  align-content: center !important;
+}
+
+.dietPage.dietCompactPage .dietCircleIcon {
+  width: 56px !important;
+  height: 56px !important;
+  display: grid !important;
+  place-items: center !important;
+  margin: 0 auto 0.75rem !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(255, 132, 0, 0.18) !important;
+  background: rgba(255, 132, 0, 0.15) !important;
+  color: #ffad5a !important;
+  font-size: 1.6rem !important;
+  font-weight: 950 !important;
+}
+
+.dietPage.dietCompactPage .dietEmptyResult h2 {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 1.35rem !important;
+}
+
+.dietPage.dietCompactPage .dietEmptyResult p {
+  max-width: 390px !important;
+  margin: 0.7rem auto 0 !important;
+  color: rgba(255, 236, 218, 0.78) !important;
+  font-size: 0.84rem !important;
+  line-height: 1.45 !important;
+}
+
+.dietPage.dietCompactPage .dietEmptyList {
+  display: grid !important;
+  gap: 0.4rem !important;
+  margin-top: 0.75rem !important;
+  color: #ffad5a !important;
+  font-weight: 900 !important;
+  font-size: 0.8rem !important;
+}
+
+/* Result content */
+.dietPage.dietCompactPage .dietResultContent {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+}
+
+.dietPage.dietCompactPage .dietMatchText {
+  margin: 0 !important;
+  border: 1px solid rgba(255, 132, 0, 0.18) !important;
+  border-radius: 16px !important;
+  background: rgba(255, 132, 0, 0.08) !important;
+  color: rgba(255, 236, 218, 0.86) !important;
+  padding: 0.6rem 0.7rem !important;
+  font-size: 0.8rem !important;
+  font-weight: 850 !important;
+  line-height: 1.35 !important;
+}
+
+/* Result grids */
+.dietPage.dietCompactPage .dietSummaryGrid,
+.dietPage.dietCompactPage .dietMacroGrid {
+  display: grid !important;
+  gap: 0.5rem !important;
+}
+
+.dietPage.dietCompactPage .dietSummaryGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.dietPage.dietCompactPage .dietMacroGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.dietPage.dietCompactPage .dietSummaryGrid div,
+.dietPage.dietCompactPage .dietMacroGrid div {
+  border: 1px solid rgba(255, 132, 0, 0.16) !important;
+  border-radius: 14px !important;
+  background: rgba(255, 132, 0, 0.065) !important;
+  padding: 0.6rem !important;
+}
+
+.dietPage.dietCompactPage .dietSummaryGrid span,
+.dietPage.dietCompactPage .dietMacroGrid span {
+  display: block !important;
+  color: rgba(255, 225, 202, 0.72) !important;
+  font-size: 0.68rem !important;
+  font-weight: 850 !important;
+}
+
+.dietPage.dietCompactPage .dietSummaryGrid strong,
+.dietPage.dietCompactPage .dietMacroGrid strong {
+  display: block !important;
+  margin-top: 0.25rem !important;
+  color: #ffad5a !important;
+  font-size: 0.95rem !important;
+  font-weight: 950 !important;
+}
+
+.dietPage.dietCompactPage .dietSummaryGrid p {
+  margin: 0.25rem 0 0 !important;
+  color: rgba(255, 236, 218, 0.64) !important;
+  font-size: 0.68rem !important;
+}
+
+/* Macro + meal panels */
+.dietPage.dietCompactPage .dietMacroBox,
+.dietPage.dietCompactPage .dietMealPanel,
+.dietPage.dietCompactPage .dietResultDetails {
+  border: 1px solid rgba(255, 132, 0, 0.18) !important;
+  border-radius: 17px !important;
+  background: rgba(255, 132, 0, 0.055) !important;
+  padding: 0.7rem !important;
+}
+
+.dietPage.dietCompactPage .dietMacroBox h3,
+.dietPage.dietCompactPage .dietMealPanel h3 {
+  margin: 0 0 0.45rem !important;
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+}
+
+.dietPage.dietCompactPage .dietMacroBox p {
+  margin: 0.5rem 0 0 !important;
+  color: rgba(255, 236, 218, 0.72) !important;
+  font-size: 0.72rem !important;
+}
+
+/* Meal chart */
+.dietPage.dietCompactPage .dietMealList {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.55rem !important;
+}
+
+.dietPage.dietCompactPage .dietMealCard {
+  border: 1px solid rgba(255, 132, 0, 0.14) !important;
+  border-radius: 15px !important;
+  background: rgba(0, 0, 0, 0.58) !important;
+  padding: 0.65rem !important;
+}
+
+.dietPage.dietCompactPage .dietMealTop {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 0.45rem !important;
+  margin-bottom: 0.45rem !important;
+}
+
+.dietPage.dietCompactPage .dietMealTop h4,
+.dietPage.dietCompactPage .dietMealTop h3 {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 0.88rem !important;
+}
+
+.dietPage.dietCompactPage .dietMealTop p {
+  margin: 0.2rem 0 0 !important;
+  color: #ffbd7a !important;
+  font-size: 0.72rem !important;
+  font-weight: 900 !important;
+}
+
+.dietPage.dietCompactPage .dietMealTop span {
+  color: #ffad5a !important;
+  font-weight: 950 !important;
+  font-size: 0.68rem !important;
+  text-align: right !important;
+  line-height: 1.3 !important;
+}
+
+/* Food list + grams spacing */
+.dietPage.dietCompactPage .dietMealCard ul,
+.dietPage.dietCompactPage .dietFoodsList {
+  margin: 0 !important;
+  padding-left: 0 !important;
+  list-style: none !important;
+  display: grid !important;
+  gap: 0.35rem !important;
+}
+
+.dietPage.dietCompactPage .dietMealCard li {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 64px !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  border-radius: 12px !important;
+  background: rgba(255, 132, 0, 0.06) !important;
+  padding: 0.45rem 0.55rem !important;
+  color: rgba(255, 236, 218, 0.86) !important;
+  font-size: 0.76rem !important;
+  line-height: 1.25 !important;
+}
+
+.dietPage.dietCompactPage .dietMealCard li strong {
+  justify-self: end !important;
+  width: 58px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 132, 0, 0.14) !important;
+  color: #ffad5a !important;
+  text-align: center !important;
+  padding: 0.2rem 0.35rem !important;
+  font-size: 0.72rem !important;
+}
+
+.dietPage.dietCompactPage .dietMealCard > p {
+  margin: 0.45rem 0 0 !important;
+  color: rgba(255, 236, 218, 0.72) !important;
+  font-size: 0.72rem !important;
+  line-height: 1.3 !important;
+}
+
+/* Recommendations */
+.dietPage.dietCompactPage .dietRecommendationList {
+  margin: 0.55rem 0 0 !important;
+  padding-left: 1.1rem !important;
+}
+
+.dietPage.dietCompactPage .dietRecommendationList li {
+  margin-bottom: 0.25rem !important;
+  color: rgba(255, 236, 218, 0.86) !important;
+  font-size: 0.74rem !important;
+  line-height: 1.3 !important;
+}
+
+.dietPage.dietCompactPage .dietFriendlyNote {
+  margin: 0 !important;
+  color: rgba(255, 236, 218, 0.68) !important;
+  font-size: 0.72rem !important;
+  line-height: 1.3 !important;
+}
+
+/* Error */
+.dietPage.dietCompactPage .errorMessage {
+  margin-top: 0.8rem !important;
+  color: #ffbd7a !important;
+  background: rgba(255, 95, 0, 0.12) !important;
+  border: 1px solid rgba(255, 132, 0, 0.22) !important;
+  border-radius: 14px !important;
+  padding: 0.75rem !important;
+  font-size: 0.84rem !important;
+  font-weight: 800 !important;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .dietPage.dietCompactPage .dietHeroWrap {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dietPage.dietCompactPage .dietHeroHighlights {
+    max-width: 680px !important;
+  }
+
+  .dietPage.dietCompactPage .dietProfileGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .dietPage.dietCompactPage .dietQuickGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 1080px) {
+  .dietPage.dietCompactPage .dietCompactGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dietPage.dietCompactPage .dietProfileCard,
+  .dietPage.dietCompactPage .dietQuickForm,
+  .dietPage.dietCompactPage .dietCompactRight {
+    grid-column: 1 / -1 !important;
+  }
+
+  .dietPage.dietCompactPage .dietCompactRight {
+    height: auto !important;
+    max-height: none !important;
+    min-height: auto !important;
+    overflow-y: visible !important;
+    padding-right: 1rem !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .dietPage.dietCompactPage .dietHeroHighlights,
+  .dietPage.dietCompactPage .dietProfileGrid,
+  .dietPage.dietCompactPage .dietQuickGrid,
+  .dietPage.dietCompactPage .dietSummaryGrid,
+  .dietPage.dietCompactPage .dietMacroGrid,
+  .dietPage.dietCompactPage .dietMealList {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dietPage.dietCompactPage .dietCardTop,
+  .dietPage.dietCompactPage .dietMealTop {
+    flex-direction: column !important;
+  }
+
+  .dietPage.dietCompactPage .dietMealTop span {
+    text-align: left !important;
+  }
+}
+/* =========================================================
+   FitLife Progress Report Page - Final Fixed CSS
+========================================================= */
+
+.progressReportPage {
+  min-height: 100vh;
+  padding: 120px 24px 64px;
+  color: #ffffff;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.94) 0%,
+      rgba(0, 0, 0, 0.84) 45%,
+      rgba(0, 0, 0, 0.58) 100%
+    ),
+    url("/images/fitness-bg.jpg") center / cover fixed no-repeat;
+}
+
+.progressReportShell {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+}
+
+.progressHero {
+  padding: 34px;
+  border: 1px solid rgba(255, 132, 0, 0.28);
+  border-radius: 34px;
+  background: rgba(8, 8, 8, 0.86);
+  box-shadow: 0 28px 75px rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(16px);
+}
+
+.progressErrorHero {
+  border-color: rgba(255, 82, 82, 0.35);
+}
+
+.progressBadge {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  padding: 9px 18px;
+  border: 1px solid rgba(255, 132, 0, 0.42);
+  border-radius: 999px;
+  background: rgba(255, 132, 0, 0.12);
+  color: #ffad5a;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.progressErrorBadge {
+  border-color: rgba(255, 82, 82, 0.45);
+  background: rgba(255, 82, 82, 0.12);
+  color: #ff8080;
+}
+
+.progressHeroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 34px;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.progressTitle {
+  margin: 24px 0 0;
+  max-width: 900px;
+  color: #ffffff;
+  font-size: clamp(38px, 5.2vw, 66px);
+  line-height: 1.05;
+  font-weight: 1000;
+  letter-spacing: -1.7px;
+}
+
+.progressHeroGrid .progressTitle {
+  margin-top: 0;
+}
+
+.progressTitle span {
+  color: #ff9a2f;
+}
+
+.progressHeroText {
+  max-width: 860px;
+  margin: 18px 0 0;
+  color: rgba(255, 238, 222, 0.8);
+  font-size: 17px;
+  line-height: 1.75;
+  font-weight: 600;
+}
+
+.progressTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.progressTag {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 9px 15px;
+  border: 1px solid rgba(255, 132, 0, 0.34);
+  border-radius: 999px;
+  background: rgba(255, 132, 0, 0.12);
+  color: #ffd0a0;
+  font-size: 13px;
+  font-weight: 900;
+  word-break: break-word;
+}
+
+.progressActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.progressPrimaryButton,
+.progressSecondaryButton {
+  appearance: none;
+  border-radius: 999px;
+  padding: 13px 22px;
+  font-size: 14px;
+  font-weight: 1000;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.progressPrimaryButton:hover,
+.progressSecondaryButton:hover {
+  transform: translateY(-2px);
+}
+
+.progressPrimaryButton {
+  border: 0;
+  background: linear-gradient(135deg, #ffb45f, #ff6900);
+  color: #080808;
+  box-shadow: 0 14px 30px rgba(255, 105, 0, 0.26);
+}
+
+.progressPrimaryButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.progressSecondaryButton {
+  border: 1px solid rgba(255, 132, 0, 0.42);
+  background: rgba(0, 0, 0, 0.58);
+  color: #ffbd7a;
+}
+
+.progressOverallCard {
+  padding: 28px;
+  border: 1px solid rgba(255, 132, 0, 0.34);
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.72);
+  text-align: center;
+}
+
+.progressOverallCard p {
+  margin: 0;
+  color: #ffad5a;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.progressOverallCard h2 {
+  margin: 14px 0 0;
+  color: #ffffff;
+  font-size: 68px;
+  line-height: 1;
+  font-weight: 1000;
+}
+
+.progressOverallCard span {
+  display: block;
+  margin-top: 14px;
+  color: rgba(255, 238, 222, 0.66);
+  font-size: 13px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.progressMetricGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.progressReportCard {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid rgba(255, 132, 0, 0.26);
+  border-radius: 28px;
+  background: rgba(10, 10, 10, 0.88);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(12px);
+}
+
+.progressReportCard p {
+  margin: 0;
+  color: #ffad5a;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.progressReportCard h3 {
+  margin: 12px 0 0;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1.15;
+  font-weight: 1000;
+  word-break: break-word;
+}
+
+.progressReportCard span {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255, 238, 222, 0.62);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.progressMainGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.progressLeftColumn,
+.progressAside {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.progressPanel {
+  padding: 28px;
+  border: 1px solid rgba(255, 132, 0, 0.26);
+  border-radius: 32px;
+  background: rgba(10, 10, 10, 0.88);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(14px);
+}
+
+.progressPanel h2 {
+  margin: 0 0 22px;
+  color: #ffffff;
+  font-size: 25px;
+  line-height: 1.2;
+  font-weight: 1000;
+}
+
+.progressInfoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.progressInfoBox {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid rgba(255, 132, 0, 0.2);
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.64);
+}
+
+.progressInfoBox p {
+  margin: 0;
+  color: #ffad5a;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.progressInfoBox h3 {
+  margin: 8px 0 0;
+  color: #ffffff;
+  font-size: 19px;
+  line-height: 1.3;
+  font-weight: 1000;
+  word-break: break-word;
+}
+
+.progressGoalCard,
+.progressNextGoalCard {
+  margin-top: 22px;
+  padding: 20px;
+  border: 1px solid rgba(255, 132, 0, 0.25);
+  border-radius: 24px;
+  background: rgba(255, 132, 0, 0.1);
+}
+
+.progressGoalTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.progressGoalTop span,
+.progressNextGoalCard p {
+  margin: 0;
+  color: #ffad5a;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.progressGoalTop strong {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 1000;
+}
+
+.progressGoalTrack {
+  height: 12px;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.progressGoalFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffb45f, #ff6900);
+}
+
+.progressNextGoalCard h3 {
+  margin: 10px 0 0;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 1000;
+}
+
+.progressNextGoalCard span {
+  display: block;
+  margin-top: 14px;
+  color: rgba(255, 238, 222, 0.72);
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 700;
+}
+
+.progressSleepDayGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.progressSleepDayCard {
+  padding: 16px;
+  border: 1px solid rgba(255, 132, 0, 0.2);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.progressSleepDayCard p {
+  margin: 0;
+  color: #ffad5a;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.progressSleepDayCard h3 {
+  margin: 8px 0 0;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 1000;
+}
+
+.progressSleepDayCard span {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255, 238, 222, 0.62);
+  font-size: 12px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.progressEmptyText {
+  margin: 0;
+  padding: 18px;
+  border: 1px solid rgba(255, 132, 0, 0.2);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.62);
+  color: rgba(255, 238, 222, 0.82);
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.progressRecommendationList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.progressRecommendationList li {
+  padding: 15px;
+  border: 1px solid rgba(255, 132, 0, 0.2);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.62);
+  color: rgba(255, 238, 222, 0.84);
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 700;
+}
+
+.progressRecommendationList li + li {
+  margin-top: 14px;
+}
+
+.progressStatusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 132, 0, 0.18);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.progressStatusRow + .progressStatusRow {
+  margin-top: 12px;
+}
+
+.progressStatusRow span {
+  color: rgba(255, 238, 222, 0.78);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.progressStatusRow strong {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 132, 0, 0.13);
+  color: #ffbd7a;
+  font-size: 12px;
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
+.progressReportPage p,
+.progressReportPage span,
+.progressReportPage li,
+.progressReportPage h2,
+.progressReportPage h3 {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 1180px) {
+  .progressHeroGrid,
+  .progressMainGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .progressMetricGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .progressReportPage {
+    padding: 100px 16px 46px;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.94) 0%,
+        rgba(0, 0, 0, 0.84) 100%
+      ),
+      url("/images/fitness-bg.jpg") center / cover fixed no-repeat;
+  }
+
+  .progressHero,
+  .progressPanel {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .progressTitle {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+
+  .progressMetricGrid,
+  .progressInfoGrid,
+  .progressSleepDayGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .progressOverallCard h2 {
+    font-size: 50px;
+  }
+
+  .progressActions {
+    flex-direction: column;
+  }
+
+  .progressPrimaryButton,
+  .progressSecondaryButton {
+    width: 100%;
+  }
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
   nav,
   header,
-  footer {
+  footer,
+  .no-print,
+  button {
     display: none !important;
   }
 
-  main {
-    background: white !important;
-    color: black !important;
+  .progressReportPage {
     padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
   }
 
-  section,
-  div {
+  .progressReportShell {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .progressReportPage * {
+    color: #000000 !important;
+    text-shadow: none !important;
     box-shadow: none !important;
+    backdrop-filter: none !important;
   }
 
-  .text-white,
-  .text-slate-300,
-  .text-slate-400,
-  .text-orange-300,
-  .text-orange-400 {
-    color: black !important;
-  }
-
-  .bg-black,
-  .bg-\[\#111111\],
-  .bg-orange-500\/10 {
-    background: white !important;
-  }
-
-  .border-orange-500\/30,
-  .border-orange-500\/20 {
+  .progressHero,
+  .progressReportCard,
+  .progressPanel,
+  .progressInfoBox,
+  .progressGoalCard,
+  .progressNextGoalCard,
+  .progressSleepDayCard,
+  .progressStatusRow,
+  .progressRecommendationList li {
+    background: #ffffff !important;
     border-color: #cccccc !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .progressTitle {
+    font-size: 30px !important;
+    line-height: 1.2 !important;
+  }
+
+  .progressPanel h2 {
+    font-size: 21px !important;
+  }
+
+  .progressReportPage h3,
+  .progressReportPage p,
+  .progressReportPage span,
+  .progressReportPage li {
+    font-size: 12px !important;
+  }
+
+  .progressHeroGrid,
+  .progressMainGrid,
+  .progressMetricGrid,
+  .progressInfoGrid,
+  .progressSleepDayGrid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 14mm;
   }
 }
+
 /* ================================
    Navbar Modules Dropdown
 ================================ */
@@ -846,8 +2184,6 @@ button {
 }
 /* ================================
    Attractive Public Pages
-   Features + About
-   Black + Orange Theme
 ================================ */
 
 .publicPage {
@@ -1236,99 +2572,276 @@ button {
   }
 }
 /* ================================
-  Health Risk page 
+   Health Risk Page
 ================================ */
 
-.healthRiskCompactPage {
-  min-height: 100vh;
-  background: transparent;
-  color: #f8fafc;
+
+/* Profile summary: 5 items in one row */
+.healthRiskProfileFull .profileMiniGrid,
+.profileMiniGrid.healthRiskProfileSingleLine {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 0.65rem !important;
 }
 
+.healthRiskProfileFull .profileMiniGrid div,
+.profileMiniGrid.healthRiskProfileSingleLine div {
+  min-height: 70px !important;
+  padding: 0.7rem 0.9rem !important;
+  border-radius: 15px !important;
+}
+
+.healthRiskProfileFull .profileMiniGrid span,
+.profileMiniGrid.healthRiskProfileSingleLine span {
+  font-size: 0.72rem !important;
+}
+
+.healthRiskProfileFull .profileMiniGrid strong,
+.profileMiniGrid.healthRiskProfileSingleLine strong {
+  font-size: 0.98rem !important;
+}
+
+/* Reduce profile card empty space */
+.healthRiskProfileFull {
+  padding: 1rem 1.15rem !important;
+}
+
+.healthRiskProfileFull .profileLoadedTop {
+  margin-bottom: 0 !important;
+}
+
+.healthRiskProfileFull .profileStatusText {
+  margin: 0.45rem 0 0 !important;
+}
+
+/* Required inputs: 4 items in one line */
+.healthRiskQuickForm .quickInputGrid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 0.7rem !important;
+}
+
+.healthRiskQuickForm .quickInputGrid label {
+  gap: 0.3rem !important;
+  font-size: 0.8rem !important;
+}
+
+.healthRiskQuickForm .quickInputGrid input,
+.healthRiskQuickForm .quickInputGrid select {
+  min-height: 44px !important;
+  padding: 0.62rem 0.8rem !important;
+  border-radius: 14px !important;
+  font-size: 0.88rem !important;
+}
+
+/* Reduce form card space */
+.healthRiskQuickForm {
+  padding: 1rem 1.15rem !important;
+}
+
+.healthRiskQuickForm .quickFormHeader {
+  margin-bottom: 0.65rem !important;
+}
+
+.healthRiskQuickForm .quickFormHeader h2 {
+  font-size: 1.45rem !important;
+  margin-top: 0.45rem !important;
+}
+
+.healthRiskQuickForm .healthHelperNote {
+  margin-top: 0.7rem !important;
+  padding: 0.65rem 0.8rem !important;
+  font-size: 0.8rem !important;
+}
+
+.healthRiskQuickForm .predictMainBtn {
+  margin-top: 0.7rem !important;
+  min-height: 48px !important;
+  padding: 0.75rem 1rem !important;
+}
+
+/* Make form + result align neatly */
+.healthRiskWorkGrid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.75fr) !important;
+  gap: 1rem !important;
+  align-items: start !important;
+}
+
+.healthRiskRightPanel {
+  min-height: 335px !important;
+  padding: 1rem 1.15rem !important;
+}
+
+.healthEmptyResult {
+  min-height: 285px !important;
+}
+
+/* Orange only */
+.healthRiskCompactPage .miniLabel,
+.healthRiskCompactPage .healthRiskBadge,
+.healthRiskCompactPage .pageBadge {
+  border: 1px solid rgba(255, 132, 0, 0.35) !important;
+  background: rgba(255, 132, 0, 0.15) !important;
+  color: #ffad5a !important;
+}
+
+.healthRiskCompactPage .healthCircleIcon,
+.healthRiskCompactPage .healthEmptyList,
+.healthRiskCompactPage .healthRecommendationBox h3,
+.healthRiskCompactPage .healthResultStats strong {
+  color: #ffad5a !important;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .healthRiskProfileFull .profileMiniGrid,
+  .profileMiniGrid.healthRiskProfileSingleLine {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .healthRiskQuickForm .quickInputGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .healthRiskWorkGrid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .healthRiskProfileFull .profileMiniGrid,
+  .profileMiniGrid.healthRiskProfileSingleLine,
+  .healthRiskQuickForm .quickInputGrid {
+    grid-template-columns: 1fr !important;
+  }
+}
+.healthRiskCompactPage {
+  min-height: 100vh;
+  color: #f8fafc;
+  padding-bottom: 2.5rem;
+}
+
+/* Hero */
 .healthRiskCompactHero {
-  padding: 1.6rem 0 1rem;
+  padding: 0.8rem 0 0.45rem;
+  background: transparent;
 }
 
 .healthRiskHeroWrap {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 430px;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.4rem;
+  gap: 1.1rem;
 }
 
 .healthRiskHeroWrap h1 {
-  margin: 0.55rem 0;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.05;
+  max-width: 680px;
+  margin: 0.55rem 0 0.45rem;
   color: #ffffff;
-  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+  font-size: clamp(2rem, 3.4vw, 3.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.42);
 }
 
 .healthRiskHeroWrap p {
   max-width: 720px;
-  color: rgba(255, 255, 255, 0.82);
-  line-height: 1.6;
   margin: 0;
+  color: rgba(255, 238, 222, 0.84);
+  font-size: 0.95rem;
+  line-height: 1.55;
 }
 
+/* Orange badges */
+.healthRiskBadge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 132, 0, 0.35);
+  background: rgba(255, 132, 0, 0.15);
+  color: #ffad5a;
+  padding: 0.42rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
+/* Hero cards */
 .healthHeroHighlights {
   display: grid;
-  grid-template-columns: repeat(3, minmax(90px, 1fr));
-  gap: 0.7rem;
-  min-width: 360px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  min-width: 0;
 }
 
 .healthHeroHighlights div {
-  border: 1px solid rgba(255, 166, 0, 0.18);
-  border-radius: 20px;
-  padding: 0.85rem;
-  background: rgba(12, 12, 12, 0.46);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+  min-height: 88px;
+  border: 1px solid rgba(255, 132, 0, 0.18);
+  border-radius: 18px;
+  background: rgba(8, 8, 8, 0.78);
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
 }
 
 .healthHeroHighlights strong {
   display: block;
-  color: #ff9f43;
-  font-size: 0.95rem;
+  color: #ffad5a;
+  font-size: 1rem;
+  font-weight: 950;
 }
 
 .healthHeroHighlights span {
   display: block;
   margin-top: 0.25rem;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 0.78rem;
+  color: rgba(255, 225, 202, 0.72);
+  font-size: 0.74rem;
+  font-weight: 850;
 }
 
+/* Main section */
 .healthRiskCompactSection {
-  padding: 1rem 0 2rem;
+  padding: 0.45rem 0 1.5rem;
 }
 
-.healthRiskCompactGrid {
+.healthRiskDashboard {
   display: grid;
-  grid-template-columns: 1.03fr 0.97fr;
-  gap: 1.1rem;
-  align-items: stretch;
-}
-
-.healthRiskLeftPanel,
-.healthRiskRightPanel {
-  display: flex;
-  flex-direction: column;
   gap: 1rem;
 }
 
+.healthRiskWorkGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(380px, 0.86fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+/* Cards */
 .profileLoadedCard,
 .healthRiskQuickForm,
 .healthRiskRightPanel {
-  border: 1px solid rgba(255, 166, 0, 0.14);
-  border-radius: 28px;
-  background: rgba(12, 12, 12, 0.48);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
-  padding: 1.1rem;
+  border: 1px solid rgba(255, 132, 0, 0.2);
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 132, 0, 0.075),
+      rgba(255, 106, 0, 0.035)
+    ),
+    rgba(8, 8, 8, 0.82);
+  padding: 1.2rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.3);
+}
+
+.healthRiskProfileFull {
+  width: 100%;
 }
 
 .profileLoadedTop,
@@ -1339,164 +2852,154 @@ button {
   gap: 1rem;
 }
 
-.miniLabel {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  background: rgba(20, 184, 166, 0.18);
-  color: #7ef0df;
-  padding: 0.3rem 0.7rem;
-  font-size: 0.75rem;
-  font-weight: 800;
-}
-
 .profileLoadedTop h2,
 .quickFormHeader h2,
 .healthRiskRightPanel h2 {
   margin: 0.55rem 0 0;
   color: #ffffff;
-  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  font-size: 1.55rem;
+  line-height: 1.12;
+  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 .textActionBtn {
-  border: 1px solid rgba(255, 159, 67, 0.28);
+  border: 1px solid rgba(255, 132, 0, 0.28);
   border-radius: 999px;
-  background: rgba(255, 159, 67, 0.14);
-  color: #ffb56b;
-  padding: 0.55rem 0.9rem;
-  font-weight: 800;
+  background: rgba(255, 132, 0, 0.14);
+  color: #ffad5a;
+  padding: 0.52rem 0.85rem;
+  font-weight: 900;
   cursor: pointer;
   transition: 0.25s ease;
 }
 
 .textActionBtn:hover {
-  background: rgba(255, 159, 67, 0.25);
+  background: rgba(255, 132, 0, 0.23);
   transform: translateY(-1px);
 }
 
 .profileStatusText {
-  margin: 0.75rem 0 0;
-  color: #8cf7e8;
-  font-weight: 700;
-  font-size: 0.88rem;
+  margin: 0.65rem 0 0;
+  color: #ffbd7a;
+  font-weight: 850;
+  font-size: 0.86rem;
 }
 
-.profileMiniGrid {
-  margin-top: 0.9rem;
+/* Profile summary one-line row */
+.profileMiniGrid.healthRiskProfileSingleLine {
+  margin-top: 0.8rem;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.65rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.6rem;
 }
 
-.profileMiniGrid div {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+.profileMiniGrid.healthRiskProfileSingleLine div {
+  border: 1px solid rgba(255, 132, 0, 0.16);
+  border-radius: 16px;
+  background: rgba(255, 132, 0, 0.065);
   padding: 0.75rem;
+  min-height: 76px;
 }
 
-.profileMiniGrid span {
+.profileMiniGrid.healthRiskProfileSingleLine span {
   display: block;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 0.76rem;
-  font-weight: 700;
+  color: rgba(255, 225, 202, 0.72);
+  font-size: 0.74rem;
+  font-weight: 850;
 }
 
-.profileMiniGrid strong {
+.profileMiniGrid.healthRiskProfileSingleLine strong {
   display: block;
   margin-top: 0.25rem;
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 0.96rem;
+  font-weight: 950;
 }
 
-.wideProfileItem {
-  grid-column: span 2;
-}
-
+/* Form table style */
 .quickInputGrid {
-  margin-top: 0.9rem;
+  margin-top: 0.8rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
+  gap: 0.75rem 0.9rem;
 }
 
 .quickInputGrid label {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  color: #ff9f43;
+  color: #ffad5a;
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .quickInputGrid input,
 .quickInputGrid select {
   width: 100%;
-  border: 1px solid rgba(255, 166, 0, 0.18);
-  border-radius: 16px;
-  background: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-  padding: 0.82rem 0.85rem;
-  font-size: 0.95rem;
+  min-height: 48px;
+  border: 1px solid rgba(255, 132, 0, 0.34);
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.68);
+  color: #fff4e8;
+  padding: 0.72rem 0.85rem;
+  font-size: 0.9rem;
   outline: none;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
 .quickInputGrid input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 232, 212, 0.48);
 }
 
 .quickInputGrid input:focus,
 .quickInputGrid select:focus {
-  border-color: rgba(20, 184, 166, 0.75);
-  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.14);
+  border-color: rgba(255, 153, 51, 0.8);
+  box-shadow: 0 0 0 3px rgba(255, 132, 0, 0.14);
 }
 
-.healthHelperNote {
-  margin: 0.85rem 0 0;
+.healthHelperNote,
+.healthFriendlyNote {
+  margin: 0.75rem 0 0;
+  border: 1px solid rgba(255, 132, 0, 0.18);
   border-radius: 16px;
-  background: rgba(59, 130, 246, 0.12);
-  color: #d7e9ff;
+  background: rgba(255, 132, 0, 0.08);
+  color: rgba(255, 236, 218, 0.86);
   padding: 0.75rem;
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.5;
-  border: 1px solid rgba(96, 165, 250, 0.16);
 }
 
 .predictMainBtn {
   width: 100%;
-  margin-top: 0.9rem;
+  margin-top: 0.85rem;
   border: none;
-  border-radius: 17px;
-  background: linear-gradient(135deg, #ff7a18, #ff9f43);
-  color: #ffffff;
-  padding: 0.92rem 1rem;
-  font-weight: 900;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #ffad5a, #ff7a18, #ff5f00);
+  color: #1b0900;
+  padding: 0.9rem 1rem;
+  font-weight: 950;
   cursor: pointer;
-  box-shadow: 0 16px 35px rgba(255, 122, 24, 0.28);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 18px 34px rgba(255, 106, 0, 0.28);
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .predictMainBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 18px 38px rgba(255, 122, 24, 0.34);
+  filter: brightness(1.05);
 }
 
 .predictMainBtn:disabled {
-  opacity: 0.7;
+  opacity: 0.68;
   cursor: not-allowed;
 }
 
+/* Result panel */
 .healthRiskRightPanel {
-  min-height: 520px;
+  min-height: 410px;
 }
 
 .healthEmptyResult {
-  min-height: 100%;
+  min-height: 345px;
   display: grid;
   place-items: center;
   text-align: center;
@@ -1504,99 +3007,101 @@ button {
 }
 
 .healthCircleIcon {
-  width: 68px;
-  height: 68px;
+  width: 58px;
+  height: 58px;
   display: grid;
   place-items: center;
-  margin: 0 auto 1rem;
-  border-radius: 24px;
-  background: rgba(20, 184, 166, 0.18);
-  color: #7ef0df;
-  font-size: 2rem;
-  font-weight: 900;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  margin: 0 auto 0.85rem;
+  border-radius: 18px;
+  background: rgba(255, 132, 0, 0.15);
+  color: #ffad5a;
+  font-size: 1.7rem;
+  font-weight: 950;
 }
 
 .healthEmptyResult h2 {
   margin: 0;
   color: #ffffff;
+  font-size: 1.55rem;
 }
 
 .healthEmptyResult p {
   max-width: 420px;
   margin: 0.7rem auto 0;
-  color: rgba(255, 255, 255, 0.76);
-  line-height: 1.55;
+  color: rgba(255, 236, 218, 0.76);
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .healthEmptyList {
   display: grid;
-  gap: 0.55rem;
-  margin-top: 1rem;
-  color: #7ef0df;
-  font-weight: 800;
-  font-size: 0.9rem;
+  gap: 0.45rem;
+  margin-top: 0.9rem;
+  color: #ffad5a;
+  font-size: 0.88rem;
+  font-weight: 900;
 }
 
+/* Result content */
 .healthResultContent {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.8rem;
 }
 
 .healthResultContent h2 {
   margin: 0;
   color: #ffffff;
+  font-size: 1.55rem;
 }
 
 .healthResultMessage {
   margin: 0;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.55;
+  color: rgba(255, 236, 218, 0.8);
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .healthResultStats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.7rem;
+  gap: 0.65rem;
 }
 
 .healthResultStats div {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 0.8rem;
+  border: 1px solid rgba(255, 132, 0, 0.16);
+  border-radius: 16px;
+  background: rgba(255, 132, 0, 0.065);
+  padding: 0.75rem;
 }
 
 .healthResultStats strong {
   display: block;
-  color: #7ef0df;
+  color: #ffad5a;
   font-size: 0.98rem;
+  font-weight: 950;
 }
 
 .healthResultStats span {
   display: block;
   margin-top: 0.25rem;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 0.76rem;
-  font-weight: 700;
+  color: rgba(255, 225, 202, 0.72);
+  font-size: 0.74rem;
+  font-weight: 850;
 }
 
+/* Recommendations */
 .healthRecommendationBox {
-  border: 1px solid rgba(20, 184, 166, 0.22);
-  border-radius: 22px;
-  background: rgba(20, 184, 166, 0.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 0.95rem;
+  border: 1px solid rgba(255, 132, 0, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 132, 0, 0.07);
+  padding: 0.85rem;
 }
 
 .healthRecommendationBox h3 {
   margin: 0 0 0.55rem;
-  color: #7ef0df;
+  color: #ffad5a;
+  font-size: 1rem;
 }
 
 .healthRecommendationBox ul {
@@ -1605,24 +3110,24 @@ button {
 }
 
 .healthRecommendationBox li {
-  margin-bottom: 0.38rem;
-  color: rgba(255, 255, 255, 0.84);
-  line-height: 1.45;
+  margin-bottom: 0.35rem;
+  color: rgba(255, 236, 218, 0.84);
+  font-size: 0.86rem;
+  line-height: 1.4;
 }
 
+/* Input summary */
 .healthInputDetails {
-  border: 1px solid rgba(96, 165, 250, 0.16);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 0.85rem;
+  border: 1px solid rgba(255, 132, 0, 0.16);
+  border-radius: 16px;
+  background: rgba(255, 132, 0, 0.05);
+  padding: 0.8rem;
 }
 
 .healthInputDetails summary {
   cursor: pointer;
-  color: #8cf7e8;
-  font-weight: 900;
+  color: #ffad5a;
+  font-weight: 950;
   list-style: none;
 }
 
@@ -1636,7 +3141,7 @@ button {
 }
 
 .healthInputSummary {
-  margin-top: 0.8rem;
+  margin-top: 0.75rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.5rem;
@@ -1645,92 +3150,82 @@ button {
 .healthInputSummary p {
   margin: 0;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 132, 0, 0.06);
   padding: 0.55rem 0.7rem;
-  color: rgba(255, 255, 255, 0.84);
+  color: rgba(255, 236, 218, 0.84);
   font-size: 0.84rem;
-}
-
-.healthFriendlyNote {
-  margin: 0;
-  border-radius: 16px;
-  background: rgba(59, 130, 246, 0.12);
-  color: #d7e9ff;
-  padding: 0.75rem;
-  font-size: 0.82rem;
-  font-weight: 800;
-  line-height: 1.5;
-  border: 1px solid rgba(96, 165, 250, 0.16);
 }
 
 .healthDisclaimer {
   margin: 0;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 236, 218, 0.62);
   font-size: 0.78rem;
   line-height: 1.45;
 }
 
+/* Orange-only risk badges */
 .riskBadge {
   width: fit-content;
   border-radius: 999px;
   padding: 0.42rem 0.85rem;
-  font-weight: 900;
   font-size: 0.82rem;
+  font-weight: 950;
+  border: 1px solid rgba(255, 132, 0, 0.35);
 }
 
 .riskLow {
-  background: rgba(34, 197, 94, 0.16);
-  color: #86efac;
+  background: rgba(255, 132, 0, 0.12);
+  color: #ffbd7a;
 }
 
 .riskMedium {
-  background: rgba(251, 191, 36, 0.16);
-  color: #fcd34d;
+  background: rgba(255, 132, 0, 0.2);
+  color: #ffad5a;
 }
 
 .riskHigh {
-  background: rgba(239, 68, 68, 0.16);
-  color: #fca5a5;
+  background: rgba(255, 95, 0, 0.26);
+  color: #ff8a3d;
 }
 
+/* Error — orange only */
 .errorText {
   margin-top: 0.75rem;
-  color: #fecaca;
-  background: rgba(127, 29, 29, 0.25);
-  border: 1px solid rgba(248, 113, 113, 0.18);
+  color: #ffbd7a;
+  background: rgba(255, 95, 0, 0.12);
+  border: 1px solid rgba(255, 132, 0, 0.22);
   border-radius: 14px;
   padding: 0.75rem;
   font-size: 0.84rem;
-  font-weight: 700;
+  font-weight: 800;
 }
 
-@media (max-width: 1080px) {
+/* Responsive */
+@media (max-width: 1200px) {
   .healthRiskHeroWrap {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr;
   }
 
   .healthHeroHighlights {
-    width: 100%;
-    min-width: 0;
+    max-width: 680px;
   }
 
-  .healthRiskCompactGrid {
+  .healthRiskWorkGrid {
     grid-template-columns: 1fr;
+  }
+
+  .profileMiniGrid.healthRiskProfileSingleLine {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 720px) {
   .healthHeroHighlights,
-  .profileMiniGrid,
+  .profileMiniGrid.healthRiskProfileSingleLine,
   .quickInputGrid,
   .healthResultStats,
   .healthInputSummary {
     grid-template-columns: 1fr;
-  }
-
-  .wideProfileItem {
-    grid-column: span 1;
   }
 
   .profileLoadedTop,
@@ -1740,6 +3235,10 @@ button {
 
   .healthRiskRightPanel {
     min-height: auto;
+  }
+
+  .healthRiskHeroWrap h1 {
+    font-size: 2.2rem;
   }
 }
 /* ================================
@@ -2224,8 +3723,6 @@ button {
 }
 /* ================================
    Diet Recommendation Page
-   Final Clean Dark Glass UI
-   With Proper Meal Gram Spacing
    ================================ */
 
 .dietPage.dietCompactPage {
@@ -2782,745 +4279,1400 @@ button {
     width: 58px;
   }
 }
-
-
 /* ================================
-   Mental Wellness Page
+   Nutrition Log Page
+   Orange Only Compact Alignment
+================================ */
+/* ================================
+   Nutrition Result Box Inner Scroll Fix
+   Right box scroll only
 ================================ */
 
-.wellnessPage {
-  background: #f8fafc;
-  min-height: 100vh;
+.nutritionCompactRight {
+  height: calc(100vh - 230px) !important;
+  max-height: 620px !important;
+  min-height: 430px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain !important;
+  padding-right: 0.95rem !important;
 }
 
-.wellnessHero {
-  padding: 70px 0 46px;
-  background:
-    radial-gradient(circle at 8% 12%, rgba(20, 184, 166, 0.16), transparent 28%),
-    radial-gradient(circle at 90% 10%, rgba(15, 118, 110, 0.12), transparent 30%),
-    linear-gradient(135deg, #f0fdfa 0%, #ffffff 52%, #f8fafc 100%);
+/* Result content should stay inside right box */
+.nutritionResultContent {
+  max-height: none !important;
+  overflow: visible !important;
 }
 
-.wellnessHero h1 {
-  margin: 20px 0 0;
-  max-width: 820px;
-  font-size: clamp(38px, 5vw, 64px);
-  line-height: 1.05;
-  letter-spacing: -0.06em;
-  color: #0f172a;
-  font-weight: 950;
+/* Meal chart should not force full page scroll */
+.nutritionMealPanel {
+  max-height: none !important;
+  overflow: visible !important;
 }
 
-.wellnessHero p {
-  margin: 20px 0 0;
-  max-width: 760px;
-  color: #64748b;
-  font-size: 17px;
-  line-height: 1.8;
+/* Clean scrollbar inside nutrition result box */
+.nutritionCompactRight::-webkit-scrollbar {
+  width: 7px !important;
 }
 
-.wellnessSection {
-  padding: 54px 0 50px;
+.nutritionCompactRight::-webkit-scrollbar-track {
+  background: rgba(255, 132, 0, 0.08) !important;
+  border-radius: 999px !important;
 }
 
-.wellnessGrid {
-  display: grid;
-  grid-template-columns: 1fr 0.75fr;
-  gap: 30px;
-  align-items: stretch;
+.nutritionCompactRight::-webkit-scrollbar-thumb {
+  background: rgba(255, 132, 0, 0.55) !important;
+  border-radius: 999px !important;
 }
 
-.wellnessFormCard,
-.wellnessSuggestionCard {
-  border-radius: 32px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
-  padding: 34px;
+.nutritionCompactRight::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 132, 0, 0.8) !important;
 }
 
-.wellnessTextarea {
-  min-height: 130px;
-  resize: vertical;
+/* Keep input form normal height */
+.nutritionQuickForm {
+  height: fit-content !important;
 }
 
-.wellnessSubmitBtn {
-  margin-top: 28px;
-  border: none;
-}
-
-.wellnessSuggestionCard {
-  background:
-    radial-gradient(circle at top right, rgba(20, 184, 166, 0.22), transparent 35%),
-    linear-gradient(135deg, #0f172a, #134e4a);
-  color: white;
-}
-
-.wellnessSuggestionCard > span {
-  color: #5eead4;
-  font-size: 14px;
-  font-weight: 900;
-}
-
-.wellnessSuggestionCard h2 {
-  margin: 16px 0 0;
-  color: white;
-  font-size: 34px;
-  line-height: 1.15;
-  letter-spacing: -0.045em;
-}
-
-.wellnessSuggestionCard > p {
-  margin: 16px 0 0;
-  color: #cbd5e1;
-  font-size: 15px;
-  line-height: 1.85;
-}
-
-.wellnessChecklist {
-  margin-top: 26px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.wellnessChecklist div {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  padding: 18px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.wellnessChecklist strong {
-  width: 30px;
-  height: 30px;
-  min-width: 30px;
-  border-radius: 50%;
-  background: #5eead4;
-  color: #0f172a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 950;
-}
-
-.wellnessChecklist p {
-  margin: 0;
-  color: #e2e8f0;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.wellnessHistorySection {
-  padding: 20px 0 90px;
-}
-
-.wellnessHistoryGrid {
-  margin-top: 28px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.wellnessLogCard {
-  padding: 26px;
-  border-radius: 28px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
-  transition: all 0.28s ease;
-}
-
-.wellnessLogCard:hover {
-  transform: translateY(-7px);
-  border-color: #99f6e4;
-  box-shadow: 0 24px 60px rgba(20, 184, 166, 0.14);
-}
-
-.wellnessLogTop {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.wellnessLogTop span {
-  color: #0f766e;
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.wellnessLogTop h3 {
-  margin: 8px 0 0;
-  color: #0f172a;
-  font-size: 24px;
-  letter-spacing: -0.04em;
-}
-
-.wellnessLogTop strong {
-  white-space: nowrap;
-  border-radius: 999px;
-  background: #ccfbf1;
-  color: #0f766e;
-  padding: 7px 12px;
-  font-size: 12px;
-  font-weight: 900;
-}
-
-.wellnessLogCard > p {
-  margin: 18px 0 0;
-  color: #64748b;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.wellnessAdvice {
-  margin-top: 18px;
-  padding: 18px;
-  border-radius: 20px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-}
-
-.wellnessAdvice span {
-  color: #0f766e;
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.wellnessAdvice p {
-  margin: 8px 0 0;
-  color: #334155;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-@media (max-width: 1000px) {
-  .wellnessGrid,
-  .wellnessHistoryGrid {
-    grid-template-columns: 1fr;
+/* Responsive: mobile-la normal page scroll */
+@media (max-width: 1080px) {
+  .nutritionCompactRight {
+    height: auto !important;
+    max-height: none !important;
+    min-height: auto !important;
+    overflow-y: visible !important;
+    padding-right: 1rem !important;
   }
 }
-
-@media (max-width: 700px) {
-  .wellnessFormCard,
-  .wellnessSuggestionCard {
-    padding: 24px;
-    border-radius: 26px;
-  }
-}
-
-
-
-/* ================================
-   Sleep Tracking Page
-   Black + Orange Gym Theme
-   No Overlay Version
-================================ */
-
-.sleepPage {
+.nutritionPage.nutritionCompactPage {
   min-height: 100vh;
-  background: url("/images/gym.png") right center / cover fixed no-repeat !important;
-  color: #fff7ed !important;
+  color: #f8fafc;
+  padding-bottom: 2.5rem;
 }
 
 /* Hero */
-.sleepHero {
-  position: relative;
-  padding: 80px 0 54px;
-  background: transparent !important;
-  border-bottom: 1px solid rgba(255, 122, 26, 0.28) !important;
-  overflow: hidden;
+.nutritionCompactHero {
+  padding: 0.8rem 0 0.45rem;
+  background: transparent;
 }
 
-.sleepHero::before,
-.sleepHero::after {
-  display: none !important;
-  content: none !important;
+.nutritionHeroWrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 430px;
+  align-items: center;
+  gap: 1.1rem;
 }
 
-.sleepHero h1 {
-  margin: 20px 0 0;
-  max-width: 820px;
-  font-size: clamp(38px, 5vw, 64px);
-  line-height: 1.05;
-  letter-spacing: -0.06em;
-  color: #fff7ed !important;
-  font-weight: 950;
-  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.55);
+.nutritionHeroWrap h1 {
+  max-width: 680px;
+  margin: 0.55rem 0 0.45rem;
+  color: #ffffff;
+  font-size: clamp(2rem, 3.4vw, 3.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.42);
 }
 
-.sleepHero p {
-  margin: 20px 0 0;
-  max-width: 760px;
-  color: #dbe4ee !important;
-  font-size: 17px;
-  line-height: 1.8;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+.nutritionHeroWrap p {
+  max-width: 720px;
+  margin: 0;
+  color: rgba(255, 238, 222, 0.84);
+  font-size: 0.95rem;
+  line-height: 1.55;
 }
 
-.sleepPage .badge {
+/* Orange badge */
+.nutritionBadge,
+.nutritionPage.nutritionCompactPage .miniLabel,
+.nutritionPage.nutritionCompactPage .badge {
   display: inline-flex;
   align-items: center;
   width: fit-content;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.38) !important;
-  color: #ff9f45 !important;
-  border: 1px solid rgba(255, 122, 26, 0.45) !important;
-  padding: 10px 18px;
-  font-size: 14px;
+  border: 1px solid rgba(255, 132, 0, 0.35);
+  background: rgba(255, 132, 0, 0.15);
+  color: #ffad5a;
+  padding: 0.42rem 0.85rem;
+  font-size: 0.78rem;
   font-weight: 950;
 }
 
-/* Main section */
-.sleepSection {
-  padding: 56px 0 50px;
-  background: transparent !important;
+/* Hero cards */
+.nutritionHeroHighlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  min-width: 0;
 }
 
-.sleepGrid {
+.nutritionHeroHighlights div {
+  min-height: 88px;
+  border: 1px solid rgba(255, 132, 0, 0.18);
+  border-radius: 18px;
+  background: rgba(8, 8, 8, 0.78);
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
+.nutritionHeroHighlights strong {
+  display: block;
+  color: #ffad5a;
+  font-size: 1rem;
+  font-weight: 950;
+}
+
+.nutritionHeroHighlights span {
+  display: block;
+  margin-top: 0.25rem;
+  color: rgba(255, 225, 202, 0.72);
+  font-size: 0.74rem;
+  font-weight: 850;
+}
+
+/* Main layout */
+.nutritionCompactSection {
+  padding: 0.45rem 0 1.5rem;
+  background: transparent;
+}
+
+.nutritionDashboardLayout {
   display: grid;
-  grid-template-columns: 1fr 0.82fr;
-  gap: 30px;
+  gap: 1rem;
+}
+
+.nutritionWorkGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(380px, 0.86fr);
+  gap: 1rem;
   align-items: start;
 }
 
 /* Cards */
-.sleepFormCard,
-.sleepResultCard {
-  border-radius: 32px;
-  background: rgba(18, 18, 18, 0.76) !important;
-  border: 1px solid rgba(255, 122, 26, 0.32) !important;
-  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.48) !important;
-  padding: 34px;
-  backdrop-filter: blur(8px);
+.nutritionProfileCard,
+.nutritionQuickForm,
+.nutritionCompactRight {
+  border: 1px solid rgba(255, 132, 0, 0.2);
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 132, 0, 0.075),
+      rgba(255, 106, 0, 0.035)
+    ),
+    rgba(8, 8, 8, 0.82);
+  padding: 1rem 1.15rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.3);
 }
 
-.sleepResultCard {
-  position: sticky;
-  top: 110px;
+.nutritionProfileFull {
+  width: 100%;
 }
 
-.sleepFormCard h2,
-.sleepResultCard h2 {
-  margin: 0;
-  color: #fff7ed !important;
-  font-size: 34px;
-  line-height: 1.15;
-  letter-spacing: -0.045em;
+.nutritionCompactRight {
+  min-height: 350px;
+  height: fit-content;
+  overflow: visible;
+  position: static;
+  scroll-margin-top: 0;
+}
+
+.nutritionCardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nutritionCardTop h2,
+.nutritionCompactRight h2 {
+  margin: 0.5rem 0 0;
+  color: #ffffff;
+  font-size: 1.45rem;
+  line-height: 1.12;
+  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.nutritionStatusText {
+  margin: 0.45rem 0 0;
+  color: #ffbd7a;
+  font-weight: 850;
+  font-size: 0.86rem;
+}
+
+/* Profile summary one row */
+.nutritionProfileGrid {
+  margin-top: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.nutritionProfileGrid div {
+  min-height: 70px;
+  border: 1px solid rgba(255, 132, 0, 0.16);
+  border-radius: 15px;
+  background: rgba(255, 132, 0, 0.065);
+  padding: 0.7rem 0.85rem;
+}
+
+.nutritionProfileGrid span {
+  display: block;
+  color: rgba(255, 225, 202, 0.72);
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.nutritionProfileGrid strong {
+  display: block;
+  margin-top: 0.25rem;
+  color: #ffffff;
+  font-size: 0.94rem;
   font-weight: 950;
 }
 
-.sleepFormCard > p,
-.sleepResultCard > p {
-  margin: 12px 0 0;
-  color: #cbd5e1 !important;
-  font-size: 15px;
-  line-height: 1.75;
-}
-
-/* Form */
-.sleepForm {
-  margin-top: 28px;
-}
-
-.sleepFormGrid {
+/* Input grid: first form fields one line */
+.nutritionQuickForm > .nutritionQuickGrid {
+  margin-top: 0.8rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.7rem;
 }
 
-.sleepFormGroup {
+.nutritionQuickForm > .nutritionQuickGrid > .nutritionWideInput {
+  grid-column: auto;
+}
+
+.nutritionQuickGrid {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.nutritionQuickGrid label,
+.nutritionWideInput,
+.nutritionFullText {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-
-.sleepFormGroup label {
-  color: #ff9f45 !important;
-  font-size: 14px;
+  gap: 0.35rem;
+  color: #ffad5a;
+  font-size: 0.8rem;
   font-weight: 900;
 }
 
-.sleepFormGroup input,
-.sleepFormGroup select,
-.sleepFormGroup textarea {
-  width: 100%;
-  min-height: 52px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 122, 26, 0.35) !important;
-  background: rgba(5, 5, 5, 0.92) !important;
-  color: #fff7ed !important;
-  padding: 14px 16px;
-  font-size: 14px;
-  font-weight: 750;
-  outline: none;
-  transition: 0.25s ease;
+.nutritionWideInput {
+  grid-column: span 2;
 }
 
-.sleepFormGroup textarea {
-  min-height: 120px;
-  margin-top: 18px;
+.nutritionQuickGrid input,
+.nutritionQuickGrid select,
+.nutritionFullText textarea {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid rgba(255, 132, 0, 0.34);
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.68);
+  color: #fff4e8;
+  padding: 0.62rem 0.8rem;
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.nutritionQuickGrid input::placeholder,
+.nutritionFullText textarea::placeholder {
+  color: rgba(255, 232, 212, 0.48);
+}
+
+.nutritionQuickGrid input:focus,
+.nutritionQuickGrid select:focus,
+.nutritionFullText textarea:focus {
+  border-color: rgba(255, 153, 51, 0.8);
+  box-shadow: 0 0 0 3px rgba(255, 132, 0, 0.14);
+}
+
+/* Advanced */
+.nutritionAdvancedSection {
+  margin-top: 0.65rem;
+  border: 1px solid rgba(255, 132, 0, 0.16);
+  border-radius: 16px;
+  background: rgba(255, 132, 0, 0.055);
+  padding: 0.7rem;
+}
+
+.nutritionAdvancedSection summary {
+  cursor: pointer;
+  color: #ffad5a;
+  font-weight: 950;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.nutritionAdvancedSection summary::after {
+  content: " +";
+  float: right;
+}
+
+.nutritionAdvancedSection[open] summary::after {
+  content: " -";
+}
+
+.nutritionFullText {
+  margin-top: 0.75rem;
+}
+
+.nutritionFullText textarea {
+  min-height: 82px;
   resize: vertical;
 }
 
-.sleepFormGroup input::placeholder,
-.sleepFormGroup textarea::placeholder {
-  color: #78716c !important;
-}
-
-.sleepFormGroup input:focus,
-.sleepFormGroup select:focus,
-.sleepFormGroup textarea:focus {
-  border-color: #ff7a1a !important;
-  background: rgba(10, 10, 10, 0.96) !important;
-  box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.18) !important;
-}
-
-/* Submit button */
-.sleepSubmitBtn {
+/* Button */
+.nutritionGenerateBtn {
   width: 100%;
-  margin-top: 28px;
-  min-height: 54px;
+  margin-top: 0.7rem;
   border: none;
-  border-radius: 999px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #ffad5a, #ff7a18, #ff5f00);
+  color: #1b0900;
+  padding: 0.82rem 1rem;
+  font-weight: 950;
   cursor: pointer;
-  background: linear-gradient(135deg, #ff7a1a, #ff9f45) !important;
-  color: #111111 !important;
-  font-size: 15px;
-  font-weight: 950;
-  box-shadow: 0 18px 45px rgba(255, 122, 26, 0.28);
-  transition: 0.25s ease;
+  box-shadow: 0 18px 34px rgba(255, 106, 0, 0.28);
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.sleepSubmitBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 24px 55px rgba(255, 122, 26, 0.38);
+.nutritionGenerateBtn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
 }
 
-.sleepSubmitBtn:disabled {
-  opacity: 0.65;
+.nutritionGenerateBtn:disabled {
+  opacity: 0.68;
   cursor: not-allowed;
-  transform: none;
 }
 
-/* Error */
-.sleepPage .errorMessage {
-  margin-top: 18px;
-  padding: 13px 15px;
-  border-radius: 14px;
-  background: rgba(239, 68, 68, 0.14) !important;
-  border: 1px solid rgba(239, 68, 68, 0.35) !important;
-  color: #fca5a5 !important;
-  font-size: 14px;
-  font-weight: 850;
-}
-
-/* Result Preview / Info Box */
-.sleepInfoBox {
-  margin-top: 24px;
-  padding: 22px;
-  border-radius: 24px;
-  background: rgba(255, 122, 26, 0.09) !important;
-  border: 1px solid rgba(255, 122, 26, 0.28) !important;
-}
-
-.sleepInfoBox h3 {
-  margin: 0;
-  color: #fff7ed !important;
-  font-size: 22px;
-  font-weight: 950;
-}
-
-.sleepInfoBox ul {
-  margin: 16px 0 0;
-  padding: 0;
-  list-style: none;
+/* Empty result */
+.nutritionEmptyResult {
+  min-height: 300px;
   display: grid;
-  gap: 12px;
-}
-
-.sleepInfoBox li {
-  color: #cbd5e1 !important;
-  font-size: 14px;
-  line-height: 1.65;
-}
-
-.sleepInfoBox li::before {
-  content: "✓";
-  color: #ff9f45;
-  font-weight: 950;
-  margin-right: 8px;
-}
-
-.sleepInfoBox p {
-  margin: 18px 0 0;
-  color: #94a3b8 !important;
-  font-size: 13px;
-  line-height: 1.7;
-}
-
-/* Sleep score result */
-.sleepScoreBox {
-  margin-top: 24px;
-  padding: 28px;
-  border-radius: 28px;
-  background: rgba(255, 122, 26, 0.12) !important;
-  border: 1px solid rgba(255, 122, 26, 0.35) !important;
+  place-items: center;
   text-align: center;
+  align-content: center;
 }
 
-.sleepScoreBox span {
-  color: #ff9f45 !important;
-  font-size: 14px;
+.nutritionCircleIcon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 0.75rem;
+  border-radius: 18px;
+  background: rgba(255, 132, 0, 0.15);
+  color: #ffad5a;
+  font-size: 1.6rem;
   font-weight: 950;
 }
 
-.sleepScoreBox strong {
+.nutritionEmptyResult h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.35rem;
+}
+
+.nutritionEmptyResult p {
+  max-width: 390px;
+  margin: 0.7rem auto 0;
+  color: rgba(255, 236, 218, 0.78);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.nutritionEmptyList {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  color: #ffad5a;
+  font-weight: 900;
+  font-size: 0.8rem;
+}
+
+/* Result */
+.nutritionResultContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.nutritionResultBadge {
+  width: fit-content;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 132, 0, 0.35);
+  background: rgba(255, 132, 0, 0.15);
+  color: #ffad5a;
+  padding: 0.34rem 0.75rem;
+  font-weight: 950;
+  font-size: 0.78rem;
+}
+
+.nutritionResultContent h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.4rem;
+}
+
+.nutritionMatchText {
+  margin: 0;
+  border: 1px solid rgba(255, 132, 0, 0.18);
+  border-radius: 16px;
+  background: rgba(255, 132, 0, 0.08);
+  color: rgba(255, 236, 218, 0.86);
+  padding: 0.6rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.nutritionSummaryGrid {
+  margin-top: 0.45rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.nutritionSummaryGrid div,
+.nutritionMacroGrid div {
+  border: 1px solid rgba(255, 132, 0, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 132, 0, 0.065);
+  padding: 0.6rem;
+}
+
+.nutritionSummaryGrid span,
+.nutritionMacroGrid span {
   display: block;
-  margin-top: 10px;
-  color: #fff7ed !important;
-  font-size: 58px;
-  line-height: 1;
-  font-weight: 950;
-}
-
-.sleepScoreBox p {
-  margin: 10px 0 0;
-  color: #cbd5e1 !important;
-  font-size: 15px;
+  color: rgba(255, 225, 202, 0.72);
+  font-size: 0.68rem;
   font-weight: 850;
 }
 
-/* Summary */
-.sleepSummaryGrid {
-  margin-top: 24px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-
-.sleepSummaryGrid div {
-  padding: 18px;
-  border-radius: 20px;
-  background: rgba(255, 122, 26, 0.1) !important;
-  border: 1px solid rgba(255, 122, 26, 0.28) !important;
-}
-
-.sleepSummaryGrid span {
+.nutritionSummaryGrid strong,
+.nutritionMacroGrid strong {
   display: block;
-  color: #ff9f45 !important;
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.sleepSummaryGrid strong {
-  display: block;
-  margin-top: 8px;
-  color: #e2e8f0 !important;
-  font-size: 22px;
+  margin-top: 0.25rem;
+  color: #ffffff;
+  font-size: 0.95rem;
   font-weight: 950;
-  text-transform: capitalize;
 }
 
-/* History */
-.sleepHistorySection {
-  padding: 24px 0 90px;
-  background: transparent !important;
+.nutritionSummaryGrid p {
+  margin: 0.25rem 0 0;
+  color: rgba(255, 236, 218, 0.64);
+  font-size: 0.68rem;
 }
 
-.sleepHistoryHeader {
+.nutritionMacroBox,
+.nutritionMealPanel {
+  border: 1px solid rgba(255, 132, 0, 0.18);
+  border-radius: 17px;
+  background: rgba(255, 132, 0, 0.055);
+  padding: 0.7rem;
+}
+
+.nutritionMacroBox h3,
+.nutritionMealPanel h3 {
+  margin: 0 0 0.45rem;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.nutritionMacroGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.nutritionMacroBox p {
+  margin: 0.5rem 0 0;
+  color: rgba(255, 236, 218, 0.72);
+  font-size: 0.72rem;
+}
+
+/* Meal chart */
+.nutritionMealList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.nutritionMealCard {
+  border: 1px solid rgba(255, 132, 0, 0.14);
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.58);
+  padding: 0.65rem;
+}
+
+.nutritionMealTop {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
-  align-items: center;
-  gap: 24px;
+  gap: 0.45rem;
+  margin-bottom: 0.45rem;
 }
 
-.sleepHistoryHeader h2 {
-  margin: 16px 0 0;
-  color: #fff7ed !important;
-  font-size: 34px;
-  letter-spacing: -0.045em;
-  font-weight: 950;
-}
-
-.sleepHistoryGrid {
-  margin-top: 28px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22px;
-}
-
-.sleepHistoryCard {
-  padding: 26px;
-  border-radius: 28px;
-  background: rgba(18, 18, 18, 0.76) !important;
-  border: 1px solid rgba(255, 122, 26, 0.32) !important;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.48) !important;
-  backdrop-filter: blur(8px);
-  transition: 0.25s ease;
-}
-
-.sleepHistoryCard:hover {
-  transform: translateY(-6px);
-  border-color: rgba(255, 159, 69, 0.7) !important;
-  box-shadow: 0 28px 70px rgba(255, 122, 26, 0.18) !important;
-}
-
-.sleepHistoryCard h3 {
+.nutritionMealTop h4 {
   margin: 0;
-  color: #fff7ed !important;
-  font-size: 22px;
-  font-weight: 950;
+  color: #ffffff;
+  font-size: 0.88rem;
 }
 
-.sleepHistoryCard p {
-  margin: 10px 0 0;
-  color: #cbd5e1 !important;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.sleepHistoryStats {
-  margin-top: 18px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.sleepHistoryStats span {
-  display: inline-flex;
-  border-radius: 999px;
-  background: rgba(255, 122, 26, 0.12) !important;
-  border: 1px solid rgba(255, 122, 26, 0.3) !important;
-  color: #ff9f45 !important;
-  padding: 8px 12px;
-  font-size: 12px;
+.nutritionMealTop p {
+  margin: 0.2rem 0 0;
+  color: #ffbd7a;
+  font-size: 0.72rem;
   font-weight: 900;
-  text-transform: capitalize;
+}
+
+.nutritionMealTop span {
+  color: #ffad5a;
+  font-weight: 950;
+  font-size: 0.68rem;
+  text-align: right;
+  line-height: 1.3;
+}
+
+.nutritionFoodsList {
+  margin: 0;
+  padding-left: 0.9rem;
+}
+
+.nutritionFoodsList li {
+  margin-bottom: 0.2rem;
+  color: rgba(255, 236, 218, 0.86);
+  font-size: 0.76rem;
+  line-height: 1.25;
+}
+
+.nutritionMealCard > p {
+  margin: 0.45rem 0 0;
+  color: rgba(255, 236, 218, 0.72);
+  font-size: 0.72rem;
+  line-height: 1.3;
+}
+
+/* Recommendations */
+.nutritionResultDetails {
+  margin-top: 0;
+  padding: 0.7rem;
+}
+
+.nutritionRecommendationList {
+  margin: 0.55rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.nutritionRecommendationList li {
+  margin-bottom: 0.25rem;
+  color: rgba(255, 236, 218, 0.86);
+  font-size: 0.74rem;
+  line-height: 1.3;
+}
+
+.nutritionFriendlyNote {
+  margin: 0;
+  color: rgba(255, 236, 218, 0.68);
+  font-size: 0.72rem;
+  line-height: 1.3;
+}
+
+/* Error — orange only */
+.nutritionPage.nutritionCompactPage .errorMessage {
+  margin-top: 0.8rem;
+  color: #ffbd7a;
+  background: rgba(255, 95, 0, 0.12);
+  border: 1px solid rgba(255, 132, 0, 0.22);
+  border-radius: 14px;
+  padding: 0.75rem;
+  font-size: 0.84rem;
+  font-weight: 800;
 }
 
 /* Responsive */
-@media (max-width: 1000px) {
-  .sleepGrid,
-  .sleepHistoryGrid {
+@media (max-width: 1280px) {
+  .nutritionHeroWrap {
     grid-template-columns: 1fr;
   }
 
-  .sleepResultCard {
-    position: static;
+  .nutritionHeroHighlights {
+    max-width: 680px;
+  }
+
+  .nutritionProfileGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .nutritionQuickForm > .nutritionQuickGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 700px) {
-  .sleepPage {
-    background: url("/images/gym.png") center center / cover fixed no-repeat !important;
+@media (max-width: 1080px) {
+  .nutritionWorkGrid {
+    grid-template-columns: 1fr;
   }
+}
 
-  .sleepHero {
-    padding: 60px 0 44px;
-  }
-
-  .sleepHero h1 {
-    font-size: 38px;
-  }
-
-  .sleepFormCard,
-  .sleepResultCard,
-  .sleepHistoryCard {
-    padding: 24px;
-    border-radius: 26px;
-  }
-
-  .sleepFormGrid,
-  .sleepSummaryGrid {
+@media (max-width: 720px) {
+  .nutritionHeroHighlights,
+  .nutritionProfileGrid,
+  .nutritionQuickForm > .nutritionQuickGrid,
+  .nutritionQuickGrid,
+  .nutritionSummaryGrid,
+  .nutritionMacroGrid,
+  .nutritionMealList {
     grid-template-columns: 1fr;
   }
 
-  .sleepScoreBox strong {
-    font-size: 48px;
+  .nutritionCompactRight {
+    min-height: auto;
+  }
+
+  .nutritionWideInput {
+    grid-column: span 1;
+  }
+
+  .nutritionCardTop,
+  .nutritionMealTop {
+    flex-direction: column;
+  }
+
+  .nutritionMealTop span {
+    text-align: left;
   }
 }
-/* ================================
-  Login
-================================ */
 
-@import "tailwindcss";
-
-body{
-    background:#020617;
+/* =========================================================
+   Sleep Tracking Page
+========================================================= */
+/* Sleep auto-calculated field */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepAutoCalculatedInput {
+  background: rgba(255, 132, 0, 0.12) !important;
+  color: #ffddb8 !important;
+  cursor: not-allowed !important;
+  border-color: rgba(255, 173, 90, 0.42) !important;
+}
+/* Page base */
+.sleepPage.sleepCompactPage.sleepWeeklyPage {
+  min-height: 100vh !important;
+  color: #fff7ed !important;
+  padding-bottom: 2.5rem !important;
 }
 
-/* Beautiful Inputs */
-.form-input{
-    width:100%;
-    padding:15px 18px;
-    border-radius:18px;
-    border:2px solid #e2e8f0;
-    background:#fff;
-    font-size:15px;
-    transition:0.35s;
-    outline:none;
+/* Hide old messy Monday-Sunday full card grid */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyGrid {
+  display: none !important;
 }
 
-.form-input::placeholder{
-    color:#94a3b8;
+/* Hero section */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCompactHero {
+  padding: 1rem 0 0.8rem !important;
+  background: rgba(0, 0, 0, 0.24) !important;
+  border-bottom: 1px solid rgba(255, 132, 0, 0.24) !important;
 }
 
-.form-input:hover{
-    border-color:#10b981;
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroWrap {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr) !important;
+  gap: 1rem !important;
+  align-items: center !important;
 }
 
-.form-input:focus{
-    border-color:#10b981;
-    box-shadow:
-      0 0 0 4px rgba(16,185,129,.15),
-      0 12px 30px rgba(16,185,129,.15);
+.sleepPage.sleepCompactPage.sleepWeeklyPage .badge,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .miniLabel {
+  display: inline-flex !important;
+  width: fit-content !important;
+  align-items: center !important;
+  border: 1px solid rgba(255, 132, 0, 0.36) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 132, 0, 0.15) !important;
+  color: #ffad5a !important;
+  padding: 0.38rem 0.78rem !important;
+  font-size: 0.74rem !important;
+  font-weight: 950 !important;
 }
 
-/* Glass Effect */
-.glass{
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(18px);
-    border:1px solid rgba(255,255,255,.15);
+.sleepPage.sleepCompactPage.sleepWeeklyPage h1 {
+  margin: 0.65rem 0 0.4rem !important;
+  max-width: 760px !important;
+  color: #ffffff !important;
+  font-size: clamp(2rem, 4vw, 3.6rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.045em !important;
+  font-weight: 950 !important;
+  text-shadow: 0 12px 30px rgba(0, 0, 0, 0.75) !important;
 }
 
-/* Animated Gradient */
-.bg-animation{
-    background:
-      radial-gradient(circle at top left,#10b981 0%,transparent 30%),
-      radial-gradient(circle at bottom right,#0ea5e9 0%,transparent 35%),
-      linear-gradient(135deg,#020617,#052e16,#0f172a);
-    background-size:250% 250%;
-    animation:bgMove 12s ease infinite;
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCompactHero p {
+  margin: 0 !important;
+  max-width: 760px !important;
+  color: rgba(255, 238, 222, 0.86) !important;
+  font-size: 0.94rem !important;
+  line-height: 1.55 !important;
+  font-weight: 700 !important;
 }
 
-@keyframes bgMove{
-    0%{
-        background-position:left top;
-    }
-    50%{
-        background-position:right bottom;
-    }
-    100%{
-        background-position:left top;
-    }
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroHighlights {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.65rem !important;
 }
 
-/* Floating animation */
-
-.float-card{
-    animation:float 5s ease-in-out infinite;
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroHighlights div {
+  min-height: 82px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  border: 1px solid rgba(255, 132, 0, 0.22) !important;
+  border-radius: 18px !important;
+  background: rgba(0, 0, 0, 0.54) !important;
+  padding: 0.8rem !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
 }
 
-@keyframes float{
-    0%,100%{
-        transform:translateY(0px);
-    }
-    50%{
-        transform:translateY(-10px);
-    }
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroHighlights strong {
+  color: #ffffff !important;
+  font-size: 0.9rem !important;
+  font-weight: 950 !important;
 }
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroHighlights span {
+  margin-top: 0.25rem !important;
+  color: rgba(255, 236, 218, 0.72) !important;
+  font-size: 0.72rem !important;
+  font-weight: 750 !important;
+}
+
+/* Main layout */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCompactSection {
+  padding: 1rem 0 2.2rem !important;
+  background: transparent !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepDashboardLayout {
+  display: grid !important;
+  gap: 1rem !important;
+}
+
+/* Common card style */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileCard,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepQuickForm,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCompactRight,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyCard,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayCard,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartCard,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryCardArea {
+  border: 1px solid rgba(255, 132, 0, 0.24) !important;
+  border-radius: 26px !important;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 132, 0, 0.12),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 132, 0, 0.06),
+      rgba(255, 106, 0, 0.025)
+    ),
+    rgba(6, 6, 6, 0.72) !important;
+  padding: 1.05rem 1.15rem !important;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+  backdrop-filter: blur(9px) !important;
+  -webkit-backdrop-filter: blur(9px) !important;
+}
+
+/* Section headers */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCardTop,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryHeader,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyHeader,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayHeader,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartTop {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage h2,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyHeader h2,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard h2 {
+  margin: 0.45rem 0 0 !important;
+  color: #ffffff !important;
+  font-size: clamp(1.35rem, 2vw, 1.85rem) !important;
+  line-height: 1.14 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.025em !important;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.7) !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepStatusText,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyHeader p,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayHeader p,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartTop p,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard p,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepEmptyResult p,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepMatchText,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepFriendlyNote {
+  color: rgba(255, 238, 222, 0.78) !important;
+  font-size: 0.86rem !important;
+  line-height: 1.5 !important;
+  font-weight: 700 !important;
+}
+
+/* Profile summary */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileGrid {
+  margin-top: 0.85rem !important;
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 0.65rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileGrid div {
+  border: 1px solid rgba(255, 132, 0, 0.18) !important;
+  border-radius: 16px !important;
+  background: rgba(0, 0, 0, 0.36) !important;
+  padding: 0.72rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileGrid span,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSummaryGrid span,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementGrid span,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepNextGoalBox span,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyScore span,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartTarget span {
+  display: block !important;
+  color: rgba(255, 225, 202, 0.76) !important;
+  font-size: 0.7rem !important;
+  font-weight: 900 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileGrid strong,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSummaryGrid strong,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementGrid strong,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepNextGoalBox strong {
+  display: block !important;
+  margin-top: 0.25rem !important;
+  color: #ffffff !important;
+  font-size: 0.9rem !important;
+  font-weight: 950 !important;
+}
+
+/* Daily prediction two-column layout */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWorkGrid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(390px, 0.85fr) !important;
+  gap: 1rem !important;
+  align-items: start !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepQuickGrid {
+  margin-top: 0.85rem !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.7rem !important;
+}
+
+/* Inputs global for sleep page */
+.sleepPage.sleepCompactPage.sleepWeeklyPage label,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepDaySelectLabel,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyFeedback {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.38rem !important;
+  color: #ffad5a !important;
+  font-size: 0.8rem !important;
+  font-weight: 950 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage input,
+.sleepPage.sleepCompactPage.sleepWeeklyPage select,
+.sleepPage.sleepCompactPage.sleepWeeklyPage textarea {
+  width: 100% !important;
+  min-height: 44px !important;
+  border: 1px solid rgba(255, 132, 0, 0.34) !important;
+  border-radius: 15px !important;
+  background: rgba(0, 0, 0, 0.62) !important;
+  color: #fff4e8 !important;
+  padding: 0.62rem 0.78rem !important;
+  font-size: 0.86rem !important;
+  font-weight: 800 !important;
+  outline: none !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage textarea {
+  min-height: 86px !important;
+  resize: vertical !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage input::placeholder,
+.sleepPage.sleepCompactPage.sleepWeeklyPage textarea::placeholder {
+  color: rgba(255, 232, 212, 0.44) !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage input:focus,
+.sleepPage.sleepCompactPage.sleepWeeklyPage select:focus,
+.sleepPage.sleepCompactPage.sleepWeeklyPage textarea:focus {
+  border-color: #ffad5a !important;
+  box-shadow: 0 0 0 3px rgba(255, 132, 0, 0.14) !important;
+}
+
+/* Advanced details */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepAdvancedSection {
+  margin-top: 0.8rem !important;
+  border: 1px solid rgba(255, 132, 0, 0.18) !important;
+  border-radius: 18px !important;
+  background: rgba(0, 0, 0, 0.34) !important;
+  padding: 0.78rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepAdvancedSection summary {
+  cursor: pointer !important;
+  list-style: none !important;
+  color: #ffad5a !important;
+  font-size: 0.88rem !important;
+  font-weight: 950 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepAdvancedSection summary::after {
+  content: " +" !important;
+  float: right !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepAdvancedSection[open] summary::after {
+  content: " -" !important;
+}
+
+/* Buttons */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepGenerateBtn,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSecondaryBtn {
+  width: 100% !important;
+  margin-top: 0.85rem !important;
+  border-radius: 999px !important;
+  padding: 0.9rem 1rem !important;
+  font-size: 0.93rem !important;
+  font-weight: 950 !important;
+  cursor: pointer !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepGenerateBtn {
+  border: none !important;
+  background: linear-gradient(135deg, #ffad5a, #ff7a18, #ff5f00) !important;
+  color: #1b0900 !important;
+  box-shadow: 0 18px 38px rgba(255, 106, 0, 0.28) !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSecondaryBtn {
+  border: 1px solid rgba(255, 132, 0, 0.36) !important;
+  background: rgba(0, 0, 0, 0.44) !important;
+  color: #ffad5a !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepGenerateBtn:hover,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSecondaryBtn:hover {
+  filter: brightness(1.06) !important;
+  transform: translateY(-1px) !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepGenerateBtn:disabled {
+  opacity: 0.68 !important;
+  cursor: not-allowed !important;
+}
+
+/* Result card */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepEmptyResult,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepResultContent {
+  min-height: 360px !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCircleIcon {
+  width: 56px !important;
+  height: 56px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 18px !important;
+  background: rgba(255, 132, 0, 0.15) !important;
+  border: 1px solid rgba(255, 132, 0, 0.28) !important;
+  color: #ffad5a !important;
+  font-weight: 950 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepEmptyList {
+  margin-top: 1rem !important;
+  display: grid !important;
+  gap: 0.6rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepEmptyList span {
+  border: 1px solid rgba(255, 132, 0, 0.18) !important;
+  border-radius: 14px !important;
+  background: rgba(0, 0, 0, 0.36) !important;
+  color: rgba(255, 236, 218, 0.82) !important;
+  padding: 0.65rem !important;
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepResultBadge {
+  display: inline-flex !important;
+  width: fit-content !important;
+  border-radius: 999px !important;
+  background: rgba(255, 132, 0, 0.16) !important;
+  border: 1px solid rgba(255, 132, 0, 0.3) !important;
+  color: #ffad5a !important;
+  padding: 0.35rem 0.75rem !important;
+  font-size: 0.78rem !important;
+  font-weight: 950 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepScoreBox {
+  margin-top: 0.85rem !important;
+  border-radius: 18px !important;
+  background: rgba(255, 132, 0, 0.14) !important;
+  border: 1px solid rgba(255, 132, 0, 0.26) !important;
+  padding: 0.9rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepScoreBox strong {
+  display: block !important;
+  margin-top: 0.2rem !important;
+  color: #ffffff !important;
+  font-size: 2rem !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepScoreBox p {
+  margin: 0.25rem 0 0 !important;
+  color: #ffad5a !important;
+  font-size: 0.82rem !important;
+  font-weight: 900 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSummaryGrid {
+  margin-top: 0.8rem !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.6rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSummaryGrid div {
+  border: 1px solid rgba(255, 132, 0, 0.18) !important;
+  border-radius: 15px !important;
+  background: rgba(0, 0, 0, 0.36) !important;
+  padding: 0.7rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepRecommendationList {
+  margin: 0.6rem 0 0 !important;
+  padding-left: 1.15rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepRecommendationList li {
+  color: rgba(255, 236, 218, 0.86) !important;
+  font-size: 0.8rem !important;
+  line-height: 1.4 !important;
+  margin-bottom: 0.35rem !important;
+  font-weight: 750 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepRecommendationList li::marker {
+  color: #ffad5a !important;
+}
+
+/* Weekly card layout */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyCard {
+  margin-top: 1rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyHeader {
+  margin-bottom: 0.9rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyScore {
+  min-width: 210px !important;
+  border: 1px solid rgba(255, 132, 0, 0.24) !important;
+  border-radius: 20px !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 132, 0, 0.14),
+      rgba(255, 106, 0, 0.04)
+    ),
+    rgba(0, 0, 0, 0.42) !important;
+  padding: 0.95rem !important;
+  text-align: right !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyScore strong {
+  display: block !important;
+  margin-top: 0.2rem !important;
+  color: #ffad5a !important;
+  font-size: 2rem !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyScore p {
+  margin: 0.3rem 0 0 !important;
+  color: rgba(255, 238, 222, 0.72) !important;
+  font-size: 0.72rem !important;
+  font-weight: 750 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyMetaGrid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.75rem !important;
+  margin-top: 0.9rem !important;
+}
+
+/* Current day only update */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayCard {
+  margin-top: 1rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayInputs {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 0.7rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepDaySelectLabel {
+  min-width: 190px !important;
+}
+
+/* Chart */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartCard {
+  margin-top: 1rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartTarget {
+  min-width: 130px !important;
+  border: 1px solid rgba(255, 132, 0, 0.24) !important;
+  border-radius: 18px !important;
+  background: rgba(255, 132, 0, 0.11) !important;
+  padding: 0.8rem !important;
+  text-align: right !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartTarget strong {
+  display: block !important;
+  margin-top: 0.18rem !important;
+  color: #ffad5a !important;
+  font-size: 1.15rem !important;
+  font-weight: 950 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartBox {
+  width: 100% !important;
+  height: 260px !important;
+  border-radius: 18px !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 132, 0, 0.055),
+      rgba(0, 0, 0, 0.26)
+    ) !important;
+  padding: 0.5rem !important;
+}
+
+/* Weekly feedback */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyFeedback {
+  margin-top: 1rem !important;
+}
+
+/* Success and error messages */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSuccessBox,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .errorMessage {
+  margin-top: 0.8rem !important;
+  border-radius: 16px !important;
+  padding: 0.78rem 0.9rem !important;
+  font-size: 0.84rem !important;
+  font-weight: 850 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSuccessBox {
+  border: 1px solid rgba(255, 132, 0, 0.26) !important;
+  background: rgba(255, 132, 0, 0.13) !important;
+  color: #ffddb8 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .errorMessage {
+  border: 1px solid rgba(255, 132, 0, 0.26) !important;
+  background: rgba(255, 95, 0, 0.12) !important;
+  color: #ffbd7a !important;
+}
+
+/* Improvement summary */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard {
+  margin-top: 1rem !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 0.9fr) !important;
+  gap: 1rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementGrid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.7rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementGrid div,
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepNextGoalBox {
+  border: 1px solid rgba(255, 132, 0, 0.2) !important;
+  border-radius: 18px !important;
+  background: rgba(0, 0, 0, 0.38) !important;
+  padding: 0.85rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepNextGoalBox {
+  margin-top: 0.7rem !important;
+}
+
+/* History */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryCardArea {
+  margin-top: 1rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepNoHistory {
+  margin-top: 0.85rem !important;
+  border: 1px dashed rgba(255, 132, 0, 0.22) !important;
+  border-radius: 16px !important;
+  background: rgba(0, 0, 0, 0.32) !important;
+  color: rgba(255, 236, 218, 0.78) !important;
+  padding: 0.8rem !important;
+  font-size: 0.84rem !important;
+  font-weight: 750 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryGrid {
+  margin-top: 0.85rem !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.75rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryCard {
+  border: 1px solid rgba(255, 132, 0, 0.18) !important;
+  border-radius: 16px !important;
+  background: rgba(0, 0, 0, 0.36) !important;
+  padding: 0.75rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryCard h3 {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 0.9rem !important;
+  font-weight: 950 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryCard p {
+  margin: 0.3rem 0 0 !important;
+  color: rgba(255, 236, 218, 0.76) !important;
+  font-size: 0.76rem !important;
+  line-height: 1.35 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryStats {
+  margin-top: 0.6rem !important;
+  display: flex !important;
+  gap: 0.35rem !important;
+  flex-wrap: wrap !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryStats span {
+  border-radius: 999px !important;
+  background: rgba(255, 132, 0, 0.12) !important;
+  color: #ffad5a !important;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.68rem !important;
+  font-weight: 850 !important;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroWrap,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWorkGrid,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayInputs {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 920px) {
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroHighlights,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileGrid,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyMetaGrid,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementGrid,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyHeader,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayHeader,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartTop,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCardTop,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryHeader {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyScore,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartTarget,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepDaySelectLabel {
+    width: 100% !important;
+    text-align: left !important;
+  }
+
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayInputs {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepQuickGrid,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSummaryGrid,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayInputs {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileCard,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepQuickForm,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCompactRight,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyCard,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayCard,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartCard,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryCardArea {
+    border-radius: 22px !important;
+    padding: 0.95rem !important;
+  }
+}
+

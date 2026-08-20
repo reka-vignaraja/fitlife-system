@@ -1,8 +1,18 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { apiRequest } from "@/lib/api";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  ReferenceLine,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 type SleepResult = {
   age: number;
@@ -32,26 +42,114 @@ type SleepLog = {
   date: string;
 };
 
-const initialLogs: SleepLog[] = [
-  {
-    sleep_hours: 7,
-    sleep_quality: "Good",
-    bedtime: "10:30 PM",
-    wake_time: "5:30 AM",
-    sleep_score: 86,
-    sleep_status: "Healthy Sleep",
-    date: "Today",
-  },
-  {
-    sleep_hours: 5,
-    sleep_quality: "Average",
-    bedtime: "12:00 AM",
-    wake_time: "5:00 AM",
-    sleep_score: 58,
-    sleep_status: "Insufficient Sleep",
-    date: "Yesterday",
-  },
+type SleepQuality = "poor" | "average" | "good" | "excellent";
+type MoodLevel = "tired" | "normal" | "fresh";
+type StressLevel = "low" | "moderate" | "high";
+
+type DailySleepProgress = {
+  date: string;
+  day: string;
+  sleep_hours: string;
+  sleep_quality: SleepQuality;
+  bedtime: string;
+  wake_time: string;
+  interruptions: string;
+  stress_level: StressLevel;
+  mood: MoodLevel;
+};
+
+type LatestSleepProgress = {
+  _id: string;
+  week_start_date: string;
+  recommended_sleep_hours: number;
+  previous_average_sleep_hours?: number;
+  average_sleep_hours: number;
+  sleep_debt_hours: number;
+  consistency_score: number;
+  good_sleep_days: number;
+  poor_sleep_days: number;
+  interrupted_days: number;
+  improvement_status: string;
+  next_week_goal: string;
+  next_week_recommendation: string;
+  weekly_feedback: string;
+  created_at: string;
+};
+
+const weekDays = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
 ];
+
+function toDateInputValue(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function getTodayDate() {
+  return toDateInputValue(new Date());
+}
+
+function getDayNameFromDate(dateText: string) {
+  if (!dateText) return "Monday";
+
+  const date = new Date(`${dateText}T00:00:00`);
+
+  return date.toLocaleDateString("en-US", {
+    weekday: "long",
+  });
+}
+
+function formatChartDate(dateText: string, fallbackDay: string) {
+  if (!dateText) return fallbackDay.slice(0, 3);
+
+  const date = new Date(`${dateText}T00:00:00`);
+
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function getWeekDates(startDateText: string) {
+  const startDate = new Date(`${startDateText}T00:00:00`);
+
+  return weekDays.map((_, index) => {
+    const currentDate = new Date(startDate);
+    currentDate.setDate(startDate.getDate() + index);
+
+    const date = toDateInputValue(currentDate);
+
+    return {
+      date,
+      day: getDayNameFromDate(date),
+    };
+  });
+}
+
+function createDefaultDailySleep(
+  startDateText = getTodayDate()
+): DailySleepProgress[] {
+  return getWeekDates(startDateText).map((item) => ({
+    date: item.date,
+    day: item.day,
+    sleep_hours: "",
+    sleep_quality: "average",
+    bedtime: "",
+    wake_time: "",
+    interruptions: "0",
+    stress_level: "moderate",
+    mood: "normal",
+  }));
+}
 
 export default function SleepTrackingPage() {
   const [formData, setFormData] = useState({
@@ -68,15 +166,89 @@ export default function SleepTrackingPage() {
     notes: "",
   });
 
+  const [weeklyData, setWeeklyData] = useState({
+    week_start_date: getTodayDate(),
+    recommended_sleep_hours: "7",
+    previous_average_sleep_hours: "",
+    weekly_feedback: "",
+    daily_sleep: createDefaultDailySleep(),
+  });
+
+  const [selectedSleepDate, setSelectedSleepDate] = useState(getTodayDate());
+
+  const [profileSummary, setProfileSummary] = useState({
+    activity_level: "-",
+    fitness_goal: "-",
+    health_conditions: "None",
+  });
+
   const [result, setResult] = useState<SleepResult | null>(null);
-  const [sleepLogs, setSleepLogs] = useState<SleepLog[]>(initialLogs);
+  const [sleepLogs, setSleepLogs] = useState<SleepLog[]>([]);
+  const [latestProgress, setLatestProgress] =
+    useState<LatestSleepProgress | null>(null);
+
   const [loading, setLoading] = useState(false);
+  const [weeklySaving, setWeeklySaving] = useState(false);
   const [profileLoading, setProfileLoading] = useState(true);
+
   const [profileMessage, setProfileMessage] = useState("");
+  const [weeklyMessage, setWeeklyMessage] = useState("");
   const [error, setError] = useState("");
+  const [weeklyError, setWeeklyError] = useState("");
+
+  const weeklyPreview = useMemo(
+    () =>
+      calculateWeeklyPreview(
+        weeklyData.daily_sleep,
+        weeklyData.recommended_sleep_hours
+      ),
+    [weeklyData.daily_sleep, weeklyData.recommended_sleep_hours]
+  );
+
+  const weeklyChartData = useMemo(
+    () =>
+      weeklyData.daily_sleep.map((item) => ({
+        day: formatChartDate(item.date, item.day),
+        sleepHours: Number(item.sleep_hours) || 0,
+      })),
+    [weeklyData.daily_sleep]
+  );
+
+  const sleepComparisonData = useMemo(() => {
+    if (!latestProgress) {
+      return [];
+    }
+
+    return [
+      {
+        week: "Previous",
+        average:
+          latestProgress.previous_average_sleep_hours ||
+          Number(weeklyData.previous_average_sleep_hours) ||
+          0,
+      },
+      {
+        week: "Current",
+        average: latestProgress.average_sleep_hours || 0,
+      },
+    ];
+  }, [latestProgress, weeklyData.previous_average_sleep_hours]);
+
+  const selectedDayIndex = weeklyData.daily_sleep.findIndex(
+    (item) => item.date === selectedSleepDate
+  );
+
+  const activeDayIndex = selectedDayIndex >= 0 ? selectedDayIndex : 0;
+
+  const selectedDayData =
+    weeklyData.daily_sleep[activeDayIndex] || createDefaultDailySleep()[0];
+
+  const selectedDayName =
+    selectedDayData?.day || getDayNameFromDate(selectedSleepDate);
 
   useEffect(() => {
     fetchProfileDetails();
+    fetchLatestSleepProgress();
   }, []);
 
   async function fetchProfileDetails() {
@@ -100,8 +272,14 @@ export default function SleepTrackingPage() {
         ),
       }));
 
+      setProfileSummary({
+        activity_level: profile.activity_level || "-",
+        fitness_goal: profile.fitness_goal || "-",
+        health_conditions: profile.health_conditions || "None",
+      });
+
       setProfileMessage("Profile details loaded automatically.");
-    } catch (err) {
+    } catch {
       setProfileMessage(
         "Profile details not found. You can enter sleep details manually."
       );
@@ -110,15 +288,197 @@ export default function SleepTrackingPage() {
     }
   }
 
+  async function fetchLatestSleepProgress() {
+    try {
+      const data = await apiRequest("/api/sleep-progress/latest", {
+        method: "GET",
+      });
+
+      if (data.has_progress && data.progress) {
+        const progress = data.progress as LatestSleepProgress;
+
+        setLatestProgress(progress);
+
+        setWeeklyData((prev) => ({
+          ...prev,
+          previous_average_sleep_hours: progress.average_sleep_hours
+            ? String(progress.average_sleep_hours)
+            : prev.previous_average_sleep_hours,
+        }));
+      }
+    } catch {
+      setLatestProgress(null);
+    }
+  }
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    setFormData((prev) => ({
+    const { name, value } = e.target;
+
+    setFormData((prev) => {
+      const updated = {
+        ...prev,
+        [name]: value,
+      };
+
+      if (name === "bedtime" || name === "wake_time") {
+        updated.sleep_hours = calculateSleepHoursFromTimes(
+          updated.bedtime,
+          updated.wake_time
+        );
+      }
+
+      return updated;
+    });
+  };
+
+  const handleWeeklyChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    if (name === "week_start_date") {
+      setSelectedSleepDate(value);
+
+      setWeeklyData((prev) => ({
+        ...prev,
+        week_start_date: value,
+        daily_sleep: createDefaultDailySleep(value),
+      }));
+
+      return;
+    }
+
+    setWeeklyData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
+  };
+
+  const handleSelectedDateChange = (selectedDate: string) => {
+    setSelectedSleepDate(selectedDate);
+
+    const existingIndex = weeklyData.daily_sleep.findIndex(
+      (item) => item.date === selectedDate
+    );
+
+    if (existingIndex === -1) {
+      setWeeklyData((prev) => ({
+        ...prev,
+        daily_sleep: [
+          ...prev.daily_sleep,
+          {
+            date: selectedDate,
+            day: getDayNameFromDate(selectedDate),
+            sleep_hours: "",
+            sleep_quality: "average",
+            bedtime: "",
+            wake_time: "",
+            interruptions: "0",
+            stress_level: "moderate",
+            mood: "normal",
+          },
+        ],
+      }));
+    }
+  };
+
+  const handleDailySleepChange = (
+    index: number,
+    field: keyof DailySleepProgress,
+    value: string
+  ) => {
+    setWeeklyData((prev) => {
+      const updatedDays = [...prev.daily_sleep];
+      const currentDay = updatedDays[index];
+
+      const updatedDay = {
+        ...currentDay,
+        date: field === "date" ? value : currentDay.date,
+        day:
+          field === "date"
+            ? getDayNameFromDate(value)
+            : field === "day"
+              ? value
+              : currentDay.day,
+        sleep_hours:
+          field === "sleep_hours" ? value : currentDay.sleep_hours,
+        sleep_quality:
+          field === "sleep_quality"
+            ? (value as SleepQuality)
+            : currentDay.sleep_quality,
+        bedtime: field === "bedtime" ? value : currentDay.bedtime,
+        wake_time: field === "wake_time" ? value : currentDay.wake_time,
+        interruptions:
+          field === "interruptions" ? value : currentDay.interruptions,
+        stress_level:
+          field === "stress_level"
+            ? (value as StressLevel)
+            : currentDay.stress_level,
+        mood: field === "mood" ? (value as MoodLevel) : currentDay.mood,
+      };
+
+      if (field === "bedtime" || field === "wake_time") {
+        updatedDay.sleep_hours = calculateSleepHoursFromTimes(
+          updatedDay.bedtime,
+          updatedDay.wake_time
+        );
+      }
+
+      updatedDays[index] = updatedDay;
+
+      return {
+        ...prev,
+        daily_sleep: updatedDays,
+      };
+    });
+  };
+
+  const fillTodayIntoWeeklyTracker = () => {
+    setWeeklyData((prev) => {
+      const updatedDays = [...prev.daily_sleep];
+
+      let targetIndex = updatedDays.findIndex(
+        (item) => item.date === selectedSleepDate
+      );
+
+      if (targetIndex === -1) {
+        updatedDays.push({
+          date: selectedSleepDate,
+          day: getDayNameFromDate(selectedSleepDate),
+          sleep_hours: "",
+          sleep_quality: "average",
+          bedtime: "",
+          wake_time: "",
+          interruptions: "0",
+          stress_level: "moderate",
+          mood: "normal",
+        });
+
+        targetIndex = updatedDays.length - 1;
+      }
+
+      updatedDays[targetIndex] = {
+        ...updatedDays[targetIndex],
+        sleep_hours: formData.sleep_hours,
+        sleep_quality: formData.sleep_quality as SleepQuality,
+        bedtime: formData.bedtime,
+        wake_time: formData.wake_time,
+        interruptions: formData.interruptions,
+        stress_level: mapStressToWeekly(formData.stress_level),
+        mood: Number(formData.sleep_hours) >= 7 ? "fresh" : "normal",
+      };
+
+      return {
+        ...prev,
+        daily_sleep: updatedDays,
+      };
+    });
+
+    setWeeklyMessage("Sleep details added to weekly tracker.");
   };
 
   const analyzeSleep = async (e: FormEvent) => {
@@ -126,14 +486,12 @@ export default function SleepTrackingPage() {
 
     setError("");
     setResult(null);
+    setWeeklyMessage("");
 
-    if (
-      !formData.age ||
-      !formData.sleep_hours ||
-      !formData.bedtime ||
-      !formData.wake_time
-    ) {
-      setError("Please fill age, sleep hours, bedtime, and wake time.");
+    if (!formData.sleep_hours || !formData.bedtime || !formData.wake_time) {
+      setError(
+        "Please select bedtime and wake time. Sleep hours will calculate automatically."
+      );
       return;
     }
 
@@ -143,12 +501,12 @@ export default function SleepTrackingPage() {
       const data = await apiRequest("/api/sleep/analyze", {
         method: "POST",
         body: JSON.stringify({
-          age: Number(formData.age),
+          age: Number(formData.age) || 25,
           gender: formData.gender,
           sleep_hours: Number(formData.sleep_hours),
           sleep_quality: formData.sleep_quality,
-          bedtime: formData.bedtime,
-          wake_time: formData.wake_time,
+          bedtime: formatTimeForDisplay(formData.bedtime),
+          wake_time: formatTimeForDisplay(formData.wake_time),
           interruptions: Number(formData.interruptions),
           screen_time_before_bed: formData.screen_time_before_bed,
           caffeine_after_evening: formData.caffeine_after_evening,
@@ -179,84 +537,198 @@ export default function SleepTrackingPage() {
     }
   };
 
+  const saveWeeklySleepProgress = async (e: FormEvent) => {
+    e.preventDefault();
+
+    setWeeklyError("");
+    setWeeklyMessage("");
+
+    const hasAtLeastOneDay = weeklyData.daily_sleep.some(
+      (item) => Number(item.sleep_hours) > 0
+    );
+
+    if (!hasAtLeastOneDay) {
+      setWeeklyError("Please enter at least one day of sleep data.");
+      return;
+    }
+
+    try {
+      setWeeklySaving(true);
+
+      const dailySleepPayload = weeklyData.daily_sleep.map((item) => ({
+        date: item.date,
+        day: item.day,
+        sleep_hours: item.sleep_hours ? Number(item.sleep_hours) : 0,
+        sleep_quality: item.sleep_quality,
+        bedtime: formatTimeForDisplay(item.bedtime),
+        wake_time: formatTimeForDisplay(item.wake_time),
+        interruptions: item.interruptions ? Number(item.interruptions) : 0,
+        stress_level: item.stress_level,
+        mood: item.mood,
+      }));
+
+      const data = await apiRequest("/api/sleep-progress/save", {
+        method: "POST",
+        body: JSON.stringify({
+          week_start_date: weeklyData.week_start_date || getTodayDate(),
+          recommended_sleep_hours: Number(weeklyData.recommended_sleep_hours),
+          previous_average_sleep_hours: weeklyData.previous_average_sleep_hours
+            ? Number(weeklyData.previous_average_sleep_hours)
+            : null,
+          weekly_feedback: weeklyData.weekly_feedback,
+          daily_sleep: dailySleepPayload,
+        }),
+      });
+
+      setWeeklyMessage(
+        `${data.message}. Average sleep: ${formatSleepDurationForUser(
+          data.average_sleep_hours
+        )}.`
+      );
+
+      await fetchLatestSleepProgress();
+    } catch (err) {
+      setWeeklyError(
+        err instanceof Error
+          ? err.message
+          : "Failed to save weekly sleep progress."
+      );
+    } finally {
+      setWeeklySaving(false);
+    }
+  };
+
   return (
     <ProtectedRoute>
-      <main className="sleepPage">
-        <section className="sleepHero">
-          <div className="container">
-            <span className="badge">AI Sleep Tracking</span>
+      <main className="sleepPage sleepCompactPage sleepWeeklyPage">
+        <section className="sleepCompactHero">
+          <div className="container sleepHeroWrap">
+            <div>
+              <span className="badge">AI Sleep Tracking</span>
 
-            <h1>Analyze Your Sleep Quality</h1>
+              <h1>Analyze Your Sleep Quality</h1>
 
-            <p>
-              Your saved profile details such as age, gender, activity level,
-              fitness goal and health conditions will be automatically filled
-              where needed.
-            </p>
+              <p>
+                FitLife uses your saved profile and sleep habits to calculate a
+                sleep score, identify sleep quality, and provide weekly sleep
+                improvement guidance.
+              </p>
+            </div>
+
+            <div className="sleepHeroHighlights">
+              <div>
+                <strong>Daily Result</strong>
+                <span>Sleep score</span>
+              </div>
+
+              <div>
+                <strong>Weekly Graph</strong>
+                <span>Sleep trend</span>
+              </div>
+
+              <div>
+                <strong>Improvement</strong>
+                <span>Next week goal</span>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="sleepSection">
-          <div className="container sleepGrid">
-            <div className="sleepFormCard">
-              <h2>Sleep Details</h2>
+        <section className="sleepCompactSection">
+          <div className="container sleepDashboardLayout">
+            <div className="sleepProfileCard sleepProfileFull">
+              <div className="sleepCardTop">
+                <div>
+                  <span className="miniLabel">Profile Summary</span>
+                  <h2>Auto-loaded Details</h2>
+                </div>
+              </div>
 
-              <p>
-                {profileLoading
-                  ? "Loading your profile details..."
-                  : "You can edit these values before analyzing your sleep."}
+              <p className="sleepStatusText">
+                {profileLoading ? "Loading profile details..." : profileMessage}
               </p>
 
-              {profileMessage && (
-                <div className="sleepInfoBox">
-                  <p>{profileMessage}</p>
+              <div className="sleepProfileGrid">
+                <div>
+                  <span>Age</span>
+                  <strong>{formData.age || "-"}</strong>
                 </div>
-              )}
 
-              {error && <div className="errorMessage">{error}</div>}
+                <div>
+                  <span>Gender</span>
+                  <strong>{formatText(formData.gender)}</strong>
+                </div>
 
-              <form onSubmit={analyzeSleep} className="sleepForm">
-                <div className="sleepFormGrid">
-                  <div className="sleepFormGroup">
-                    <label>Age</label>
+                <div>
+                  <span>Activity Level</span>
+                  <strong>{formatText(profileSummary.activity_level)}</strong>
+                </div>
 
+                <div>
+                  <span>Fitness Goal</span>
+                  <strong>{formatText(profileSummary.fitness_goal)}</strong>
+                </div>
+
+                <div>
+                  <span>Health Conditions</span>
+                  <strong>{formatText(profileSummary.health_conditions)}</strong>
+                </div>
+
+                <div>
+                  <span>Sleep Input</span>
+                  <strong>
+                    {formatSleepDurationForUser(formData.sleep_hours) || "-"}
+                  </strong>
+                </div>
+              </div>
+            </div>
+
+            <div className="sleepWorkGrid">
+              <form onSubmit={analyzeSleep} className="sleepQuickForm">
+                <div className="sleepCardTop">
+                  <div>
+                    <span className="miniLabel">Step 1</span>
+                    <h2>Daily Sleep Prediction</h2>
+                  </div>
+                </div>
+
+                {error && <div className="errorMessage">{error}</div>}
+
+                <div className="sleepQuickGrid">
+                  <label>
+                    Bedtime
                     <input
-                      type="number"
-                      name="age"
-                      placeholder="Example: 25"
-                      value={formData.age}
+                      type="time"
+                      name="bedtime"
+                      value={formData.bedtime}
                       onChange={handleChange}
                     />
-                  </div>
+                  </label>
 
-                  <div className="sleepFormGroup">
-                    <label>Gender</label>
-
-                    <select
-                      name="gender"
-                      value={formData.gender}
-                      onChange={handleChange}
-                    >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                    </select>
-                  </div>
-
-                  <div className="sleepFormGroup">
-                    <label>Sleep Hours</label>
-
+                  <label>
+                    Wake Time
                     <input
-                      type="number"
-                      name="sleep_hours"
-                      placeholder="Example: 7"
-                      value={formData.sleep_hours}
+                      type="time"
+                      name="wake_time"
+                      value={formData.wake_time}
                       onChange={handleChange}
                     />
-                  </div>
+                  </label>
 
-                  <div className="sleepFormGroup">
-                    <label>Sleep Quality</label>
+                  <label>
+                    Sleep Hours
+                    <input
+                      type="text"
+                      name="sleep_hours_display"
+                      placeholder="Auto calculated"
+                      value={formatSleepDurationForUser(formData.sleep_hours)}
+                      readOnly
+                      className="sleepAutoCalculatedInput"
+                    />
+                  </label>
 
+                  <label>
+                    Sleep Quality
                     <select
                       name="sleep_quality"
                       value={formData.sleep_quality}
@@ -267,35 +739,10 @@ export default function SleepTrackingPage() {
                       <option value="average">Average</option>
                       <option value="poor">Poor</option>
                     </select>
-                  </div>
+                  </label>
 
-                  <div className="sleepFormGroup">
-                    <label>Bedtime</label>
-
-                    <input
-                      type="text"
-                      name="bedtime"
-                      placeholder="Example: 10:30 PM"
-                      value={formData.bedtime}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="sleepFormGroup">
-                    <label>Wake Time</label>
-
-                    <input
-                      type="text"
-                      name="wake_time"
-                      placeholder="Example: 5:30 AM"
-                      value={formData.wake_time}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="sleepFormGroup">
-                    <label>Interruptions</label>
-
+                  <label>
+                    Interruptions
                     <input
                       type="number"
                       name="interruptions"
@@ -303,37 +750,10 @@ export default function SleepTrackingPage() {
                       value={formData.interruptions}
                       onChange={handleChange}
                     />
-                  </div>
+                  </label>
 
-                  <div className="sleepFormGroup">
-                    <label>Screen Time Before Bed</label>
-
-                    <select
-                      name="screen_time_before_bed"
-                      value={formData.screen_time_before_bed}
-                      onChange={handleChange}
-                    >
-                      <option value="no">No</option>
-                      <option value="yes">Yes</option>
-                    </select>
-                  </div>
-
-                  <div className="sleepFormGroup">
-                    <label>Caffeine After Evening</label>
-
-                    <select
-                      name="caffeine_after_evening"
-                      value={formData.caffeine_after_evening}
-                      onChange={handleChange}
-                    >
-                      <option value="no">No</option>
-                      <option value="yes">Yes</option>
-                    </select>
-                  </div>
-
-                  <div className="sleepFormGroup">
-                    <label>Stress Level</label>
-
+                  <label>
+                    Stress Level
                     <select
                       name="stress_level"
                       value={formData.stress_level}
@@ -343,131 +763,799 @@ export default function SleepTrackingPage() {
                       <option value="medium">Medium</option>
                       <option value="high">High</option>
                     </select>
+                  </label>
+                </div>
+
+                <details className="sleepAdvancedSection">
+                  <summary>Profile fallback details</summary>
+
+                  <div className="sleepQuickGrid">
+                    <label>
+                      Age
+                      <input
+                        type="number"
+                        name="age"
+                        placeholder="Example: 25"
+                        value={formData.age}
+                        onChange={handleChange}
+                      />
+                    </label>
+
+                    <label>
+                      Gender
+                      <select
+                        name="gender"
+                        value={formData.gender}
+                        onChange={handleChange}
+                      >
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                    </label>
                   </div>
-                </div>
+                </details>
 
-                <div className="sleepFormGroup">
-                  <label>Notes</label>
+                <details className="sleepAdvancedSection">
+                  <summary>Sleep habit details</summary>
 
-                  <textarea
-                    name="notes"
-                    placeholder="Example: I feel tired in the morning"
-                    value={formData.notes}
-                    onChange={handleChange}
-                  />
-                </div>
+                  <div className="sleepQuickGrid">
+                    <label>
+                      Screen Time Before Bed
+                      <select
+                        name="screen_time_before_bed"
+                        value={formData.screen_time_before_bed}
+                        onChange={handleChange}
+                      >
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                      </select>
+                    </label>
+
+                    <label>
+                      Caffeine After Evening
+                      <select
+                        name="caffeine_after_evening"
+                        value={formData.caffeine_after_evening}
+                        onChange={handleChange}
+                      >
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <label className="sleepFullText">
+                    Notes
+                    <textarea
+                      name="notes"
+                      placeholder="Example: I feel tired in the morning"
+                      value={formData.notes}
+                      onChange={handleChange}
+                    />
+                  </label>
+                </details>
 
                 <button
                   type="submit"
-                  className="sleepSubmitBtn"
+                  className="sleepGenerateBtn"
                   disabled={loading}
                 >
                   {loading ? "Analyzing..." : "Analyze Sleep"}
                 </button>
+
+                {result && (
+                  <button
+                    type="button"
+                    className="sleepSecondaryBtn"
+                    onClick={fillTodayIntoWeeklyTracker}
+                  >
+                    Add to Weekly Tracker
+                  </button>
+                )}
               </form>
-            </div>
 
-            <div className="sleepResultCard">
-              {!result ? (
-                <>
-                  <h2>Sleep Result Preview</h2>
+              <div className="sleepCompactRight">
+                {!result ? (
+                  <div className="sleepEmptyResult">
+                    <div className="sleepCircleIcon">SL</div>
 
-                  <p>Your sleep score and recommendations will appear here.</p>
+                    <h2>Sleep Result Preview</h2>
 
-                  <div className="sleepInfoBox">
-                    <h3>Healthy Sleep Guide</h3>
+                    <p>
+                      Your sleep score, sleep status, sleep habit summary, and
+                      recommendations will appear here after analysis.
+                    </p>
 
-                    <ul>
-                      <li>Adults usually need 7 to 9 hours of sleep.</li>
-                      <li>Avoid screen time before bedtime.</li>
-                      <li>Maintain a consistent sleep routine.</li>
-                      <li>Reduce caffeine intake in the evening.</li>
-                    </ul>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <h2>Your Sleep Analysis</h2>
-
-                  <div className="sleepScoreBox">
-                    <span>Sleep Score</span>
-                    <strong>{result.sleep_score}</strong>
-                    <p>{result.sleep_status}</p>
-                  </div>
-
-                  <div className="sleepSummaryGrid">
-                    <div>
-                      <span>Sleep Hours</span>
-                      <strong>{result.sleep_hours}</strong>
-                    </div>
-
-                    <div>
-                      <span>Quality</span>
-                      <strong>{result.sleep_quality}</strong>
-                    </div>
-
-                    <div>
-                      <span>Bedtime</span>
-                      <strong>{result.bedtime}</strong>
-                    </div>
-
-                    <div>
-                      <span>Wake Time</span>
-                      <strong>{result.wake_time}</strong>
+                    <div className="sleepEmptyList">
+                      <span>Sleep score</span>
+                      <span>Sleep status</span>
+                      <span>Healthy sleep recommendations</span>
                     </div>
                   </div>
+                ) : (
+                  <div className="sleepResultContent">
+                    <span className="sleepResultBadge">
+                      {result.sleep_status}
+                    </span>
 
-                  <div className="sleepInfoBox">
-                    <h3>Recommendations</h3>
+                    <h2>Your Sleep Analysis</h2>
 
-                    <ul>
-                      {result.recommendations.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
+                    <p className="sleepMatchText">
+                      {getSleepLevel(result.sleep_score)}
+                    </p>
 
-                    <p>{result.disclaimer}</p>
+                    <div className="sleepScoreBox">
+                      <span>Sleep Score</span>
+                      <strong>{result.sleep_score}/100</strong>
+                      <p>{result.sleep_status}</p>
+                    </div>
+
+                    <div className="sleepSummaryGrid">
+                      <div>
+                        <span>Sleep Hours</span>
+                        <strong>
+                          {formatSleepDurationForUser(result.sleep_hours)}
+                        </strong>
+                      </div>
+
+                      <div>
+                        <span>Quality</span>
+                        <strong>{formatText(result.sleep_quality)}</strong>
+                      </div>
+
+                      <div>
+                        <span>Bedtime</span>
+                        <strong>{result.bedtime}</strong>
+                      </div>
+
+                      <div>
+                        <span>Wake Time</span>
+                        <strong>{result.wake_time}</strong>
+                      </div>
+                    </div>
+
+                    <details className="sleepAdvancedSection sleepResultDetails" open>
+                      <summary>Practical recommendations</summary>
+
+                      <ul className="sleepRecommendationList">
+                        {result.recommendations.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </details>
+
+                    <p className="sleepFriendlyNote">
+                      {result.disclaimer}
+                    </p>
                   </div>
-                </>
-              )}
-            </div>
-          </div>
-        </section>
-
-        <section className="sleepHistorySection">
-          <div className="container">
-            <div className="sleepHistoryHeader">
-              <div>
-                <span className="badge">History</span>
-                <h2>Recent Sleep Logs</h2>
+                )}
               </div>
             </div>
 
-            <div className="sleepHistoryGrid">
-              {sleepLogs.map((log, index) => (
-                <div className="sleepHistoryCard" key={`${log.date}-${index}`}>
+            {result && (
+              <div className="sleepWeeklyCard">
+                <div className="sleepWeeklyHeader">
                   <div>
-                    <h3>{log.date}</h3>
-                    <p>{log.sleep_status}</p>
+                    <span className="miniLabel">Step 2</span>
+                    <h2>Weekly Sleep Progress</h2>
+                    <p>
+                      Select a date and update sleep details one day at a time.
+                      The graph shows the weekly sleep pattern clearly.
+                    </p>
                   </div>
 
-                  <div className="sleepHistoryStats">
-                    <span>{log.sleep_hours} hrs</span>
-                    <span>{log.sleep_quality}</span>
-                    <span>{log.sleep_score} score</span>
+                  <div className="sleepWeeklyScore">
+                    <span>Preview Average</span>
+                    <strong>
+                      {formatSleepDurationForUser(
+                        weeklyPreview.average_sleep_hours
+                      )}
+                    </strong>
+                    <p>{weeklyPreview.recorded_days} recorded days</p>
                   </div>
-
-                  <p>
-                    Bedtime: {log.bedtime} | Wake Time: {log.wake_time}
-                  </p>
                 </div>
-              ))}
+
+                {weeklyMessage && (
+                  <div className="sleepSuccessBox">{weeklyMessage}</div>
+                )}
+
+                {weeklyError && (
+                  <div className="errorMessage">{weeklyError}</div>
+                )}
+
+                <form onSubmit={saveWeeklySleepProgress}>
+                  <div className="sleepWeeklyMetaGrid">
+                    <label>
+                      Week Start Date
+                      <input
+                        type="date"
+                        name="week_start_date"
+                        value={weeklyData.week_start_date}
+                        onChange={handleWeeklyChange}
+                      />
+                    </label>
+
+                    <label>
+                      Recommended Sleep Hours
+                      <input
+                        type="number"
+                        step="0.1"
+                        name="recommended_sleep_hours"
+                        value={weeklyData.recommended_sleep_hours}
+                        onChange={handleWeeklyChange}
+                      />
+                    </label>
+
+                    <label>
+                      Previous Week Average
+                      <input
+                        type="number"
+                        step="0.1"
+                        name="previous_average_sleep_hours"
+                        placeholder="Auto-filled after first save"
+                        value={weeklyData.previous_average_sleep_hours}
+                        onChange={handleWeeklyChange}
+                      />
+                    </label>
+                  </div>
+
+                  <div className="sleepCurrentDayCard">
+                    <div className="sleepCurrentDayHeader">
+                      <div>
+                        <span className="miniLabel">Daily Update</span>
+                        <h3>Current Day Sleep Update</h3>
+                        <p>
+                          Select a date and update that day's sleep record.
+                        </p>
+                      </div>
+
+                      <label className="sleepDaySelectLabel">
+                        Select Date
+                        <input
+                          type="date"
+                          value={selectedSleepDate}
+                          onChange={(e) =>
+                            handleSelectedDateChange(e.target.value)
+                          }
+                        />
+                        <small>{selectedDayName}</small>
+                      </label>
+                    </div>
+
+                    <div className="sleepCurrentDayInputs">
+                      <label>
+                        Bedtime
+                        <input
+                          type="time"
+                          value={selectedDayData.bedtime}
+                          onChange={(e) =>
+                            handleDailySleepChange(
+                              activeDayIndex,
+                              "bedtime",
+                              e.target.value
+                            )
+                          }
+                        />
+                      </label>
+
+                      <label>
+                        Wake Time
+                        <input
+                          type="time"
+                          value={selectedDayData.wake_time}
+                          onChange={(e) =>
+                            handleDailySleepChange(
+                              activeDayIndex,
+                              "wake_time",
+                              e.target.value
+                            )
+                          }
+                        />
+                      </label>
+
+                      <label>
+                        Hours
+                        <input
+                          type="text"
+                          placeholder="Auto calculated"
+                          value={formatSleepDurationForUser(
+                            selectedDayData.sleep_hours
+                          )}
+                          readOnly
+                          className="sleepAutoCalculatedInput"
+                        />
+                      </label>
+
+                      <label>
+                        Quality
+                        <select
+                          value={selectedDayData.sleep_quality}
+                          onChange={(e) =>
+                            handleDailySleepChange(
+                              activeDayIndex,
+                              "sleep_quality",
+                              e.target.value
+                            )
+                          }
+                        >
+                          <option value="excellent">Excellent</option>
+                          <option value="good">Good</option>
+                          <option value="average">Average</option>
+                          <option value="poor">Poor</option>
+                        </select>
+                      </label>
+
+                      <label>
+                        Interruptions
+                        <input
+                          type="number"
+                          placeholder="0"
+                          value={selectedDayData.interruptions}
+                          onChange={(e) =>
+                            handleDailySleepChange(
+                              activeDayIndex,
+                              "interruptions",
+                              e.target.value
+                            )
+                          }
+                        />
+                      </label>
+
+                      <label>
+                        Stress
+                        <select
+                          value={selectedDayData.stress_level}
+                          onChange={(e) =>
+                            handleDailySleepChange(
+                              activeDayIndex,
+                              "stress_level",
+                              e.target.value
+                            )
+                          }
+                        >
+                          <option value="low">Low</option>
+                          <option value="moderate">Moderate</option>
+                          <option value="high">High</option>
+                        </select>
+                      </label>
+
+                      <label>
+                        Mood
+                        <select
+                          value={selectedDayData.mood}
+                          onChange={(e) =>
+                            handleDailySleepChange(
+                              activeDayIndex,
+                              "mood",
+                              e.target.value
+                            )
+                          }
+                        >
+                          <option value="fresh">Fresh</option>
+                          <option value="normal">Normal</option>
+                          <option value="tired">Tired</option>
+                        </select>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="sleepChartCard">
+                    <div className="sleepChartTop">
+                      <div>
+                        <span className="miniLabel">Weekly Graph</span>
+                        <h3>This Week Sleep Hours</h3>
+                        <p>
+                          Bars show daily sleep hours. The target line shows the
+                          recommended sleep duration.
+                        </p>
+                      </div>
+
+                      <div className="sleepChartTarget">
+                        <span>Target</span>
+                        <strong>
+                          {formatSleepDurationForUser(
+                            Number(weeklyData.recommended_sleep_hours) || 7
+                          )}
+                        </strong>
+                      </div>
+                    </div>
+
+                    <div className="sleepChartBox">
+                      <ResponsiveContainer width="100%" height={260}>
+                        <BarChart data={weeklyChartData}>
+                          <CartesianGrid
+                            strokeDasharray="3 3"
+                            stroke="rgba(255,255,255,0.12)"
+                          />
+
+                          <XAxis
+                            dataKey="day"
+                            stroke="rgba(255,238,222,0.72)"
+                          />
+
+                          <YAxis
+                            stroke="rgba(255,238,222,0.72)"
+                            domain={[0, 10]}
+                          />
+
+                          <Tooltip
+                            contentStyle={{
+                              background: "rgba(8,8,8,0.94)",
+                              border: "1px solid rgba(255,132,0,0.3)",
+                              borderRadius: "14px",
+                              color: "#ffffff",
+                            }}
+                            labelStyle={{
+                              color: "#ffad5a",
+                              fontWeight: 900,
+                            }}
+                            formatter={(value) =>
+                              formatSleepDurationForUser(Number(value))
+                            }
+                            cursor={{ fill: "rgba(255,132,0,0.08)" }}
+                          />
+
+                          <ReferenceLine
+                            y={Number(weeklyData.recommended_sleep_hours) || 7}
+                            stroke="#ffad5a"
+                            strokeDasharray="5 5"
+                          />
+
+                          <Bar
+                            dataKey="sleepHours"
+                            name="Sleep Hours"
+                            fill="#ff8a00"
+                            radius={[12, 12, 0, 0]}
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+
+                  <label className="sleepFullText sleepWeeklyFeedback">
+                    Weekly Feedback
+                    <textarea
+                      name="weekly_feedback"
+                      placeholder="Example: I slept earlier this week but Sunday was disturbed."
+                      value={weeklyData.weekly_feedback}
+                      onChange={handleWeeklyChange}
+                    />
+                  </label>
+
+                  <button
+                    type="submit"
+                    className="sleepGenerateBtn"
+                    disabled={weeklySaving}
+                  >
+                    {weeklySaving
+                      ? "Saving Weekly Progress..."
+                      : "Save Weekly Sleep Progress"}
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {latestProgress && (
+              <div className="sleepImprovementCard">
+                <div>
+                  <span className="miniLabel">Step 3</span>
+                  <h2>Weekly Sleep Improvement Summary</h2>
+                  <p>{latestProgress.next_week_recommendation}</p>
+                </div>
+
+                <div>
+                  {sleepComparisonData.length > 0 && (
+                    <div className="sleepComparisonChart">
+                      <h3>Previous vs Current Week</h3>
+
+                      <ResponsiveContainer width="100%" height={220}>
+                        <BarChart data={sleepComparisonData}>
+                          <CartesianGrid
+                            strokeDasharray="3 3"
+                            stroke="rgba(255,255,255,0.12)"
+                          />
+
+                          <XAxis
+                            dataKey="week"
+                            stroke="rgba(255,238,222,0.72)"
+                          />
+
+                          <YAxis
+                            stroke="rgba(255,238,222,0.72)"
+                            domain={[0, 10]}
+                          />
+
+                          <Tooltip
+                            contentStyle={{
+                              background: "rgba(8,8,8,0.94)",
+                              border: "1px solid rgba(255,132,0,0.3)",
+                              borderRadius: "14px",
+                              color: "#ffffff",
+                            }}
+                            labelStyle={{
+                              color: "#ffad5a",
+                              fontWeight: 900,
+                            }}
+                            formatter={(value) =>
+                              formatSleepDurationForUser(Number(value))
+                            }
+                            cursor={{ fill: "rgba(255,132,0,0.08)" }}
+                          />
+
+                          <Bar
+                            dataKey="average"
+                            name="Average Sleep"
+                            fill="#ff8a00"
+                            radius={[10, 10, 0, 0]}
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  )}
+
+                  <div className="sleepImprovementGrid">
+                    <div>
+                      <span>Average Sleep</span>
+                      <strong>
+                        {formatSleepDurationForUser(
+                          latestProgress.average_sleep_hours
+                        )}
+                      </strong>
+                    </div>
+
+                    <div>
+                      <span>Sleep Debt</span>
+                      <strong>
+                        {formatSleepDurationForUser(
+                          latestProgress.sleep_debt_hours
+                        )}
+                      </strong>
+                    </div>
+
+                    <div>
+                      <span>Consistency</span>
+                      <strong>{latestProgress.consistency_score}%</strong>
+                    </div>
+
+                    <div>
+                      <span>Status</span>
+                      <strong>{latestProgress.improvement_status}</strong>
+                    </div>
+
+                    <div>
+                      <span>Good Days</span>
+                      <strong>{latestProgress.good_sleep_days}</strong>
+                    </div>
+
+                    <div>
+                      <span>Poor Days</span>
+                      <strong>{latestProgress.poor_sleep_days}</strong>
+                    </div>
+                  </div>
+
+                  <div className="sleepNextGoalBox">
+                    <span>Next Week Goal</span>
+                    <strong>{latestProgress.next_week_goal}</strong>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="sleepHistoryCardArea">
+              <div className="sleepHistoryHeader">
+                <div>
+                  <span className="badge">History</span>
+                  <h2>Recent Sleep Logs</h2>
+                </div>
+              </div>
+
+              {sleepLogs.length === 0 ? (
+                <div className="sleepNoHistory">
+                  No sleep logs yet. Analyze your first sleep record to see it here.
+                </div>
+              ) : (
+                <div className="sleepHistoryGrid">
+                  {sleepLogs.map((log, index) => (
+                    <div className="sleepHistoryCard" key={`${log.date}-${index}`}>
+                      <div>
+                        <h3>{log.date}</h3>
+                        <p>{log.sleep_status}</p>
+                      </div>
+
+                      <div className="sleepHistoryStats">
+                        <span>{formatSleepDurationForUser(log.sleep_hours)}</span>
+                        <span>{formatText(log.sleep_quality)}</span>
+                        <span>{log.sleep_score} score</span>
+                      </div>
+
+                      <p>
+                        Bedtime: {log.bedtime} | Wake Time: {log.wake_time}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </section>
       </main>
     </ProtectedRoute>
   );
+}
+
+function parseSleepTimeToMinutes(timeText: string): number | null {
+  const cleanedTime = timeText.trim().toLowerCase().replace(/\s+/g, "");
+
+  if (!cleanedTime) {
+    return null;
+  }
+
+  const normalizedTime = cleanedTime.replace(".", ":");
+
+  const hasAm = normalizedTime.endsWith("am");
+  const hasPm = normalizedTime.endsWith("pm");
+
+  const timeWithoutPeriod = normalizedTime.replace("am", "").replace("pm", "");
+
+  const match = timeWithoutPeriod.match(/^(\d{1,2})(?::(\d{2}))?$/);
+
+  if (!match) {
+    return null;
+  }
+
+  let hour = Number(match[1]);
+  const minute = Number(match[2] || "0");
+
+  if (Number.isNaN(hour) || Number.isNaN(minute) || minute > 59) {
+    return null;
+  }
+
+  if (hasAm || hasPm) {
+    if (hour < 1 || hour > 12) {
+      return null;
+    }
+
+    if (hasPm && hour !== 12) {
+      hour += 12;
+    }
+
+    if (hasAm && hour === 12) {
+      hour = 0;
+    }
+  } else if (hour > 23) {
+    return null;
+  }
+
+  return hour * 60 + minute;
+}
+
+function calculateSleepHoursFromTimes(
+  bedtime: string,
+  wakeTime: string
+): string {
+  const bedtimeMinutes = parseSleepTimeToMinutes(bedtime);
+  const wakeTimeMinutes = parseSleepTimeToMinutes(wakeTime);
+
+  if (bedtimeMinutes === null || wakeTimeMinutes === null) {
+    return "";
+  }
+
+  let durationMinutes = wakeTimeMinutes - bedtimeMinutes;
+
+  if (durationMinutes <= 0) {
+    durationMinutes += 24 * 60;
+  }
+
+  if (durationMinutes <= 0 || durationMinutes > 16 * 60) {
+    return "";
+  }
+
+  const durationHours = durationMinutes / 60;
+
+  return String(Number(durationHours.toFixed(2)));
+}
+
+function formatSleepDurationForUser(hoursText: string | number) {
+  const totalHours = Number(hoursText);
+
+  if (!totalHours || Number.isNaN(totalHours)) {
+    return "";
+  }
+
+  let hours = Math.floor(totalHours);
+  let minutes = Math.round((totalHours - hours) * 60);
+
+  if (minutes === 60) {
+    hours += 1;
+    minutes = 0;
+  }
+
+  if (hours === 0) {
+    return `${minutes}m`;
+  }
+
+  if (minutes === 0) {
+    return `${hours}h`;
+  }
+
+  return `${hours}h ${minutes}m`;
+}
+
+function formatTimeForDisplay(timeText: string) {
+  const minutes = parseSleepTimeToMinutes(timeText);
+
+  if (minutes === null) {
+    return timeText;
+  }
+
+  const dayMinutes = minutes % (24 * 60);
+  const hour24 = Math.floor(dayMinutes / 60);
+  const minute = dayMinutes % 60;
+
+  const period = hour24 >= 12 ? "PM" : "AM";
+  const hour12 = hour24 % 12 === 0 ? 12 : hour24 % 12;
+  const displayMinute = String(minute).padStart(2, "0");
+
+  return `${hour12}:${displayMinute} ${period}`;
+}
+
+function calculateWeeklyPreview(
+  dailySleep: DailySleepProgress[],
+  recommendedSleepHours: string
+) {
+  const recordedDays = dailySleep.filter(
+    (item) => Number(item.sleep_hours) > 0
+  );
+
+  if (recordedDays.length === 0) {
+    return {
+      average_sleep_hours: "0",
+      sleep_debt_hours: "0",
+      recorded_days: 0,
+    };
+  }
+
+  const totalSleep = recordedDays.reduce(
+    (total, item) => total + Number(item.sleep_hours),
+    0
+  );
+
+  const recommended = Number(recommendedSleepHours) || 7;
+  const expected = recommended * recordedDays.length;
+  const sleepDebt = Math.max(0, expected - totalSleep);
+
+  return {
+    average_sleep_hours: String(
+      Number((totalSleep / recordedDays.length).toFixed(2))
+    ),
+    sleep_debt_hours: String(Number(sleepDebt.toFixed(2))),
+    recorded_days: recordedDays.length,
+  };
+}
+
+function getSleepLevel(score: number) {
+  if (score >= 85) {
+    return "Excellent sleep pattern. Continue maintaining your routine.";
+  }
+
+  if (score >= 70) {
+    return "Good sleep quality. Small improvements can make it better.";
+  }
+
+  if (score >= 50) {
+    return "Moderate sleep quality. Improve consistency, screen habits, and stress control.";
+  }
+
+  return "Poor sleep quality. Focus on sleep duration, routine, and reducing disruptions.";
+}
+
+function formatText(value: string) {
+  if (!value) return "-";
+
+  return value
+    .split(" ")
+    .map((item) => item.charAt(0).toUpperCase() + item.slice(1))
+    .join(" ");
 }
 
 function normalizeGender(gender?: string) {
@@ -479,6 +1567,15 @@ function normalizeGender(gender?: string) {
   if (value === "female") return "female";
 
   return "";
+}
+
+function mapStressToWeekly(stressLevel: string): StressLevel {
+  const value = stressLevel.toLowerCase();
+
+  if (value === "low") return "low";
+  if (value === "high") return "high";
+
+  return "moderate";
 }
 
 function buildProfileNote(
