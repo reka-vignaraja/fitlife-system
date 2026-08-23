@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { apiRequest } from "@/lib/api";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
@@ -18,6 +18,29 @@ type Goal = {
   status: string;
   recommendations: string[];
 };
+
+type ProfileResponse = {
+  profile?: {
+    fitness_goal?: string;
+    weight_kg?: number;
+    activity_level?: string;
+  };
+};
+
+const categoryOptions = [
+  { label: "Fitness", value: "fitness" },
+  { label: "Weight Loss", value: "weight loss" },
+  { label: "Weight Gain", value: "weight gain" },
+  { label: "Muscle Gain", value: "muscle gain" },
+  { label: "Nutrition", value: "nutrition" },
+  { label: "Sleep", value: "sleep" },
+];
+
+const priorityOptions = [
+  { label: "Low", value: "low" },
+  { label: "Medium", value: "medium" },
+  { label: "High", value: "high" },
+];
 
 export default function GoalsPage() {
   const [formData, setFormData] = useState({
@@ -48,19 +71,35 @@ export default function GoalsPage() {
     fetchGoals();
   }, []);
 
+  const latestGoal = goals[0];
+
+  const totalGoals = goals.length;
+
+  const averageProgress = useMemo(() => {
+    if (goals.length === 0) {
+      return 0;
+    }
+
+    const total = goals.reduce((sum, goal) => {
+      return sum + Number(goal.progress || 0);
+    }, 0);
+
+    return Math.round(total / goals.length);
+  }, [goals]);
+
   async function fetchProfileDetails() {
     try {
       setProfileLoading(true);
 
-      const data = await apiRequest("/api/profile/me", {
+      const data: ProfileResponse = await apiRequest("/api/profile/me", {
         method: "GET",
       });
 
       const profile = data.profile;
 
-      const fitnessGoal = profile.fitness_goal || "";
-      const weight = profile.weight_kg ? String(profile.weight_kg) : "";
-      const activityLevel = profile.activity_level || "";
+      const fitnessGoal = profile?.fitness_goal || "";
+      const weight = profile?.weight_kg ? String(profile.weight_kg) : "";
+      const activityLevel = profile?.activity_level || "";
 
       setFormData((prev) => ({
         ...prev,
@@ -79,7 +118,7 @@ export default function GoalsPage() {
       setProfileMessage(
         "Profile goal and current weight loaded automatically."
       );
-    } catch (err) {
+    } catch {
       setProfileMessage(
         "Profile details not found. You can create a goal manually."
       );
@@ -222,25 +261,48 @@ export default function GoalsPage() {
 
   return (
     <ProtectedRoute>
-      <main className="goalsPage">
-        <section className="goalsHero">
-          <div className="container">
-            <span className="badge">Goal Management</span>
+      <main className="goalsPage goalsOrangePage">
+        <section className="goalsOrangeHero">
+          <div className="container goalsOrangeHeroWrap">
+            <div>
+              <span className="goalsOrangeBadge">Goal Management</span>
 
-            <h1>Set and Track Your Health Goals</h1>
+              <h1>Set and Track Your Health Goals</h1>
 
-            <p>
-              Your saved profile goal and current weight will be automatically
-              filled. You only need to set your target value and deadline.
-            </p>
+              <p>
+                Your saved profile goal and current weight will be automatically
+                filled. You only need to set your target value, deadline, and
+                update your progress regularly.
+              </p>
+            </div>
+
+            <div className="goalsOrangeHeroStats">
+              <div>
+                <span>Total Goals</span>
+                <strong>{totalGoals}</strong>
+              </div>
+
+              <div>
+                <span>Average Progress</span>
+                <strong>{averageProgress}%</strong>
+              </div>
+
+              <div>
+                <span>Latest Goal</span>
+                <strong>{latestGoal ? latestGoal.status : "Not Started"}</strong>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="goalsSection">
-          <div className="container goalsGrid">
-            <form onSubmit={createGoal} className="goalFormCard">
-              <div className="formHeader">
-                <h2>Create New Goal</h2>
+        <section className="goalsOrangeSection">
+          <div className="container goalsOrangeGrid">
+            <form onSubmit={createGoal} className="goalsOrangeFormCard">
+              <div className="goalsOrangeCardHeader">
+                <div>
+                  <span className="goalsOrangeMiniBadge">Create Goal</span>
+                  <h2>Create New Goal</h2>
+                </div>
 
                 <p>
                   {profileLoading
@@ -250,198 +312,209 @@ export default function GoalsPage() {
               </div>
 
               {profileMessage && (
-                <div className="successMessage">{profileMessage}</div>
+                <div className="goalsOrangeNotice">{profileMessage}</div>
               )}
 
-              {error && <div className="errorMessage">{error}</div>}
-              {message && <div className="successMessage">{message}</div>}
+              {error && <div className="goalsOrangeError">{error}</div>}
+              {message && <div className="goalsOrangeSuccess">{message}</div>}
 
-              <div className="formGrid">
-                <div className="formGroup">
-                  <label>Goal Title</label>
-
+              <div className="goalsOrangeFormGrid">
+                <label>
+                  Goal Title
                   <input
                     type="text"
                     name="title"
                     value={formData.title}
                     onChange={handleChange}
                     placeholder="Example: Lose 5kg"
-                    className="form-input"
                   />
-                </div>
+                </label>
 
-                <div className="formGroup">
-                  <label>Category</label>
-
+                <label>
+                  Category
                   <select
                     name="category"
                     value={formData.category}
                     onChange={handleChange}
-                    className="form-input"
                   >
-                    <option value="fitness">Fitness</option>
-                    <option value="weight loss">Weight Loss</option>
-                    <option value="weight gain">Weight Gain</option>
-                    <option value="muscle gain">Muscle Gain</option>
-                    <option value="nutrition">Nutrition</option>
-                    <option value="sleep">Sleep</option>
+                    {categoryOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
                   </select>
-                </div>
+                </label>
 
-                <div className="formGroup">
-                  <label>Target Value</label>
-
+                <label>
+                  Target Value
                   <input
                     type="number"
                     name="target_value"
                     value={formData.target_value}
                     onChange={handleChange}
                     placeholder="Example: 55"
-                    className="form-input"
                   />
-                </div>
+                </label>
 
-                <div className="formGroup">
-                  <label>Current Value</label>
-
+                <label>
+                  Current Value
                   <input
                     type="number"
                     name="current_value"
                     value={formData.current_value}
                     onChange={handleChange}
-                    placeholder="Example: 60"
-                    className="form-input"
+                    placeholder="Example: 70"
                   />
-                </div>
+                </label>
 
-                <div className="formGroup">
-                  <label>Unit</label>
-
+                <label>
+                  Unit
                   <input
                     type="text"
                     name="unit"
                     value={formData.unit}
                     onChange={handleChange}
-                    placeholder="kg, hours, days, workouts"
-                    className="form-input"
+                    placeholder="kg, hours, days"
                   />
-                </div>
+                </label>
 
-                <div className="formGroup">
-                  <label>Deadline</label>
-
+                <label>
+                  Deadline
                   <input
                     type="date"
                     name="deadline"
                     value={formData.deadline}
                     onChange={handleChange}
-                    className="form-input"
                   />
-                </div>
+                </label>
 
-                <div className="formGroup">
-                  <label>Priority</label>
-
+                <label>
+                  Priority
                   <select
                     name="priority"
                     value={formData.priority}
                     onChange={handleChange}
-                    className="form-input"
                   >
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
+                    {priorityOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
                   </select>
-                </div>
-              </div>
+                </label>
 
-              <div className="formGroup">
-                <label>Notes</label>
-
-                <textarea
-                  name="notes"
-                  value={formData.notes}
-                  onChange={handleChange}
-                  placeholder="Example: I want to complete this goal in 2 months"
-                  className="form-input goalTextarea"
-                />
+                <label className="goalsOrangeFullField">
+                  Notes
+                  <textarea
+                    name="notes"
+                    value={formData.notes}
+                    onChange={handleChange}
+                    placeholder="Example: I want to complete this goal in 2 months"
+                  />
+                </label>
               </div>
 
               <button
                 type="submit"
-                className="primaryBtn goalSubmitBtn"
+                className="goalsOrangePrimaryBtn"
                 disabled={loading}
               >
                 {loading ? "Creating..." : "Create Goal"}
               </button>
             </form>
 
-            <aside className="goalInfoCard">
-              <span>Goal Tips</span>
+            <aside className="goalsOrangeSide">
+              <div className="goalsOrangeInfoCard">
+                <span className="goalsOrangeMiniBadge">Goal Tips</span>
 
-              <h2>Build Consistency</h2>
+                <h2>Build Consistency</h2>
 
-              <p>
-                Set realistic goals, update your progress weekly, and focus on
-                small consistent actions. FitLife helps you understand progress
-                percentage and goal status.
-              </p>
+                <p>
+                  Set realistic goals, update your progress weekly, and focus on
+                  small consistent actions. FitLife helps you understand progress
+                  percentage and goal status.
+                </p>
 
-              <div className="goalTips">
-                <div>
-                  <strong>✓</strong>
-                  <p>
-                    Profile data is used to pre-fill your goal and current
-                    weight.
-                  </p>
+                <div className="goalsOrangeTips">
+                  <div>
+                    <strong>✓</strong>
+                    <p>
+                      Profile data is used to pre-fill your goal and current
+                      weight.
+                    </p>
+                  </div>
+
+                  <div>
+                    <strong>✓</strong>
+                    <p>Set a realistic target value and deadline.</p>
+                  </div>
+
+                  <div>
+                    <strong>✓</strong>
+                    <p>Update progress regularly to improve your report.</p>
+                  </div>
                 </div>
+              </div>
 
-                <div>
-                  <strong>✓</strong>
-                  <p>Set a realistic target value and deadline.</p>
-                </div>
+              <div className="goalsOrangeInfoCard">
+                <span className="goalsOrangeMiniBadge">Quick Summary</span>
 
-                <div>
-                  <strong>✓</strong>
-                  <p>Update progress regularly to improve your report.</p>
+                <div className="goalsOrangeQuickStats">
+                  <div>
+                    <span>Total Goals</span>
+                    <strong>{totalGoals}</strong>
+                  </div>
+
+                  <div>
+                    <span>Average Progress</span>
+                    <strong>{averageProgress}%</strong>
+                  </div>
+
+                  <div>
+                    <span>Latest Status</span>
+                    <strong>{latestGoal ? latestGoal.status : "No Goal"}</strong>
+                  </div>
                 </div>
               </div>
             </aside>
           </div>
         </section>
 
-        <section className="goalHistorySection">
+        <section className="goalsOrangeHistorySection">
           <div className="container">
-            <div className="historyHeader">
-              <span className="badge">Goal History</span>
-              <h2>Your Goals</h2>
+            <div className="goalsOrangeHistoryHeader">
+              <div>
+                <span className="goalsOrangeBadge">Goal History</span>
+                <h2>Your Goals</h2>
+              </div>
             </div>
 
             {pageLoading ? (
-              <p>Loading goals...</p>
+              <div className="goalsOrangeEmpty">Loading goals...</div>
             ) : goals.length === 0 ? (
-              <p>No goals created yet.</p>
+              <div className="goalsOrangeEmpty">
+                No goals created yet. Create your first goal above.
+              </div>
             ) : (
-              <div className="goalHistoryGrid">
+              <div className="goalsOrangeHistoryGrid">
                 {goals.map((goal) => (
-                  <div className="goalCard" key={goal._id}>
-                    <div className="goalCardTop">
+                  <div className="goalsOrangeGoalCard" key={goal._id}>
+                    <div className="goalsOrangeGoalTop">
                       <div>
-                        <span>{goal.category}</span>
+                        <span>{formatText(goal.category)}</span>
                         <h3>{goal.title}</h3>
                       </div>
 
                       <strong>{goal.progress}%</strong>
                     </div>
 
-                    <div className="goalProgressBar">
+                    <div className="goalsOrangeProgressBar">
                       <div style={{ width: `${goal.progress}%` }} />
                     </div>
 
-                    <div className="goalMetaGrid">
+                    <div className="goalsOrangeMetaGrid">
                       <div>
                         <span>Current</span>
-
                         <p>
                           {goal.current_value} {goal.unit}
                         </p>
@@ -449,7 +522,6 @@ export default function GoalsPage() {
 
                       <div>
                         <span>Target</span>
-
                         <p>
                           {goal.target_value} {goal.unit}
                         </p>
@@ -466,7 +538,7 @@ export default function GoalsPage() {
                       </div>
                     </div>
 
-                    <div className="goalUpdateBox">
+                    <div className="goalsOrangeUpdateBox">
                       <input
                         type="number"
                         placeholder="New progress value"
@@ -484,19 +556,21 @@ export default function GoalsPage() {
                       </button>
                     </div>
 
-                    <div className="goalRecommendationBox">
-                      <span>Recommendations</span>
+                    {goal.recommendations?.length > 0 && (
+                      <div className="goalsOrangeRecommendation">
+                        <span>Recommendations</span>
 
-                      <ul>
-                        {goal.recommendations.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
+                        <ul>
+                          {goal.recommendations.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                     <button
                       type="button"
-                      className="goalDeleteBtn"
+                      className="goalsOrangeDeleteBtn"
                       onClick={() => deleteGoal(goal._id)}
                     >
                       Delete Goal
@@ -538,4 +612,13 @@ function normalizeGoalCategory(goal?: string) {
   if (value === "general health") return "fitness";
 
   return "fitness";
+}
+
+function formatText(value?: string) {
+  if (!value) return "-";
+
+  return value
+    .split(" ")
+    .map((item) => item.charAt(0).toUpperCase() + item.slice(1))
+    .join(" ");
 }

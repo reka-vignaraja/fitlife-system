@@ -90,7 +90,7 @@ export default function NutritionLogPage() {
       }));
 
       setProfileMessage("Profile details loaded automatically.");
-    } catch (err) {
+    } catch {
       setProfileMessage(
         "Profile details not found. You can enter nutrition details manually."
       );
@@ -110,6 +110,7 @@ export default function NutritionLogPage() {
 
   const generateNutritionPlan = async (e: FormEvent) => {
     e.preventDefault();
+
     setError("");
     setResult(null);
 
@@ -119,7 +120,9 @@ export default function NutritionLogPage() {
       !formData.weight_kg ||
       !formData.water_intake_liters
     ) {
-      setError("Please fill age, height, weight, and water intake.");
+      setError(
+        "Please enter water intake. Profile age, height, and weight are also required."
+      );
       return;
     }
 
@@ -138,11 +141,11 @@ export default function NutritionLogPage() {
           diet_type: formData.diet_type,
           meals_per_day: Number(formData.meals_per_day),
           water_intake_liters: Number(formData.water_intake_liters),
-          allergies: formData.allergies,
-          health_conditions: formData.health_conditions,
-          food_avoid: formData.food_avoid,
-          daily_food_notes: formData.daily_food_notes,
-          notes: formData.notes,
+          allergies: formData.allergies || "None",
+          health_conditions: formData.health_conditions || "None",
+          food_avoid: formData.food_avoid || "None",
+          daily_food_notes: formData.daily_food_notes || "",
+          notes: formData.notes || "",
         }),
       });
 
@@ -160,89 +163,105 @@ export default function NutritionLogPage() {
 
   return (
     <ProtectedRoute>
-      <main className="nutritionPage">
-        <section className="nutritionHero">
-          <div className="container">
-            <span className="badge">AI Nutrition Generator</span>
+      <main className="nutritionPage nutritionCompactPage">
+        <section className="nutritionCompactHero">
+          <div className="container nutritionHeroWrap">
+            <div>
+              <span className="badge">AI Nutrition Generator</span>
 
-            <h1>Personalized Nutrition Analysis</h1>
+              <h1>Personalized Nutrition Analysis</h1>
 
-            <p>
-              Your saved profile details such as age, gender, height, weight,
-              activity level, goal, diet preference, allergies, and health
-              conditions will be automatically filled.
-            </p>
+              <p>
+                FitLife uses your saved profile, goal, diet preference, water
+                intake, and food notes to generate daily nutrition targets and
+                meal-wise guidance.
+              </p>
+            </div>
+
+            <div className="nutritionHeroHighlights">
+              <div>
+                <strong>Profile-Based</strong>
+                <span>Auto-filled details</span>
+              </div>
+
+              <div>
+                <strong>Nutrition Score</strong>
+                <span>Easy health insight</span>
+              </div>
+
+              <div>
+                <strong>Meal Guidance</strong>
+                <span>Daily food support</span>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="nutritionSection">
-          <div className="container nutritionGrid">
-            <div className="nutritionFormCard">
-              <h2>User Nutrition Details</h2>
+        <section className="nutritionCompactSection">
+          <div className="container nutritionDashboardLayout">
+            <div className="nutritionProfileCard nutritionProfileFull">
+              <div className="nutritionCardTop">
+                <div>
+                  <span className="miniLabel">Profile Summary</span>
+                  <h2>Auto-loaded Details</h2>
+                </div>
+              </div>
 
-              <p>
-                {profileLoading
-                  ? "Loading your profile details..."
-                  : "You can edit these values before generating your nutrition plan."}
+              <p className="nutritionStatusText">
+                {profileLoading ? "Loading profile details..." : profileMessage}
               </p>
 
-              {profileMessage && (
-                <div className="nutritionInfoBox">
-                  <p>{profileMessage}</p>
+              <div className="nutritionProfileGrid">
+                <div>
+                  <span>Age</span>
+                  <strong>{formData.age || "-"}</strong>
                 </div>
-              )}
 
-              {error && <div className="errorMessage">{error}</div>}
+                <div>
+                  <span>Gender</span>
+                  <strong>{formatText(formData.gender)}</strong>
+                </div>
 
-              <form onSubmit={generateNutritionPlan} className="nutritionForm">
-                <div className="nutritionFormGrid">
-                  <div className="nutritionFormGroup">
-                    <label>Age</label>
-                    <input
-                      type="number"
-                      name="age"
-                      placeholder="25"
-                      value={formData.age}
-                      onChange={handleChange}
-                    />
+                <div>
+                  <span>Height</span>
+                  <strong>
+                    {formData.height_cm ? `${formData.height_cm} cm` : "-"}
+                  </strong>
+                </div>
+
+                <div>
+                  <span>Weight</span>
+                  <strong>
+                    {formData.weight_kg ? `${formData.weight_kg} kg` : "-"}
+                  </strong>
+                </div>
+
+                <div>
+                  <span>Goal</span>
+                  <strong>{formatText(formData.goal)}</strong>
+                </div>
+
+                <div>
+                  <span>Diet Type</span>
+                  <strong>{formatText(formData.diet_type)}</strong>
+                </div>
+              </div>
+            </div>
+
+            <div className="nutritionWorkGrid">
+              <form onSubmit={generateNutritionPlan} className="nutritionQuickForm">
+                <div className="nutritionCardTop">
+                  <div>
+                    <span className="miniLabel">Nutrition Inputs</span>
+                    <h2>Generate Nutrition Plan</h2>
                   </div>
+                </div>
 
-                  <div className="nutritionFormGroup">
-                    <label>Gender</label>
-                    <select
-                      name="gender"
-                      value={formData.gender}
-                      onChange={handleChange}
-                    >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                    </select>
-                  </div>
+                {error && <div className="errorMessage">{error}</div>}
 
-                  <div className="nutritionFormGroup">
-                    <label>Height cm</label>
-                    <input
-                      type="number"
-                      name="height_cm"
-                      placeholder="170"
-                      value={formData.height_cm}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="nutritionFormGroup">
-                    <label>Weight kg</label>
-                    <input
-                      type="number"
-                      name="weight_kg"
-                      placeholder="75"
-                      value={formData.weight_kg}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="nutritionFormGroup">
-                    <label>Activity Level</label>
+                <div className="nutritionQuickGrid">
+                  <label>
+                    Activity Level
                     <select
                       name="activity_level"
                       value={formData.activity_level}
@@ -254,10 +273,10 @@ export default function NutritionLogPage() {
                       <option value="active">Active</option>
                       <option value="very active">Very Active</option>
                     </select>
-                  </div>
+                  </label>
 
-                  <div className="nutritionFormGroup">
-                    <label>Goal</label>
+                  <label>
+                    Goal
                     <select
                       name="goal"
                       value={formData.goal}
@@ -268,10 +287,10 @@ export default function NutritionLogPage() {
                       <option value="muscle gain">Muscle Gain</option>
                       <option value="maintenance">Maintenance</option>
                     </select>
-                  </div>
+                  </label>
 
-                  <div className="nutritionFormGroup">
-                    <label>Diet Type</label>
+                  <label>
+                    Diet Type
                     <select
                       name="diet_type"
                       value={formData.diet_type}
@@ -282,10 +301,10 @@ export default function NutritionLogPage() {
                       <option value="vegan">Vegan</option>
                       <option value="balanced diet">Balanced Diet</option>
                     </select>
-                  </div>
+                  </label>
 
-                  <div className="nutritionFormGroup">
-                    <label>Meals Per Day</label>
+                  <label>
+                    Meals Per Day
                     <select
                       name="meals_per_day"
                       value={formData.meals_per_day}
@@ -296,196 +315,260 @@ export default function NutritionLogPage() {
                       <option value="5">5 Meals</option>
                       <option value="6">6 Meals</option>
                     </select>
-                  </div>
+                  </label>
 
-                  <div className="nutritionFormGroup">
-                    <label>Water Intake Liters</label>
+                  <label className="nutritionWideInput">
+                    Water Intake(L)
                     <input
                       type="number"
                       step="0.1"
                       name="water_intake_liters"
-                      placeholder="1.5"
+                      placeholder="Example: 1.5"
                       value={formData.water_intake_liters}
                       onChange={handleChange}
                     />
+                  </label>
+                </div>
+
+                <details className="nutritionAdvancedSection">
+                  <summary>Health and food preferences</summary>
+
+                  <div className="nutritionQuickGrid">
+                    <label>
+                      Allergies
+                      <input
+                        type="text"
+                        name="allergies"
+                        placeholder="Example: peanuts, milk"
+                        value={formData.allergies}
+                        onChange={handleChange}
+                      />
+                    </label>
+
+                    <label>
+                      Health Conditions
+                      <input
+                        type="text"
+                        name="health_conditions"
+                        placeholder="Example: diabetes, pressure"
+                        value={formData.health_conditions}
+                        onChange={handleChange}
+                      />
+                    </label>
+
+                    <label className="nutritionWideInput">
+                      Foods to Avoid
+                      <input
+                        type="text"
+                        name="food_avoid"
+                        placeholder="Example: egg, fish, fried foods"
+                        value={formData.food_avoid}
+                        onChange={handleChange}
+                      />
+                    </label>
                   </div>
-                </div>
+                </details>
 
-                <div className="nutritionFormGroup">
-                  <label>Allergies</label>
-                  <input
-                    type="text"
-                    name="allergies"
-                    placeholder="Example: peanuts, milk"
-                    value={formData.allergies}
-                    onChange={handleChange}
-                  />
-                </div>
+                <details className="nutritionAdvancedSection">
+                  <summary>Daily food notes</summary>
 
-                <div className="nutritionFormGroup">
-                  <label>Health Conditions</label>
-                  <input
-                    type="text"
-                    name="health_conditions"
-                    placeholder="Example: diabetes, pressure"
-                    value={formData.health_conditions}
-                    onChange={handleChange}
-                  />
-                </div>
+                  <label className="nutritionFullText">
+                    Food Notes
+                    <textarea
+                      name="daily_food_notes"
+                      placeholder="Example: I ate rice, chicken, vegetables and one soft drink"
+                      value={formData.daily_food_notes}
+                      onChange={handleChange}
+                    />
+                  </label>
 
-                <div className="nutritionFormGroup">
-                  <label>Foods to Avoid</label>
-                  <input
-                    type="text"
-                    name="food_avoid"
-                    placeholder="Example: egg, fish"
-                    value={formData.food_avoid}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="nutritionFormGroup">
-                  <label>Daily Food Notes</label>
-                  <textarea
-                    name="daily_food_notes"
-                    placeholder="Example: I ate rice, chicken, vegetables and one soft drink"
-                    value={formData.daily_food_notes}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="nutritionFormGroup">
-                  <label>Extra Notes</label>
-                  <textarea
-                    name="notes"
-                    placeholder="Example: I want healthier food habits"
-                    value={formData.notes}
-                    onChange={handleChange}
-                  />
-                </div>
+                  <label className="nutritionFullText">
+                    Extra Notes
+                    <textarea
+                      name="notes"
+                      placeholder="Example: I want healthier food habits"
+                      value={formData.notes}
+                      onChange={handleChange}
+                    />
+                  </label>
+                </details>
 
                 <button
                   type="submit"
-                  className="nutritionSubmitBtn"
+                  className="nutritionGenerateBtn"
                   disabled={loading}
                 >
                   {loading ? "Generating..." : "Generate AI Nutrition Plan"}
                 </button>
               </form>
-            </div>
 
-            <div className="nutritionResultCard">
-              {!result ? (
-                <>
-                  <h2>Nutrition Plan Preview</h2>
+              <div className="nutritionCompactRight">
+                {!result ? (
+                  <div className="nutritionEmptyResult">
+                    <div className="nutritionCircleIcon">🥗</div>
 
-                  <p>
-                    Your nutrition targets and meal-wise recommendations will
-                    appear here after submitting your details.
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h2>Your AI Nutrition Plan</h2>
-
-                  <div className="nutritionSummaryGrid">
-                    <div>
-                      <span>BMI</span>
-                      <strong>{result.bmi}</strong>
-                      <p>{result.bmi_category}</p>
-                    </div>
-
-                    <div>
-                      <span>Score</span>
-                      <strong>{result.nutrition_score}</strong>
-                      <p>Nutrition score</p>
-                    </div>
-
-                    <div>
-                      <span>Calories</span>
-                      <strong>{result.daily_calorie_target}</strong>
-                      <p>Daily target</p>
-                    </div>
-
-                    <div>
-                      <span>Water</span>
-                      <strong>{result.water_target_liters}L</strong>
-                      <p>Daily target</p>
-                    </div>
-                  </div>
-
-                  <div className="macroTargetBox">
-                    <h3>Daily Macro Targets</h3>
-
-                    <div className="macroGrid">
-                      <div>
-                        <span>Protein</span>
-                        <strong>{result.daily_macro_targets.protein_g}g</strong>
-                      </div>
-
-                      <div>
-                        <span>Carbs</span>
-                        <strong>{result.daily_macro_targets.carbs_g}g</strong>
-                      </div>
-
-                      <div>
-                        <span>Fats</span>
-                        <strong>{result.daily_macro_targets.fats_g}g</strong>
-                      </div>
-                    </div>
+                    <h2>Nutrition Plan Preview</h2>
 
                     <p>
-                      Fiber target: {result.fiber_target_g}g | Sugar limit:{" "}
-                      {result.sugar_limit_g}g | Sodium limit:{" "}
-                      {result.sodium_limit_mg}mg
+                      Your nutrition score, daily calorie target, water target,
+                      macro balance, meal-wise nutrition chart, and guidance will
+                      appear here.
                     </p>
+
+                    <div className="nutritionEmptyList">
+                      <span>✓ Nutrition score</span>
+                      <span>✓ Macro and water targets</span>
+                      <span>✓ Meal-wise food recommendations</span>
+                    </div>
                   </div>
+                ) : (
+                  <div className="nutritionResultContent">
+                    <span className="nutritionResultBadge">
+                      Nutrition Score: {result.nutrition_score}/100
+                    </span>
 
-                  <div className="nutritionChart">
-                    {result.nutrition_chart.map((meal) => (
-                      <div className="nutritionMealCard" key={meal.meal}>
-                        <div className="nutritionMealTop">
-                          <div>
-                            <h3>{meal.meal}</h3>
-                            <p>{meal.target_calories} kcal</p>
-                          </div>
+                    <h2>Your AI Nutrition Plan</h2>
 
-                          <span>
-                            P {meal.protein_g}g / C {meal.carbs_g}g / F{" "}
-                            {meal.fats_g}g
-                          </span>
+                    <p className="nutritionMatchText">
+                      {getNutritionLevel(result.nutrition_score)}
+                    </p>
+
+                    <div className="nutritionSummaryGrid">
+                      <div>
+                        <span>Score</span>
+                        <strong>{result.nutrition_score}</strong>
+                        <p>Nutrition score</p>
+                      </div>
+
+                      <div>
+                        <span>Calories</span>
+                        <strong>{result.daily_calorie_target}</strong>
+                        <p>Daily target</p>
+                      </div>
+
+                      <div>
+                        <span>Water</span>
+                        <strong>{result.water_target_liters}L</strong>
+                        <p>Daily target</p>
+                      </div>
+
+                      <div>
+                        <span>Fiber</span>
+                        <strong>{result.fiber_target_g}g</strong>
+                        <p>Daily target</p>
+                      </div>
+                    </div>
+
+                    <div className="nutritionMacroBox">
+                      <h3>Daily Macro Targets</h3>
+
+                      <div className="nutritionMacroGrid">
+                        <div>
+                          <span>Protein</span>
+                          <strong>{result.daily_macro_targets.protein_g}g</strong>
                         </div>
 
-                        <ul>
-                          {meal.recommended_foods.map((food) => (
-                            <li key={food}>{food}</li>
-                          ))}
-                        </ul>
+                        <div>
+                          <span>Carbs</span>
+                          <strong>{result.daily_macro_targets.carbs_g}g</strong>
+                        </div>
 
-                        <p>{meal.nutrition_note}</p>
+                        <div>
+                          <span>Fats</span>
+                          <strong>{result.daily_macro_targets.fats_g}g</strong>
+                        </div>
                       </div>
-                    ))}
+
+                      <p>
+                        Sugar limit: {result.sugar_limit_g}g | Sodium limit:{" "}
+                        {result.sodium_limit_mg}mg
+                      </p>
+                    </div>
+
+                    <div className="nutritionMealPanel">
+                      <h3>Meal-wise Nutrition Chart</h3>
+
+                      <div className="nutritionMealList">
+                        {result.nutrition_chart.map((meal) => (
+                          <div className="nutritionMealCard" key={meal.meal}>
+                            <div className="nutritionMealTop">
+                              <div>
+                                <h4>{meal.meal}</h4>
+                                <p>{meal.target_calories} kcal</p>
+                              </div>
+
+                              <span>
+                                P {meal.protein_g}g / C {meal.carbs_g}g / F{" "}
+                                {meal.fats_g}g
+                              </span>
+                            </div>
+
+                            <ul className="nutritionFoodsList">
+                              {meal.recommended_foods.map((food) => (
+                                <li key={`${meal.meal}-${food}`}>
+                                  {formatText(food)}
+                                </li>
+                              ))}
+                            </ul>
+
+                            <p>{meal.nutrition_note}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <details
+                      className="nutritionAdvancedSection nutritionResultDetails"
+                      open
+                    >
+                      <summary>Practical recommendations</summary>
+
+                      <ul className="nutritionRecommendationList">
+                        {result.recommendations.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </details>
+
+                    <p className="nutritionFriendlyNote">
+                      This nutrition plan is generated for general health and
+                      fitness guidance. It is not a replacement for professional
+                      medical or dietician advice.
+                    </p>
                   </div>
-
-                  <div className="nutritionRecommendationBox">
-                    <h3>Recommendations</h3>
-
-                    <ul>
-                      {result.recommendations.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-
-                    <p>{result.disclaimer}</p>
-                  </div>
-                </>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </section>
       </main>
     </ProtectedRoute>
   );
+}
+
+function getNutritionLevel(score: number) {
+  if (score >= 80) {
+    return "Excellent nutrition balance. Continue maintaining healthy food and water habits.";
+  }
+
+  if (score >= 60) {
+    return "Good nutrition balance. Some improvements can make your daily intake healthier.";
+  }
+
+  if (score >= 40) {
+    return "Moderate nutrition balance. Improve hydration, food quality, and meal consistency.";
+  }
+
+  return "Needs improvement. Focus on water intake, balanced meals, and reducing unhealthy foods.";
+}
+
+function formatText(value: string) {
+  if (!value) return "-";
+
+  return value
+    .split(" ")
+    .map((item) => item.charAt(0).toUpperCase() + item.slice(1))
+    .join(" ");
 }
 
 function normalizeGender(gender?: string) {
@@ -541,6 +624,7 @@ function normalizeDietType(dietType?: string) {
   if (value === "non vegetarian") return "non vegetarian";
   if (value === "vegan") return "vegan";
   if (value === "balanced diet") return "balanced diet";
+  if (value === "balanced") return "balanced diet";
 
   return "";
 }

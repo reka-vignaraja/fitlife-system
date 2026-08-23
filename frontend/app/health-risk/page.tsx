@@ -202,28 +202,30 @@ export default function HealthRiskPage() {
       <section className="healthRiskCompactHero">
         <div className="container healthRiskHeroWrap">
           <div>
-            <span className="pageBadge">AI Health Prediction</span>
+            <span className="healthRiskBadge">AI Health Prediction</span>
+
             <h1>Health Risk Prediction</h1>
+
             <p>
-              Basic profile details are loaded automatically. You only need to
-              enter blood pressure, cholesterol, and smoking status to generate
-              a simple lifestyle risk summary.
+              Profile details are loaded automatically. Enter only current blood
+              pressure, cholesterol, and smoking status to generate a simple
+              lifestyle risk summary.
             </p>
           </div>
 
           <div className="healthHeroHighlights">
             <div>
-              <strong>Secure</strong>
-              <span>Protected user data</span>
+              <strong>Profile</strong>
+              <span>Auto loaded</span>
             </div>
 
             <div>
-              <strong>Simple</strong>
-              <span>Less repeated input</span>
+              <strong>Inputs</strong>
+              <span>Only required data</span>
             </div>
 
             <div>
-              <strong>Helpful</strong>
+              <strong>Result</strong>
               <span>Clear guidance</span>
             </div>
           </div>
@@ -231,65 +233,65 @@ export default function HealthRiskPage() {
       </section>
 
       <section className="healthRiskCompactSection">
-        <div className="container healthRiskCompactGrid">
-          <div className="healthRiskLeftPanel">
-            <div className="profileLoadedCard">
-              <div className="profileLoadedTop">
-                <div>
-                  <span className="miniLabel">Profile Summary</span>
-                  <h2>Auto-loaded Details</h2>
-                </div>
-
-                <button
-                  type="button"
-                  className="textActionBtn"
-                  onClick={() => router.push("/profile")}
-                >
-                  Update Profile
-                </button>
+        <div className="container healthRiskDashboard">
+          <div className="profileLoadedCard healthRiskProfileFull">
+            <div className="profileLoadedTop">
+              <div>
+                <span className="healthRiskBadge">Profile Summary</span>
+                <h2>Auto-loaded Details</h2>
               </div>
 
-              <p className="profileStatusText">
-                {profileLoading ? "Loading profile details..." : profileMessage}
-              </p>
-
-              <div className="profileMiniGrid">
-                <div>
-                  <span>Age</span>
-                  <strong>{formData.age || "-"}</strong>
-                </div>
-
-                <div>
-                  <span>Gender</span>
-                  <strong>{formData.gender || "-"}</strong>
-                </div>
-
-                <div>
-                  <span>Height</span>
-                  <strong>
-                    {formData.height_cm ? `${formData.height_cm} cm` : "-"}
-                  </strong>
-                </div>
-
-                <div>
-                  <span>Weight</span>
-                  <strong>
-                    {formData.weight_kg ? `${formData.weight_kg} kg` : "-"}
-                  </strong>
-                </div>
-
-                <div className="wideProfileItem">
-                  <span>Activity Level</span>
-                  <strong>{formData.activity_level || "-"}</strong>
-                </div>
-              </div>
+              <button
+                type="button"
+                className="textActionBtn"
+                onClick={() => router.push("/profile")}
+              >
+                Update Profile
+              </button>
             </div>
 
+            <p className="profileStatusText">
+              {profileLoading ? "Loading profile details..." : profileMessage}
+            </p>
+
+            <div className="profileMiniGrid healthRiskProfileSingleLine">
+              <div>
+                <span>Age</span>
+                <strong>{formData.age || "-"}</strong>
+              </div>
+
+              <div>
+                <span>Gender</span>
+                <strong>{formData.gender || "-"}</strong>
+              </div>
+
+              <div>
+                <span>Height</span>
+                <strong>
+                  {formData.height_cm ? `${formData.height_cm} cm` : "-"}
+                </strong>
+              </div>
+
+              <div>
+                <span>Weight</span>
+                <strong>
+                  {formData.weight_kg ? `${formData.weight_kg} kg` : "-"}
+                </strong>
+              </div>
+
+              <div>
+                <span>Activity Level</span>
+                <strong>{formData.activity_level || "-"}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div className="healthRiskWorkGrid">
             <form className="healthRiskQuickForm" onSubmit={handleSubmit}>
               <div className="quickFormHeader">
                 <div>
-                  <span className="miniLabel">Required Health Inputs</span>
-                  <h2>Enter Current Measurements</h2>
+                  <span className="healthRiskBadge">Required Inputs</span>
+                  <h2>Current Health Measurements</h2>
                 </div>
               </div>
 
@@ -360,107 +362,114 @@ export default function HealthRiskPage() {
                 {loading ? "Predicting..." : "Predict Health Risk"}
               </button>
             </form>
-          </div>
 
-          <div className="healthRiskRightPanel">
-            {!result ? (
-              <div className="healthEmptyResult">
-                <div className="healthCircleIcon">♡</div>
-                <h2>No Prediction Yet</h2>
-                <p>
-                  After entering the required health measurements, your risk
-                  summary and recommendations will appear here.
-                </p>
+            <div className="healthRiskRightPanel">
+              {!result ? (
+                <div className="healthEmptyResult">
+                  <div className="healthCircleIcon">♡</div>
 
-                <div className="healthEmptyList">
-                  <span>✓ Profile-based prediction</span>
-                  <span>✓ Simple risk summary</span>
-                  <span>✓ Lifestyle recommendations</span>
-                </div>
-              </div>
-            ) : (
-              <div className="healthResultContent">
-                <span className={`riskBadge ${getRiskClass(result.predicted_risk_level)}`}>
-                  {result.predicted_risk_level}
-                </span>
+                  <h2>No Prediction Yet</h2>
 
-                <h2>{result.plan_title}</h2>
-                <p className="healthResultMessage">{result.message}</p>
+                  <p>
+                    After entering the required health measurements, your risk
+                    summary and recommendations will appear here.
+                  </p>
 
-                <div className="healthResultStats">
-                  <div>
-                    <strong>{result.predicted_risk_level}</strong>
-                    <span>Risk Level</span>
-                  </div>
-
-                  <div>
-                    <strong>{getPredictionStrength(result.confidence)}</strong>
-                    <span>Prediction Strength</span>
-                  </div>
-
-                  <div>
-                    <strong>{result.recommendations.length}</strong>
-                    <span>Health Tips</span>
+                  <div className="healthEmptyList">
+                    <span>Profile-based prediction</span>
+                    <span>Simple risk summary</span>
+                    <span>Lifestyle recommendations</span>
                   </div>
                 </div>
+              ) : (
+                <div className="healthResultContent">
+                  <span
+                    className={`riskBadge ${getRiskClass(
+                      result.predicted_risk_level
+                    )}`}
+                  >
+                    {result.predicted_risk_level}
+                  </span>
 
-                <div className="healthRecommendationBox">
-                  <h3>Recommended Actions</h3>
+                  <h2>{result.plan_title}</h2>
 
-                  <ul>
-                    {result.recommendations.slice(0, 5).map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
+                  <p className="healthResultMessage">{result.message}</p>
 
-                <details className="healthInputDetails">
-                  <summary>View input summary</summary>
+                  <div className="healthResultStats">
+                    <div>
+                      <strong>{result.predicted_risk_level}</strong>
+                      <span>Risk Level</span>
+                    </div>
 
-                  <div className="healthInputSummary">
-                    <p>
-                      <strong>Age:</strong> {result.age}
-                    </p>
+                    <div>
+                      <strong>{getPredictionStrength(result.confidence)}</strong>
+                      <span>Prediction Strength</span>
+                    </div>
 
-                    <p>
-                      <strong>Gender:</strong> {result.gender}
-                    </p>
-
-                    <p>
-                      <strong>Height:</strong> {result.height_cm} cm
-                    </p>
-
-                    <p>
-                      <strong>Weight:</strong> {result.weight_kg} kg
-                    </p>
-
-                    <p>
-                      <strong>BP:</strong> {result.systolic_bp}/
-                      {result.diastolic_bp}
-                    </p>
-
-                    <p>
-                      <strong>Cholesterol:</strong> {result.cholesterol} mg/dL
-                    </p>
-
-                    <p>
-                      <strong>Activity:</strong> {result.activity_level}
-                    </p>
-
-                    <p>
-                      <strong>Smoker:</strong> {result.smoker}
-                    </p>
+                    <div>
+                      <strong>{result.recommendations.length}</strong>
+                      <span>Health Tips</span>
+                    </div>
                   </div>
-                </details>
 
-                <p className="healthFriendlyNote">
-                  This result is generated using your health inputs and is
-                  intended for awareness and lifestyle guidance only.
-                </p>
+                  <div className="healthRecommendationBox">
+                    <h3>Recommended Actions</h3>
 
-                <p className="healthDisclaimer">{result.disclaimer}</p>
-              </div>
-            )}
+                    <ul>
+                      {result.recommendations.slice(0, 5).map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <details className="healthInputDetails">
+                    <summary>View input summary</summary>
+
+                    <div className="healthInputSummary">
+                      <p>
+                        <strong>Age:</strong> {result.age}
+                      </p>
+
+                      <p>
+                        <strong>Gender:</strong> {result.gender}
+                      </p>
+
+                      <p>
+                        <strong>Height:</strong> {result.height_cm} cm
+                      </p>
+
+                      <p>
+                        <strong>Weight:</strong> {result.weight_kg} kg
+                      </p>
+
+                      <p>
+                        <strong>BP:</strong> {result.systolic_bp}/
+                        {result.diastolic_bp}
+                      </p>
+
+                      <p>
+                        <strong>Cholesterol:</strong> {result.cholesterol} mg/dL
+                      </p>
+
+                      <p>
+                        <strong>Activity:</strong> {result.activity_level}
+                      </p>
+
+                      <p>
+                        <strong>Smoker:</strong> {result.smoker}
+                      </p>
+                    </div>
+                  </details>
+
+                  <p className="healthFriendlyNote">
+                    This result is generated using your health inputs and is
+                    intended for awareness and lifestyle guidance only.
+                  </p>
+
+                  <p className="healthDisclaimer">{result.disclaimer}</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>

@@ -5,43 +5,26 @@ import { MouseEvent, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { removeToken } from "@/lib/auth";
 
-const moduleLinks = [
-  {
-    name: "Dashboard",
-    path: "/dashboard",
-  },
-  {
-    name: "Health Risk",
-    path: "/health-risk",
-  },
-  {
-    name: "BMI Analysis",
-    path: "/bmi",
-  },
-  {
-    name: "Diet Recommendation",
-    path: "/diet-recommendation",
-  },
-  {
-    name: "AI Fitness Guider",
-    path: "/fitness-tracking",
-  },
-  {
-    name: "Nutrition Log",
-    path: "/nutrition-log",
-  },
-  {
-    name: "Sleep Tracking",
-    path: "/sleep-tracking",
-  },
-  {
-    name: "Goals",
-    path: "/goals",
-  },
-  {
-    name: "Progress Report",
-    path: "/progress-report",
-  },
+type MenuItem = {
+  name: string;
+  path: string;
+};
+
+const healthLinks: MenuItem[] = [
+  { name: "Profile", path: "/profile" },
+  { name: "BMI Analysis", path: "/bmi" },
+  { name: "Health Risk", path: "/health-risk" },
+  { name: "Sleep Tracking", path: "/sleep-tracking" },
+];
+
+const nutritionLinks: MenuItem[] = [
+  { name: "Diet Recommendation", path: "/diet-recommendation" },
+  { name: "Nutrition Log", path: "/nutrition-log" },
+];
+
+const fitnessLinks: MenuItem[] = [
+  { name: "AI Fitness Guider", path: "/fitness-tracking" },
+  { name: "Goals", path: "/goals" },
 ];
 
 export default function Navbar() {
@@ -49,15 +32,15 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [modulesOpen, setModulesOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string>("");
 
   useEffect(() => {
     const token = localStorage.getItem("fitlife_token");
     setIsLoggedIn(!!token);
-    setModulesOpen(false);
+    setOpenMenu("");
   }, [pathname]);
 
-  const handleModuleLink = (
+  const handlePrivateLink = (
     e: MouseEvent<HTMLAnchorElement>,
     path: string
   ) => {
@@ -67,12 +50,12 @@ export default function Navbar() {
 
     if (!token) {
       setIsLoggedIn(false);
-      setModulesOpen(false);
+      setOpenMenu("");
       router.push("/login");
       return;
     }
 
-    setModulesOpen(false);
+    setOpenMenu("");
     router.push(path);
   };
 
@@ -84,16 +67,63 @@ export default function Navbar() {
     localStorage.removeItem("fitlife_profile");
 
     setIsLoggedIn(false);
-    setModulesOpen(false);
+    setOpenMenu("");
 
     router.push("/login");
+  };
+
+  const toggleMenu = (menuName: string) => {
+    setOpenMenu((current) => (current === menuName ? "" : menuName));
+  };
+
+  const isActivePath = (path: string) => {
+    return pathname === path || pathname.startsWith(`${path}/`);
+  };
+
+  const renderDropdown = (
+    menuName: string,
+    label: string,
+    links: MenuItem[]
+  ) => {
+    const isOpen = openMenu === menuName;
+
+    return (
+      <div className="topNavDropdown">
+        <button
+          type="button"
+          className={isOpen ? "topNavBtn topNavBtnActive" : "topNavBtn"}
+          onClick={() => toggleMenu(menuName)}
+        >
+          {label} <span>{isOpen ? "⌃" : "⌄"}</span>
+        </button>
+
+        {isOpen && (
+          <div className="topNavMenu">
+            {links.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                onClick={(e) => handlePrivateLink(e, item.path)}
+                className={
+                  isActivePath(item.path)
+                    ? "topNavMenuItem topNavMenuItemActive"
+                    : "topNavMenuItem"
+                }
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
     <header className="navbar">
       <div className="navContainer">
         {/* Logo */}
-        <Link href="/" className="logoBox">
+        <Link href={isLoggedIn ? "/dashboard" : "/"} className="logoBox">
           <div className="logoIcon">F</div>
 
           <div>
@@ -102,39 +132,36 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Navigation Links */}
+        {/* Center Navigation */}
         <nav className="navLinks">
           <Link href="/about">About</Link>
-          <Link href="/features">Features</Link>
 
-          {/* Modules only visible after login */}
+          {!isLoggedIn && <Link href="/features">Features</Link>}
+
           {isLoggedIn && (
-            <div className="modulesDropdown">
-              <button
-                type="button"
-                className="modulesBtn"
-                onClick={() => setModulesOpen((prev) => !prev)}
+            <>
+              <Link
+                href="/dashboard"
+                onClick={(e) => handlePrivateLink(e, "/dashboard")}
+                className={isActivePath("/dashboard") ? "navActiveLink" : ""}
               >
-                Modules <span>⌄</span>
-              </button>
+                Dashboard
+              </Link>
 
-              {modulesOpen && (
-                <div className="modulesMenu">
-                  {moduleLinks.map((item) => (
-                    <Link
-                      key={item.path}
-                      href={item.path}
-                      onClick={(e) => handleModuleLink(e, item.path)}
-                      className="modulesMenuItem"
-                    >
-                      <div>
-                        <strong>{item.name}</strong>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+              {renderDropdown("health", "Health", healthLinks)}
+              {renderDropdown("nutrition", "Nutrition", nutritionLinks)}
+              {renderDropdown("fitness", "Fitness", fitnessLinks)}
+
+              <Link
+                href="/progress-report"
+                onClick={(e) => handlePrivateLink(e, "/progress-report")}
+                className={
+                  isActivePath("/progress-report") ? "navActiveLink" : ""
+                }
+              >
+                Report
+              </Link>
+            </>
           )}
         </nav>
 
