@@ -356,6 +356,7 @@ def generate_ai_fitness_plan(data, user_id: str):
         "recommendations": recommendations,
         "disclaimer": "This is an AI-generated educational fitness plan. It is not medical advice.",
         "created_at": datetime.utcnow(),
+        "updated_at": datetime.utcnow(),
     }
 
     insert_data = result.copy()
@@ -364,9 +365,65 @@ def generate_ai_fitness_plan(data, user_id: str):
     result["_id"] = str(insert_result.inserted_id)
     result["user_object_id"] = str(user_object_id)
     result["created_at"] = result["created_at"].isoformat()
+    result["updated_at"] = result["updated_at"].isoformat()
 
     return {
         "message": "AI Fitness Guider plan generated successfully",
         "saved_to_progress_report": True,
         **result,
+    }
+
+
+def serialize_fitness_plan_document(document):
+    if isinstance(document, ObjectId):
+        return str(document)
+
+    if isinstance(document, datetime):
+        return document.isoformat()
+
+    if isinstance(document, list):
+        return [serialize_fitness_plan_document(item) for item in document]
+
+    if isinstance(document, dict):
+        return {
+            key: serialize_fitness_plan_document(value)
+            for key, value in document.items()
+        }
+
+    return document
+
+
+def get_latest_fitness_plan(user_id: str):
+    db = get_database()
+
+    fitness_collection = db["fitness_plans"]
+
+    try:
+        user_object_id = ObjectId(user_id)
+    except Exception:
+        raise HTTPException(status_code=401, detail="Invalid user id")
+
+    latest_plan = fitness_collection.find_one(
+        {
+            "$or": [
+                {"user_id": user_id},
+                {"user_object_id": user_object_id},
+            ]
+        },
+        sort=[("created_at", -1), ("updated_at", -1)],
+    )
+
+    if not latest_plan:
+        return {
+            "message": "No fitness plan found",
+            "has_plan": False,
+            "plan": None,
+        }
+
+    latest_plan = serialize_fitness_plan_document(latest_plan)
+
+    return {
+        "message": "Latest fitness plan loaded successfully",
+        "has_plan": True,
+        "plan": latest_plan,
     }
