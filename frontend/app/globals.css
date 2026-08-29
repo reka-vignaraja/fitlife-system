@@ -1,4 +1,19 @@
+@import "tailwindcss";
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
 * {
   box-sizing: border-box;
 }
@@ -92,7 +107,7 @@ button {
   font-size: 12px;
 }
 
-/* Navbar Responsive */
+
 
 /* =========================================================
    Navbar Split Dropdown Update
@@ -2116,6 +2131,608 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 
   .todayWorkoutTop {
     flex-direction: column !important;
+  }
+}
+/* ================================
+   FitLife Goals Page CSS
+   ================================ */
+
+.goalsPage,
+.goalsOrangePage {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(249, 115, 22, 0.24), transparent 28%),
+    radial-gradient(circle at 90% 10%, rgba(245, 158, 11, 0.2), transparent 30%),
+    linear-gradient(135deg, #020617 0%, #050505 45%, #111827 100%);
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+.goalsOrangePage .container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* Hero Section */
+
+.goalsOrangeHero {
+  padding: 90px 0 60px;
+  border-bottom: 1px solid rgba(249, 115, 22, 0.22);
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.88), rgba(17, 24, 39, 0.58)),
+    radial-gradient(circle at right, rgba(249, 115, 22, 0.16), transparent 38%);
+}
+
+.goalsOrangeHeroWrap {
+  display: grid;
+  grid-template-columns: 1.35fr 0.9fr;
+  gap: 34px;
+  align-items: center;
+}
+
+.goalsOrangeBadge,
+.goalsOrangeMiniBadge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border: 1px solid rgba(249, 115, 22, 0.45);
+  background: rgba(249, 115, 22, 0.1);
+  color: #fb923c;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.goalsOrangeHero h1 {
+  margin: 22px 0 18px;
+  max-width: 760px;
+  color: #fff7ed;
+  font-size: clamp(42px, 6vw, 82px);
+  line-height: 0.95;
+  font-weight: 1000;
+  letter-spacing: -0.05em;
+  text-shadow: 0 18px 36px rgba(0, 0, 0, 0.4);
+}
+
+.goalsOrangeHero p {
+  max-width: 700px;
+  color: #dbeafe;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.goalsOrangeHeroStats {
+  display: grid;
+  gap: 18px;
+}
+
+.goalsOrangeHeroStats div {
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.95), rgba(245, 158, 11, 0.95));
+  border-radius: 30px;
+  padding: 26px;
+  color: #050505;
+  box-shadow: 0 28px 60px rgba(249, 115, 22, 0.22);
+}
+
+.goalsOrangeHeroStats span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.goalsOrangeHeroStats strong {
+  display: block;
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 1000;
+  line-height: 1;
+}
+
+/* Main Section */
+
+.goalsOrangeSection {
+  padding: 56px 0;
+}
+
+.goalsOrangeGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.goalsOrangeFormCard,
+.goalsOrangeInfoCard,
+.goalsOrangeGoalCard,
+.goalsOrangeEmpty {
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  background:
+    linear-gradient(145deg, rgba(15, 23, 42, 0.84), rgba(8, 8, 8, 0.92)),
+    radial-gradient(circle at top right, rgba(249, 115, 22, 0.12), transparent 32%);
+  border-radius: 34px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(16px);
+}
+
+.goalsOrangeFormCard {
+  padding: 34px;
+}
+
+.goalsOrangeCardHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.goalsOrangeCardHeader h2,
+.goalsOrangeInfoCard h2,
+.goalsOrangeHistoryHeader h2 {
+  margin: 14px 0 0;
+  color: #fff7ed;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.05;
+  font-weight: 1000;
+  letter-spacing: -0.04em;
+}
+
+.goalsOrangeCardHeader p {
+  max-width: 310px;
+  color: #cbd5e1;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* Alerts */
+
+.goalsOrangeNotice,
+.goalsOrangeError,
+.goalsOrangeSuccess {
+  margin: 18px 0;
+  border-radius: 20px;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.goalsOrangeNotice {
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.12);
+  color: #bfdbfe;
+}
+
+.goalsOrangeError {
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.14);
+  color: #fecaca;
+}
+
+.goalsOrangeSuccess {
+  border: 1px solid rgba(34, 197, 94, 0.38);
+  background: rgba(34, 197, 94, 0.14);
+  color: #bbf7d0;
+}
+
+/* Form */
+
+.goalsOrangeFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.goalsOrangeFormGrid label {
+  display: grid;
+  gap: 9px;
+  color: #fed7aa;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.goalsOrangeFullField {
+  grid-column: 1 / -1;
+}
+
+.goalsOrangeFormGrid input,
+.goalsOrangeFormGrid select,
+.goalsOrangeFormGrid textarea,
+.goalsOrangeUpdateBox input {
+  width: 100%;
+  border: 1px solid rgba(249, 115, 22, 0.38);
+  background: rgba(2, 6, 23, 0.82);
+  color: #ffffff;
+  border-radius: 18px;
+  padding: 14px 15px;
+  font-size: 15px;
+  font-weight: 700;
+  outline: none;
+  transition: 0.22s ease;
+}
+
+.goalsOrangeFormGrid input::placeholder,
+.goalsOrangeFormGrid textarea::placeholder,
+.goalsOrangeUpdateBox input::placeholder {
+  color: #64748b;
+}
+
+.goalsOrangeFormGrid textarea {
+  min-height: 115px;
+  resize: vertical;
+}
+
+.goalsOrangeFormGrid input:focus,
+.goalsOrangeFormGrid select:focus,
+.goalsOrangeFormGrid textarea:focus,
+.goalsOrangeUpdateBox input:focus {
+  border-color: #fb923c;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.18);
+}
+
+.goalsOrangeFormGrid select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.goalsOrangeFormGrid option {
+  background: #020617;
+  color: #ffffff;
+}
+
+.goalsOrangePrimaryBtn {
+  width: 100%;
+  margin-top: 24px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f97316, #fbbf24);
+  color: #050505;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 1000;
+  cursor: pointer;
+  box-shadow: 0 24px 45px rgba(249, 115, 22, 0.28);
+  transition: 0.22s ease;
+}
+
+.goalsOrangePrimaryBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 30px 58px rgba(249, 115, 22, 0.38);
+}
+
+.goalsOrangePrimaryBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  transform: none;
+}
+
+/* Sidebar */
+
+.goalsOrangeSide {
+  display: grid;
+  gap: 24px;
+}
+
+.goalsOrangeInfoCard {
+  padding: 30px;
+}
+
+.goalsOrangeInfoCard p {
+  color: #cbd5e1;
+  line-height: 1.75;
+}
+
+.goalsOrangeTips {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.goalsOrangeTips div {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: start;
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
+  padding: 16px;
+}
+
+.goalsOrangeTips strong {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.16);
+  color: #86efac;
+}
+
+.goalsOrangeTips p {
+  margin: 0;
+  color: #dbeafe;
+}
+
+.goalsOrangeQuickStats {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.goalsOrangeQuickStats div {
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  background: rgba(249, 115, 22, 0.08);
+  border-radius: 20px;
+  padding: 18px;
+}
+
+.goalsOrangeQuickStats span {
+  display: block;
+  margin-bottom: 8px;
+  color: #fdba74;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.goalsOrangeQuickStats strong {
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 1000;
+}
+
+/* History */
+
+.goalsOrangeHistorySection {
+  padding: 24px 0 90px;
+}
+
+.goalsOrangeHistoryHeader {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.goalsOrangeEmpty {
+  padding: 34px;
+  color: #cbd5e1;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.goalsOrangeHistoryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.goalsOrangeGoalCard {
+  padding: 28px;
+}
+
+.goalsOrangeGoalTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: start;
+  margin-bottom: 18px;
+}
+
+.goalsOrangeGoalTop span {
+  display: inline-flex;
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  color: #fdba74;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.goalsOrangeGoalTop h3 {
+  margin: 12px 0 0;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 1000;
+  letter-spacing: -0.03em;
+}
+
+.goalsOrangeGoalTop strong {
+  min-width: 76px;
+  text-align: center;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #f97316, #fbbf24);
+  color: #050505;
+  padding: 14px 12px;
+  font-size: 24px;
+  font-weight: 1000;
+}
+
+.goalsOrangeProgressBar {
+  width: 100%;
+  height: 13px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  margin: 18px 0 22px;
+}
+
+.goalsOrangeProgressBar div {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f97316, #fbbf24, #22c55e);
+  transition: width 0.3s ease;
+}
+
+.goalsOrangeMetaGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.goalsOrangeMetaGrid div {
+  border: 1px solid rgba(249, 115, 22, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.goalsOrangeMetaGrid span {
+  display: block;
+  color: #93c5fd;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.goalsOrangeMetaGrid p {
+  margin: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+/* Update Box */
+
+.goalsOrangeUpdateBox {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.goalsOrangeUpdateBox button,
+.goalsOrangeDeleteBtn {
+  border: none;
+  border-radius: 18px;
+  padding: 13px 18px;
+  font-weight: 1000;
+  cursor: pointer;
+  transition: 0.22s ease;
+}
+
+.goalsOrangeUpdateBox button {
+  background: linear-gradient(135deg, #f97316, #fbbf24);
+  color: #050505;
+}
+
+.goalsOrangeUpdateBox button:hover,
+.goalsOrangeDeleteBtn:hover {
+  transform: translateY(-2px);
+}
+
+.goalsOrangeRecommendation {
+  margin-top: 20px;
+  border: 1px solid rgba(34, 197, 94, 0.24);
+  background: rgba(34, 197, 94, 0.08);
+  border-radius: 22px;
+  padding: 18px;
+}
+
+.goalsOrangeRecommendation span {
+  display: block;
+  color: #86efac;
+  font-size: 13px;
+  font-weight: 1000;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+
+.goalsOrangeRecommendation ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #dcfce7;
+  line-height: 1.7;
+}
+
+.goalsOrangeDeleteBtn {
+  width: 100%;
+  margin-top: 18px;
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fecaca;
+}
+
+.goalsOrangeDeleteBtn:hover {
+  background: rgba(239, 68, 68, 0.24);
+}
+
+/* Responsive */
+
+@media (max-width: 1024px) {
+  .goalsOrangeHeroWrap,
+  .goalsOrangeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .goalsOrangeHeroStats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .goalsOrangePage .container {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .goalsOrangeHero {
+    padding: 64px 0 42px;
+  }
+
+  .goalsOrangeHeroStats,
+  .goalsOrangeFormGrid,
+  .goalsOrangeHistoryGrid,
+  .goalsOrangeMetaGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .goalsOrangeFormCard,
+  .goalsOrangeInfoCard,
+  .goalsOrangeGoalCard {
+    padding: 22px;
+    border-radius: 26px;
+  }
+
+  .goalsOrangeCardHeader {
+    display: grid;
+  }
+
+  .goalsOrangeUpdateBox {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .goalsOrangeHero h1 {
+    font-size: 42px;
+  }
+
+  .goalsOrangeHero p {
+    font-size: 15px;
+  }
+
+  .goalsOrangeGoalTop {
+    display: grid;
+  }
+
+  .goalsOrangeGoalTop strong {
+    width: fit-content;
   }
 }
 /* =========================================================
@@ -4229,49 +4846,260 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   }
 }
 /* ================================
-   Dashboard Page
+   FitLife Dashboard Page - Full Updated CSS
 ================================ */
 
 .dashboardPage {
-  background: #f8fafc;
   min-height: 100vh;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(249, 115, 22, 0.18), transparent 26%),
+    radial-gradient(circle at 90% 5%, rgba(251, 191, 36, 0.16), transparent 28%),
+    linear-gradient(135deg, #fff7ed 0%, #ffffff 44%, #f8fafc 100%);
+  color: #0f172a;
 }
 
+.dashboardContainer {
+  width: min(1240px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+/* ================================
+   Auth Checking
+================================ */
+
+.authCheckingPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f172a;
+  padding: 24px;
+}
+
+.authCheckingBox {
+  width: min(460px, 100%);
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  border-radius: 28px;
+  background: rgba(15, 23, 42, 0.95);
+  padding: 34px;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+.authCheckingBox h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 950;
+}
+
+.authCheckingBox p {
+  margin: 12px 0 0;
+  color: #cbd5e1;
+}
+
+/* ================================
+   Dashboard Hero
+================================ */
+
 .dashboardHero {
-  padding: 70px 0 44px;
-  background:
-    radial-gradient(circle at 8% 10%, rgba(20, 184, 166, 0.16), transparent 28%),
-    radial-gradient(circle at 90% 10%, rgba(15, 118, 110, 0.12), transparent 30%),
-    linear-gradient(135deg, #f0fdfa 0%, #ffffff 50%, #f8fafc 100%);
+  padding: 72px 0 48px;
 }
 
 .dashboardHeroInner {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 44px;
   align-items: center;
-  justify-content: space-between;
-  gap: 40px;
 }
 
-.dashboardHero h1 {
+.dashboardHeroText h1 {
   margin: 20px 0 0;
-  max-width: 720px;
-  font-size: clamp(38px, 5vw, 64px);
-  line-height: 1.05;
-  letter-spacing: -0.06em;
+  max-width: 760px;
+  font-size: clamp(42px, 5vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.065em;
   color: #0f172a;
   font-weight: 950;
 }
 
-.dashboardHero p {
-  margin: 20px 0 0;
+.dashboardHeroText p {
+  margin: 22px 0 0;
   max-width: 720px;
   color: #64748b;
   font-size: 17px;
   line-height: 1.8;
 }
 
+.dashboardBadge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.12);
+  color: #c2410c;
+  border: 1px solid rgba(249, 115, 22, 0.24);
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.darkBadge {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fed7aa;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.dashboardHeroActions {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.dashboardPrimaryBtn,
+.dashboardSecondaryBtn,
+.aiAssistantBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 950;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.dashboardPrimaryBtn {
+  border: none;
+  background: #f97316;
+  color: #111827;
+  box-shadow: 0 18px 38px rgba(249, 115, 22, 0.28);
+}
+
+.dashboardPrimaryBtn:hover {
+  background: #fb923c;
+  transform: translateY(-2px);
+}
+
+.dashboardSecondaryBtn {
+  border: 1px solid rgba(15, 23, 42, 0.16);
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.dashboardSecondaryBtn:hover {
+  border-color: rgba(249, 115, 22, 0.38);
+  color: #c2410c;
+  transform: translateY(-2px);
+}
+
+/* ================================
+   Hero Visual
+================================ */
+
+.dashboardHeroVisual {
+  border-radius: 34px;
+  background:
+    linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(67, 20, 7, 0.94)),
+    linear-gradient(135deg, #f97316, #facc15);
+  color: #ffffff;
+  padding: 28px;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.heroVisualTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.heroVisualTop span {
+  color: #fed7aa;
+  font-size: 13px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.heroVisualTop strong {
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.14);
+  color: #bbf7d0;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.heroVisualCard {
+  margin-top: 24px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.heroVisualCard p {
+  margin: 0;
+  color: #fed7aa;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.heroVisualCard h3 {
+  margin: 8px 0 0;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 950;
+}
+
+.heroVisualCard span {
+  font-size: 42px;
+}
+
+.heroMiniGrid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.heroMiniGrid div {
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.09);
+  padding: 16px;
+}
+
+.heroMiniGrid strong {
+  display: block;
+  font-size: 24px;
+  font-weight: 950;
+  color: #ffffff;
+}
+
+.heroMiniGrid p {
+  margin: 4px 0 0;
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* ================================
+   Dashboard Content
+================================ */
+
 .dashboardContent {
-  padding: 50px 0 90px;
+  padding: 12px 0 90px;
 }
 
 .summaryGrid {
@@ -4280,21 +5108,25 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   gap: 22px;
 }
 
+/* ================================
+   Summary Cards
+================================ */
+
 .dashboardCard {
   position: relative;
   overflow: hidden;
   padding: 28px;
   border-radius: 28px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.07);
   transition: all 0.28s ease;
 }
 
 .dashboardCard:hover {
   transform: translateY(-7px);
-  border-color: #99f6e4;
-  box-shadow: 0 24px 60px rgba(20, 184, 166, 0.14);
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 24px 60px rgba(249, 115, 22, 0.15);
 }
 
 .dashboardCard::after {
@@ -4305,7 +5137,7 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  background: rgba(20, 184, 166, 0.14);
+  background: rgba(249, 115, 22, 0.13);
 }
 
 .dashboardCardTop {
@@ -4317,7 +5149,7 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   width: 58px;
   height: 58px;
   border-radius: 20px;
-  background: #ccfbf1;
+  background: #ffedd5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4330,7 +5162,7 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   margin: 22px 0 0;
   color: #334155;
   font-size: 15px;
-  font-weight: 900;
+  font-weight: 950;
 }
 
 .dashboardCard strong {
@@ -4338,7 +5170,7 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   z-index: 2;
   display: block;
   margin-top: 8px;
-  color: #0f766e;
+  color: #ea580c;
   font-size: 34px;
   font-weight: 950;
 }
@@ -4352,6 +5184,246 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   line-height: 1.6;
 }
 
+/* ================================
+   AI Assistant Banner
+================================ */
+
+.aiAssistantBanner {
+  margin-top: 34px;
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 8% 30%, rgba(249, 115, 22, 0.38), transparent 28%),
+    linear-gradient(135deg, #0f172a, #431407);
+  color: #ffffff;
+  padding: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.22);
+}
+
+.aiAssistantBanner h2 {
+  margin: 16px 0 0;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  font-weight: 950;
+}
+
+.aiAssistantBanner p {
+  margin: 12px 0 0;
+  max-width: 720px;
+  color: #e2e8f0;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.aiAssistantBtn {
+  border: none;
+  background: #ffffff;
+  color: #0f172a;
+  white-space: nowrap;
+}
+
+.aiAssistantBtn:hover {
+  background: #fed7aa;
+  transform: translateY(-2px);
+}
+
+/* ================================
+   Dashboard AI Chat Panel - Fixed
+================================ */
+
+.dashboardAiChatPanel {
+  margin-top: 30px;
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(249, 115, 22, 0.2), transparent 30%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(67, 20, 7, 0.96));
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  color: #ffffff;
+  padding: 32px;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
+}
+
+.dashboardAiChatHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+
+.dashboardAiChatHeader h2 {
+  margin: 14px 0 0;
+  color: #ffffff;
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  font-weight: 950;
+}
+
+.dashboardAiChatHeader p {
+  margin: 12px 0 0;
+  max-width: 780px;
+  color: #e2e8f0;
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 650;
+}
+
+.dashboardAiCloseBtn {
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  padding: 11px 18px;
+  font-size: 13px;
+  font-weight: 950;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.dashboardAiCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+.dashboardAiSuggested {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.dashboardAiSuggested button {
+  border: 1px solid rgba(251, 146, 60, 0.3);
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.12);
+  color: #fed7aa;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.dashboardAiSuggested button:hover {
+  background: rgba(249, 115, 22, 0.24);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.dashboardAiMessages {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 330px;
+  overflow-y: auto;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 18px;
+}
+
+.dashboardAiMessages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dashboardAiMessages::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.45);
+}
+
+.dashboardAiMessage {
+  width: fit-content;
+  max-width: 78%;
+  border-radius: 22px;
+  padding: 14px 17px;
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 750;
+}
+
+.dashboardAiMessage.assistant {
+  align-self: flex-start;
+  background: rgba(255, 237, 213, 0.12);
+  border: 1px solid rgba(254, 215, 170, 0.18);
+  color: #ffedd5;
+}
+
+.dashboardAiMessage.user {
+  align-self: flex-end;
+  background: rgba(249, 115, 22, 0.24);
+  border: 1px solid rgba(251, 146, 60, 0.26);
+  color: #ffffff;
+}
+
+.dashboardAiForm {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+}
+
+.dashboardAiForm input {
+  flex: 1;
+  min-height: 52px;
+  border: 1px solid rgba(251, 146, 60, 0.35);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 15px 18px;
+  font-size: 14px;
+  font-weight: 800;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.dashboardAiForm input::placeholder {
+  color: #cbd5e1;
+}
+
+.dashboardAiForm input:focus {
+  border-color: #fb923c;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.16);
+}
+
+.dashboardAiForm button {
+  min-height: 52px;
+  border: none;
+  border-radius: 999px;
+  background: #f97316;
+  color: #111827;
+  padding: 15px 26px;
+  font-size: 14px;
+  font-weight: 950;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.dashboardAiForm button:hover {
+  background: #fb923c;
+  transform: translateY(-1px);
+}
+
+.dashboardAiForm button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.dashboardAiDisclaimer {
+  margin: 15px 0 0;
+  color: #cbd5e1;
+  font-size: 12px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+/* ================================
+   Panels
+================================ */
+
 .dashboardTwoColumn {
   margin-top: 34px;
   display: grid;
@@ -4363,9 +5435,9 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 .modulePanel,
 .activityPanel {
   border-radius: 32px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.94);
   border: 1px solid #e2e8f0;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
   padding: 30px;
 }
 
@@ -4382,6 +5454,7 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   font-size: 28px;
   color: #0f172a;
   letter-spacing: -0.045em;
+  font-weight: 950;
 }
 
 .moduleGrid {
@@ -4391,24 +5464,26 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 }
 
 .moduleCard {
+  display: block;
   padding: 24px;
   border-radius: 24px;
   background: linear-gradient(145deg, #ffffff, #f8fafc);
   border: 1px solid #e2e8f0;
+  text-decoration: none;
   transition: all 0.28s ease;
 }
 
 .moduleCard:hover {
   transform: translateY(-6px);
-  border-color: #99f6e4;
-  box-shadow: 0 18px 42px rgba(20, 184, 166, 0.13);
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 18px 42px rgba(249, 115, 22, 0.14);
 }
 
 .moduleIcon {
   width: 52px;
   height: 52px;
   border-radius: 18px;
-  background: #ccfbf1;
+  background: #ffedd5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4420,6 +5495,7 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   color: #0f172a;
   font-size: 19px;
   letter-spacing: -0.035em;
+  font-weight: 950;
 }
 
 .moduleCard p {
@@ -4432,10 +5508,14 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 .moduleCard span {
   display: inline-block;
   margin-top: 18px;
-  color: #0f766e;
+  color: #ea580c;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 950;
 }
+
+/* ================================
+   Activity Panel
+================================ */
 
 .activityList {
   display: flex;
@@ -4458,6 +5538,7 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   margin: 0;
   color: #0f172a;
   font-size: 15px;
+  font-weight: 900;
 }
 
 .activityItem p {
@@ -4468,23 +5549,23 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 
 .activityItem strong {
   white-space: nowrap;
-  color: #0f766e;
+  color: #ea580c;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 950;
 }
 
 .aiSuggestionBox {
   margin-top: 22px;
   padding: 24px;
   border-radius: 24px;
-  background: linear-gradient(135deg, #0f172a, #134e4a);
+  background: linear-gradient(135deg, #0f172a, #431407);
   color: white;
 }
 
 .aiSuggestionBox span {
-  color: #5eead4;
+  color: #fed7aa;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 950;
 }
 
 .aiSuggestionBox p {
@@ -4494,7 +5575,38 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   line-height: 1.8;
 }
 
+.aiSuggestionBox button {
+  display: inline-block;
+  margin-top: 16px;
+  border: none;
+  border-radius: 999px;
+  background: #f97316;
+  color: #111827;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 950;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.aiSuggestionBox button:hover {
+  background: #fb923c;
+  transform: translateY(-1px);
+}
+
+/* ================================
+   Responsive
+================================ */
+
 @media (max-width: 1100px) {
+  .dashboardHeroInner {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboardHeroVisual {
+    max-width: 520px;
+  }
+
   .summaryGrid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -4505,207 +5617,559 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 }
 
 @media (max-width: 760px) {
-  .dashboardHeroInner {
+  .dashboardContainer {
+    width: min(100% - 28px, 1240px);
+  }
+
+  .dashboardHero {
+    padding: 54px 0 36px;
+  }
+
+  .dashboardHeroText h1 {
+    font-size: 40px;
+  }
+
+  .dashboardHeroActions,
+  .dashboardAiForm {
+    flex-direction: column;
+  }
+
+  .dashboardPrimaryBtn,
+  .dashboardSecondaryBtn,
+  .aiAssistantBtn,
+  .dashboardAiForm button {
+    width: 100%;
+  }
+
+  .summaryGrid,
+  .moduleGrid,
+  .heroMiniGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .aiAssistantBanner,
+  .dashboardAiChatHeader {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .summaryGrid,
-  .moduleGrid {
-    grid-template-columns: 1fr;
-  }
-
+  .aiAssistantBanner,
+  .dashboardAiChatPanel,
   .modulePanel,
   .activityPanel {
-    padding: 22px;
+    padding: 24px;
     border-radius: 26px;
+  }
+
+  .dashboardAiMessage {
+    max-width: 100%;
+  }
+
+  .dashboardAiCloseBtn {
+    width: 100%;
   }
 }
 
-
-
-
-
 /* ================================
-   Profile Page
+   FitLife Profile Page Full CSS
 ================================ */
 
 .profilePage {
-  background: #f8fafc;
   min-height: 100vh;
+  padding: 40px 24px 70px;
+  color: #ffffff;
 }
 
-.profileHero {
-  padding: 70px 0 46px;
-  background:
-    radial-gradient(circle at 8% 12%, rgba(20, 184, 166, 0.16), transparent 28%),
-    radial-gradient(circle at 90% 10%, rgba(15, 118, 110, 0.12), transparent 30%),
-    linear-gradient(135deg, #f0fdfa 0%, #ffffff 52%, #f8fafc 100%);
+.profileContainer {
+  width: min(1280px, 100%);
+  margin: 0 auto;
 }
 
-.profileHero h1 {
-  margin: 20px 0 0;
-  max-width: 760px;
-  font-size: clamp(38px, 5vw, 64px);
-  line-height: 1.05;
-  letter-spacing: -0.06em;
-  color: #0f172a;
-  font-weight: 950;
-}
-
-.profileHero p {
-  margin: 20px 0 0;
-  max-width: 760px;
-  color: #64748b;
-  font-size: 17px;
-  line-height: 1.8;
-}
-
-.profileSection {
-  padding: 54px 0 90px;
-}
-
-.profileGrid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 30px;
-  align-items: start;
-}
-
-.profileInfoCard,
-.profileFormCard {
+.profileLoadingCard {
+  border: 1px solid rgba(249, 115, 22, 0.35);
   border-radius: 32px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+  background: rgba(17, 17, 17, 0.92);
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
 }
 
-.profileInfoCard {
-  padding: 34px;
+.profileLoadingCard h1 {
+  font-size: 34px;
+  font-weight: 900;
+  color: #ffffff;
 }
 
-.profileInfoCard h2 {
-  margin: 0;
-  color: #0f172a;
-  font-size: 30px;
-  line-height: 1.15;
-  letter-spacing: -0.045em;
+.profileLoadingCard p {
+  margin-top: 10px;
+  color: #cbd5e1;
 }
 
-.profileInfoCard > p {
-  margin: 18px 0 0;
-  color: #64748b;
-  font-size: 15px;
-  line-height: 1.8;
+/* Toast message */
+.profileToast {
+  position: fixed;
+  top: 100px;
+  right: 28px;
+  z-index: 9999;
+  min-width: 280px;
+  max-width: 360px;
+  border-radius: 20px;
+  padding: 16px 18px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(14px);
+  animation: profileToastSlide 0.25s ease-out;
 }
 
-.profileBenefits {
-  margin-top: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.profileBenefits div {
-  padding: 20px;
-  border-radius: 22px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-}
-
-.profileBenefits span {
-  display: flex;
-  width: 48px;
-  height: 48px;
-  border-radius: 18px;
-  background: #ccfbf1;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-}
-
-.profileBenefits strong {
+.profileToast strong {
   display: block;
-  margin-top: 14px;
-  color: #0f172a;
-  font-size: 16px;
+  margin-bottom: 4px;
+  font-size: 14px;
   font-weight: 900;
 }
 
-.profileBenefits p {
-  margin: 6px 0 0;
-  color: #64748b;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.profileFormCard {
-  padding: 34px;
-}
-
-.formHeader h2 {
-  margin: 0;
-  color: #0f172a;
-  font-size: 30px;
-  letter-spacing: -0.045em;
-}
-
-.formHeader p {
-  margin: 8px 0 0;
-  color: #64748b;
-  font-size: 15px;
-}
-
-.successMessage {
-  margin-top: 22px;
-  padding: 14px 16px;
-  border-radius: 16px;
-  background: #f0fdfa;
-  border: 1px solid #99f6e4;
-  color: #0f766e;
+.profileToast span {
+  display: block;
   font-size: 14px;
   font-weight: 800;
 }
 
-.formGrid {
+.profileToastSuccess {
+  border: 1px solid rgba(34, 197, 94, 0.45);
+  background: rgba(22, 101, 52, 0.92);
+  color: #dcfce7;
+}
+
+.profileToastError {
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  background: rgba(127, 29, 29, 0.92);
+  color: #fee2e2;
+}
+
+@keyframes profileToastSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Hero card */
+.profileHeroCard {
+  overflow: hidden;
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  border-radius: 34px;
+  background: rgba(17, 17, 17, 0.92);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+}
+
+.profileHeroTop {
+  min-height: 145px;
+  padding: 34px;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  background: linear-gradient(
+    90deg,
+    #fb6a10 0%,
+    #fb7c18 45%,
+    #ffb21a 100%
+  );
+}
+
+.profileAvatar {
+  width: 104px;
+  height: 104px;
+  min-width: 104px;
+  border-radius: 50%;
+  border: 4px solid #050505;
+  background: #ff7a12;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 46px;
+  font-weight: 900;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.35);
+}
+
+.profileHeroInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.profileNameRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.profileNameRow h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(32px, 4vw, 46px);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -1px;
+  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.35);
+}
+
+.profileVerifyBadge {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.22);
+  color: #ffffff;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.profileVerifyBadge.verified {
+  background: rgba(22, 163, 74, 0.22);
+  border-color: rgba(34, 197, 94, 0.45);
+  color: #dcfce7;
+}
+
+.profileEmail {
+  margin-top: 8px;
+  color: #fff7ed;
+  font-size: 15px;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.profileEditButton {
+  border: none;
+  border-radius: 999px;
+  background: #0b0b0b;
+  color: #ffffff;
+  padding: 14px 26px;
+  font-weight: 900;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.profileEditButton:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-1px);
+}
+
+.profileHeroBottom {
+  padding: 20px 34px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: rgba(12, 12, 12, 0.94);
+}
+
+.profileHeroBottom span {
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.08);
+  color: #ffffff;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Summary cards */
+.profileSummaryGrid {
   margin-top: 28px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.profileSummaryCard {
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  border-radius: 28px;
+  background: rgba(17, 17, 17, 0.92);
+  padding: 24px;
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.4);
+}
+
+.profileSummaryCard p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.profileSummaryCard h3 {
+  margin: 10px 0 0;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.profileSummaryCard span {
+  display: block;
+  margin-top: 8px;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Main content */
+.profileContentGrid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 32px;
+}
+
+.profileMainSections,
+.profileSidePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.profileCard {
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  border-radius: 32px;
+  background: rgba(17, 17, 17, 0.92);
+  padding: 28px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+}
+
+.profileCardHeader {
+  margin-bottom: 24px;
+}
+
+.profileCardHeader h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.profileCardHeader p {
+  margin-top: 8px;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.profileInputGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
 
-.formGroup {
+.profileFieldFull {
+  grid-column: 1 / -1;
+}
+
+.profileField label {
+  display: block;
+  margin-bottom: 8px;
+  color: #fb923c;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.profileField input,
+.profileField select,
+.profileField textarea {
   width: 100%;
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  border-radius: 18px;
+  background: #000000;
+  color: #ffffff;
+  padding: 15px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  outline: none;
+  transition: 0.2s ease;
 }
 
-.formGroup.fullWidth {
-  grid-column: span 2;
+.profileField input::placeholder,
+.profileField textarea::placeholder {
+  color: #64748b;
 }
 
-.profileSubmitBtn {
-  margin-top: 28px;
+.profileField input:focus,
+.profileField select:focus,
+.profileField textarea:focus {
+  border-color: #fb923c;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.18);
+}
+
+.profileField input:disabled,
+.profileField select:disabled,
+.profileField textarea:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.profileField textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.profileSaveButton {
+  width: 100%;
   border: none;
+  border-radius: 999px;
+  background: #f97316;
+  color: #000000;
+  padding: 16px 24px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
-@media (max-width: 1000px) {
-  .profileGrid {
+.profileSaveButton:hover {
+  background: #fb923c;
+  transform: translateY(-1px);
+}
+
+.profileSaveButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Side panel */
+.profileSecurityList,
+.profileCompletenessBox {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.profileSecurityItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 15px 16px;
+}
+
+.profileSecurityItem span {
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.profileSecurityItem strong {
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.1);
+  color: #fdba74;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.profileSecurityItem strong.success {
+  background: rgba(34, 197, 94, 0.12);
+  color: #bbf7d0;
+}
+
+.profileProgressTrack {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.12);
+}
+
+.profileProgressFill {
+  height: 100%;
+  border-radius: 999px;
+  background: #f97316;
+}
+
+.profileCompletenessBox p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.profileUsageList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profileUsageList li {
+  margin-bottom: 12px;
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .profileContentGrid {
     grid-template-columns: 1fr;
+  }
+
+  .profileSummaryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .profileHeroTop {
+    align-items: flex-start;
   }
 }
 
-@media (max-width: 700px) {
-  .formGrid {
+@media (max-width: 768px) {
+  .profilePage {
+    padding: 32px 16px 56px;
+  }
+
+  .profileHeroTop {
+    flex-direction: column;
+    padding: 28px 24px;
+  }
+
+  .profileAvatar {
+    width: 92px;
+    height: 92px;
+    min-width: 92px;
+    font-size: 40px;
+  }
+
+  .profileEditButton {
+    width: 100%;
+  }
+
+  .profileHeroBottom {
+    padding: 20px 24px;
+  }
+
+  .profileInputGrid {
     grid-template-columns: 1fr;
   }
 
-  .formGroup.fullWidth {
-    grid-column: span 1;
+  .profileSummaryGrid {
+    grid-template-columns: 1fr;
   }
 
-  .profileInfoCard,
-  .profileFormCard {
-    padding: 24px;
-    border-radius: 26px;
+  .profileToast {
+    top: 90px;
+    left: 16px;
+    right: 16px;
+    max-width: none;
   }
 }
 /* ================================
@@ -5940,38 +7404,44 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 }
 
 /* =========================================================
-   Sleep Tracking Page
+   Sleep Tracking Page - Final Professional CSS
 ========================================================= */
-/* Sleep auto-calculated field */
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepAutoCalculatedInput {
-  background: rgba(255, 132, 0, 0.12) !important;
-  color: #ffddb8 !important;
-  cursor: not-allowed !important;
-  border-color: rgba(255, 173, 90, 0.42) !important;
-}
-/* Page base */
+
 .sleepPage.sleepCompactPage.sleepWeeklyPage {
   min-height: 100vh !important;
+  padding-top: 96px !important;
+  padding-bottom: 3rem !important;
   color: #fff7ed !important;
-  padding-bottom: 2.5rem !important;
 }
 
-/* Hide old messy Monday-Sunday full card grid */
+.sleepPage.sleepCompactPage.sleepWeeklyPage * {
+  box-sizing: border-box !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .container {
+  width: min(1360px, calc(100% - 48px)) !important;
+  margin: 0 auto !important;
+}
+
+/* Hide old weekly grid if old JSX/CSS still exists */
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyGrid {
   display: none !important;
 }
 
-/* Hero section */
+/* =========================================================
+   Hero
+========================================================= */
+
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCompactHero {
-  padding: 1rem 0 0.8rem !important;
-  background: rgba(0, 0, 0, 0.24) !important;
-  border-bottom: 1px solid rgba(255, 132, 0, 0.24) !important;
+  padding: 2.2rem 0 1.4rem !important;
+  background: rgba(0, 0, 0, 0.18) !important;
+  border-bottom: 1px solid rgba(255, 132, 0, 0.22) !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroWrap {
   display: grid !important;
   grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr) !important;
-  gap: 1rem !important;
+  gap: 1.2rem !important;
   align-items: center !important;
 }
 
@@ -5987,43 +7457,45 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   padding: 0.38rem 0.78rem !important;
   font-size: 0.74rem !important;
   font-weight: 950 !important;
+  letter-spacing: 0.4px !important;
+  text-transform: uppercase !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage h1 {
-  margin: 0.65rem 0 0.4rem !important;
+  margin: 0.75rem 0 0.45rem !important;
   max-width: 760px !important;
   color: #ffffff !important;
-  font-size: clamp(2rem, 4vw, 3.6rem) !important;
-  line-height: 1.05 !important;
-  letter-spacing: -0.045em !important;
-  font-weight: 950 !important;
+  font-size: clamp(2.2rem, 4.5vw, 4.2rem) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.055em !important;
+  font-weight: 1000 !important;
   text-shadow: 0 12px 30px rgba(0, 0, 0, 0.75) !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCompactHero p {
   margin: 0 !important;
   max-width: 760px !important;
-  color: rgba(255, 238, 222, 0.86) !important;
-  font-size: 0.94rem !important;
-  line-height: 1.55 !important;
+  color: rgba(255, 238, 222, 0.84) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.58 !important;
   font-weight: 700 !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroHighlights {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 0.65rem !important;
+  gap: 0.7rem !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroHighlights div {
-  min-height: 82px !important;
+  min-height: 88px !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
   border: 1px solid rgba(255, 132, 0, 0.22) !important;
   border-radius: 18px !important;
   background: rgba(0, 0, 0, 0.54) !important;
-  padding: 0.8rem !important;
+  padding: 0.85rem !important;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22) !important;
   backdrop-filter: blur(6px) !important;
   -webkit-backdrop-filter: blur(6px) !important;
@@ -6031,26 +7503,30 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroHighlights strong {
   color: #ffffff !important;
-  font-size: 0.9rem !important;
+  font-size: 0.95rem !important;
   font-weight: 950 !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroHighlights span {
   margin-top: 0.25rem !important;
   color: rgba(255, 236, 218, 0.72) !important;
-  font-size: 0.72rem !important;
+  font-size: 0.74rem !important;
   font-weight: 750 !important;
 }
 
-/* Main layout */
+/* =========================================================
+   Main Layout
+========================================================= */
+
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCompactSection {
-  padding: 1rem 0 2.2rem !important;
+  padding: 1.4rem 0 2.5rem !important;
   background: transparent !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepDashboardLayout {
-  display: grid !important;
-  gap: 1rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.1rem !important;
 }
 
 /* Common card style */
@@ -6060,7 +7536,6 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyCard,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayCard,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartCard,
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryCardArea {
   border: 1px solid rgba(255, 132, 0, 0.24) !important;
   border-radius: 26px !important;
@@ -6075,8 +7550,8 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
       rgba(255, 132, 0, 0.06),
       rgba(255, 106, 0, 0.025)
     ),
-    rgba(6, 6, 6, 0.72) !important;
-  padding: 1.05rem 1.15rem !important;
+    rgba(6, 6, 6, 0.74) !important;
+  padding: 1.15rem !important;
   box-shadow:
     0 24px 70px rgba(0, 0, 0, 0.38),
     inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
@@ -6084,7 +7559,6 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   -webkit-backdrop-filter: blur(9px) !important;
 }
 
-/* Section headers */
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCardTop,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryHeader,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyHeader,
@@ -6097,50 +7571,57 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage h2,
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyHeader h2,
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard h2 {
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyHeader h2 {
   margin: 0.45rem 0 0 !important;
   color: #ffffff !important;
-  font-size: clamp(1.35rem, 2vw, 1.85rem) !important;
-  line-height: 1.14 !important;
+  font-size: clamp(1.45rem, 2.2vw, 2rem) !important;
+  line-height: 1.12 !important;
   font-weight: 950 !important;
-  letter-spacing: -0.025em !important;
+  letter-spacing: -0.03em !important;
   text-shadow: 0 8px 24px rgba(0, 0, 0, 0.7) !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage h3 {
+  margin: 0.45rem 0 0 !important;
+  color: #ffffff !important;
+  font-size: 1.2rem !important;
+  line-height: 1.15 !important;
+  font-weight: 950 !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepStatusText,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyHeader p,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayHeader p,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartTop p,
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard p,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepEmptyResult p,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepMatchText,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepFriendlyNote {
   color: rgba(255, 238, 222, 0.78) !important;
-  font-size: 0.86rem !important;
+  font-size: 0.88rem !important;
   line-height: 1.5 !important;
   font-weight: 700 !important;
 }
 
-/* Profile summary */
+/* =========================================================
+   Profile Summary
+========================================================= */
+
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileGrid {
-  margin-top: 0.85rem !important;
+  margin-top: 0.9rem !important;
   display: grid !important;
   grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
-  gap: 0.65rem !important;
+  gap: 0.7rem !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileGrid div {
   border: 1px solid rgba(255, 132, 0, 0.18) !important;
   border-radius: 16px !important;
   background: rgba(0, 0, 0, 0.36) !important;
-  padding: 0.72rem !important;
+  padding: 0.76rem !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileGrid span,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSummaryGrid span,
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementGrid span,
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepNextGoalBox span,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyScore span,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartTarget span {
   display: block !important;
@@ -6150,9 +7631,7 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileGrid strong,
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSummaryGrid strong,
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementGrid strong,
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepNextGoalBox strong {
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSummaryGrid strong {
   display: block !important;
   margin-top: 0.25rem !important;
   color: #ffffff !important;
@@ -6160,22 +7639,24 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   font-weight: 950 !important;
 }
 
-/* Daily prediction two-column layout */
+/* =========================================================
+   Daily Prediction
+========================================================= */
+
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWorkGrid {
   display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(390px, 0.85fr) !important;
+  grid-template-columns: minmax(0, 1fr) minmax(390px, 0.86fr) !important;
   gap: 1rem !important;
   align-items: start !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepQuickGrid {
-  margin-top: 0.85rem !important;
+  margin-top: 0.9rem !important;
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 0.7rem !important;
+  gap: 0.75rem !important;
 }
 
-/* Inputs global for sleep page */
 .sleepPage.sleepCompactPage.sleepWeeklyPage label,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepDaySelectLabel,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyFeedback {
@@ -6219,7 +7700,14 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   box-shadow: 0 0 0 3px rgba(255, 132, 0, 0.14) !important;
 }
 
-/* Advanced details */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepAutoCalculatedInput {
+  background: rgba(255, 132, 0, 0.12) !important;
+  color: #ffddb8 !important;
+  cursor: not-allowed !important;
+  border-color: rgba(255, 173, 90, 0.42) !important;
+}
+
+/* Advanced sections */
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepAdvancedSection {
   margin-top: 0.8rem !important;
   border: 1px solid rgba(255, 132, 0, 0.18) !important;
@@ -6249,9 +7737,9 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepGenerateBtn,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSecondaryBtn {
   width: 100% !important;
-  margin-top: 0.85rem !important;
+  margin-top: 0.9rem !important;
   border-radius: 999px !important;
-  padding: 0.9rem 1rem !important;
+  padding: 0.92rem 1rem !important;
   font-size: 0.93rem !important;
   font-weight: 950 !important;
   cursor: pointer !important;
@@ -6382,7 +7870,10 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   color: #ffad5a !important;
 }
 
-/* Weekly card layout */
+/* =========================================================
+   Weekly Progress
+========================================================= */
+
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyCard {
   margin-top: 1rem !important;
 }
@@ -6429,22 +7920,29 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   margin-top: 0.9rem !important;
 }
 
-/* Current day only update */
+/* Current day update */
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayCard {
   margin-top: 1rem !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayInputs {
+  margin-top: 0.85rem !important;
   display: grid !important;
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: 0.7rem !important;
+  gap: 0.75rem !important;
 }
 
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepDaySelectLabel {
   min-width: 190px !important;
 }
 
-/* Chart */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepDaySelectLabel small {
+  color: #ffad5a !important;
+  font-size: 0.72rem !important;
+  font-weight: 850 !important;
+}
+
+/* Weekly chart */
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartCard {
   margin-top: 1rem !important;
 }
@@ -6469,6 +7967,7 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartBox {
   width: 100% !important;
   height: 260px !important;
+  margin-top: 0.8rem !important;
   border-radius: 18px !important;
   background:
     linear-gradient(
@@ -6479,12 +7978,11 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   padding: 0.5rem !important;
 }
 
-/* Weekly feedback */
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyFeedback {
   margin-top: 1rem !important;
 }
 
-/* Success and error messages */
+/* Messages */
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSuccessBox,
 .sleepPage.sleepCompactPage.sleepWeeklyPage .errorMessage {
   margin-top: 0.8rem !important;
@@ -6506,33 +8004,219 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   color: #ffbd7a !important;
 }
 
-/* Improvement summary */
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard {
+/* =========================================================
+   Step 3 Professional Insight V2
+   Works with updated JSX class names:
+   sleepInsightV2, sleepInsightHeader, sleepInsightBody, sleepMetricGrid...
+========================================================= */
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightV2 {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 18px !important;
   margin-top: 1rem !important;
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(420px, 0.9fr) !important;
-  gap: 1rem !important;
+  padding: 1.25rem !important;
+  border: 1px solid rgba(255, 132, 0, 0.26) !important;
+  border-radius: 28px !important;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 132, 0, 0.14),
+      transparent 32%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 132, 0, 0.07),
+      rgba(255, 106, 0, 0.025)
+    ),
+    rgba(6, 6, 6, 0.82) !important;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  overflow: visible !important;
 }
 
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementGrid {
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightHeader {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 220px !important;
+  gap: 18px !important;
+  align-items: stretch !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightHeader > div:first-child {
+  padding: 1rem 1.1rem !important;
+  border: 1px solid rgba(255, 132, 0, 0.2) !important;
+  border-radius: 22px !important;
+  background: rgba(0, 0, 0, 0.36) !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightHeader h2 {
+  margin: 0.5rem 0 0.45rem !important;
+  color: #ffffff !important;
+  font-size: clamp(1.55rem, 2.5vw, 2.15rem) !important;
+  line-height: 1.1 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightHeader p {
+  margin: 0 !important;
+  max-width: 980px !important;
+  color: rgba(255, 238, 222, 0.8) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.55 !important;
+  font-weight: 700 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightHeaderScore {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 1rem !important;
+  border: 1px solid rgba(255, 132, 0, 0.24) !important;
+  border-radius: 22px !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 132, 0, 0.14),
+      rgba(255, 106, 0, 0.04)
+    ),
+    rgba(0, 0, 0, 0.42) !important;
+  text-align: right !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightHeaderScore span {
+  color: rgba(255, 225, 202, 0.76) !important;
+  font-size: 0.72rem !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.45px !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightHeaderScore strong {
+  display: block !important;
+  margin-top: 0.35rem !important;
+  color: #ffad5a !important;
+  font-size: 2rem !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightBody {
+  display: grid !important;
+  grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr) !important;
+  gap: 16px !important;
+  align-items: start !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightChartCard {
+  min-height: 315px !important;
+  padding: 1rem !important;
+  border: 1px solid rgba(255, 132, 0, 0.2) !important;
+  border-radius: 22px !important;
+  background: rgba(0, 0, 0, 0.36) !important;
+  overflow: hidden !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightChartTop {
+  margin-bottom: 0.7rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightChartTop h3 {
+  margin: 0.45rem 0 0 !important;
+  color: #ffffff !important;
+  font-size: 1.05rem !important;
+  font-weight: 950 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightEmpty {
+  min-height: 210px !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 1px dashed rgba(255, 132, 0, 0.22) !important;
+  border-radius: 18px !important;
+  color: rgba(255, 236, 218, 0.72) !important;
+  font-size: 0.86rem !important;
+  font-weight: 800 !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepMetricGrid {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   gap: 0.7rem !important;
 }
 
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementGrid div,
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepNextGoalBox {
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepMetricCard {
+  min-height: 92px !important;
+  padding: 0.85rem !important;
   border: 1px solid rgba(255, 132, 0, 0.2) !important;
   border-radius: 18px !important;
   background: rgba(0, 0, 0, 0.38) !important;
-  padding: 0.85rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
 }
 
-.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepNextGoalBox {
-  margin-top: 0.7rem !important;
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepMetricCard span {
+  display: block !important;
+  margin-bottom: 0.38rem !important;
+  color: rgba(255, 225, 202, 0.74) !important;
+  font-size: 0.68rem !important;
+  line-height: 1.25 !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.35px !important;
 }
 
-/* History */
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepMetricCard strong {
+  display: block !important;
+  color: #ffffff !important;
+  font-size: 1rem !important;
+  line-height: 1.28 !important;
+  font-weight: 950 !important;
+  word-break: normal !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightTextGrid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 0.75rem !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightTextCard {
+  padding: 0.95rem 1rem !important;
+  border: 1px solid rgba(255, 132, 0, 0.2) !important;
+  border-radius: 18px !important;
+  background: rgba(0, 0, 0, 0.38) !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightTextCard span {
+  display: block !important;
+  margin-bottom: 0.35rem !important;
+  color: #ffad5a !important;
+  font-size: 0.72rem !important;
+  line-height: 1.25 !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.45px !important;
+}
+
+.sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightTextCard strong {
+  display: block !important;
+  color: rgba(255, 255, 255, 0.86) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  font-weight: 750 !important;
+  word-break: normal !important;
+}
+
+/* =========================================================
+   History
+========================================================= */
+
 .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryCardArea {
   margin-top: 1rem !important;
 }
@@ -6592,11 +8276,14 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   font-weight: 850 !important;
 }
 
-/* Responsive */
+/* =========================================================
+   Responsive
+========================================================= */
+
 @media (max-width: 1280px) {
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroWrap,
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWorkGrid,
-  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard {
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightBody {
     grid-template-columns: 1fr !important;
   }
 
@@ -6604,7 +8291,8 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 
-  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayInputs {
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayInputs,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepMetricGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 }
@@ -6613,7 +8301,6 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHeroHighlights,
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepProfileGrid,
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyMetaGrid,
-  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementGrid,
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryGrid {
     grid-template-columns: 1fr !important;
   }
@@ -6622,27 +8309,40 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayHeader,
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartTop,
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCardTop,
-  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryHeader {
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryHeader,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightHeader {
+    grid-template-columns: 1fr !important;
     flex-direction: column !important;
     align-items: flex-start !important;
   }
 
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyScore,
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartTarget,
-  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepDaySelectLabel {
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepDaySelectLabel,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightHeaderScore {
     width: 100% !important;
     text-align: left !important;
   }
 
-  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayInputs {
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayInputs,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepMetricGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
 @media (max-width: 640px) {
+  .sleepPage.sleepCompactPage.sleepWeeklyPage {
+    padding-top: 120px !important;
+  }
+
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .container {
+    width: min(100% - 28px, 1360px) !important;
+  }
+
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepQuickGrid,
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepSummaryGrid,
-  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayInputs {
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayInputs,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepMetricGrid {
     grid-template-columns: 1fr !important;
   }
 
@@ -6652,10 +8352,1621 @@ main:has(form input[name="password"]):has(a[href="/register"]) .text-red-300 {
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepWeeklyCard,
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepCurrentDayCard,
   .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepChartCard,
-  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepImprovementCard,
-  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryCardArea {
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepHistoryCardArea,
+  .sleepPage.sleepCompactPage.sleepWeeklyPage .sleepInsightV2 {
     border-radius: 22px !important;
     padding: 0.95rem !important;
   }
+
+  .sleepPage.sleepCompactPage.sleepWeeklyPage h1 {
+    font-size: 2.2rem !important;
+  }
+}
+/* ================================
+   FitLife Admin Login Page
+================================ */
+
+.adminLoginPage {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(249, 115, 22, 0.18), transparent 28%),
+    radial-gradient(circle at 90% 10%, rgba(251, 191, 36, 0.16), transparent 30%),
+    linear-gradient(135deg, #0f172a, #111827);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
 }
 
+.adminLoginShell {
+  width: min(1120px, 100%);
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 36px;
+  align-items: center;
+}
+
+.adminLoginIntro span,
+.adminLoginCard span {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.14);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  color: #fed7aa;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.adminLoginIntro h1 {
+  margin: 20px 0 0;
+  max-width: 640px;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.065em;
+  font-weight: 950;
+}
+
+.adminLoginIntro p {
+  margin: 22px 0 0;
+  max-width: 620px;
+  color: #cbd5e1;
+  font-size: 17px;
+  line-height: 1.8;
+  font-weight: 650;
+}
+
+.adminLoginInfoBox {
+  margin-top: 34px;
+  width: min(520px, 100%);
+  border-radius: 28px;
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 24px;
+}
+
+.adminLoginInfoBox strong {
+  display: block;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.adminLoginInfoBox p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+.adminLoginCard {
+  border-radius: 34px;
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  background: rgba(15, 23, 42, 0.94);
+  padding: 34px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+}
+
+.adminLoginCard h2 {
+  margin: 18px 0 0;
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 950;
+}
+
+.adminLoginCard p {
+  margin: 8px 0 22px;
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.adminLoginCard label {
+  display: block;
+  margin: 16px 0 8px;
+  color: #fb923c;
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.adminLoginCard input {
+  width: 100%;
+  border: 1px solid rgba(249, 115, 22, 0.32);
+  border-radius: 18px;
+  background: #000000;
+  color: #ffffff;
+  padding: 15px 16px;
+  font-size: 15px;
+  font-weight: 750;
+  outline: none;
+}
+
+.adminLoginCard input:focus {
+  border-color: #fb923c;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.16);
+}
+
+.adminLoginCard button {
+  width: 100%;
+  margin-top: 24px;
+  border: none;
+  border-radius: 999px;
+  background: #f97316;
+  color: #111827;
+  padding: 15px 22px;
+  font-size: 15px;
+  font-weight: 950;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.adminLoginCard button:hover {
+  background: #fb923c;
+  transform: translateY(-1px);
+}
+
+.adminLoginCard small {
+  display: block;
+  margin-top: 16px;
+  color: #94a3b8;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.adminErrorBox {
+  border-radius: 16px;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(127, 29, 29, 0.45);
+  color: #fecaca;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+@media (max-width: 900px) {
+  .adminLoginShell {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* =====================================================
+   Admin Only Navigation Bar
+===================================================== */
+
+.adminOnlyNav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9998 !important;
+  background: rgba(2, 6, 23, 0.94) !important;
+  backdrop-filter: blur(18px) !important;
+  border-bottom: 1px solid rgba(249, 115, 22, 0.26) !important;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.32) !important;
+}
+
+.adminOnlyNav,
+.adminOnlyNav * {
+  text-shadow: none !important;
+}
+
+.adminOnlyNavInner {
+  width: min(1240px, 100%) !important;
+  min-height: 82px !important;
+  margin: 0 auto !important;
+  padding: 0 28px !important;
+  display: grid !important;
+  grid-template-columns: 260px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 24px !important;
+}
+
+.adminOnlyBrand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+.adminOnlyBrand > span {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 18px !important;
+  background: linear-gradient(135deg, #f97316, #facc15) !important;
+  color: #111827 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 25px !important;
+  font-weight: 950 !important;
+  box-shadow: 0 16px 35px rgba(249, 115, 22, 0.25) !important;
+}
+
+.adminOnlyBrand strong {
+  display: block !important;
+  color: #ffffff !important;
+  font-size: 18px !important;
+  line-height: 1.1 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.adminOnlyBrand small {
+  display: block !important;
+  margin-top: 5px !important;
+  color: #fed7aa !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+
+.adminOnlyLinks {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+}
+
+.adminOnlyLink {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  border-radius: 999px !important;
+  padding: 11px 16px !important;
+  color: #cbd5e1 !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  font-size: 14px !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+  transition: 0.2s ease !important;
+}
+
+.adminOnlyLink:hover {
+  color: #ffffff !important;
+  background: rgba(249, 115, 22, 0.12) !important;
+  border-color: rgba(249, 115, 22, 0.24) !important;
+}
+
+.adminOnlyLinkActive {
+  color: #111827 !important;
+  background: linear-gradient(135deg, #f97316, #facc15) !important;
+  border-color: rgba(249, 115, 22, 0.35) !important;
+  box-shadow: 0 12px 28px rgba(249, 115, 22, 0.2) !important;
+}
+
+.adminOnlyLogout {
+  border: none !important;
+  border-radius: 999px !important;
+  background: #ef4444 !important;
+  color: #ffffff !important;
+  padding: 12px 20px !important;
+  font-size: 14px !important;
+  font-weight: 950 !important;
+  cursor: pointer !important;
+  transition: 0.2s ease !important;
+}
+
+.adminOnlyLogout:hover {
+  background: #dc2626 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Hide old dashboard topbar because new admin navbar replaces it */
+.adminDashboardPage .adminTopBar {
+  display: none !important;
+}
+
+/* Make sure admin pages have space under fixed admin navbar */
+.adminDashboardPage,
+.adminListPage {
+  padding-top: 120px !important;
+}
+
+@media (max-width: 980px) {
+  .adminOnlyNavInner {
+    grid-template-columns: 1fr !important;
+    padding: 16px 20px !important;
+    gap: 14px !important;
+  }
+
+  .adminOnlyLinks {
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    padding-bottom: 4px !important;
+  }
+
+  .adminOnlyLogout {
+    width: 100% !important;
+  }
+
+  .adminDashboardPage,
+  .adminListPage {
+    padding-top: 210px !important;
+  }
+}
+/* =====================================================
+   Admin Auth Verification Loading Screen
+===================================================== */
+
+.adminCheckingPage {
+  min-height: 100vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 30px !important;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(249, 115, 22, 0.18), transparent 28%),
+    radial-gradient(circle at 90% 10%, rgba(250, 204, 21, 0.12), transparent 25%),
+    linear-gradient(135deg, #020617 0%, #0f172a 55%, #111827 100%) !important;
+  color: #ffffff !important;
+}
+
+.adminCheckingBox {
+  width: min(460px, 100%) !important;
+  border-radius: 32px !important;
+  padding: 38px !important;
+  text-align: center !important;
+  background:
+    radial-gradient(circle at 90% 8%, rgba(249, 115, 22, 0.22), transparent 30%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.96)) !important;
+  border: 1px solid rgba(249, 115, 22, 0.28) !important;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.42) !important;
+}
+
+.adminCheckingIcon {
+  width: 72px !important;
+  height: 72px !important;
+  margin: 0 auto 22px !important;
+  border-radius: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #f97316, #facc15) !important;
+  font-size: 34px !important;
+}
+
+.adminCheckingBox h2 {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 26px !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.04em !important;
+  text-shadow: none !important;
+}
+
+.adminCheckingBox p {
+  margin: 12px 0 0 !important;
+  color: #cbd5e1 !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+}
+/* =====================================================
+   Admin Modules
+===================================================== */
+
+
+.adminReportFilterCard {
+  width: min(1240px, 100%) !important;
+  margin: 0 auto 24px !important;
+  padding: 22px !important;
+  border-radius: 28px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 230px 230px 180px !important;
+  gap: 18px !important;
+  align-items: end !important;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(249, 115, 22, 0.16), transparent 30%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.94)) !important;
+  border: 1px solid rgba(249, 115, 22, 0.24) !important;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28) !important;
+}
+
+.adminReportFilterCard,
+.adminReportFilterCard * {
+  text-shadow: none !important;
+}
+
+.adminStatusDanger {
+  background: rgba(239, 68, 68, 0.16) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.28) !important;
+}
+
+.adminReportSummaryBox {
+  margin-top: 22px !important;
+  border-radius: 24px !important;
+  padding: 22px !important;
+  background: rgba(15, 23, 42, 0.76) !important;
+  border: 1px solid rgba(249, 115, 22, 0.22) !important;
+}
+
+.adminReportSummaryBox span {
+  display: block !important;
+  color: #fed7aa !important;
+  font-size: 12px !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  margin-bottom: 10px !important;
+}
+
+.adminReportSummaryBox p {
+  margin: 0 !important;
+  color: #e5e7eb !important;
+  font-size: 15px !important;
+  line-height: 1.8 !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 1100px) {
+  .adminReportFilterCard {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .adminReportFilterCard {
+    grid-template-columns: 1fr !important;
+  }
+}
+.adminModulesGrid {
+  width: min(1240px, 100%) !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+
+.adminModuleCard {
+  border-radius: 30px !important;
+  padding: 28px !important;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(249, 115, 22, 0.2), transparent 32%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.96)) !important;
+  border: 1px solid rgba(249, 115, 22, 0.24) !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34) !important;
+  color: #ffffff !important;
+}
+
+.adminModuleCard,
+.adminModuleCard * {
+  text-shadow: none !important;
+}
+
+.adminModuleCardTop {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 18px !important;
+  margin-bottom: 18px !important;
+}
+
+.adminModuleCategory {
+  display: inline-flex !important;
+  margin-bottom: 10px !important;
+  border-radius: 999px !important;
+  padding: 7px 12px !important;
+  background: rgba(249, 115, 22, 0.16) !important;
+  color: #fed7aa !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+}
+
+.adminModuleCard h2 {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 24px !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.04em !important;
+}
+
+.adminModuleStatus {
+  border-radius: 999px !important;
+  padding: 8px 13px !important;
+  background: rgba(34, 197, 94, 0.16) !important;
+  color: #86efac !important;
+  border: 1px solid rgba(34, 197, 94, 0.25) !important;
+  font-size: 12px !important;
+  font-weight: 950 !important;
+  white-space: nowrap !important;
+}
+
+.adminModuleCard p {
+  margin: 0 0 22px !important;
+  color: #cbd5e1 !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  font-weight: 700 !important;
+}
+
+.adminModuleMetaGrid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  margin-bottom: 18px !important;
+}
+
+.adminModuleMetaGrid div {
+  border-radius: 20px !important;
+  padding: 18px !important;
+  background: rgba(15, 23, 42, 0.76) !important;
+  border: 1px solid rgba(148, 163, 184, 0.16) !important;
+}
+
+.adminModuleMetaGrid strong {
+  display: block !important;
+  color: #f97316 !important;
+  font-size: 28px !important;
+  font-weight: 950 !important;
+  line-height: 1 !important;
+}
+
+.adminModuleMetaGrid span {
+  display: block !important;
+  margin-top: 8px !important;
+  color: #94a3b8 !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+
+.adminModuleCollection {
+  border-radius: 18px !important;
+  padding: 14px 16px !important;
+  background: rgba(249, 115, 22, 0.1) !important;
+  color: #fed7aa !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+}
+
+.adminModuleCollection span {
+  margin-left: 8px !important;
+  color: #ffffff !important;
+  font-family: monospace !important;
+}
+
+@media (max-width: 900px) {
+  .adminModulesGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .adminModuleCardTop {
+    flex-direction: column !important;
+  }
+
+  .adminModuleMetaGrid {
+    grid-template-columns: 1fr !important;
+  }
+}
+/* =====================================================
+   FINAL ADMIN DASHBOARD CSS FIX
+   Paste at ABSOLUTE BOTTOM of globals.css
+===================================================== */
+
+/* Main dashboard page spacing under fixed admin navbar */
+.adminDashboardPage {
+  min-height: 100vh !important;
+  padding: 155px 28px 70px !important;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(249, 115, 22, 0.18), transparent 28%),
+    radial-gradient(circle at 92% 8%, rgba(250, 204, 21, 0.12), transparent 26%),
+    linear-gradient(135deg, #020617 0%, #0f172a 55%, #111827 100%) !important;
+  color: #ffffff !important;
+}
+
+.adminDashboardPage,
+.adminDashboardPage * {
+  text-shadow: none !important;
+}
+
+/* Hero section */
+.adminDashboardPage .adminHeroSection {
+  width: min(1240px, 100%) !important;
+  margin: 0 auto 34px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 280px !important;
+  gap: 24px !important;
+  align-items: stretch !important;
+}
+
+.adminDashboardPage .adminHeroSection > div:first-child {
+  min-height: 210px !important;
+  border-radius: 32px !important;
+  padding: 38px !important;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(249, 115, 22, 0.14), transparent 30%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.96)) !important;
+  border: 1px solid rgba(249, 115, 22, 0.24) !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3) !important;
+}
+
+.adminDashboardPage .adminHeroSection h1 {
+  margin: 18px 0 18px !important;
+  color: #ffffff !important;
+  font-size: clamp(44px, 6vw, 78px) !important;
+  line-height: 0.95 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.07em !important;
+}
+
+.adminDashboardPage .adminHeroSection p {
+  margin: 0 !important;
+  max-width: 860px !important;
+  color: #dbeafe !important;
+  font-size: 18px !important;
+  line-height: 1.7 !important;
+  font-weight: 750 !important;
+}
+
+.adminDashboardPage .adminHeroCard {
+  border-radius: 32px !important;
+  padding: 34px !important;
+  background: linear-gradient(135deg, #f97316, #facc15) !important;
+  color: #111827 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  box-shadow: 0 28px 80px rgba(249, 115, 22, 0.28) !important;
+}
+
+.adminDashboardPage .adminHeroCard strong {
+  display: block !important;
+  color: #111827 !important;
+  font-size: 64px !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+}
+
+.adminDashboardPage .adminHeroCard span {
+  display: block !important;
+  margin-top: 14px !important;
+  color: #111827 !important;
+  font-size: 14px !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* Badge */
+.adminDashboardPage .adminBadge {
+  display: inline-flex !important;
+  border-radius: 999px !important;
+  padding: 10px 16px !important;
+  background: rgba(249, 115, 22, 0.14) !important;
+  color: #fed7aa !important;
+  border: 1px solid rgba(249, 115, 22, 0.28) !important;
+  font-size: 13px !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* Stat cards */
+.adminDashboardPage .adminStatsGrid {
+  width: min(1240px, 100%) !important;
+  margin: 0 auto 28px !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 22px !important;
+}
+
+.adminDashboardPage .adminStatCard {
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 245px !important;
+  border-radius: 30px !important;
+  background:
+    radial-gradient(circle at 90% 8%, rgba(249, 115, 22, 0.22), transparent 30%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.96)) !important;
+  border: 1px solid rgba(249, 115, 22, 0.26) !important;
+  padding: 32px !important;
+  color: #ffffff !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34) !important;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.adminDashboardPage .adminStatCard:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(249, 115, 22, 0.5) !important;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42) !important;
+}
+
+.adminDashboardPage .adminStatCard::before {
+  content: "" !important;
+  position: absolute !important;
+  width: 130px !important;
+  height: 130px !important;
+  right: -45px !important;
+  top: -45px !important;
+  border-radius: 50% !important;
+  background: rgba(249, 115, 22, 0.14) !important;
+}
+
+.adminDashboardPage .adminStatCard *,
+.adminDashboardPage .adminStatCard h3,
+.adminDashboardPage .adminStatCard strong,
+.adminDashboardPage .adminStatCard p {
+  position: relative !important;
+  z-index: 1 !important;
+  text-shadow: none !important;
+}
+
+.adminDashboardPage .adminStatIcon {
+  width: 62px !important;
+  height: 62px !important;
+  border-radius: 22px !important;
+  background: linear-gradient(135deg, #f97316, #facc15) !important;
+  color: #111827 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 28px !important;
+  margin-bottom: 26px !important;
+  box-shadow: 0 16px 35px rgba(249, 115, 22, 0.24) !important;
+}
+
+.adminDashboardPage .adminStatCard h3 {
+  margin: 0 !important;
+  color: #f8fafc !important;
+  font-size: 19px !important;
+  line-height: 1.3 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.adminDashboardPage .adminStatCard strong {
+  display: block !important;
+  margin-top: 14px !important;
+  color: #f97316 !important;
+  font-size: 50px !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.05em !important;
+}
+
+.adminDashboardPage .adminStatCard p {
+  margin: 14px 0 0 !important;
+  color: #cbd5e1 !important;
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  font-weight: 700 !important;
+}
+
+/* Bottom grid */
+.adminDashboardPage .adminMainGrid {
+  width: min(1240px, 100%) !important;
+  margin: 28px auto 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.35fr) minmax(380px, 0.65fr) !important;
+  gap: 24px !important;
+  align-items: start !important;
+}
+
+/* Panels */
+.adminDashboardPage .adminPanel,
+.adminDashboardPage .adminActivityPanel {
+  border-radius: 30px !important;
+  padding: 28px !important;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(249, 115, 22, 0.14), transparent 30%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.96)) !important;
+  border: 1px solid rgba(249, 115, 22, 0.24) !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3) !important;
+}
+
+.adminDashboardPage .adminPanelHeader h2 {
+  margin: 18px 0 10px !important;
+  color: #ffffff !important;
+  font-size: 38px !important;
+  line-height: 1.1 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.05em !important;
+}
+
+.adminDashboardPage .adminPanelHeader p {
+  margin: 0 !important;
+  color: #cbd5e1 !important;
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  font-weight: 700 !important;
+}
+
+/* Admin management links */
+.adminDashboardPage .adminModuleGrid {
+  margin-top: 24px !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+.adminDashboardPage .adminModuleLink {
+  min-height: 135px !important;
+  border-radius: 24px !important;
+  padding: 22px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 14px !important;
+  background: rgba(15, 23, 42, 0.82) !important;
+  border: 1px solid rgba(249, 115, 22, 0.2) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition: 0.2s ease !important;
+}
+
+.adminDashboardPage .adminModuleLink:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(249, 115, 22, 0.46) !important;
+  background: rgba(30, 41, 59, 0.9) !important;
+}
+
+.adminDashboardPage .adminModuleLink > span {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 18px !important;
+  background: linear-gradient(135deg, #f97316, #facc15) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 23px !important;
+}
+
+.adminDashboardPage .adminModuleLink strong {
+  display: block !important;
+  color: #ffffff !important;
+  font-size: 20px !important;
+  font-weight: 950 !important;
+  line-height: 1.2 !important;
+  margin-bottom: 6px !important;
+}
+
+.adminDashboardPage .adminModuleLink small {
+  display: block !important;
+  color: #cbd5e1 !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  font-weight: 700 !important;
+}
+
+/* Recent Activity fixed height */
+.adminDashboardPage .adminActivityPanel {
+  max-height: 720px !important;
+  overflow: hidden !important;
+}
+
+.adminDashboardPage .adminRecentList {
+  display: grid !important;
+  gap: 16px !important;
+  max-height: 520px !important;
+  overflow-y: auto !important;
+  padding-right: 8px !important;
+}
+
+.adminDashboardPage .adminRecentList::-webkit-scrollbar {
+  width: 7px !important;
+}
+
+.adminDashboardPage .adminRecentList::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border-radius: 999px !important;
+}
+
+.adminDashboardPage .adminRecentList::-webkit-scrollbar-thumb {
+  background: rgba(249, 115, 22, 0.7) !important;
+  border-radius: 999px !important;
+}
+
+.adminDashboardPage .adminRecentList article {
+  display: grid !important;
+  grid-template-columns: 54px minmax(0, 1fr) !important;
+  gap: 15px !important;
+  padding: 16px !important;
+  border-radius: 22px !important;
+  background: rgba(15, 23, 42, 0.78) !important;
+  border: 1px solid rgba(249, 115, 22, 0.18) !important;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18) !important;
+}
+
+.adminDashboardPage .adminRecentIcon {
+  width: 54px !important;
+  height: 54px !important;
+  border-radius: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #f97316, #facc15) !important;
+  font-size: 25px !important;
+}
+
+.adminDashboardPage .adminRecentContent {
+  min-width: 0 !important;
+}
+
+.adminDashboardPage .adminRecentContent > div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-bottom: 8px !important;
+}
+
+.adminDashboardPage .adminRecentContent h3 {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 16px !important;
+  line-height: 1.3 !important;
+  font-weight: 950 !important;
+}
+
+.adminDashboardPage .adminRecentContent span {
+  border-radius: 999px !important;
+  padding: 6px 10px !important;
+  background: rgba(249, 115, 22, 0.14) !important;
+  color: #fed7aa !important;
+  font-size: 11px !important;
+  font-weight: 950 !important;
+  white-space: nowrap !important;
+}
+
+.adminDashboardPage .adminRecentContent p {
+  margin: 0 0 9px !important;
+  color: #cbd5e1 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  font-weight: 700 !important;
+}
+
+.adminDashboardPage .adminRecentContent small {
+  color: #94a3b8 !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+
+.adminDashboardPage .adminRecentEmpty {
+  border-radius: 22px !important;
+  padding: 26px !important;
+  background: rgba(15, 23, 42, 0.78) !important;
+  border: 1px solid rgba(249, 115, 22, 0.18) !important;
+  text-align: center !important;
+}
+
+.adminDashboardPage .adminRecentEmpty h3 {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 20px !important;
+  font-weight: 950 !important;
+}
+
+.adminDashboardPage .adminRecentEmpty p {
+  margin: 10px 0 0 !important;
+  color: #cbd5e1 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  font-weight: 700 !important;
+}
+
+/* Responsive */
+@media (max-width: 1150px) {
+  .adminDashboardPage .adminStatsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .adminDashboardPage .adminHeroSection {
+    grid-template-columns: 1fr !important;
+  }
+
+  .adminDashboardPage .adminMainGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .adminDashboardPage .adminActivityPanel {
+    max-height: none !important;
+  }
+
+  .adminDashboardPage .adminRecentList {
+    max-height: 560px !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .adminDashboardPage {
+    padding-top: 230px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .adminDashboardPage {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .adminDashboardPage .adminModuleGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .adminDashboardPage .adminPanel,
+  .adminDashboardPage .adminActivityPanel,
+  .adminDashboardPage .adminHeroSection > div:first-child,
+  .adminDashboardPage .adminHeroCard {
+    padding: 22px !important;
+    border-radius: 26px !important;
+  }
+
+  .adminDashboardPage .adminHeroSection h1 {
+    font-size: 44px !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .adminDashboardPage .adminStatsGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .adminDashboardPage .adminStatCard {
+    min-height: auto !important;
+    padding: 26px !important;
+    border-radius: 26px !important;
+  }
+
+  .adminDashboardPage .adminStatCard strong {
+    font-size: 44px !important;
+  }
+
+  .adminDashboardPage .adminRecentList article {
+    grid-template-columns: 1fr !important;
+  }
+
+  .adminDashboardPage .adminRecentContent > div {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+}
+/* =====================================================
+   FINAL ADMIN LIST PAGES CSS FIX
+   Users / Reports / Modules
+   Paste at ABSOLUTE BOTTOM of globals.css
+===================================================== */
+
+.adminListPage {
+  min-height: 100vh !important;
+  padding: 155px 28px 70px !important;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(249, 115, 22, 0.18), transparent 28%),
+    radial-gradient(circle at 92% 8%, rgba(250, 204, 21, 0.12), transparent 26%),
+    linear-gradient(135deg, #020617 0%, #0f172a 55%, #111827 100%) !important;
+  background-image:
+    radial-gradient(circle at 8% 8%, rgba(249, 115, 22, 0.18), transparent 28%),
+    radial-gradient(circle at 92% 8%, rgba(250, 204, 21, 0.12), transparent 26%),
+    linear-gradient(135deg, #020617 0%, #0f172a 55%, #111827 100%) !important;
+  color: #ffffff !important;
+}
+
+.adminListPage,
+.adminListPage * {
+  text-shadow: none !important;
+}
+
+/* Top section */
+.adminListTop {
+  width: min(1240px, 100%) !important;
+  margin: 0 auto 34px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 420px !important;
+  gap: 24px !important;
+  align-items: stretch !important;
+}
+
+.adminListTop > div:first-child {
+  border-radius: 32px !important;
+  padding: 38px !important;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(249, 115, 22, 0.14), transparent 30%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.96)) !important;
+  border: 1px solid rgba(249, 115, 22, 0.24) !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3) !important;
+}
+
+.adminBadge {
+  display: inline-flex !important;
+  border-radius: 999px !important;
+  padding: 10px 16px !important;
+  background: rgba(249, 115, 22, 0.14) !important;
+  color: #fed7aa !important;
+  border: 1px solid rgba(249, 115, 22, 0.28) !important;
+  font-size: 13px !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+}
+
+.adminListTop h1 {
+  margin: 18px 0 18px !important;
+  color: #ffffff !important;
+  font-size: clamp(42px, 5vw, 68px) !important;
+  line-height: 0.98 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.06em !important;
+}
+
+.adminListTop p {
+  margin: 0 !important;
+  color: #dbeafe !important;
+  font-size: 17px !important;
+  line-height: 1.75 !important;
+  font-weight: 750 !important;
+}
+
+.adminListStats {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.adminListStats div {
+  border-radius: 28px !important;
+  padding: 26px !important;
+  background: linear-gradient(135deg, #f97316, #facc15) !important;
+  color: #111827 !important;
+  box-shadow: 0 24px 65px rgba(249, 115, 22, 0.25) !important;
+}
+
+.adminListStats strong {
+  display: block !important;
+  color: #111827 !important;
+  font-size: 42px !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+}
+
+.adminListStats span {
+  display: block !important;
+  margin-top: 10px !important;
+  color: #111827 !important;
+  font-size: 12px !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* Filter cards */
+.adminFilterCard,
+.adminReportFilterCard {
+  width: min(1240px, 100%) !important;
+  margin: 0 auto 26px !important;
+  padding: 22px !important;
+  border-radius: 28px !important;
+  display: grid !important;
+  gap: 18px !important;
+  align-items: end !important;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(249, 115, 22, 0.16), transparent 30%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.94)) !important;
+  border: 1px solid rgba(249, 115, 22, 0.24) !important;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28) !important;
+}
+
+.adminFilterCard {
+  grid-template-columns: minmax(0, 1fr) 260px 180px !important;
+}
+
+.adminReportFilterCard {
+  grid-template-columns: minmax(0, 1fr) 230px 230px 180px !important;
+}
+
+.adminSearchBox,
+.adminSelectBox {
+  display: grid !important;
+  gap: 9px !important;
+}
+
+.adminSearchBox label,
+.adminSelectBox label {
+  color: #fed7aa !important;
+  font-size: 12px !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+
+.adminSearchBox input,
+.adminSelectBox select {
+  width: 100% !important;
+  min-height: 54px !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(148, 163, 184, 0.24) !important;
+  background: rgba(15, 23, 42, 0.86) !important;
+  color: #ffffff !important;
+  padding: 15px 16px !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  outline: none !important;
+}
+
+.adminSearchBox input::placeholder {
+  color: #64748b !important;
+}
+
+.adminSearchBox input:focus,
+.adminSelectBox select:focus {
+  border-color: rgba(249, 115, 22, 0.7) !important;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12) !important;
+}
+
+.adminFilterResult {
+  min-height: 54px !important;
+  border-radius: 18px !important;
+  padding: 12px 16px !important;
+  background: linear-gradient(135deg, #f97316, #facc15) !important;
+  color: #111827 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  box-shadow: 0 16px 35px rgba(249, 115, 22, 0.22) !important;
+}
+
+.adminFilterResult strong {
+  color: #111827 !important;
+  font-size: 24px !important;
+  font-weight: 950 !important;
+  line-height: 1 !important;
+}
+
+.adminFilterResult span {
+  color: #111827 !important;
+  font-size: 11px !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin-top: 5px !important;
+}
+
+/* Table card */
+.adminTableCard {
+  width: min(1240px, 100%) !important;
+  margin: 0 auto !important;
+  border-radius: 32px !important;
+  padding: 30px !important;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(249, 115, 22, 0.14), transparent 30%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.96)) !important;
+  border: 1px solid rgba(249, 115, 22, 0.24) !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34) !important;
+}
+
+.adminTableHeader {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 18px !important;
+  margin-bottom: 24px !important;
+}
+
+.adminTableHeader h2 {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 34px !important;
+  line-height: 1.1 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.05em !important;
+}
+
+.adminTableHeader p {
+  margin: 8px 0 0 !important;
+  color: #cbd5e1 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+
+/* Export button */
+.adminExportBtn {
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 13px 22px !important;
+  background: linear-gradient(135deg, #f97316, #facc15) !important;
+  color: #111827 !important;
+  font-size: 14px !important;
+  font-weight: 950 !important;
+  cursor: pointer !important;
+  box-shadow: 0 16px 35px rgba(249, 115, 22, 0.22) !important;
+  transition: 0.2s ease !important;
+  white-space: nowrap !important;
+}
+
+.adminExportBtn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 20px 45px rgba(249, 115, 22, 0.32) !important;
+}
+
+/* Table */
+.adminTableScroll {
+  width: 100% !important;
+  overflow-x: auto !important;
+}
+
+.adminTable {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  min-width: 920px !important;
+  overflow: hidden !important;
+  border-radius: 22px !important;
+}
+
+.adminTable thead {
+  background: rgba(249, 115, 22, 0.16) !important;
+}
+
+.adminTable th {
+  padding: 20px 22px !important;
+  color: #fed7aa !important;
+  text-align: left !important;
+  font-size: 13px !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  border-bottom: 1px solid rgba(249, 115, 22, 0.24) !important;
+}
+
+.adminTable td {
+  padding: 20px 22px !important;
+  color: #e5e7eb !important;
+  font-size: 14px !important;
+  font-weight: 750 !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
+  background: rgba(2, 6, 23, 0.58) !important;
+}
+
+.adminTable td strong {
+  color: #ffffff !important;
+  font-weight: 950 !important;
+}
+
+.adminTable tbody tr:hover td {
+  background: rgba(15, 23, 42, 0.92) !important;
+}
+
+/* Status badges */
+.adminStatusBadge {
+  display: inline-flex !important;
+  border-radius: 999px !important;
+  padding: 8px 12px !important;
+  font-size: 12px !important;
+  font-weight: 950 !important;
+  white-space: nowrap !important;
+}
+
+.adminStatusSuccess {
+  background: rgba(34, 197, 94, 0.16) !important;
+  color: #86efac !important;
+  border: 1px solid rgba(34, 197, 94, 0.28) !important;
+}
+
+.adminStatusWarning {
+  background: rgba(250, 204, 21, 0.16) !important;
+  color: #fde68a !important;
+  border: 1px solid rgba(250, 204, 21, 0.28) !important;
+}
+
+.adminStatusDanger {
+  background: rgba(239, 68, 68, 0.16) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.28) !important;
+}
+
+/* Buttons */
+.adminViewBtn {
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 10px 18px !important;
+  background: #f97316 !important;
+  color: #111827 !important;
+  font-size: 13px !important;
+  font-weight: 950 !important;
+  cursor: pointer !important;
+  transition: 0.2s ease !important;
+}
+
+.adminViewBtn:hover {
+  background: #facc15 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Empty state */
+.adminEmptyState {
+  text-align: center !important;
+  padding: 42px 24px !important;
+}
+
+.adminEmptyState h3 {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 24px !important;
+  font-weight: 950 !important;
+}
+
+.adminEmptyState p {
+  margin: 10px 0 0 !important;
+  color: #cbd5e1 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+
+/* Modal */
+.adminModalOverlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  padding: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(2, 6, 23, 0.82) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.adminUserModal {
+  width: min(820px, 100%) !important;
+  max-height: 86vh !important;
+  overflow-y: auto !important;
+  border-radius: 32px !important;
+  padding: 30px !important;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(249, 115, 22, 0.18), transparent 30%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.98)) !important;
+  border: 1px solid rgba(249, 115, 22, 0.28) !important;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.55) !important;
+}
+
+.adminModalTop {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 20px !important;
+  align-items: flex-start !important;
+  margin-bottom: 24px !important;
+}
+
+.adminModalTop h2 {
+  margin: 14px 0 6px !important;
+  color: #ffffff !important;
+  font-size: 32px !important;
+  font-weight: 950 !important;
+}
+
+.adminModalTop p {
+  margin: 0 !important;
+  color: #cbd5e1 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+
+.adminModalClose {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 999px !important;
+  border: none !important;
+  background: rgba(239, 68, 68, 0.95) !important;
+  color: #ffffff !important;
+  font-size: 28px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+}
+
+.adminUserDetailGrid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+.adminUserDetailGrid div {
+  border-radius: 20px !important;
+  padding: 18px !important;
+  background: rgba(15, 23, 42, 0.76) !important;
+  border: 1px solid rgba(148, 163, 184, 0.16) !important;
+}
+
+.adminUserDetailGrid span {
+  display: block !important;
+  color: #fed7aa !important;
+  font-size: 12px !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+
+.adminUserDetailGrid strong {
+  display: block !important;
+  margin-top: 8px !important;
+  color: #ffffff !important;
+  font-size: 15px !important;
+  font-weight: 900 !important;
+}
+
+.adminReportSummaryBox {
+  margin-top: 22px !important;
+  border-radius: 24px !important;
+  padding: 22px !important;
+  background: rgba(15, 23, 42, 0.76) !important;
+  border: 1px solid rgba(249, 115, 22, 0.22) !important;
+}
+
+.adminReportSummaryBox span {
+  display: block !important;
+  color: #fed7aa !important;
+  font-size: 12px !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  margin-bottom: 10px !important;
+}
+
+.adminReportSummaryBox p {
+  margin: 0 !important;
+  color: #e5e7eb !important;
+  font-size: 15px !important;
+  line-height: 1.8 !important;
+  font-weight: 700 !important;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .adminListTop {
+    grid-template-columns: 1fr !important;
+  }
+
+  .adminReportFilterCard,
+  .adminFilterCard {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .adminListPage {
+    padding-top: 230px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .adminListPage {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .adminReportFilterCard,
+  .adminFilterCard {
+    grid-template-columns: 1fr !important;
+  }
+
+  .adminTableHeader {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+
+  .adminExportBtn {
+    width: 100% !important;
+  }
+
+  .adminUserDetailGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .adminListTop > div:first-child,
+  .adminTableCard,
+  .adminUserModal {
+    padding: 22px !important;
+    border-radius: 26px !important;
+  }
+
+  .adminListTop h1 {
+    font-size: 42px !important;
+  }
+}

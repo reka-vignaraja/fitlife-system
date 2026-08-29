@@ -487,7 +487,6 @@ def get_progress_report(user_id: str = Depends(get_current_user_id)):
             "priority": goal_record.get("priority") or "Not set",
         }
 
-
     sleep_progress_details = {
         "has_weekly_progress": False,
         "week_start_date": "Not saved",
@@ -548,9 +547,105 @@ def get_progress_report(user_id: str = Depends(get_current_user_id)):
             "created_at": clean_datetime(sleep_progress_record.get("created_at")),
         }
 
+    generated_at = datetime.utcnow()
+
+    report_summary_text = (
+        f"Progress report generated with BMI status {bmi_category}, "
+        f"health risk level {health_risk}, nutrition status {nutrition_score}, "
+        f"sleep status {sleep_score}, goal progress {goal_progress}%, "
+        f"and overall score {overall_score}."
+    )
+
+    progress_report_document = {
+        "user_id": user_id,
+        "report_type": "Progress Report",
+        "bmi": bmi_value if bmi_value else "Not set",
+        "bmi_category": bmi_category,
+        "health_risk": health_risk,
+        "diet_status": diet_recommendation,
+        "fitness_goal": fitness_goal,
+        "fitness_level": fitness_level,
+        "workout_days": workout_days,
+        "sleep_status": sleep_score,
+        "nutrition_score": nutrition_score,
+        "goal_progress": goal_progress,
+        "overall_score": overall_score,
+        "status": "Generated",
+        "summary": report_summary_text,
+        "recommendations": recommendations,
+        "profile": {
+            "height_cm": height_cm or "Not set",
+            "weight_kg": weight_kg or "Not set",
+            "activity_level": activity_level,
+            "fitness_goal": fitness_goal,
+            "fitness_level": fitness_level,
+            "workout_days": workout_days,
+            "diet_preference": diet_type,
+            "health_conditions": user.get("health_conditions") or "None",
+        },
+        "fitness": {
+            "fitness_goal": fitness_goal,
+            "fitness_level": fitness_level,
+            "workout_days": workout_days,
+            "activity_level": activity_level,
+        },
+        "diet": {
+            "diet_recommendation": diet_recommendation,
+            "confidence": diet_confidence,
+            "model_accuracy": diet_model_accuracy,
+            "algorithm_type": diet_algorithm,
+            "daily_calorie_target": diet_daily_calories,
+            "diet_type": diet_type,
+            "meals_per_day": diet_meals_per_day,
+            "created_at": diet_created_at,
+        },
+        "sleep_progress": sleep_progress_details,
+        "goal": goal_details,
+        "updated_at": generated_at,
+    }
+
+    try:
+        progress_report_document["user_object_id"] = ObjectId(user_id)
+    except Exception:
+        pass
+
+    progress_reports_collection = db["progress_reports"]
+
+    report_filter_options = [{"user_id": user_id}]
+
+    try:
+        object_user_id = ObjectId(user_id)
+        report_filter_options.append({"user_id": object_user_id})
+        report_filter_options.append({"user_object_id": object_user_id})
+    except Exception:
+        pass
+
+    report_filter = {
+        "$or": report_filter_options,
+    }
+
+    progress_reports_collection.update_one(
+        report_filter,
+        {
+            "$set": progress_report_document,
+            "$setOnInsert": {
+                "created_at": generated_at,
+            },
+        },
+        upsert=True,
+    )
+
+    saved_report = progress_reports_collection.find_one(
+        report_filter,
+        sort=[("updated_at", -1)],
+    )
+
+    report_id = str(saved_report.get("_id")) if saved_report else ""
+
     return {
-        "message": "Progress report generated successfully",
-        "generated_at": datetime.utcnow(),
+        "message": "Progress report generated and saved successfully",
+        "report_id": report_id,
+        "generated_at": generated_at,
         "user": {
             "id": str(user["_id"]),
             "name": user.get("name") or user.get("full_name") or "FitLife User",

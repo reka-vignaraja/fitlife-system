@@ -17,4 +17,16 @@ class SleepAnalysisRequest(BaseModel):
     caffeine_after_evening: str
     stress_level: str
 
+    # Professional sleep tracking fields
+    sleep_latency_minutes: Optional[int] = Field(0, ge=0, le=240)
+    daytime_sleepiness: Optional[str] = "medium"
+
+    late_heavy_meal: Optional[str] = "no"
+    exercise_today: Optional[str] = "no"
+
+    bedroom_dark: Optional[str] = "yes"
+    bedroom_quiet: Optional[str] = "yes"
+    bedroom_cool: Optional[str] = "yes"
+    comfortable_bed: Optional[str] = "yes"
+
     notes: Optional[str] = ""

@@ -15,6 +15,7 @@ import {
 } from "recharts";
 
 type SleepResult = {
+  _id?: string;
   age: number;
   gender: string;
   sleep_hours: number;
@@ -25,6 +26,15 @@ type SleepResult = {
   screen_time_before_bed: string;
   caffeine_after_evening: string;
   stress_level: string;
+  sleep_latency_minutes: number;
+  daytime_sleepiness: string;
+  late_heavy_meal: string;
+  exercise_today: string;
+  bedroom_dark: string;
+  bedroom_quiet: string;
+  bedroom_cool: string;
+  comfortable_bed: string;
+  bedroom_environment_score: number;
   notes: string;
   sleep_status: string;
   sleep_score: number;
@@ -45,6 +55,7 @@ type SleepLog = {
 type SleepQuality = "poor" | "average" | "good" | "excellent";
 type MoodLevel = "tired" | "normal" | "fresh";
 type StressLevel = "low" | "moderate" | "high";
+type SleepinessLevel = "low" | "medium" | "high";
 
 type DailySleepProgress = {
   date: string;
@@ -56,6 +67,15 @@ type DailySleepProgress = {
   interruptions: string;
   stress_level: StressLevel;
   mood: MoodLevel;
+  sleep_latency_minutes: string;
+  daytime_sleepiness: SleepinessLevel;
+  screen_time_before_bed: string;
+  caffeine_after_evening: string;
+  late_heavy_meal: string;
+  bedroom_dark: string;
+  bedroom_quiet: string;
+  bedroom_cool: string;
+  comfortable_bed: string;
 };
 
 type LatestSleepProgress = {
@@ -66,10 +86,16 @@ type LatestSleepProgress = {
   average_sleep_hours: number;
   sleep_debt_hours: number;
   consistency_score: number;
+  bedtime_consistency_score: number;
+  wake_time_consistency_score: number;
+  routine_status: string;
+  irregular_bedtime_days: number;
   good_sleep_days: number;
   poor_sleep_days: number;
   interrupted_days: number;
   improvement_status: string;
+  target_gap_message: string;
+  weekly_insight_explanation: string;
   next_week_goal: string;
   next_week_recommendation: string;
   weekly_feedback: string;
@@ -148,6 +174,15 @@ function createDefaultDailySleep(
     interruptions: "0",
     stress_level: "moderate",
     mood: "normal",
+    sleep_latency_minutes: "0",
+    daytime_sleepiness: "medium",
+    screen_time_before_bed: "no",
+    caffeine_after_evening: "no",
+    late_heavy_meal: "no",
+    bedroom_dark: "yes",
+    bedroom_quiet: "yes",
+    bedroom_cool: "yes",
+    comfortable_bed: "yes",
   }));
 }
 
@@ -163,6 +198,14 @@ export default function SleepTrackingPage() {
     screen_time_before_bed: "no",
     caffeine_after_evening: "no",
     stress_level: "medium",
+    sleep_latency_minutes: "0",
+    daytime_sleepiness: "medium",
+    late_heavy_meal: "no",
+    exercise_today: "no",
+    bedroom_dark: "yes",
+    bedroom_quiet: "yes",
+    bedroom_cool: "yes",
+    comfortable_bed: "yes",
     notes: "",
   });
 
@@ -380,6 +423,15 @@ export default function SleepTrackingPage() {
             interruptions: "0",
             stress_level: "moderate",
             mood: "normal",
+            sleep_latency_minutes: "0",
+            daytime_sleepiness: "medium",
+            screen_time_before_bed: "no",
+            caffeine_after_evening: "no",
+            late_heavy_meal: "no",
+            bedroom_dark: "yes",
+            bedroom_quiet: "yes",
+            bedroom_cool: "yes",
+            comfortable_bed: "yes",
           },
         ],
       }));
@@ -419,6 +471,32 @@ export default function SleepTrackingPage() {
             ? (value as StressLevel)
             : currentDay.stress_level,
         mood: field === "mood" ? (value as MoodLevel) : currentDay.mood,
+        sleep_latency_minutes:
+          field === "sleep_latency_minutes"
+            ? value
+            : currentDay.sleep_latency_minutes,
+        daytime_sleepiness:
+          field === "daytime_sleepiness"
+            ? (value as SleepinessLevel)
+            : currentDay.daytime_sleepiness,
+        screen_time_before_bed:
+          field === "screen_time_before_bed"
+            ? value
+            : currentDay.screen_time_before_bed,
+        caffeine_after_evening:
+          field === "caffeine_after_evening"
+            ? value
+            : currentDay.caffeine_after_evening,
+        late_heavy_meal:
+          field === "late_heavy_meal" ? value : currentDay.late_heavy_meal,
+        bedroom_dark:
+          field === "bedroom_dark" ? value : currentDay.bedroom_dark,
+        bedroom_quiet:
+          field === "bedroom_quiet" ? value : currentDay.bedroom_quiet,
+        bedroom_cool:
+          field === "bedroom_cool" ? value : currentDay.bedroom_cool,
+        comfortable_bed:
+          field === "comfortable_bed" ? value : currentDay.comfortable_bed,
       };
 
       if (field === "bedtime" || field === "wake_time") {
@@ -435,50 +513,6 @@ export default function SleepTrackingPage() {
         daily_sleep: updatedDays,
       };
     });
-  };
-
-  const fillTodayIntoWeeklyTracker = () => {
-    setWeeklyData((prev) => {
-      const updatedDays = [...prev.daily_sleep];
-
-      let targetIndex = updatedDays.findIndex(
-        (item) => item.date === selectedSleepDate
-      );
-
-      if (targetIndex === -1) {
-        updatedDays.push({
-          date: selectedSleepDate,
-          day: getDayNameFromDate(selectedSleepDate),
-          sleep_hours: "",
-          sleep_quality: "average",
-          bedtime: "",
-          wake_time: "",
-          interruptions: "0",
-          stress_level: "moderate",
-          mood: "normal",
-        });
-
-        targetIndex = updatedDays.length - 1;
-      }
-
-      updatedDays[targetIndex] = {
-        ...updatedDays[targetIndex],
-        sleep_hours: formData.sleep_hours,
-        sleep_quality: formData.sleep_quality as SleepQuality,
-        bedtime: formData.bedtime,
-        wake_time: formData.wake_time,
-        interruptions: formData.interruptions,
-        stress_level: mapStressToWeekly(formData.stress_level),
-        mood: Number(formData.sleep_hours) >= 7 ? "fresh" : "normal",
-      };
-
-      return {
-        ...prev,
-        daily_sleep: updatedDays,
-      };
-    });
-
-    setWeeklyMessage("Sleep details added to weekly tracker.");
   };
 
   const analyzeSleep = async (e: FormEvent) => {
@@ -511,6 +545,14 @@ export default function SleepTrackingPage() {
           screen_time_before_bed: formData.screen_time_before_bed,
           caffeine_after_evening: formData.caffeine_after_evening,
           stress_level: formData.stress_level,
+          sleep_latency_minutes: Number(formData.sleep_latency_minutes) || 0,
+          daytime_sleepiness: formData.daytime_sleepiness,
+          late_heavy_meal: formData.late_heavy_meal,
+          exercise_today: formData.exercise_today,
+          bedroom_dark: formData.bedroom_dark,
+          bedroom_quiet: formData.bedroom_quiet,
+          bedroom_cool: formData.bedroom_cool,
+          comfortable_bed: formData.comfortable_bed,
           notes: formData.notes,
         }),
       });
@@ -528,6 +570,68 @@ export default function SleepTrackingPage() {
       };
 
       setSleepLogs((prev) => [newLog, ...prev]);
+
+      setWeeklyData((prev) => {
+        const updatedDays = [...prev.daily_sleep];
+
+        let targetIndex = updatedDays.findIndex(
+          (item) => item.date === selectedSleepDate
+        );
+
+        if (targetIndex === -1) {
+          updatedDays.push({
+            date: selectedSleepDate,
+            day: getDayNameFromDate(selectedSleepDate),
+            sleep_hours: "",
+            sleep_quality: "average",
+            bedtime: "",
+            wake_time: "",
+            interruptions: "0",
+            stress_level: "moderate",
+            mood: "normal",
+            sleep_latency_minutes: "0",
+            daytime_sleepiness: "medium",
+            screen_time_before_bed: "no",
+            caffeine_after_evening: "no",
+            late_heavy_meal: "no",
+            bedroom_dark: "yes",
+            bedroom_quiet: "yes",
+            bedroom_cool: "yes",
+            comfortable_bed: "yes",
+          });
+
+          targetIndex = updatedDays.length - 1;
+        }
+
+        updatedDays[targetIndex] = {
+          ...updatedDays[targetIndex],
+          sleep_hours: formData.sleep_hours,
+          sleep_quality: formData.sleep_quality as SleepQuality,
+          bedtime: formData.bedtime,
+          wake_time: formData.wake_time,
+          interruptions: formData.interruptions,
+          stress_level: mapStressToWeekly(formData.stress_level),
+          mood: Number(formData.sleep_hours) >= 7 ? "fresh" : "normal",
+          sleep_latency_minutes: formData.sleep_latency_minutes,
+          daytime_sleepiness: formData.daytime_sleepiness as SleepinessLevel,
+          screen_time_before_bed: formData.screen_time_before_bed,
+          caffeine_after_evening: formData.caffeine_after_evening,
+          late_heavy_meal: formData.late_heavy_meal,
+          bedroom_dark: formData.bedroom_dark,
+          bedroom_quiet: formData.bedroom_quiet,
+          bedroom_cool: formData.bedroom_cool,
+          comfortable_bed: formData.comfortable_bed,
+        };
+
+        return {
+          ...prev,
+          daily_sleep: updatedDays,
+        };
+      });
+
+      setWeeklyMessage(
+        "Sleep analysis automatically added to weekly tracker. Review it below and save weekly progress."
+      );
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Sleep analysis failed."
@@ -565,6 +669,17 @@ export default function SleepTrackingPage() {
         interruptions: item.interruptions ? Number(item.interruptions) : 0,
         stress_level: item.stress_level,
         mood: item.mood,
+        sleep_latency_minutes: item.sleep_latency_minutes
+          ? Number(item.sleep_latency_minutes)
+          : 0,
+        daytime_sleepiness: item.daytime_sleepiness,
+        screen_time_before_bed: item.screen_time_before_bed,
+        caffeine_after_evening: item.caffeine_after_evening,
+        late_heavy_meal: item.late_heavy_meal,
+        bedroom_dark: item.bedroom_dark,
+        bedroom_quiet: item.bedroom_quiet,
+        bedroom_cool: item.bedroom_cool,
+        comfortable_bed: item.comfortable_bed,
       }));
 
       const data = await apiRequest("/api/sleep-progress/save", {
@@ -728,6 +843,19 @@ export default function SleepTrackingPage() {
                   </label>
 
                   <label>
+                    Time to Fall Asleep
+                    <input
+                      type="number"
+                      name="sleep_latency_minutes"
+                      min="0"
+                      max="240"
+                      placeholder="Example: 20"
+                      value={formData.sleep_latency_minutes}
+                      onChange={handleChange}
+                    />
+                  </label>
+
+                  <label>
                     Sleep Quality
                     <select
                       name="sleep_quality"
@@ -738,6 +866,19 @@ export default function SleepTrackingPage() {
                       <option value="good">Good</option>
                       <option value="average">Average</option>
                       <option value="poor">Poor</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Daytime Sleepiness
+                    <select
+                      name="daytime_sleepiness"
+                      value={formData.daytime_sleepiness}
+                      onChange={handleChange}
+                    >
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
                     </select>
                   </label>
 
@@ -795,7 +936,7 @@ export default function SleepTrackingPage() {
                   </div>
                 </details>
 
-                <details className="sleepAdvancedSection">
+                <details className="sleepAdvancedSection" open>
                   <summary>Sleep habit details</summary>
 
                   <div className="sleepQuickGrid">
@@ -822,6 +963,30 @@ export default function SleepTrackingPage() {
                         <option value="yes">Yes</option>
                       </select>
                     </label>
+
+                    <label>
+                      Late Heavy Meal
+                      <select
+                        name="late_heavy_meal"
+                        value={formData.late_heavy_meal}
+                        onChange={handleChange}
+                      >
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                      </select>
+                    </label>
+
+                    <label>
+                      Exercise Today
+                      <select
+                        name="exercise_today"
+                        value={formData.exercise_today}
+                        onChange={handleChange}
+                      >
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                      </select>
+                    </label>
                   </div>
 
                   <label className="sleepFullText">
@@ -835,6 +1000,60 @@ export default function SleepTrackingPage() {
                   </label>
                 </details>
 
+                <details className="sleepAdvancedSection" open>
+                  <summary>Bedroom environment</summary>
+
+                  <div className="sleepQuickGrid">
+                    <label>
+                      Dark Room
+                      <select
+                        name="bedroom_dark"
+                        value={formData.bedroom_dark}
+                        onChange={handleChange}
+                      >
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                    </label>
+
+                    <label>
+                      Quiet Room
+                      <select
+                        name="bedroom_quiet"
+                        value={formData.bedroom_quiet}
+                        onChange={handleChange}
+                      >
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                    </label>
+
+                    <label>
+                      Cool Room
+                      <select
+                        name="bedroom_cool"
+                        value={formData.bedroom_cool}
+                        onChange={handleChange}
+                      >
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                    </label>
+
+                    <label>
+                      Comfortable Bed
+                      <select
+                        name="comfortable_bed"
+                        value={formData.comfortable_bed}
+                        onChange={handleChange}
+                      >
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                    </label>
+                  </div>
+                </details>
+
                 <button
                   type="submit"
                   className="sleepGenerateBtn"
@@ -842,16 +1061,6 @@ export default function SleepTrackingPage() {
                 >
                   {loading ? "Analyzing..." : "Analyze Sleep"}
                 </button>
-
-                {result && (
-                  <button
-                    type="button"
-                    className="sleepSecondaryBtn"
-                    onClick={fillTodayIntoWeeklyTracker}
-                  >
-                    Add to Weekly Tracker
-                  </button>
-                )}
               </form>
 
               <div className="sleepCompactRight">
@@ -904,6 +1113,16 @@ export default function SleepTrackingPage() {
                       </div>
 
                       <div>
+                        <span>Latency</span>
+                        <strong>{result.sleep_latency_minutes}m</strong>
+                      </div>
+
+                      <div>
+                        <span>Sleepiness</span>
+                        <strong>{formatText(result.daytime_sleepiness)}</strong>
+                      </div>
+
+                      <div>
                         <span>Bedtime</span>
                         <strong>{result.bedtime}</strong>
                       </div>
@@ -911,6 +1130,16 @@ export default function SleepTrackingPage() {
                       <div>
                         <span>Wake Time</span>
                         <strong>{result.wake_time}</strong>
+                      </div>
+
+                      <div>
+                        <span>Environment</span>
+                        <strong>{result.bedroom_environment_score}%</strong>
+                      </div>
+
+                      <div>
+                        <span>Interruptions</span>
+                        <strong>{result.interruptions}</strong>
                       </div>
                     </div>
 
@@ -939,8 +1168,8 @@ export default function SleepTrackingPage() {
                     <span className="miniLabel">Step 2</span>
                     <h2>Weekly Sleep Progress</h2>
                     <p>
-                      Select a date and update sleep details one day at a time.
-                      The graph shows the weekly sleep pattern clearly.
+                      Your analyzed sleep data is added automatically. You can
+                      review, edit, or select another date.
                     </p>
                   </div>
 
@@ -1003,9 +1232,10 @@ export default function SleepTrackingPage() {
                     <div className="sleepCurrentDayHeader">
                       <div>
                         <span className="miniLabel">Daily Update</span>
-                        <h3>Current Day Sleep Update</h3>
+                        <h3>Weekly Day Review & Edit</h3>
                         <p>
-                          Select a date and update that day's sleep record.
+                          Your analyzed sleep data is added automatically. You
+                          can review, edit, or select another date.
                         </p>
                       </div>
 
@@ -1067,6 +1297,24 @@ export default function SleepTrackingPage() {
                       </label>
 
                       <label>
+                        Sleep Latency
+                        <input
+                          type="number"
+                          min="0"
+                          max="240"
+                          placeholder="Minutes"
+                          value={selectedDayData.sleep_latency_minutes}
+                          onChange={(e) =>
+                            handleDailySleepChange(
+                              activeDayIndex,
+                              "sleep_latency_minutes",
+                              e.target.value
+                            )
+                          }
+                        />
+                      </label>
+
+                      <label>
                         Quality
                         <select
                           value={selectedDayData.sleep_quality}
@@ -1082,6 +1330,24 @@ export default function SleepTrackingPage() {
                           <option value="good">Good</option>
                           <option value="average">Average</option>
                           <option value="poor">Poor</option>
+                        </select>
+                      </label>
+
+                      <label>
+                        Daytime Sleepiness
+                        <select
+                          value={selectedDayData.daytime_sleepiness}
+                          onChange={(e) =>
+                            handleDailySleepChange(
+                              activeDayIndex,
+                              "daytime_sleepiness",
+                              e.target.value
+                            )
+                          }
+                        >
+                          <option value="low">Low</option>
+                          <option value="medium">Medium</option>
+                          <option value="high">High</option>
                         </select>
                       </label>
 
@@ -1136,7 +1402,132 @@ export default function SleepTrackingPage() {
                           <option value="tired">Tired</option>
                         </select>
                       </label>
+
+                      <label>
+                        Screen Before Bed
+                        <select
+                          value={selectedDayData.screen_time_before_bed}
+                          onChange={(e) =>
+                            handleDailySleepChange(
+                              activeDayIndex,
+                              "screen_time_before_bed",
+                              e.target.value
+                            )
+                          }
+                        >
+                          <option value="no">No</option>
+                          <option value="yes">Yes</option>
+                        </select>
+                      </label>
+
+                      <label>
+                        Caffeine Evening
+                        <select
+                          value={selectedDayData.caffeine_after_evening}
+                          onChange={(e) =>
+                            handleDailySleepChange(
+                              activeDayIndex,
+                              "caffeine_after_evening",
+                              e.target.value
+                            )
+                          }
+                        >
+                          <option value="no">No</option>
+                          <option value="yes">Yes</option>
+                        </select>
+                      </label>
+
+                      <label>
+                        Late Heavy Meal
+                        <select
+                          value={selectedDayData.late_heavy_meal}
+                          onChange={(e) =>
+                            handleDailySleepChange(
+                              activeDayIndex,
+                              "late_heavy_meal",
+                              e.target.value
+                            )
+                          }
+                        >
+                          <option value="no">No</option>
+                          <option value="yes">Yes</option>
+                        </select>
+                      </label>
                     </div>
+
+                    <details className="sleepAdvancedSection" open>
+                      <summary>Bedroom environment for this day</summary>
+
+                      <div className="sleepCurrentDayInputs">
+                        <label>
+                          Dark Room
+                          <select
+                            value={selectedDayData.bedroom_dark}
+                            onChange={(e) =>
+                              handleDailySleepChange(
+                                activeDayIndex,
+                                "bedroom_dark",
+                                e.target.value
+                              )
+                            }
+                          >
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                          </select>
+                        </label>
+
+                        <label>
+                          Quiet Room
+                          <select
+                            value={selectedDayData.bedroom_quiet}
+                            onChange={(e) =>
+                              handleDailySleepChange(
+                                activeDayIndex,
+                                "bedroom_quiet",
+                                e.target.value
+                              )
+                            }
+                          >
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                          </select>
+                        </label>
+
+                        <label>
+                          Cool Room
+                          <select
+                            value={selectedDayData.bedroom_cool}
+                            onChange={(e) =>
+                              handleDailySleepChange(
+                                activeDayIndex,
+                                "bedroom_cool",
+                                e.target.value
+                              )
+                            }
+                          >
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                          </select>
+                        </label>
+
+                        <label>
+                          Comfortable Bed
+                          <select
+                            value={selectedDayData.comfortable_bed}
+                            onChange={(e) =>
+                              handleDailySleepChange(
+                                activeDayIndex,
+                                "comfortable_bed",
+                                e.target.value
+                              )
+                            }
+                          >
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                          </select>
+                        </label>
+                      </div>
+                    </details>
                   </div>
 
                   <div className="sleepChartCard">
@@ -1236,110 +1627,161 @@ export default function SleepTrackingPage() {
             )}
 
             {latestProgress && (
-              <div className="sleepImprovementCard">
-                <div>
-                  <span className="miniLabel">Step 3</span>
-                  <h2>Weekly Sleep Improvement Summary</h2>
-                  <p>{latestProgress.next_week_recommendation}</p>
-                </div>
+  <section className="sleepImprovementCard sleepInsightV2">
+    <div className="sleepInsightHeader">
+      <div>
+        <span className="miniLabel">Step 3</span>
+        <h2>Weekly Sleep Improvement Summary</h2>
+        <p>
+          {latestProgress.next_week_recommendation ||
+            "Save weekly sleep progress to generate personalized sleep improvement guidance."}
+        </p>
+      </div>
 
-                <div>
-                  {sleepComparisonData.length > 0 && (
-                    <div className="sleepComparisonChart">
-                      <h3>Previous vs Current Week</h3>
+      <div className="sleepInsightHeaderScore">
+        <span>Average Sleep</span>
+        <strong>
+          {formatSleepDurationForUser(latestProgress.average_sleep_hours) || "0h"}
+        </strong>
+      </div>
+    </div>
 
-                      <ResponsiveContainer width="100%" height={220}>
-                        <BarChart data={sleepComparisonData}>
-                          <CartesianGrid
-                            strokeDasharray="3 3"
-                            stroke="rgba(255,255,255,0.12)"
-                          />
+    <div className="sleepInsightBody">
+      <div className="sleepInsightChartCard">
+        <div className="sleepInsightChartTop">
+          <div>
+            <span className="miniLabel">Trend</span>
+            <h3>Previous vs Current Week</h3>
+          </div>
+        </div>
 
-                          <XAxis
-                            dataKey="week"
-                            stroke="rgba(255,238,222,0.72)"
-                          />
+        {sleepComparisonData.length > 0 ? (
+          <ResponsiveContainer width="100%" height={230}>
+            <BarChart data={sleepComparisonData}>
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="rgba(255,255,255,0.12)"
+              />
 
-                          <YAxis
-                            stroke="rgba(255,238,222,0.72)"
-                            domain={[0, 10]}
-                          />
+              <XAxis
+                dataKey="week"
+                stroke="rgba(255,238,222,0.72)"
+              />
 
-                          <Tooltip
-                            contentStyle={{
-                              background: "rgba(8,8,8,0.94)",
-                              border: "1px solid rgba(255,132,0,0.3)",
-                              borderRadius: "14px",
-                              color: "#ffffff",
-                            }}
-                            labelStyle={{
-                              color: "#ffad5a",
-                              fontWeight: 900,
-                            }}
-                            formatter={(value) =>
-                              formatSleepDurationForUser(Number(value))
-                            }
-                            cursor={{ fill: "rgba(255,132,0,0.08)" }}
-                          />
+              <YAxis
+                stroke="rgba(255,238,222,0.72)"
+                domain={[0, 10]}
+              />
 
-                          <Bar
-                            dataKey="average"
-                            name="Average Sleep"
-                            fill="#ff8a00"
-                            radius={[10, 10, 0, 0]}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                  )}
+              <Tooltip
+                contentStyle={{
+                  background: "rgba(8,8,8,0.94)",
+                  border: "1px solid rgba(255,132,0,0.3)",
+                  borderRadius: "14px",
+                  color: "#ffffff",
+                }}
+                labelStyle={{
+                  color: "#ffad5a",
+                  fontWeight: 900,
+                }}
+                formatter={(value) =>
+                  formatSleepDurationForUser(Number(value))
+                }
+                cursor={{ fill: "rgba(255,132,0,0.08)" }}
+              />
 
-                  <div className="sleepImprovementGrid">
-                    <div>
-                      <span>Average Sleep</span>
-                      <strong>
-                        {formatSleepDurationForUser(
-                          latestProgress.average_sleep_hours
-                        )}
-                      </strong>
-                    </div>
+              <Bar
+                dataKey="average"
+                name="Average Sleep"
+                fill="#ff8a00"
+                radius={[10, 10, 0, 0]}
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        ) : (
+          <div className="sleepInsightEmpty">
+            Not enough weekly data yet.
+          </div>
+        )}
+      </div>
 
-                    <div>
-                      <span>Sleep Debt</span>
-                      <strong>
-                        {formatSleepDurationForUser(
-                          latestProgress.sleep_debt_hours
-                        )}
-                      </strong>
-                    </div>
+      <div className="sleepMetricGrid">
+        <div className="sleepMetricCard">
+          <span>Sleep Debt</span>
+          <strong>
+            {formatSleepDurationForUser(latestProgress.sleep_debt_hours) || "0h"}
+          </strong>
+        </div>
 
-                    <div>
-                      <span>Consistency</span>
-                      <strong>{latestProgress.consistency_score}%</strong>
-                    </div>
+        <div className="sleepMetricCard">
+          <span>Consistency</span>
+          <strong>{latestProgress.consistency_score ?? 0}%</strong>
+        </div>
 
-                    <div>
-                      <span>Status</span>
-                      <strong>{latestProgress.improvement_status}</strong>
-                    </div>
+        <div className="sleepMetricCard">
+          <span>Routine Status</span>
+          <strong>{latestProgress.routine_status || "Not enough data"}</strong>
+        </div>
 
-                    <div>
-                      <span>Good Days</span>
-                      <strong>{latestProgress.good_sleep_days}</strong>
-                    </div>
+        <div className="sleepMetricCard">
+          <span>Bedtime Consistency</span>
+          <strong>{latestProgress.bedtime_consistency_score ?? 0}%</strong>
+        </div>
 
-                    <div>
-                      <span>Poor Days</span>
-                      <strong>{latestProgress.poor_sleep_days}</strong>
-                    </div>
-                  </div>
+        <div className="sleepMetricCard">
+          <span>Wake Consistency</span>
+          <strong>{latestProgress.wake_time_consistency_score ?? 0}%</strong>
+        </div>
 
-                  <div className="sleepNextGoalBox">
-                    <span>Next Week Goal</span>
-                    <strong>{latestProgress.next_week_goal}</strong>
-                  </div>
-                </div>
-              </div>
-            )}
+        <div className="sleepMetricCard">
+          <span>Irregular Bedtime</span>
+          <strong>{latestProgress.irregular_bedtime_days ?? 0}</strong>
+        </div>
+
+        <div className="sleepMetricCard">
+          <span>Status</span>
+          <strong>{latestProgress.improvement_status || "Baseline week"}</strong>
+        </div>
+
+        <div className="sleepMetricCard">
+          <span>Good Days</span>
+          <strong>{latestProgress.good_sleep_days ?? 0}</strong>
+        </div>
+
+        <div className="sleepMetricCard">
+          <span>Poor Days</span>
+          <strong>{latestProgress.poor_sleep_days ?? 0}</strong>
+        </div>
+      </div>
+    </div>
+
+    <div className="sleepInsightTextGrid">
+      <div className="sleepInsightTextCard">
+        <span>Target Gap</span>
+        <strong>
+          {latestProgress.target_gap_message ||
+            "Save more records to calculate the target gap."}
+        </strong>
+      </div>
+
+      <div className="sleepInsightTextCard">
+        <span>Weekly Insight</span>
+        <strong>
+          {latestProgress.weekly_insight_explanation ||
+            "Weekly insight will appear after saving sleep progress."}
+        </strong>
+      </div>
+
+      <div className="sleepInsightTextCard">
+        <span>Next Week Goal</span>
+        <strong>
+          {latestProgress.next_week_goal ||
+            "Record sleep for more days next week."}
+        </strong>
+      </div>
+    </div>
+  </section>
+)}
 
             <div className="sleepHistoryCardArea">
               <div className="sleepHistoryHeader">

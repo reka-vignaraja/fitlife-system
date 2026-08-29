@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.database.mongodb import connect_to_mongo, close_mongo_connection
 
+from app.routes import admin_routes
 from app.routes.auth_routes import router as auth_router
 from app.routes.diet_routes import router as diet_router
 from app.routes.fitness_routes import router as fitness_router
@@ -37,7 +38,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+app.include_router(admin_routes.router)
 app.include_router(auth_router)
 app.include_router(diet_router)
 app.include_router(fitness_router)

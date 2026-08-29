@@ -34,8 +34,17 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [openMenu, setOpenMenu] = useState<string>("");
 
+  /*
+    Admin pages use separate admin layout.
+    So public/user navbar should not appear in admin routes.
+  */
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("fitlife_token");
+
     setIsLoggedIn(!!token);
     setOpenMenu("");
   }, [pathname]);
@@ -122,7 +131,6 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="navContainer">
-        {/* Logo */}
         <Link href={isLoggedIn ? "/dashboard" : "/"} className="logoBox">
           <div className="logoIcon">F</div>
 
@@ -132,7 +140,6 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Center Navigation */}
         <nav className="navLinks">
           <Link href="/about">About</Link>
 
@@ -165,7 +172,6 @@ export default function Navbar() {
           )}
         </nav>
 
-        {/* Right Side Buttons */}
         <div className="navActions">
           {isLoggedIn ? (
             <>
