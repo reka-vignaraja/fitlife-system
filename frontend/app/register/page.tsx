@@ -235,10 +235,10 @@ export default function RegisterPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center justify-center text-orange-400 transition hover:text-orange-300"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-orange-400 transition hover:text-orange-300"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                  {showPassword ? <EyeIcon /> : <EyeOffIcon />}
+                  {showPassword ? <EyeOffIcon /> : <EyeIcon />}
                 </button>
               </div>
             </div>
@@ -261,14 +261,14 @@ export default function RegisterPage() {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword((prev) => !prev)}
-                  className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center justify-center text-orange-400 transition hover:text-orange-300"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-orange-400 transition hover:text-orange-300"
                   aria-label={
                     showConfirmPassword
                       ? "Hide confirm password"
                       : "Show confirm password"
                   }
                 >
-                  {showConfirmPassword ? <EyeIcon /> : <EyeOffIcon />}
+                  {showConfirmPassword ? <EyeOffIcon /> : <EyeIcon />}
                 </button>
               </div>
             </div>
